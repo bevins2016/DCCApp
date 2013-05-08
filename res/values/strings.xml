@@ -11,6 +11,7 @@
     <string name="Button5_name">Photo Gallery</string>
     <string name="Button6_name">eReport</string>
     <string name="Button7_name">Action Items</string>
+    <string name="Button8_name">Directory</string>
     <string name="login_title">Log in to virtualdiscoverycenter.net</string>
     <string name="login_title2">Enter Your UserName and Password below.</string>
     <string name="UserName">UserName</string>

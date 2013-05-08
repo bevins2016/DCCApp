@@ -18,7 +18,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	Button photoB;
 	Button reportB;
 	Button actionB;
-
+	Button directoryB;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,6 +33,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		photoB = (Button) findViewById(R.id.button5);
 		reportB = (Button) findViewById(R.id.button6);
 		actionB = (Button) findViewById(R.id.button7);
+		directoryB = (Button) findViewById(R.id.button8);
 
 		//Here the listener for each button that allows actions is set.
 		newsB.setOnClickListener(this);
@@ -42,6 +43,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		photoB.setOnClickListener(this);
 		reportB.setOnClickListener(this);
 		actionB.setOnClickListener(this);
+		directoryB.setOnClickListener(this);
 	}
 
 	public void onClick(View v) {
@@ -68,6 +70,10 @@ public class MainActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.button7:
 			startActivity(new Intent(this, MainActivity.class));
+			break;
+		case R.id.button8:
+			startActivity(new Intent(this, MainActivity.class));
+			finish();
 			break;
 		}
 	}
