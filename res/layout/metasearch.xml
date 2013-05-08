@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:id="@+id/reporttype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" >
+
+        <CheckBox
+            android:id="@+id/fiftysevencheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:checked="true"
+            android:text="@string/fiftysevencheck" />
+
+        <CheckBox
+            android:id="@+id/ereportcheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:checked="true"
+            android:text="@string/ereportcheck" />
+
+        <CheckBox
+            android:id="@+id/edailycheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:checked="true"
+            android:text="@string/edailycheck" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/middlerow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/reporttype"
+        android:layout_marginTop="10dp" >
+
+        <TextView
+            android:id="@+id/enddateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+			android:layout_alignParentRight="true"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/startdateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+			android:layout_alignParentLeft="true"
+            android:text="" />
+
+        <Button
+            android:id="@+id/metastartdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/startdateTextView"
+            android:onClick="showDatePickerDialog"
+            android:text="@string/admin_startdate_button" />
+
+        <Button
+            android:id="@+id/metaenddate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/enddateTextView"
+            android:onClick="showDatePickerDialog"
+            android:text="@string/search_end_date" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/TitleRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/middlerow"
+        android:layout_marginTop="10dp" >
+
+        <TextView
+            android:id="@+id/studentlist_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="@string/student_title" />
+
+        <TextView
+            android:id="@+id/teamlist_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/team_title" />
+
+        <TextView
+            android:id="@+id/keywordlist_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="100dp"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="@string/keyword_title" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/metabuttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" >
+
+        <Button
+            android:id="@+id/metasearchbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/search" />
+
+        <Button
+            android:id="@+id/meta_add_remv_key_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/addrmvkeywrd" />
+
+        <Button
+            android:id="@+id/meta_today_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/todaybtn" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/metalistview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/metabuttons"
+        android:layout_below="@id/TitleRow"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <ListView
+            android:id="@+id/metastudentlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+        </ListView>
+
+        <ListView
+            android:id="@+id/metateamlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1" >
+        </ListView>
+
+        <ListView
+            android:id="@+id/metakeywordlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:hint="@string/addkeywordshint" >
+        </ListView>
+
+        <EditText
+            android:id="@+id/metaemptykeytext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:text="@string/blanktext" >
+        </EditText>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textreporttype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/choosereport"
+        android:textSize="20sp" />
+
+</RelativeLayout>

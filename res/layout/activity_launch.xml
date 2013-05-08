@@ -1,0 +1,104 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:columnCount="4" 
+tools:context=".LaunchActivity">
+
+    <RadioButton
+        android:id="@+id/radioButton1"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
+    
+    
+<LinearLayout
+	android:layout_width="212dp"
+	android:layout_height="match_parent"
+	android:layout_gravity="left"
+	android:orientation="vertical" android:id="@+id/linearLayout1">
+	<Button
+		android:id="@+id/button1"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/Button1_name"
+		android:drawableRight="@drawable/news"/>
+	<Button
+		android:id="@+id/button2"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/Button2_name" />
+	<Button
+		android:id="@+id/button3"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/Button3_name"
+		android:drawableRight="@drawable/cal"/>
+	<Button
+		android:id="@+id/button4"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/Button4_name"
+		android:drawableRight="@drawable/mail"/>
+	<Button
+		android:id="@+id/button5"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/Button5_name"
+		android:drawableRight="@drawable/gallery" />
+	<Button
+		android:id="@+id/button6"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/Button6_name"
+		android:drawableRight="@drawable/report" />
+	<Button
+		android:id="@+id/button7"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="@string/Button7_name"
+		android:drawableRight="@drawable/ep" />
+</LinearLayout>
+　
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentTop="true"
+    android:layout_toRightOf="@+id/linearLayout1"
+    android:background="@android:color/black"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/survey_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/white"
+        android:text="@string/survey" />
+
+    <Button
+        android:id="@+id/manage_survey_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/white"
+        android:text="@string/managesurvey" />
+
+    <Button
+        android:id="@+id/meta_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/white"
+        android:text="@string/metasearch" />
+
+    <Button
+        android:id="@+id/admin_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/white"
+        android:text="@string/title_activity_admin" />
+</LinearLayout>
+
+</RelativeLayout>

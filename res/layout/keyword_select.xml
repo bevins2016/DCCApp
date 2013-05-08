@@ -1,0 +1,62 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MetaSearch" >
+
+    <Button
+        android:id="@+id/keywordsrchbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="2dp"
+        android:text="@string/search" />
+    
+    <Button
+        android:id="@+id/keywordteamselectbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@id/keywordsrchbtn"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:text="@string/teamselect" />
+    
+    <Button
+        android:id="@+id/keywordtimerangebtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@id/keywordteamselectbtn"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:text="@string/choosedate" />
+    
+    <Button
+        android:id="@+id/addkeywordbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="2dp"
+        android:text="@string/addrmvkeywrd" />
+    
+    <Button
+        android:id="@+id/keywordssbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@id/keywordtimerangebtn"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:text="@string/studentselect" />
+
+    <ListView
+        android:id="@+id/keywordlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/keywordsrchbtn"
+        android:layout_centerHorizontal="true" >
+    </ListView>
+
+</RelativeLayout>

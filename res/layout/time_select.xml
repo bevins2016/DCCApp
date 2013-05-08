@@ -1,0 +1,46 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TimeSelect" >
+    
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical" >
+
+        <CalendarView
+            android:id="@+id/portstarttime"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+			android:layout_marginTop="50dp"
+            android:layout_weight="1" />
+
+   		<TextView
+			android:id="@+id/portendtimetext"
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:layout_marginTop="25dp"
+			android:text="@string/timeend" />
+
+        <CalendarView
+            android:id="@+id/portendtime"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="25dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+    
+    <TextView
+		android:id="@+id/portstarttimetext"
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:layout_marginTop="10dp"
+		android:text="@string/timestart" />
+
+
+</RelativeLayout>

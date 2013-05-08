@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+    
+    <TextView
+        android:id="@+id/Fname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Fname" />
+    <EditText
+        android:id="@+id/Fname_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+		android:textSize="20sp"
+        android:layout_below="@id/Fname" />
+    <TextView
+        android:id="@+id/Lname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Fname_text"
+        android:text="@string/Lname" />
+    <EditText
+        android:id="@+id/Lname_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+		android:textSize="20sp"
+        android:layout_below="@id/Lname" />
+    <TextView
+        android:id="@+id/Email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Lname_text"
+        android:text="@string/Email" />
+    <EditText
+        android:id="@+id/Email_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+		android:textSize="20sp"
+        android:layout_below="@id/Email" />
+    <TextView
+        android:id="@+id/first_proj_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Email_text"
+        android:text="@string/first_proj" />
+    <Spinner
+        android:id="@+id/first_proj"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/first_proj_title" />
+    <TextView
+        android:id="@+id/second_proj_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/first_proj"
+        android:text="@string/second_proj" />
+    <Spinner
+        android:id="@+id/second_proj"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/second_proj_title" />
+
+</RelativeLayout>

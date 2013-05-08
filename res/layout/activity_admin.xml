@@ -1,0 +1,128 @@
+<!-- Layout for AdminActivity -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdminActivity" >
+
+    <TextView
+        android:id="@+id/startdatetext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/setstartdatetext" />
+
+    <Button
+        android:id="@+id/startdatevalue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/startdatetext"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:onClick="showDatePickerDialog"
+        android:text="@string/admin_startdate_button" >
+    </Button>
+
+    <TextView
+        android:id="@+id/sortchecks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/sortchecks" />
+
+    <CheckBox
+        android:id="@+id/sortcheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sortchecks"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="5dp"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/addprojecttext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="60dp"
+        android:text="@string/addteamtext" />
+
+    <EditText
+        android:id="@+id/addproject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/addprojecttext"
+        android:ems="10"
+        android:hint="@string/addteamhint" >
+    </EditText>
+
+    <Button
+        android:id="@+id/admin_update_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/update" />
+
+    <Button
+        android:id="@+id/admin_editStudents_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="@string/editStudentsbtn" />
+
+    <RelativeLayout
+        android:id="@+id/title_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/startdatevalue" >
+
+        <TextView
+            android:id="@+id/admin_team_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="200dp"
+            android:text="@string/removeteams"
+            android:textIsSelectable="false" />
+
+        <TextView
+            android:id="@+id/admin_student_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="100dp"
+            android:text="@string/removestudents"
+            android:textIsSelectable="false" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/admin_lists"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/admin_update_btn"
+        android:layout_below="@id/title_row"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="20dp" >
+
+        <ListView
+            android:id="@+id/admin_studentlist"
+            android:layout_width="500dp"
+            android:layout_height="wrap_content" >
+        </ListView>
+
+        <ListView
+            android:id="@+id/admin_teamlist"
+            android:layout_width="450dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp" >
+        </ListView>
+    </LinearLayout>
+
+</RelativeLayout>

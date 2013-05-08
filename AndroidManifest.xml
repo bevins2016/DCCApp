@@ -1,0 +1,140 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.dcc"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="16" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".Login"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".AndroidRssReader"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="http" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.dcc.LaunchActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".search.StudentSelectActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".search.TeamSelect"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".ProgramView"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".ProgramSelect"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".surveys.CreateSurvey"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".surveys.ManageSurvey"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".search.TimeSelect"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name=".search.SearchResults"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".AutoRank"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".ReportType"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name=".search.MetaSearch"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name=".admin.AdminActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name=".UpdateTask"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".admin.EditStudents"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".utilities.KeywordUploader"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.example.dcc.CustomizedListView"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".EmailMain"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
