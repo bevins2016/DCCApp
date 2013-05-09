@@ -238,16 +238,16 @@ public class LaunchActivity extends Activity implements OnClickListener {
 			startActivity(new Intent(LaunchActivity.this, MainActivity.class));
 			break;
 		case R.id.button4:
-			startActivity(new Intent(LaunchActivity.this, MainActivity.class));
+			startActivity(new Intent(LaunchActivity.this, EmailMain.class));
 			break;
 		case R.id.button5:
-			startActivity(new Intent(LaunchActivity.this, MainActivity.class));
+			startActivity(new Intent(LaunchActivity.this, CustomizedListView.class));
 			break;
 		case R.id.button6:
 			startActivity(new Intent(LaunchActivity.this, LaunchActivity.class));
 			break;
 		case R.id.button7:
-			startActivity(new Intent(LaunchActivity.this, MainActivity.class));
+			startActivity(new Intent(LaunchActivity.this, EmailMain.class));
 			break;
 		case R.id.meta_button:
 			intent.setClass(LaunchActivity.this, MetaSearch.class);

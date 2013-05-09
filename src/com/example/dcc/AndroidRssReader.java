@@ -13,24 +13,20 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 import android.app.ListActivity;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class AndroidRssReader extends ListActivity{
 	//Create buttons Globally so they are available to all methods
-	private RSSFeed myRssFeed = null;
+	public static RSSFeed myRssFeed = null;
 	static WebView webView;
 	
 	/** Called when the activity is first created. */

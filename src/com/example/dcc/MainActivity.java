@@ -19,6 +19,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	Button reportB;
 	Button actionB;
 	Button directoryB;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -69,7 +70,8 @@ public class MainActivity extends Activity implements OnClickListener {
 			startActivity(new Intent(this, LaunchActivity.class));
 			break;
 		case R.id.button7:
-			startActivity(new Intent(this, MainActivity.class));
+			startActivity(new Intent(this, ActionItem.class));
+			finish();
 			break;
 		case R.id.button8:
 			startActivity(new Intent(this, MainActivity.class));
