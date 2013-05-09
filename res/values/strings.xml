@@ -16,6 +16,8 @@
     <string name="login_title2">Enter Your UserName and Password below.</string>
     <string name="UserName">UserName</string>
     <string name="Password">Password</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Login">Login</string>
     <string name="title_article_detail">Post Detail</string>
     <string name="title_article_list">NerdAbility Reader</string>
     <string name="btn_offline_reading">Save for later</string>
