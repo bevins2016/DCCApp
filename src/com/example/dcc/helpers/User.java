@@ -1,17 +1,19 @@
 package com.example.dcc.helpers;
 
+import org.apache.http.client.CookieStore;
+
 public class User {
 
 	private String handle;
 	private String email;
-	private String firstName;
-	private String lastName;
+	private String name;
+	private CookieStore cookieJar;
 	
 	public User(){
 		this.setHandle(null);
 		this.setEmail(null);
-		this.setFirstName(null);
-		this.setLastName(null);
+		this.setName(null);
+		this.setCookieJar(null);
 	}
 
 	public String getHandle() {
@@ -30,19 +32,20 @@ public class User {
 		this.email = email;
 	}
 
-	public String getFirstName() {
-		return firstName;
+
+	public CookieStore getCookieJar() {
+		return cookieJar;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setCookieJar(CookieStore cookieJar) {
+		this.cookieJar = cookieJar;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getName() {
+		return name;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setName(String name) {
+		this.name = name;
 	}
 }

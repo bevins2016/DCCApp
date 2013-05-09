@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,17 +19,25 @@ import org.apache.http.HttpHost;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.params.ClientPNames;
 import org.apache.http.client.protocol.ClientContext;
+import org.apache.http.cookie.Cookie;
+import org.apache.http.cookie.CookieSpec;
+import org.apache.http.cookie.CookieSpecFactory;
+import org.apache.http.cookie.CookieOrigin;
+import org.apache.http.cookie.MalformedCookieException;
 import org.apache.http.impl.DefaultHttpRequestFactory;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.cookie.BasicClientCookie;
+import org.apache.http.impl.cookie.BrowserCompatSpec;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
@@ -48,12 +58,16 @@ public class HttpConnection{
 	 * @param log
 	 * @param pwd
 	 * @return
+	 * @throws URISyntaxException 
 	 */
-	public synchronized CookieStore login(String log, String pwd){
+	public synchronized CookieStore login(String log, String pwd) throws URISyntaxException{
 		try{
-			HttpClient client = new DefaultHttpClient();
+			DefaultHttpClient client = new DefaultHttpClient();
 			CookieStore cookieJar = new BasicCookieStore();
-			
+			client.setCookieStore(cookieJar);
+			client.getCookieSpecs().register("easy", getCookieSpec());
+
+			client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");
 			List<NameValuePair> nvp = new ArrayList<NameValuePair>();
 			nvp.add(new BasicNameValuePair("rememberme", "forever"));
 			nvp.add(new BasicNameValuePair("redirect_to", "/intern/"));
@@ -71,28 +85,46 @@ public class HttpConnection{
 
 			HttpResponse response = client.execute(new HttpHost(HOST), post);
 			
-			for(int i = 0; i < response.getAllHeaders().length; i++){
-				Header temp = response.getAllHeaders()[i];
-				Log.i(this.getClass().getName(), temp.getName()+":"+temp.getValue());
-			}
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-					response.getEntity().getContent()));
-			String line = br.readLine();
-			while(br!=null){
-				Log.i(this.getClass().toString(), line);
-				line = br.readLine();
-			}
 			Header[] cookie = (Header[]) response.getHeaders("Set-Cookie");
 			for(int h=0; h<cookie.length; h++){
 				Header temp = cookie[h];
 				cookieJar.addCookie(new BasicClientCookie(temp.getName(), temp.getValue()));
 			}
 
-			if(cookieJar.getCookies().size() > 0 && response.getStatusLine().getStatusCode() == 302) return cookieJar;
-			throw new IOException("No Cookies");
+			return cookieJar;
 		}catch(IOException e){
 			Log.e(this.getClass().toString(), e.getLocalizedMessage());
 			return null;
 		}
+	}
+	
+	public void getFriends(CookieStore cj) throws ClientProtocolException, IOException{
+		HttpClient client = new DefaultHttpClient();
+		HttpGet httpGet = new HttpGet("/members/brandoncharmon/friends/");
+		StringBuilder cookies = new StringBuilder();
+		for(Cookie c : cj.getCookies()){
+			cookies.append(c.getName()+"="+c.getValue()+";");
+		}
+		httpGet.setHeader("Cookie",cookies.toString());
+		HttpResponse hr = client.execute(new HttpHost(HOST), httpGet);
+		for(int i=0; i < hr.getAllHeaders().length; i++){
+			Log.i(this.getClass().getName(), hr.getAllHeaders()[i].getName()+"////"+
+		hr.getAllHeaders()[i].getValue());
+		}
+	}
+	
+	private CookieSpecFactory getCookieSpec(){
+		return new CookieSpecFactory() {
+			
+			@Override
+			public CookieSpec newInstance(HttpParams params) {
+				 return new BrowserCompatSpec() {
+	                  @Override
+	                  public void validate(Cookie cookie, CookieOrigin origin)
+	                  throws MalformedCookieException {
+	                  }
+	              };
+			}
+		};
 	}
 }

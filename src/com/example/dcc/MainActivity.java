@@ -1,5 +1,8 @@
 package com.example.dcc;
 
+import java.net.URISyntaxException;
+
+import com.example.dcc.helpers.User;
 import com.example.dcc.helpers.mysql.HttpConnection;
 import com.example.dcc.helpers.mysql.PreparedStatements;
 import com.example.dcc.helpers.mysql.PreparedStatements.SQL_COMMANDS;
@@ -178,6 +181,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		}
 
 		boolean cancel = false;
+		@SuppressWarnings("unused")
 		View focusView = null;
 
 		try{
@@ -214,7 +218,14 @@ public class MainActivity extends Activity implements OnClickListener {
 		protected Boolean doInBackground(Void... params) {
 			Log.e("BG","in bg");
 			HttpConnection hc = new HttpConnection();
-			hc.login(userText, passwordText);
+			try {
+				User u = new User();
+				u.setCookieJar(hc.login(userText, passwordText));
+				hc.getFriends(u.getCookieJar());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			return null;
 		}
 
