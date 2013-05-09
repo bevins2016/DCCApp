@@ -104,5 +104,6 @@
     <string name="mngkeywrds">Manage Keywords</string>
     <string name="title_activity_keyword_uploader">KeywordUploader</string>
     <string name="action_settings">Settings</string>
+    <string name="blank"> </string>
 
 </resources>

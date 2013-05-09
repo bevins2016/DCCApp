@@ -1,5 +1,6 @@
 package com.example.dcc;
 
+import com.example.dcc.helpers.mysql.HttpConnection;
 import com.example.dcc.helpers.mysql.PreparedStatements;
 import com.example.dcc.helpers.mysql.PreparedStatements.SQL_COMMANDS;
 
@@ -9,7 +10,10 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,7 +24,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity implements OnClickListener {
 
 	final private static int DIALOG_LOGIN = 1; 
-	
+
 	//Create buttons Globally so they are available to all methods
 	private Button newsB;
 	private Button loginB;
@@ -30,10 +34,15 @@ public class MainActivity extends Activity implements OnClickListener {
 	private Button reportB;
 	private Button actionB;
 	private Button directoryB;
-	
+
 	private Context context;
-	private PreparedStatements sqlStatement;
+	private PreparedStatements sqlStatement; 
+	private LogInTask logTask;
 	
+	public String userText;
+	public String passwordText;
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,7 +51,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		context = this;
 		sqlStatement = new PreparedStatements(this.openOrCreateDatabase("dcc_settings", MODE_PRIVATE, null));
 		sqlStatement.runStatement(SQL_COMMANDS.createTable);
-		
+
 		//These are the buttons on the left side of the screen.
 		//The have been initialized in order.
 		newsB = (Button) findViewById(R.id.button1);
@@ -63,6 +72,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		reportB.setOnClickListener(this);
 		actionB.setOnClickListener(this);
 		directoryB.setOnClickListener(this);
+
 	}
 
 	public void onClick(View v) {
@@ -125,25 +135,24 @@ public class MainActivity extends Activity implements OnClickListener {
 					.findViewById(R.id.btn_login);
 			Button cancelbutton = (Button) alertDialog
 					.findViewById(R.id.btn_cancel);
-			final EditText userName = (EditText) alertDialog
-					.findViewById(R.id.login_text);
-			final EditText password = (EditText) alertDialog
-					.findViewById(R.id.password);
 
+			final EditText user = (EditText) alertDialog.findViewById(R.id.login_text);
+			final EditText pwd = (EditText) alertDialog.findViewById(R.id.password);
+			
 			loginbutton.setOnClickListener(new View.OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
+					Log.e(this.toString(), "Logging In");
+					
+					userText = user.getText().toString();
+					passwordText = pwd.getText().toString();
+					
+					logTask = null;
+					attemptLogin();
 					alertDialog.dismiss();
-					Toast.makeText(
-							context,
-							"User Name : " + userName.getText().toString()
-							+ "  Password : "
-							+ password.getText().toString(),
-							Toast.LENGTH_LONG).show();
 				}
 			});
-
 			cancelbutton.setOnClickListener(new View.OnClickListener() {
 
 				@Override
@@ -152,6 +161,71 @@ public class MainActivity extends Activity implements OnClickListener {
 				}
 			});
 			break;
+		}
+	}
+
+	/**
+	 * Attempts to sign in or register the account specified by the login form.
+	 * If there are form errors (invalid email, missing fields, etc.), the
+	 * errors are presented and no actual login attempt is made.
+	 */
+	public void attemptLogin() {
+		Log.e(this.toString(), "Attempt Log In");
+		
+		if (logTask != null) {
+			Log.e(this.toString(), "Return logTask != null");
+			return;
+		}
+
+		boolean cancel = false;
+		View focusView = null;
+
+		try{
+		// Check for a valid password.
+		if (TextUtils.isEmpty(passwordText)) {
+			Toast.makeText(context, "Password is Empty", Toast.LENGTH_LONG);
+			cancel = true;
+		} else if (passwordText.length() < 4) {
+			Toast.makeText(context, "Password is to short", Toast.LENGTH_LONG);
+			cancel = true;
+		}
+
+		// Check for a valid email address.
+		if (TextUtils.isEmpty(userText)) {
+			Toast.makeText(context, "User Name is Empty", Toast.LENGTH_LONG);;
+			cancel = true;
+		}
+
+		}catch(Exception e){
+			//Log.e(this.toString(), e.getMessage());
+			Log.i("stuff", userText+" "+passwordText);
+			cancel = true;
+		}
+		if (!cancel){
+			logTask = new LogInTask();
+			logTask.execute((Void) null);
+		}
+	}
+
+
+	public class LogInTask extends AsyncTask<Void, Void, Boolean>{
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			Log.e("BG","in bg");
+			HttpConnection hc = new HttpConnection();
+			hc.login(userText, passwordText);
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(final Boolean success) {
+
+		}
+
+		@Override
+		protected void onCancelled() {
+
 		}
 	}
 
