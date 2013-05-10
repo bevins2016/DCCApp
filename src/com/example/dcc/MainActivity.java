@@ -42,6 +42,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	public String userText;
 	public String passwordText;
 
+	private User u;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -212,7 +213,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			HttpConnection hc = new HttpConnection();
 			try {
 				User u = new User();
-				u.setCookieJar(hc.login(userText, passwordText));
+				u.setCookieJar(hc.login(u, userText, passwordText));
 				hc.getFriends(u.getCookieJar());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

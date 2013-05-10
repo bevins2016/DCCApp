@@ -17,6 +17,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.CookieSyncManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -41,9 +42,13 @@ public class AndroidRssReader extends ListActivity{
 		  //main webpage: http://www.virtualDiscoveryCenter.net
 		  webView = (WebView) findViewById(R.id.webView1);
 		  webView.setWebViewClient(new WebViewClient());
+		  webView.setFitsSystemWindows(true);
 		  webView.loadUrl("http://www.virtualDiscoveryCenter.net");
 		  WebSettings webSettings = webView.getSettings();
 		  webSettings.setJavaScriptEnabled(true);
+		  
+		 CookieSyncManager cs =  CookieSyncManager.createInstance(this);
+		 cs.startSync();
 		  
 		  Uri data = getIntent().getData();
 		  
