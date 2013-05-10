@@ -1,0 +1,107 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+	android:padding="10dp"
+	android:fillViewport="true"
+    tools:context=".AddStudent" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:id="@+id/Fname"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:inputType="textCapWords" />
+
+        <EditText
+            android:id="@+id/Lname"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Fname"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:inputType="textCapWords" />
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Lname"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:inputType="textEmailAddress" />
+
+        <Spinner
+            android:id="@+id/first_proj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/email"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp" />
+
+        <Spinner
+            android:id="@+id/second_proj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/first_proj"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:id="@+id/FnameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/Fname"
+            android:text="@string/fname" />
+
+        <TextView
+            android:id="@+id/LnameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Fname"
+            android:layout_marginTop="20dp"
+            android:layout_toLeftOf="@id/Lname"
+            android:text="@string/lname" />
+
+        <TextView
+            android:id="@+id/emailText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Lname"
+            android:layout_marginTop="20dp"
+            android:layout_toLeftOf="@id/email"
+            android:text="@string/email" />
+
+        <TextView
+            android:id="@+id/first_projText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/email"
+            android:layout_marginTop="20dp"
+            android:layout_toLeftOf="@id/first_proj"
+            android:text="@string/first_proj" />
+
+        <TextView
+            android:id="@+id/second_projText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/first_proj"
+            android:layout_marginTop="20dp"
+            android:layout_toLeftOf="@id/second_proj"
+            android:text="@string/second_proj" />
+
+        <Button
+            android:id="@+id/addStudentButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/second_proj"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="@string/addstudentButton" />
+    </RelativeLayout>
+
+</ScrollView>

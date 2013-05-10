@@ -8,9 +8,16 @@
         android:minSdkVersion="16"
         android:targetSdkVersion="16" />
 
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_VIDEO" />
 
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -141,7 +148,7 @@
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
-		       <activity
+        <activity
             android:name=".ActionItem"
             android:label="@string/app_name" >
             <intent-filter>
@@ -149,6 +156,32 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+          <activity
+            android:name=".EReportLauncher"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SetDefaults"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".EDailyActivity"
+            android:label="@string/app_name"/>
+        <activity
+            android:name=".EReport"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".Record057"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".AddStudent"
+            android:label="@string/app_name" >
         </activity>
     </application>
 

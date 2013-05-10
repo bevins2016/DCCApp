@@ -32,14 +32,13 @@ public class ActionItem extends ListActivity implements OnClickListener {
 	public static RSSFeed myRssFeed = null;
 	private Button btnEmail = null;
 	static WebView webView;
-	Button newsB;
-	Button loginB;
-	Button calB;
-	Button mailB;
-	Button photoB;
-	Button reportB;
-	Button actionB;
-	Button directoryB;
+	private Button newsB;
+	private Button loginB;
+	private Button calB;
+	private Button photoB;
+	private Button reportB;
+	private Button actionB;
+	private Button directoryB;
 
 	String currentItem;
 	TextView thisAction;
@@ -55,7 +54,6 @@ public class ActionItem extends ListActivity implements OnClickListener {
 		newsB = (Button) findViewById(R.id.button1);
 		loginB = (Button) findViewById(R.id.button2);
 		calB = (Button) findViewById(R.id.button3);
-		mailB = (Button) findViewById(R.id.button4);
 		photoB = (Button) findViewById(R.id.button5);
 		reportB = (Button) findViewById(R.id.button6);
 		actionB = (Button) findViewById(R.id.button7);
@@ -65,7 +63,6 @@ public class ActionItem extends ListActivity implements OnClickListener {
 		newsB.setOnClickListener(this);
 		loginB.setOnClickListener(this);
 		calB.setOnClickListener(this);
-		mailB.setOnClickListener(this);
 		photoB.setOnClickListener(this);
 		reportB.setOnClickListener(this);
 		actionB.setOnClickListener(this);
@@ -192,9 +189,6 @@ public class ActionItem extends ListActivity implements OnClickListener {
 			break;
 		case R.id.button3:
 			startActivity(new Intent(this, MainActivity.class));
-			break;
-		case R.id.button4:
-			startActivity(new Intent(this, EmailMain.class));
 			break;
 		case R.id.button5:
 			startActivity(new Intent(this, CustomizedListView.class));

@@ -30,12 +30,6 @@ android:columnCount="4" >
 		android:text="@string/Button3_name"
 		android:drawableRight="@drawable/cal"/>
 	<Button
-		android:id="@+id/button4"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:text="@string/Button4_name"
-		android:drawableRight="@drawable/mail"/>
-	<Button
 		android:id="@+id/button5"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"

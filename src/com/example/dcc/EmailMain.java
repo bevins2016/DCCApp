@@ -14,11 +14,11 @@ public class EmailMain extends Activity implements OnClickListener {
 	Button newsB;
 	Button loginB;
 	Button calB;
-	Button mailB;
 	Button photoB;
 	Button reportB;
 	Button actionB;
 	Button directoryB;
+	Button searchB;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,22 +31,22 @@ public class EmailMain extends Activity implements OnClickListener {
 		newsB = (Button) findViewById(R.id.button1);
 		loginB = (Button) findViewById(R.id.button2);
 		calB = (Button) findViewById(R.id.button3);
-		mailB = (Button) findViewById(R.id.button4);
 		photoB = (Button) findViewById(R.id.button5);
 		reportB = (Button) findViewById(R.id.button6);
 		actionB = (Button) findViewById(R.id.button7);
 		directoryB = (Button) findViewById(R.id.button8);
+		searchB = (Button) findViewById(R.id.search);
 
 		// Here the listener for each button that allows actions is set.
 		newsB.setOnClickListener(this);
 		loginB.setOnClickListener(this);
 		calB.setOnClickListener(this);
-		mailB.setOnClickListener(this);
 		photoB.setOnClickListener(this);
 		reportB.setOnClickListener(this);
 		actionB.setOnClickListener(this);
 		directoryB.setOnClickListener(this);
 		btnEmail.setOnClickListener(this);
+		searchB.setOnClickListener(this);
 	}
 
 	public void sendEmail(View v) {
@@ -74,14 +74,11 @@ public class EmailMain extends Activity implements OnClickListener {
 		case R.id.button3:
 			startActivity(new Intent(this, MainActivity.class));
 			break;
-		case R.id.button4:
-			startActivity(new Intent(this, EmailMain.class));
-			break;
 		case R.id.button5:
 			startActivity(new Intent(this, CustomizedListView.class));
 			break;
 		case R.id.button6:
-			startActivity(new Intent(this, LaunchActivity.class));
+			startActivity(new Intent(this, EReportLauncher.class));
 			break;
 		case R.id.button7:
 			startActivity(new Intent(this, EmailMain.class));
@@ -93,6 +90,9 @@ public class EmailMain extends Activity implements OnClickListener {
 		case R.id.email_button:
 			// Calling sendEmail from the activity class
 			sendEmail(v);
+			break;
+		case R.id.search:
+			startActivity(new Intent(this, LaunchActivity.class));
 			break;
 		}
 	}

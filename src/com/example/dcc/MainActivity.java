@@ -52,7 +52,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		newsB = (Button) findViewById(R.id.button1);
 		loginB = (Button) findViewById(R.id.button2);
 		calB = (Button) findViewById(R.id.button3);
-		mailB = (Button) findViewById(R.id.button4);
+//		mailB = (Button) findViewById(R.id.button4);
 		photoB = (Button) findViewById(R.id.button5);
 		reportB = (Button) findViewById(R.id.button6);
 		actionB = (Button) findViewById(R.id.button7);
@@ -62,7 +62,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		newsB.setOnClickListener(this);
 		loginB.setOnClickListener(this);
 		calB.setOnClickListener(this);
-		mailB.setOnClickListener(this);
+	//	mailB.setOnClickListener(this);
 		photoB.setOnClickListener(this);
 		reportB.setOnClickListener(this);
 		actionB.setOnClickListener(this);
@@ -74,7 +74,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		//each case is a button in the menu.
 		switch (v.getId()) {
 		case R.id.button1:
-			startActivity(new Intent(this, AndroidRssReader.class));
+			startActivity(new Intent(this, EmailMain.class));
 			break;
 		case R.id.button2:
 			startActivity(new Intent(this, MainActivity.class));
@@ -82,9 +82,9 @@ public class MainActivity extends Activity implements OnClickListener {
 		case R.id.button3:
 			startActivity(new Intent(this, MainActivity.class));
 			break;
-		case R.id.button4:
-			startActivity(new Intent(this, EmailMain.class));
-			break;
+	//	case R.id.button4:
+	//		startActivity(new Intent(this, EmailMain.class));
+	//		break;
 		case R.id.button5:
 			startActivity(new Intent(this, CustomizedListView.class));
 			break;

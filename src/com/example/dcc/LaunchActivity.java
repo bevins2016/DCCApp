@@ -49,7 +49,6 @@ public class LaunchActivity extends Activity implements OnClickListener {
 	Button newsB;
 	Button loginB;
 	Button calB;
-	Button mailB;
 	Button photoB;
 	Button reportB;
 	Button actionB;
@@ -77,7 +76,6 @@ public class LaunchActivity extends Activity implements OnClickListener {
 		newsB = (Button) findViewById(R.id.button1);
 		loginB = (Button) findViewById(R.id.button2);
 		calB = (Button) findViewById(R.id.button3);
-		mailB = (Button) findViewById(R.id.button4);
 		photoB = (Button) findViewById(R.id.button5);
 		reportB = (Button) findViewById(R.id.button6);
 		actionB = (Button) findViewById(R.id.button7);
@@ -94,7 +92,6 @@ public class LaunchActivity extends Activity implements OnClickListener {
 		newsB.setOnClickListener(this);
 		loginB.setOnClickListener(this);
 		calB.setOnClickListener(this);
-		mailB.setOnClickListener(this);
 		photoB.setOnClickListener(this);
 		reportB.setOnClickListener(this);
 		actionB.setOnClickListener(this);
@@ -232,13 +229,14 @@ public class LaunchActivity extends Activity implements OnClickListener {
 			startActivity(new Intent(LaunchActivity.this, AndroidRssReader.class));
 			break;
 		case R.id.button2:
+<<<<<<< HEAD
 			//startActivity(new Intent(LaunchActivity.this, Login.class));
+=======
+			startActivity(new Intent(LaunchActivity.this, MainActivity.class));
+>>>>>>> Deleted Email Button / Added eReport Submission
 			break;
 		case R.id.button3:
 			startActivity(new Intent(LaunchActivity.this, MainActivity.class));
-			break;
-		case R.id.button4:
-			startActivity(new Intent(LaunchActivity.this, EmailMain.class));
 			break;
 		case R.id.button5:
 			startActivity(new Intent(LaunchActivity.this, CustomizedListView.class));
