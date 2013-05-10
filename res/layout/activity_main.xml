@@ -52,6 +52,11 @@ android:layout_width="match_parent"
 android:layout_height="wrap_content"
 android:text="@string/Button8_name"
 android:drawableRight="@drawable/directory" />
+<Button
+    android:id="@+id/search"
+   	android:layout_width="match_parent"
+   	android:layout_height="wrap_content"
+   	android:text="Search" />
 </LinearLayout>
 <GridLayout
 android:id="@+id/a"
