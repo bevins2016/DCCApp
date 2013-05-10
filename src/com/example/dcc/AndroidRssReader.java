@@ -54,7 +54,7 @@ public class AndroidRssReader extends ListActivity{
 			Cookie c = cs.getCookies().get(i);
 			String cookie = c.getName()+"="+c.getValue()+"; domain="+c.getDomain()+"; path="+c.getPath();
 			webCookieManager.setCookie(c.getDomain(), cookie);
-			webCookieSync.getInstance().sync();
+			CookieSyncManager.getInstance().sync();
 		}
 		
 		setContentView(R.layout.rss_webviewer);
