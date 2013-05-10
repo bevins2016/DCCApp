@@ -3,19 +3,27 @@ package com.example.dcc;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import org.apache.http.client.CookieStore;
+import org.apache.http.cookie.Cookie;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 import android.app.ListActivity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -30,13 +38,13 @@ public class AndroidRssReader extends ListActivity{
 	public static RSSFeed myRssFeed = null;
 	static WebView webView;
 	private User user;
-	//private Context context;
+	private Context context;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.rss_webviewer);
-		//context = this;
+		context = this;
 		user = (User)getIntent().getSerializableExtra("user");
 		new MyTask().execute();
 
@@ -47,7 +55,10 @@ public class AndroidRssReader extends ListActivity{
 
 		webView.setWebViewClient(new WebViewClient());
 		webView.setFitsSystemWindows(true);
-		webView.loadUrl("http://www.virtualDiscoveryCenter.net");
+		Map<String, String> m = new HashMap<String, String>();
+		m.put("Cookie", user.cookies);
+		Log.i("cookies", user.cookies);
+		webView.loadUrl("http://www.virtualDiscoveryCenter.net", m);
 		WebSettings webSettings = webView.getSettings();
 		webSettings.setJavaScriptEnabled(true);
 
@@ -63,11 +74,11 @@ public class AndroidRssReader extends ListActivity{
 	private class MyTask extends AsyncTask<Void, Void, Void>{
 
 
-		//CookieManager cm;
-		//String cookie;
+		CookieManager cm;
+		String cookie;
 		
 		protected void onPreExecute(){
-			/*CookieSyncManager.createInstance(context);
+			CookieSyncManager.createInstance(context);
 			CookieStore cs = user.getCookieJar();
 			
 			for(int i=0; i < cs.getCookies().size(); i++){
@@ -75,7 +86,7 @@ public class AndroidRssReader extends ListActivity{
 				String cookie = c.getName()+"="+c.getValue()+"; domain="+c.getDomain()+"; path="+c.getPath();
 				cm.setCookie(c.getDomain(), cookie);
 				CookieSyncManager.getInstance().sync();
-			}*/ 
+			}
 		}
 		@Override
 		protected Void doInBackground(Void... arg0) {

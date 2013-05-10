@@ -33,15 +33,12 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	public String userText,passwordText;
 
-	private User user;
+	public User user = new User();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		//Create a new user object.
-		user = new User();
 
 		//These are the buttons on the left side of the screen.
 		//The have been initialized in order.
@@ -72,7 +69,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.button1:
 			Intent i = new Intent(this, AndroidRssReader.class);
-			//	i.putExtra("user", user);
+			i.putExtra("user", user);
 			startActivity(i);
 			break;
 		case R.id.button2:

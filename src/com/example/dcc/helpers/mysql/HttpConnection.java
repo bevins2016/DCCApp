@@ -63,7 +63,7 @@ public class HttpConnection{
 		try{
 			//Basic settings
 			DefaultHttpClient client = new DefaultHttpClient();
-			DCCCookieStore cookieJar = new DCCCookieStore();
+			DCCCookieStore cookieJar = user.cookieJar;
 			client.setCookieStore(cookieJar);
 			
 			//Used to bypass some typical security settings
@@ -119,11 +119,13 @@ public class HttpConnection{
 				sb.append(c.getName()+"="+c.getValue()+";");
 			}
 			
+			user.cookies = sb.toString();
+			Log.i("Cookies", sb.toString()+cookieJar.getCookies().size());
 			get.setHeader("Cookie", sb.toString());
 			response = client.execute(new HttpHost(HOST), get);
 			
 			buildUser(user, response);
-			user.setCookieJar(cookieJar);
+			//user.setCookieJar(cookieJar);
 			
 		}catch(IOException e){
 			Log.e(this.getClass().toString(), e.getLocalizedMessage());
