@@ -226,7 +226,6 @@ public class MainActivity extends Activity implements OnClickListener {
 				user.setCookieJar(hc.login(user, userText, passwordText));
 				hc.getFriends(user.getCookieJar());
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return null;

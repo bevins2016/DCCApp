@@ -41,22 +41,6 @@ public class AndroidRssReader extends ListActivity{
 		super.onCreate(savedInstanceState);
 
 		user = (User)getIntent().getSerializableExtra("user");
-		
-		CookieSyncManager webCookieSync =
-				CookieSyncManager.createInstance(this);
-		CookieManager webCookieManager =
-				CookieManager.getInstance();
-		webCookieManager.setAcceptCookie(true);
-
-		CookieStore cs = user.getCookieJar();
-		
-		for(int i=0; i < cs.getCookies().size(); i++){
-			Cookie c = cs.getCookies().get(i);
-			String cookie = c.getName()+"="+c.getValue()+"; domain="+c.getDomain()+"; path="+c.getPath();
-			webCookieManager.setCookie(c.getDomain(), cookie);
-			CookieSyncManager.getInstance().sync();
-		}
-		
 		setContentView(R.layout.rss_webviewer);
 
 
@@ -85,6 +69,20 @@ public class AndroidRssReader extends ListActivity{
 	}
 	private class MyTask extends AsyncTask<Void, Void, Void>{
 
+		CookieManager cm;
+		String cookie;
+		
+		protected void onPreExecute(){
+			CookieSyncManager.createInstance(AndroidRssReader.this);
+			CookieStore cs = user.getCookieJar();
+			
+			for(int i=0; i < cs.getCookies().size(); i++){
+				Cookie c = cs.getCookies().get(i);
+				String cookie = c.getName()+"="+c.getValue()+"; domain="+c.getDomain()+"; path="+c.getPath();
+				cm.setCookie(c.getDomain(), cookie);
+				CookieSyncManager.getInstance().sync();
+			}
+		}
 		@Override
 		protected Void doInBackground(Void... arg0) {
 			try {
