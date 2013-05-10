@@ -39,6 +39,7 @@ public class ActionItem extends ListActivity implements OnClickListener {
 	private Button reportB;
 	private Button actionB;
 	private Button directoryB;
+	private Button searchB;
 
 	String currentItem;
 	TextView thisAction;
@@ -59,6 +60,7 @@ public class ActionItem extends ListActivity implements OnClickListener {
 		actionB = (Button) findViewById(R.id.button7);
 		directoryB = (Button) findViewById(R.id.button8);
 		thisAction = (TextView) findViewById(R.id.actionView);
+		searchB = (Button) findViewById(R.id.search);
 
 		newsB.setOnClickListener(this);
 		loginB.setOnClickListener(this);
@@ -68,6 +70,7 @@ public class ActionItem extends ListActivity implements OnClickListener {
 		actionB.setOnClickListener(this);
 		directoryB.setOnClickListener(this);
 		btnEmail.setOnClickListener(this);
+		searchB.setOnClickListener(this);
 
 		new MyTask().execute();
 
@@ -186,18 +189,21 @@ public class ActionItem extends ListActivity implements OnClickListener {
 			break;
 		case R.id.button2:
 			startActivity(new Intent(this, MainActivity.class));
+			finish();
 			break;
 		case R.id.button3:
 			startActivity(new Intent(this, MainActivity.class));
+			finish();
 			break;
 		case R.id.button5:
 			startActivity(new Intent(this, CustomizedListView.class));
 			break;
 		case R.id.button6:
-			startActivity(new Intent(this, LaunchActivity.class));
+			startActivity(new Intent(this, EReportLauncher.class));
 			break;
 		case R.id.button7:
 			startActivity(new Intent(this, ActionItem.class));
+			finish();
 			break;
 		case R.id.button8:
 			startActivity(new Intent(this, MainActivity.class));
@@ -206,6 +212,10 @@ public class ActionItem extends ListActivity implements OnClickListener {
 		case R.id.email_button1:
 			// Calling sendEmail from the activity class
 			sendEmail(v);
+			break;
+		case R.id.search:
+			startActivity(new Intent(this, LaunchActivity.class));
+			finish();
 			break;
 		}
 	}

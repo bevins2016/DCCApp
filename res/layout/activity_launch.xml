@@ -51,6 +51,11 @@ tools:context=".LaunchActivity">
 		android:layout_height="wrap_content"
 		android:text="@string/Button7_name"
 		android:drawableRight="@drawable/ep" />
+	<Button
+    	android:id="@+id/search"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:text="Search" />
 </LinearLayout>
 　
 <LinearLayout

@@ -34,6 +34,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	private Button reportB;
 	private Button actionB;
 	private Button directoryB;
+	private Button searchB;
 
 	private Context context;
 	private LogInTask logTask;
@@ -57,6 +58,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		reportB = (Button) findViewById(R.id.button6);
 		actionB = (Button) findViewById(R.id.button7);
 		directoryB = (Button) findViewById(R.id.button8);
+		searchB = (Button) findViewById(R.id.search);
 
 		//Here the listener for each button that allows actions is set.
 		newsB.setOnClickListener(this);
@@ -67,6 +69,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		reportB.setOnClickListener(this);
 		actionB.setOnClickListener(this);
 		directoryB.setOnClickListener(this);
+		searchB.setOnClickListener(this);
 	}
 
 	public void onClick(View v) {
@@ -79,10 +82,16 @@ public class MainActivity extends Activity implements OnClickListener {
 			startActivity(i);
 			break;
 		case R.id.button2:
+<<<<<<< HEAD
 			showDialog(1);
+=======
+			startActivity(new Intent(this, MainActivity.class));
+			finish();
+>>>>>>> fix on activity finish and button redirects
 			break;
 		case R.id.button3:
 			startActivity(new Intent(this, MainActivity.class));
+			finish();
 			break;
 	//	case R.id.button4:
 	//		startActivity(new Intent(this, EmailMain.class));
@@ -91,7 +100,11 @@ public class MainActivity extends Activity implements OnClickListener {
 			startActivity(new Intent(this, CustomizedListView.class));
 			break;
 		case R.id.button6:
+			startActivity(new Intent(this, EReportLauncher.class));
+			break;
+		case R.id.search:
 			startActivity(new Intent(this, LaunchActivity.class));
+			finish();
 			break;
 		case R.id.button7:
 			startActivity(new Intent(this, ActionItem.class));

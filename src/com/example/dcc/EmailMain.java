@@ -70,9 +70,11 @@ public class EmailMain extends Activity implements OnClickListener {
 			break;
 		case R.id.button2:
 			startActivity(new Intent(this, MainActivity.class));
+			finish();
 			break;
 		case R.id.button3:
 			startActivity(new Intent(this, MainActivity.class));
+			finish();
 			break;
 		case R.id.button5:
 			startActivity(new Intent(this, CustomizedListView.class));
@@ -81,7 +83,7 @@ public class EmailMain extends Activity implements OnClickListener {
 			startActivity(new Intent(this, EReportLauncher.class));
 			break;
 		case R.id.button7:
-			startActivity(new Intent(this, EmailMain.class));
+			startActivity(new Intent(this, ActionItem.class));
 			break;
 		case R.id.button8:
 			startActivity(new Intent(this, MainActivity.class));

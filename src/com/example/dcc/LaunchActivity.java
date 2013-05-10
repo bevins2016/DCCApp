@@ -52,6 +52,7 @@ public class LaunchActivity extends Activity implements OnClickListener {
 	Button photoB;
 	Button reportB;
 	Button actionB;
+	private Button searchB;
 	private Button MetaSearchButton;
 	private Button CreateSurveyButton;
 	private Button ManageSurveyButton;
@@ -79,6 +80,7 @@ public class LaunchActivity extends Activity implements OnClickListener {
 		photoB = (Button) findViewById(R.id.button5);
 		reportB = (Button) findViewById(R.id.button6);
 		actionB = (Button) findViewById(R.id.button7);
+		searchB = (Button) findViewById(R.id.search);
 
 		/* Set up buttons */
 		MetaSearchButton = (Button) findViewById(R.id.meta_button);
@@ -95,6 +97,7 @@ public class LaunchActivity extends Activity implements OnClickListener {
 		photoB.setOnClickListener(this);
 		reportB.setOnClickListener(this);
 		actionB.setOnClickListener(this);
+		searchB.setOnClickListener(this);
 
 	}
 
@@ -228,17 +231,31 @@ public class LaunchActivity extends Activity implements OnClickListener {
 		case R.id.button1:
 			startActivity(new Intent(LaunchActivity.this, AndroidRssReader.class));
 			break;
+<<<<<<< HEAD
+=======
+		case R.id.button2:
+			//startActivity(new Intent(LaunchActivity.this, Login.class));
+			startActivity(new Intent(LaunchActivity.this, MainActivity.class));
+			finish();
+			break;
+>>>>>>> fix on activity finish and button redirects
 		case R.id.button3:
 			startActivity(new Intent(LaunchActivity.this, MainActivity.class));
+			finish();
 			break;
 		case R.id.button5:
 			startActivity(new Intent(LaunchActivity.this, CustomizedListView.class));
 			break;
 		case R.id.button6:
+			startActivity(new Intent(LaunchActivity.this, EReportLauncher.class));
+			break;
+		case R.id.search:
 			startActivity(new Intent(LaunchActivity.this, LaunchActivity.class));
+			finish();
 			break;
 		case R.id.button7:
-			startActivity(new Intent(LaunchActivity.this, EmailMain.class));
+			startActivity(new Intent(LaunchActivity.this, ActionItem.class));
+			finish();
 			break;
 		case R.id.meta_button:
 			intent.setClass(LaunchActivity.this, MetaSearch.class);
