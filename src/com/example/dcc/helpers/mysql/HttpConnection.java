@@ -116,6 +116,7 @@ public class HttpConnection{
 			//Re-add the cookies to the request
 			for(int i=0; i < cookieJar.getCookies().size(); i++){
 				Cookie c = cookieJar.getCookies().get(i);
+				if(c.getName().startsWith("wordpress_logged_in")||c.getName().startsWith("wordpress_test"))
 				sb.append(c.getName()+"="+c.getValue()+";");
 			}
 			

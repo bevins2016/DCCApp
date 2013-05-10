@@ -54,10 +54,10 @@ public class AndroidRssReader extends ListActivity{
 		webView  = (WebView) findViewById(R.id.webView1);
 
 		webView.setWebViewClient(new WebViewClient());
-		webView.setFitsSystemWindows(true);
 		Map<String, String> m = new HashMap<String, String>();
 		m.put("Cookie", user.cookies);
-		Log.i("cookies", user.cookies);
+		Log.i("cookiesasd", user.cookies);
+
 		webView.loadUrl("http://www.virtualDiscoveryCenter.net", m);
 		WebSettings webSettings = webView.getSettings();
 		webSettings.setJavaScriptEnabled(true);
@@ -74,11 +74,11 @@ public class AndroidRssReader extends ListActivity{
 	private class MyTask extends AsyncTask<Void, Void, Void>{
 
 
-		CookieManager cm;
-		String cookie;
+		//CookieManager cm;
+		//String cookie;
 		
 		protected void onPreExecute(){
-			CookieSyncManager.createInstance(context);
+			/*CookieSyncManager.createInstance(context);
 			CookieStore cs = user.getCookieJar();
 			
 			for(int i=0; i < cs.getCookies().size(); i++){
@@ -86,7 +86,7 @@ public class AndroidRssReader extends ListActivity{
 				String cookie = c.getName()+"="+c.getValue()+"; domain="+c.getDomain()+"; path="+c.getPath();
 				cm.setCookie(c.getDomain(), cookie);
 				CookieSyncManager.getInstance().sync();
-			}
+			}*/
 		}
 		@Override
 		protected Void doInBackground(Void... arg0) {
@@ -150,7 +150,12 @@ public class AndroidRssReader extends ListActivity{
 		//Intent myIntent = new Intent(Intent.ACTION_VIEW, feedUri);
 		//startActivity(myIntent);
 		String url = myRssFeed.getItem(position).getLink();
-		webView.loadUrl(url);
+		
+		Map<String, String> m = new HashMap<String, String>();
+		m.put("Cookie", user.cookies);
+		Log.i("cookies", user.cookies);
+		
+		webView.loadUrl(url, m);
 	}
 
 
