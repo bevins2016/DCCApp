@@ -3,6 +3,8 @@ package com.example.dcc;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -14,12 +16,11 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-import com.example.dcc.helpers.User;
-
 import android.app.ListActivity;
-import android.net.Uri;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
@@ -30,37 +31,21 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.dcc.helpers.User;
+
 public class AndroidRssReader extends ListActivity{
 	//Create buttons Globally so they are available to all methods
 	public static RSSFeed myRssFeed = null;
 	static WebView webView;
 	private User user;
+	private Context context;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		user = (User)getIntent().getSerializableExtra("user");
-		
-		CookieSyncManager webCookieSync =
-				CookieSyncManager.createInstance(this);
-		CookieManager webCookieManager =
-				CookieManager.getInstance();
-		webCookieManager.setAcceptCookie(true);
-
-		CookieStore cs = user.getCookieJar();
-		
-		for(int i=0; i < cs.getCookies().size(); i++){
-			Cookie c = cs.getCookies().get(i);
-			String cookie = c.getName()+"="+c.getValue()+"; domain="+c.getDomain()+"; path="+c.getPath();
-			webCookieManager.setCookie(c.getDomain(), cookie);
-			CookieSyncManager.getInstance().sync();
-		}
-		
 		setContentView(R.layout.rss_webviewer);
-
-
-
+		context = this;
+		user = (User)getIntent().getSerializableExtra("user");
 		new MyTask().execute();
 
 		//this portion of the onCreate is dedicated to running the webView
@@ -70,11 +55,14 @@ public class AndroidRssReader extends ListActivity{
 
 		webView.setWebViewClient(new WebViewClient());
 		webView.setFitsSystemWindows(true);
-		webView.loadUrl("http://www.virtualDiscoveryCenter.net");
+		Map<String, String> m = new HashMap<String, String>();
+		m.put("Cookie", user.cookies);
+		Log.i("cookies", user.cookies);
+		webView.loadUrl("http://www.virtualDiscoveryCenter.net", m);
 		WebSettings webSettings = webView.getSettings();
 		webSettings.setJavaScriptEnabled(true);
 
-		Uri data = getIntent().getData();
+		//Uri data = getIntent().getData(); Don't know what this is doing
 
 		if (savedInstanceState == null) {
 			String url = getIntent().getDataString();
@@ -85,6 +73,21 @@ public class AndroidRssReader extends ListActivity{
 	}
 	private class MyTask extends AsyncTask<Void, Void, Void>{
 
+
+		CookieManager cm;
+		String cookie;
+		
+		protected void onPreExecute(){
+			CookieSyncManager.createInstance(context);
+			CookieStore cs = user.getCookieJar();
+			
+			for(int i=0; i < cs.getCookies().size(); i++){
+				Cookie c = cs.getCookies().get(i);
+				String cookie = c.getName()+"="+c.getValue()+"; domain="+c.getDomain()+"; path="+c.getPath();
+				cm.setCookie(c.getDomain(), cookie);
+				CookieSyncManager.getInstance().sync();
+			}
+		}
 		@Override
 		protected Void doInBackground(Void... arg0) {
 			try {
