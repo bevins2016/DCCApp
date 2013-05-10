@@ -29,7 +29,6 @@ public class MainActivity extends Activity implements OnClickListener {
 	private Button newsB;
 	private Button loginB;
 	private Button calB;
-	private Button mailB;
 	private Button photoB;
 	private Button reportB;
 	private Button actionB;
@@ -96,6 +95,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.button6:
 			startActivity(new Intent(this, EReportLauncher.class));
+			finish();
 			break;
 		case R.id.search:
 			startActivity(new Intent(this, LaunchActivity.class));
@@ -119,7 +119,6 @@ public class MainActivity extends Activity implements OnClickListener {
 		case DIALOG_LOGIN:
 			LayoutInflater inflater = LayoutInflater.from(this);
 			View dialogview = inflater.inflate(R.layout.dialog_login, null);
-
 			AlertDialog.Builder dialogbuilder = new AlertDialog.Builder(this);
 			dialogbuilder.setTitle("Login");
 			dialogbuilder.setView(dialogview);

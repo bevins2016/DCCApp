@@ -92,14 +92,17 @@ public class ActionItem extends ListActivity implements OnClickListener {
 		}
 
 	}
-
+	
+	
+// use Async task to make network calls to avoid NetworkOnMainThreadException
 	private class MyTask extends AsyncTask<Void, Void, Void> {
 
 		@Override
 		protected Void doInBackground(Void... arg0) {
 			try {
-				URL rssUrl = new URL(
+				URL rssUrl = new URL(//set URL
 						"http://www.virtualdiscoverycenter.net/feed/");// http://www.virtualdiscoverycenter.net/feed/
+				//instantiate network objects and parsers
 				SAXParserFactory mySAXParserFactory = SAXParserFactory
 						.newInstance();
 				SAXParser mySAXParser = mySAXParserFactory.newSAXParser();
@@ -110,6 +113,7 @@ public class ActionItem extends ListActivity implements OnClickListener {
 				myXMLReader.parse(myInputSource);
 
 				myRssFeed = myRSSHandler.getFeed();
+				//catch potential exceptions
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
 			} catch (ParserConfigurationException e) {
@@ -119,22 +123,25 @@ public class ActionItem extends ListActivity implements OnClickListener {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
+				//return null because a String return is required but uneeded
 			return null;
 		}
 
 		@Override
 		protected void onPostExecute(Void result) {
 			if (myRssFeed != null) {
+				//instanciate the textviews in the scrollview
 				TextView feedTitle = (TextView) findViewById(R.id.feedtitle);
 				TextView feedDescribtion = (TextView) findViewById(R.id.feeddescribtion);
 				TextView feedPubdate = (TextView) findViewById(R.id.feedpubdate);
 				TextView feedLink = (TextView) findViewById(R.id.feedlink);
+				//set the textviews to the info on the Rss feed located in RSSFeed
 				feedTitle.setText(myRssFeed.getTitle());
 				feedDescribtion.setText(myRssFeed.getDescription());
 				feedPubdate.setText(myRssFeed.getPubdate());
 				feedLink.setText(myRssFeed.getLink());
 
+				//adapt the listview to the array.
 				ArrayAdapter<RSSItem> adapter = new ArrayAdapter<RSSItem>(
 						getApplicationContext(),
 						android.R.layout.simple_list_item_1,
@@ -145,6 +152,7 @@ public class ActionItem extends ListActivity implements OnClickListener {
 
 			} else {
 
+				//if the server is down or Rss is completely empty
 				TextView textEmpty = (TextView) findViewById(android.R.id.empty);
 				textEmpty.setText("No Feed Found!");
 			}
@@ -160,10 +168,12 @@ public class ActionItem extends ListActivity implements OnClickListener {
 		// Uri feedUri = Uri.parse(myRssFeed.getItem(position).getLink());
 		// Intent myIntent = new Intent(Intent.ACTION_VIEW, feedUri);
 		// startActivity(myIntent);
+		//this will change what happens when you pick and item on the list
 		String url = myRssFeed.getItem(position).getLink();
 		currentItem = myRssFeed.getItem(position).getTitle();
 		currentLocation = position;
 		thisAction.setText(currentItem);
+		//loads the url into the webview of the selcted Rss item
 		webView.loadUrl(url);
 	}
 	
@@ -171,6 +181,7 @@ public class ActionItem extends ListActivity implements OnClickListener {
 		// The following code is the implementation of Email client
 		Intent i = new Intent(android.content.Intent.ACTION_SEND);
 		i.setType("text/plain");
+		//email to send to 
 		String[] address = { "bevins2012@hotmail.com" };
 
 		i.putExtra(android.content.Intent.EXTRA_EMAIL, address);

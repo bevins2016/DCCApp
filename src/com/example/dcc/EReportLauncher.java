@@ -41,7 +41,14 @@ public class EReportLauncher extends Activity implements OnClickListener {
 	private Button eDailyButton; // eDaily Button
 	private Button eReportButton; // eReport Button
 	private Button fiftysevenButton; // 0:57 Button
-
+	private Button newsB;
+	private Button loginB;
+	private Button calB;
+	private Button photoB;
+	private Button reportB;
+	private Button actionB;
+	private Button directoryB;
+	private Button searchB;
 	private String filename = "";
 	private String fiftysevenFile = Environment.getExternalStorageDirectory()
 			+ "/enotebook/057s";
@@ -68,6 +75,29 @@ public class EReportLauncher extends Activity implements OnClickListener {
 
 		/* Check if files/folders exist */
 		defaultCheck();
+		
+		//These are the buttons on the left side of the screen.
+				//The have been initialized in order.
+				newsB = (Button) findViewById(R.id.button1);
+				loginB = (Button) findViewById(R.id.button2);
+				calB = (Button) findViewById(R.id.button3);
+//				mailB = (Button) findViewById(R.id.button4);
+				photoB = (Button) findViewById(R.id.button5);
+				reportB = (Button) findViewById(R.id.button6);
+				actionB = (Button) findViewById(R.id.button7);
+				directoryB = (Button) findViewById(R.id.button8);
+				searchB = (Button) findViewById(R.id.search);
+
+				//Here the listener for each button that allows actions is set.
+				newsB.setOnClickListener(this);
+				loginB.setOnClickListener(this);
+				calB.setOnClickListener(this);
+			//	mailB.setOnClickListener(this);
+				photoB.setOnClickListener(this);
+				reportB.setOnClickListener(this);
+				actionB.setOnClickListener(this);
+				directoryB.setOnClickListener(this);
+				searchB.setOnClickListener(this);
 	}
 
 	@Override
@@ -100,13 +130,50 @@ public class EReportLauncher extends Activity implements OnClickListener {
 	 */
 	public void onClick(View v) {
 		Intent intent = new Intent();
-		if (v.getId() == R.id.eDailyButton) {
+		
+		switch (v.getId()) {
+		case R.id.button1:
+			Intent i = new Intent(this, AndroidRssReader.class);
+		//	i.putExtra("user", user);
+			startActivity(i);
+			break;
+		case R.id.button2:
+			showDialog(1);
+			break;
+		case R.id.button3:
+			startActivity(new Intent(this, MainActivity.class));
+			finish();
+			break;
+	//	case R.id.button4:
+	//		startActivity(new Intent(this, EmailMain.class));
+	//		break;
+		case R.id.button5:
+			startActivity(new Intent(this, CustomizedListView.class));
+			break;
+		case R.id.button6:
+			startActivity(new Intent(this, EReportLauncher.class));
+			break;
+		case R.id.search:
+			startActivity(new Intent(this, LaunchActivity.class));
+			finish();
+			break;
+		case R.id.button7:
+			startActivity(new Intent(this, ActionItem.class));
+			finish();
+			break;
+		case R.id.button8:
+			startActivity(new Intent(this, MainActivity.class));
+			finish();
+			break;
+		case R.id.eDailyButton:
 			intent.setClass(this, EDailyActivity.class);
 			startActivity(intent);
-		} else if (v.getId() == R.id.eReportButton) {
+			break;
+		case R.id.eReportButton:
 			intent.setClass(this, EReport.class);
 			startActivity(intent);
-		} else if (v.getId() == R.id.Video057Button) {
+			break;
+		case R.id.Video057Button:
 			File f = new File(Environment.getExternalStorageDirectory()
 					+ "/enotebook/InternalStorage.txt");
 			if(f.exists()) {
@@ -114,8 +181,12 @@ public class EReportLauncher extends Activity implements OnClickListener {
 			} else {
 				setDefaultsPopup057();
 			}
+			break;
 		}
+		
 	}
+	
+	
 
 	/* Check if directories/files exits */
 	private void defaultCheck() {
