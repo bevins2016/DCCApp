@@ -228,13 +228,6 @@ public class LaunchActivity extends Activity implements OnClickListener {
 		case R.id.button1:
 			startActivity(new Intent(LaunchActivity.this, AndroidRssReader.class));
 			break;
-		case R.id.button2:
-<<<<<<< HEAD
-			//startActivity(new Intent(LaunchActivity.this, Login.class));
-=======
-			startActivity(new Intent(LaunchActivity.this, MainActivity.class));
->>>>>>> Deleted Email Button / Added eReport Submission
-			break;
 		case R.id.button3:
 			startActivity(new Intent(LaunchActivity.this, MainActivity.class));
 			break;

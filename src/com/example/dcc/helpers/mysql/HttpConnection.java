@@ -49,6 +49,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import com.example.dcc.helpers.DCCCookieStore;
 import com.example.dcc.helpers.User;
 
 import android.util.Log;
@@ -67,10 +68,10 @@ public class HttpConnection{
 	 * @return
 	 * @throws URISyntaxException 
 	 */
-	public synchronized CookieStore login(User u, String log, String pwd) throws URISyntaxException{
+	public synchronized DCCCookieStore login(User u, String log, String pwd) throws URISyntaxException{
 		try{
 			DefaultHttpClient client = new DefaultHttpClient();
-			CookieStore cookieJar = new BasicCookieStore();
+			DCCCookieStore cookieJar = new DCCCookieStore();
 			client.setCookieStore(cookieJar);
 			client.getCookieSpecs().register("easy", getCookieSpec());
 
