@@ -1,59 +1,53 @@
+//TODO change button ids to more descriptive names.
+
 package com.example.dcc;
 
-import com.example.dcc.helpers.User;
-import com.example.dcc.helpers.mysql.HttpConnection;
-import com.example.dcc.helpers.mysql.PreparedStatements;
-
-import android.os.AsyncTask;
-import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.dcc.helpers.User;
+import com.example.dcc.helpers.mysql.HttpConnection;
+
 public class MainActivity extends Activity implements OnClickListener {
 
 	final private static int DIALOG_LOGIN = 1; 
 
 	//Create buttons Globally so they are available to all methods
-	private Button newsB;
-	private Button loginB;
-	private Button calB;
-	private Button mailB;
-	private Button photoB;
-	private Button reportB;
-	private Button actionB;
-	private Button directoryB;
-	private Button searchB;
+	private Button newsB,loginB,calB,photoB,reportB,actionB,directoryB,searchB;
 
 	private Context context;
 	private LogInTask logTask;
 
-	public String userText;
-	public String passwordText;
+	public String userText,passwordText;
 
 	private User user;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		//Create a new user object.
 		user = new User();
+
 		//These are the buttons on the left side of the screen.
 		//The have been initialized in order.
 		newsB = (Button) findViewById(R.id.button1);
 		loginB = (Button) findViewById(R.id.button2);
 		calB = (Button) findViewById(R.id.button3);
-//		mailB = (Button) findViewById(R.id.button4);
 		photoB = (Button) findViewById(R.id.button5);
 		reportB = (Button) findViewById(R.id.button6);
 		actionB = (Button) findViewById(R.id.button7);
@@ -64,7 +58,6 @@ public class MainActivity extends Activity implements OnClickListener {
 		newsB.setOnClickListener(this);
 		loginB.setOnClickListener(this);
 		calB.setOnClickListener(this);
-	//	mailB.setOnClickListener(this);
 		photoB.setOnClickListener(this);
 		reportB.setOnClickListener(this);
 		actionB.setOnClickListener(this);
@@ -72,13 +65,14 @@ public class MainActivity extends Activity implements OnClickListener {
 		searchB.setOnClickListener(this);
 	}
 
+	@SuppressWarnings("deprecation")
 	public void onClick(View v) {
 		//this switch listens for any and all click actions in the app
 		//each case is a button in the menu.
 		switch (v.getId()) {
 		case R.id.button1:
 			Intent i = new Intent(this, AndroidRssReader.class);
-		//	i.putExtra("user", user);
+			//	i.putExtra("user", user);
 			startActivity(i);
 			break;
 		case R.id.button2:
@@ -88,9 +82,6 @@ public class MainActivity extends Activity implements OnClickListener {
 			startActivity(new Intent(this, MainActivity.class));
 			finish();
 			break;
-	//	case R.id.button4:
-	//		startActivity(new Intent(this, EmailMain.class));
-	//		break;
 		case R.id.button5:
 			startActivity(new Intent(this, CustomizedListView.class));
 			break;
@@ -112,6 +103,10 @@ public class MainActivity extends Activity implements OnClickListener {
 		}
 	}
 
+	/**
+	 * This method is used to display the dialog that accepts the user's
+	 * name and password and starts the authentication task.
+	 */
 	protected Dialog onCreateDialog(int id){
 		AlertDialog dialogDetails = null;
 
@@ -121,52 +116,48 @@ public class MainActivity extends Activity implements OnClickListener {
 			View dialogview = inflater.inflate(R.layout.dialog_login, null);
 
 			AlertDialog.Builder dialogbuilder = new AlertDialog.Builder(this);
-			dialogbuilder.setTitle("Login");
-			dialogbuilder.setView(dialogview);
+			dialogbuilder.setTitle("DCC Login").setView(dialogview);
 			dialogDetails = dialogbuilder.create();
-
-			break;
 		}
-
 		return dialogDetails;
 	}
 
+	/**
+	 * This class is used to build the dialog box prior to being set to visible.
+	 * All click listeners in the dialog is limited to this method(does not use this as
+	 * the listener). Ignores the int 'id'
+	 */
 	protected void onPrepareDialog(int id, Dialog dialog) {
 
-		switch (id) {
-		case DIALOG_LOGIN:
-			final AlertDialog alertDialog = (AlertDialog) dialog;
-			Button loginbutton = (Button) alertDialog
-					.findViewById(R.id.btn_login);
-			Button cancelbutton = (Button) alertDialog
-					.findViewById(R.id.btn_cancel);
+		//Create dialog
+		final AlertDialog alertDialog = (AlertDialog) dialog;
+		Button loginbutton = (Button) alertDialog.findViewById(R.id.btn_login);
+		Button cancelbutton = (Button) alertDialog.findViewById(R.id.btn_cancel);
 
-			final EditText user = (EditText) alertDialog.findViewById(R.id.login_text);
-			final EditText pwd = (EditText) alertDialog.findViewById(R.id.password);
+		//Get input fields
+		final EditText user = (EditText) alertDialog.findViewById(R.id.login_text);
+		final EditText pwd = (EditText) alertDialog.findViewById(R.id.password);
 
-			loginbutton.setOnClickListener(new View.OnClickListener() {
+		//Set the listener for the login action
+		loginbutton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				userText = user.getText().toString();
+				passwordText = pwd.getText().toString();
 
-				@Override
-				public void onClick(View v) {
-					Log.e(this.toString(), "Logging In");
-
-					userText = user.getText().toString();
-					passwordText = pwd.getText().toString();
-
-					logTask = null;
-					attemptLogin();
-					alertDialog.dismiss();
-				}
-			});
-			cancelbutton.setOnClickListener(new View.OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					alertDialog.dismiss();
-				}
-			});
-			break;
-		}
+				logTask = null;
+				attemptLogin();
+				alertDialog.dismiss();
+			}
+		});
+		
+		//Set the lisener for the cancel action
+		cancelbutton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				alertDialog.dismiss();
+			}
+		});
 	}
 
 	/**
@@ -175,10 +166,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	 * errors are presented and no actual login attempt is made.
 	 */
 	public void attemptLogin() {
-		Log.e(this.toString(), "Attempt Log In");
-
 		if (logTask != null) {
-			Log.e(this.toString(), "Return logTask != null");
 			return;
 		}
 
@@ -203,10 +191,10 @@ public class MainActivity extends Activity implements OnClickListener {
 			}
 
 		}catch(Exception e){
-			//Log.e(this.toString(), e.getMessage());
-			Log.i("stuff", userText+" "+passwordText);
 			cancel = true;
 		}
+		
+		//If the task has successfully passed the inspection move to login task
 		if (!cancel){
 			logTask = new LogInTask();
 			logTask.execute((Void) null);
@@ -218,11 +206,11 @@ public class MainActivity extends Activity implements OnClickListener {
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			Log.e("BG","in bg");
 			HttpConnection hc = new HttpConnection();
 			try {
-				user.setCookieJar(hc.login(user, userText, passwordText));
-				hc.getFriends(user.getCookieJar());
+				//This logs the user in.
+				hc.login(user, userText, passwordText);
+				//hc.getFriends(user.getCookieJar());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -231,12 +219,10 @@ public class MainActivity extends Activity implements OnClickListener {
 
 		@Override
 		protected void onPostExecute(final Boolean success) {
-
 		}
 
 		@Override
 		protected void onCancelled() {
-
 		}
 	}
 

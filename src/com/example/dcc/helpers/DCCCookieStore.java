@@ -1,14 +1,14 @@
 package com.example.dcc.helpers;
 
 import java.io.Serializable;
-
 import org.apache.http.impl.client.BasicCookieStore;
 
+/**
+ * This is a class used to extend the BasicCookieStore into a Serializable object. This
+ * enables us to pass the cookie store through intents.
+ * @author Harmon
+ *
+ */
+@SuppressWarnings("serial")
 public class DCCCookieStore extends BasicCookieStore implements Serializable{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 }

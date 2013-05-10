@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import org.apache.http.client.CookieStore;
 
+import android.util.Log;
+
 public class User implements Serializable{
 
 	/**
