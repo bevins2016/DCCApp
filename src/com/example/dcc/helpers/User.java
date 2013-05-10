@@ -5,13 +5,11 @@ import org.apache.http.client.CookieStore;
 public class User {
 
 	private String handle;
-	private String email;
 	private String name;
 	private CookieStore cookieJar;
 	
 	public User(){
 		this.setHandle(null);
-		this.setEmail(null);
 		this.setName(null);
 		this.setCookieJar(null);
 	}
@@ -22,14 +20,6 @@ public class User {
 
 	public void setHandle(String handle) {
 		this.handle = handle;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 

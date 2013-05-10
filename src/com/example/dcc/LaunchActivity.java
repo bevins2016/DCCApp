@@ -232,7 +232,7 @@ public class LaunchActivity extends Activity implements OnClickListener {
 			startActivity(new Intent(LaunchActivity.this, AndroidRssReader.class));
 			break;
 		case R.id.button2:
-			startActivity(new Intent(LaunchActivity.this, Login.class));
+			//startActivity(new Intent(LaunchActivity.this, Login.class));
 			break;
 		case R.id.button3:
 			startActivity(new Intent(LaunchActivity.this, MainActivity.class));

@@ -13,6 +13,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.http.Header;
 import org.apache.http.HttpHost;
@@ -43,6 +45,11 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.BasicHttpContext;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
+import com.example.dcc.helpers.User;
 
 import android.util.Log;
 import android.util.Xml.Encoding;
@@ -60,7 +67,7 @@ public class HttpConnection{
 	 * @return
 	 * @throws URISyntaxException 
 	 */
-	public synchronized CookieStore login(String log, String pwd) throws URISyntaxException{
+	public synchronized CookieStore login(User u, String log, String pwd) throws URISyntaxException{
 		try{
 			DefaultHttpClient client = new DefaultHttpClient();
 			CookieStore cookieJar = new BasicCookieStore();
@@ -85,12 +92,14 @@ public class HttpConnection{
 
 			HttpResponse response = client.execute(new HttpHost(HOST), post);
 			
+			buildUser(u, response);
 			Header[] cookie = (Header[]) response.getHeaders("Set-Cookie");
 			for(int h=0; h<cookie.length; h++){
 				Header temp = cookie[h];
 				cookieJar.addCookie(new BasicClientCookie(temp.getName(), temp.getValue()));
 			}
 
+			
 			return cookieJar;
 		}catch(IOException e){
 			Log.e(this.getClass().toString(), e.getLocalizedMessage());
@@ -98,6 +107,26 @@ public class HttpConnection{
 		}
 	}
 	
+	private void buildUser(User u, HttpResponse response) {
+		try {
+			//Get the site
+			BufferedReader in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+			StringBuilder total = new StringBuilder();
+			String line;
+			while((line = in.readLine()) != null) total.append(line);
+
+			Document doc = Jsoup.parse(total.toString());
+			Element span = doc.getElementById("ffl-logged-in-user");
+			u.setName(span.text());
+			
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	public void getFriends(CookieStore cj) throws ClientProtocolException, IOException{
 		HttpClient client = new DefaultHttpClient();
 		HttpGet httpGet = new HttpGet("/members/brandoncharmon/friends/");
@@ -107,10 +136,6 @@ public class HttpConnection{
 		}
 		httpGet.setHeader("Cookie",cookies.toString());
 		HttpResponse hr = client.execute(new HttpHost(HOST), httpGet);
-		for(int i=0; i < hr.getAllHeaders().length; i++){
-			Log.i(this.getClass().getName(), hr.getAllHeaders()[i].getName()+"////"+
-		hr.getAllHeaders()[i].getValue());
-		}
 	}
 	
 	private CookieSpecFactory getCookieSpec(){
