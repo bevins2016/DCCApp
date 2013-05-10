@@ -1,12 +1,18 @@
 package com.example.dcc.helpers;
 
+import java.io.Serializable;
+
 import org.apache.http.client.CookieStore;
 
-public class User {
+public class User implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5285360029686080283L;
 	private String handle;
 	private String name;
-	private CookieStore cookieJar;
+	private DCCCookieStore cookieJar;
 	
 	public User(){
 		this.setHandle(null);
@@ -23,11 +29,11 @@ public class User {
 	}
 
 
-	public CookieStore getCookieJar() {
+	public DCCCookieStore getCookieJar() {
 		return cookieJar;
 	}
 
-	public void setCookieJar(CookieStore cookieJar) {
+	public void setCookieJar(DCCCookieStore cookieJar) {
 		this.cookieJar = cookieJar;
 	}
 

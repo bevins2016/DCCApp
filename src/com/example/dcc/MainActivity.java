@@ -37,18 +37,17 @@ public class MainActivity extends Activity implements OnClickListener {
 	private Button searchB;
 
 	private Context context;
-	private PreparedStatements sqlStatement;
 	private LogInTask logTask;
 
 	public String userText;
 	public String passwordText;
 
-	private User u;
+	private User user;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		user = new User();
 		//These are the buttons on the left side of the screen.
 		//The have been initialized in order.
 		newsB = (Button) findViewById(R.id.button1);
@@ -78,9 +77,12 @@ public class MainActivity extends Activity implements OnClickListener {
 		//each case is a button in the menu.
 		switch (v.getId()) {
 		case R.id.button1:
-			startActivity(new Intent(this, AndroidRssReader.class));
+			Intent i = new Intent(this, AndroidRssReader.class);
+		//	i.putExtra("user", user);
+			startActivity(i);
 			break;
 		case R.id.button2:
+			showDialog(1);
 			startActivity(new Intent(this, MainActivity.class));
 			finish();
 			break;
@@ -221,9 +223,8 @@ public class MainActivity extends Activity implements OnClickListener {
 			Log.e("BG","in bg");
 			HttpConnection hc = new HttpConnection();
 			try {
-				User u = new User();
-				u.setCookieJar(hc.login(u, userText, passwordText));
-				hc.getFriends(u.getCookieJar());
+				user.setCookieJar(hc.login(user, userText, passwordText));
+				hc.getFriends(user.getCookieJar());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
