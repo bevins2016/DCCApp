@@ -75,7 +75,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		//each case is a button in the menu.
 		switch (v.getId()) {
 		case R.id.button1:
-			startActivity(new Intent(this, EmailMain.class));
+			startActivity(new Intent(this, AndroidRssReader.class));
 			break;
 		case R.id.button2:
 			startActivity(new Intent(this, MainActivity.class));
