@@ -83,8 +83,6 @@ public class MainActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.button2:
 			showDialog(1);
-			startActivity(new Intent(this, MainActivity.class));
-			finish();
 			break;
 		case R.id.button3:
 			startActivity(new Intent(this, MainActivity.class));
