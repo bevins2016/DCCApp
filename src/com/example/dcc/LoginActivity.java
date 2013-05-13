@@ -1,5 +1,6 @@
 package com.example.dcc;
 
+import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.User;
 import com.example.dcc.helpers.mysql.HttpConnection;
 
@@ -208,9 +209,8 @@ public class LoginActivity extends Activity {
 			showProgress(false);
 
 			if (success) {
-				Intent i = new Intent(context, MainActivity.class);
-				i.putExtra("user", user);
-				startActivity(i);
+				ObjectStorage.setUser(user);
+				startActivity(new Intent(context, MainActivity.class));
 				finish();
 			} else {
 				mPasswordView

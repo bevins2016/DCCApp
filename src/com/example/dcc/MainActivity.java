@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.User;
 
 public class MainActivity extends Activity implements OnClickListener {
@@ -35,7 +36,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		user = (User)this.getIntent().getSerializableExtra("user");
+		user = ObjectStorage.getUser();
 		
 		//These are the buttons on the left side of the screen.
 		//The have been initialized in order.
@@ -61,9 +62,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		//each case is a button in the menu.
 		switch (v.getId()) {
 		case R.id.news:
-			Intent i = new Intent(this, AndroidRssReader.class);
-			i.putExtra("user", user);
-			startActivity(i);
+			startActivity(new Intent(this, AndroidRssReader.class));
 			break;
 		case R.id.calendar:
 			startActivity(new Intent(this, MainActivity.class));
