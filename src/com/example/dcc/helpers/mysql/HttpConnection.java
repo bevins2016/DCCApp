@@ -55,18 +55,24 @@ public class HttpConnection{
 	private static final String LOG = "Dcc.HttpConnection";
 
 
-	private static synchronized HttpResponse getStreamPost(User user, String page, List<NameValuePair> nvp){
+	private static synchronized String getStreamGet(User user, String page, List<NameValuePair> nvp){
 		try {
 
 			HttpClient client = new DefaultHttpClient();
-			HttpGet httpGet = new HttpGet("/members/brandoncharmon/friends/");
-			httpGet.setHeader("Cookie",user.cookies);
-			HttpPost post = new HttpPost(page);
+			HttpGet get = new HttpGet("/members/brandoncharmon/friends/");
+			get.setHeader("Cookie",user.cookies);
 			client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");
-
-			if(nvp!=null) post.setEntity(new UrlEncodedFormEntity(nvp));
 			
-			return client.execute(new HttpHost(HOST), post);
+			//if(nvp!=null) get.setEntity(new UrlEncodedFormEntity(nvp));
+			
+			HttpResponse response =  client.execute(new HttpHost(HOST), get);
+			
+			BufferedReader in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+			StringBuilder total = new StringBuilder();
+			String line;
+			while((line = in.readLine()) != null) total.append(line);
+			
+			return total.toString();
 			
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
