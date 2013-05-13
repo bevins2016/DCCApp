@@ -2,13 +2,21 @@
 
 package com.example.dcc;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.User;
@@ -23,6 +31,8 @@ public class MainActivity extends Activity implements OnClickListener {
 	private Button actionB;
 	private Button directoryB;
 	private Button searchB;
+	
+	private ImageView userIcon;
 
 	private Context context;
 
@@ -47,6 +57,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		actionB = (Button) findViewById(R.id.action);
 		directoryB = (Button) findViewById(R.id.directory);
 		searchB = (Button) findViewById(R.id.search);
+		userIcon = (ImageView) findViewById(R.id.usericon);
 		//Here the listener for each button that allows actions is set.
 		newsB.setOnClickListener(this);
 		calB.setOnClickListener(this);
@@ -55,6 +66,9 @@ public class MainActivity extends Activity implements OnClickListener {
 		actionB.setOnClickListener(this);
 		directoryB.setOnClickListener(this);
 		searchB.setOnClickListener(this);
+		
+		userIcon.setImageBitmap(user.getImage());
+		
 	}
 
 	public void onClick(View v) {
