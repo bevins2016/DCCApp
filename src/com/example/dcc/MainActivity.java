@@ -48,6 +48,8 @@ public class MainActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		user = (User)this.getIntent().getSerializableExtra("user");
+		
 		//These are the buttons on the left side of the screen.
 		//The have been initialized in order.
 		newsB = (Button) findViewById(R.id.news);
@@ -157,72 +159,6 @@ public class MainActivity extends Activity implements OnClickListener {
 				alertDialog.dismiss();
 			}
 		});
-	}
-
-	/**
-	 * Attempts to sign in or register the account specified by the login form.
-	 * If there are form errors (invalid email, missing fields, etc.), the
-	 * errors are presented and no actual login attempt is made.
-	 */
-	public void attemptLogin() {
-		if (logTask != null) {
-			return;
-		}
-
-		boolean cancel = false;
-		@SuppressWarnings("unused")
-		View focusView = null;
-
-		try{
-			// Check for a valid password.
-			if (TextUtils.isEmpty(passwordText)) {
-				Toast.makeText(context, "Password is Empty", Toast.LENGTH_LONG);
-				cancel = true;
-			} else if (passwordText.length() < 4) {
-				Toast.makeText(context, "Password is to short", Toast.LENGTH_LONG);
-				cancel = true;
-			}
-
-			// Check for a valid email address.
-			if (TextUtils.isEmpty(userText)) {
-				Toast.makeText(context, "User Name is Empty", Toast.LENGTH_LONG);;
-				cancel = true;
-			}
-
-		}catch(Exception e){
-			cancel = true;
-		}
-		
-		//If the task has successfully passed the inspection move to login task
-		if (!cancel){
-			logTask = new LogInTask();
-			logTask.execute((Void) null);
-		}
-	}
-
-
-	public class LogInTask extends AsyncTask<Void, Void, Boolean>{
-
-		@Override
-		protected Boolean doInBackground(Void... params) {
-			HttpConnection hc = new HttpConnection();
-			try {
-				//This logs the user in.
-				hc.login(user, userText, passwordText);
-				//hc.getFriends(user.getCookieJar());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(final Boolean success) {
-		}
-
-		@Override
-		protected void onCancelled() {
-		}
 	}
 
 	/*
