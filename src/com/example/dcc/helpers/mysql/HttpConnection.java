@@ -50,6 +50,7 @@ public class HttpConnection{
 
 	private static final String HOST = "www.virtualdiscoverycenter.net";
 	private static final String REFERER = "http://www.virtualdiscoverycenter.net/intern/";
+	private static final String LOG = "Dcc.HttpConnection";
 
 
 	/**
@@ -59,7 +60,7 @@ public class HttpConnection{
 	 * @return Returns the cookies received from the wordpress site
 	 * @throws URISyntaxException 
 	 */
-	public synchronized void login(User user, String log, String pwd){
+	public static synchronized boolean login(User user, String log, String pwd){
 		try{
 			//Basic settings
 			DefaultHttpClient client = new DefaultHttpClient();
@@ -125,14 +126,16 @@ public class HttpConnection{
 			get.setHeader("Cookie", sb.toString());
 			response = client.execute(new HttpHost(HOST), get);
 			
-			buildUser(user, response);
-			//user.setCookieJar(cookieJar);
+			buildUser(user, response);	
 			
+			return true;
 		}catch(IOException e){
-			Log.e(this.getClass().toString(), e.getLocalizedMessage());
+			Log.e(LOG, e.getLocalizedMessage());
 		} catch (URISyntaxException e) {
-			Log.e(this.getClass().toString(), e.getLocalizedMessage());
+			Log.e(LOG, e.getLocalizedMessage());
 		}
+		
+		return false;
 	}
 
 	
@@ -142,7 +145,7 @@ public class HttpConnection{
 	 * @param u
 	 * @param response
 	 */
-	private void buildUser(User user, HttpResponse response) {
+	private static synchronized void buildUser(User user, HttpResponse response) {
 		try {
 			//Get the site from an input stream
 			BufferedReader in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
@@ -155,11 +158,10 @@ public class HttpConnection{
 			Element span = doc.getElementById("ffl-logged-in-user");
 			
 			user.setName(span.text());
-			Log.i(this.getClass().getName(), span.text());
 		} catch (IllegalStateException e) {
-			Log.e(this.getClass().toString(), e.getLocalizedMessage());
+			Log.e(LOG, e.getLocalizedMessage());
 		} catch (IOException e) {
-			Log.e(this.getClass().toString(), e.getLocalizedMessage());
+			Log.e(LOG, e.getLocalizedMessage());
 		}
 
 	}
@@ -179,14 +181,13 @@ public class HttpConnection{
 			cookies.append(c.getName()+"="+c.getValue()+";");
 		}
 		httpGet.setHeader("Cookie",cookies.toString());
-		//HttpResponse hr = client.execute(new HttpHost(HOST), httpGet);
 	}
 
 	/**
 	 * Method used to bypass some cookie security features.
 	 * @return
 	 */
-	private CookieSpecFactory getCookieSpec(){
+	private static CookieSpecFactory getCookieSpec(){
 		return new CookieSpecFactory() {
 
 			@Override

@@ -187,6 +187,7 @@ public class AddStudent extends Activity implements OnClickListener {
 				connection.connect();
 				int fileLength = connection.getContentLength();
 				InputStream input = new BufferedInputStream(url.openStream());
+				@SuppressWarnings("resource")
 				OutputStream output = new FileOutputStream(teamfile);
 
 				byte data[] = new byte[1024];

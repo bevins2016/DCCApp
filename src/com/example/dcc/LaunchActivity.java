@@ -36,6 +36,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dcc.admin.AdminActivity;
@@ -74,12 +75,11 @@ public class LaunchActivity extends Activity implements OnClickListener {
 		/* Check if directory exists, if not create it */
 		/* Call functions to get start and end dates */
 		setDefaults();
-		newsB = (Button) findViewById(R.id.button1);
-		loginB = (Button) findViewById(R.id.button2);
-		calB = (Button) findViewById(R.id.button3);
-		photoB = (Button) findViewById(R.id.button5);
-		reportB = (Button) findViewById(R.id.button6);
-		actionB = (Button) findViewById(R.id.button7);
+		newsB = (Button) findViewById(R.id.news);
+		calB = (Button) findViewById(R.id.calendar);
+		photoB = (Button) findViewById(R.id.photo);
+		reportB = (Button) findViewById(R.id.report);
+		actionB = (Button) findViewById(R.id.action);
 		searchB = (Button) findViewById(R.id.search);
 
 		/* Set up buttons */
@@ -228,30 +228,31 @@ public class LaunchActivity extends Activity implements OnClickListener {
 			startActivity(intent);
 		}*/
 		switch (v.getId()) {
-		case R.id.button1:
-			startActivity(new Intent(LaunchActivity.this, AndroidRssReader.class));
+		case R.id.news:
+			Intent i = new Intent(this, AndroidRssReader.class);
+			startActivity(i);
 			break;
-		case R.id.button2:
-			//startActivity(new Intent(LaunchActivity.this, Login.class));
-			startActivity(new Intent(LaunchActivity.this, MainActivity.class));
+		case R.id.calendar:
+			startActivity(new Intent(this, MainActivity.class));
 			finish();
 			break;
-		case R.id.button3:
-			startActivity(new Intent(LaunchActivity.this, MainActivity.class));
+		case R.id.photo:
+			startActivity(new Intent(this, CustomizedListView.class));
+			break;
+		case R.id.report:
+			startActivity(new Intent(this, EReportLauncher.class));
 			finish();
-			break;
-		case R.id.button5:
-			startActivity(new Intent(LaunchActivity.this, CustomizedListView.class));
-			break;
-		case R.id.button6:
-			startActivity(new Intent(LaunchActivity.this, EReportLauncher.class));
 			break;
 		case R.id.search:
-			startActivity(new Intent(LaunchActivity.this, LaunchActivity.class));
+			startActivity(new Intent(this, LaunchActivity.class));
 			finish();
 			break;
-		case R.id.button7:
-			startActivity(new Intent(LaunchActivity.this, ActionItem.class));
+		case R.id.action:
+			startActivity(new Intent(this, ActionItem.class));
+			finish();
+			break;
+		case R.id.directory:
+			startActivity(new Intent(this, MainActivity.class));
 			finish();
 			break;
 		case R.id.meta_button:

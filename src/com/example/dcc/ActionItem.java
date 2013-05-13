@@ -51,14 +51,13 @@ public class ActionItem extends ListActivity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.action_item);
 
-		btnEmail = (Button) findViewById(R.id.email_button1);
-		newsB = (Button) findViewById(R.id.button1);
-		loginB = (Button) findViewById(R.id.button2);
-		calB = (Button) findViewById(R.id.button3);
-		photoB = (Button) findViewById(R.id.button5);
-		reportB = (Button) findViewById(R.id.button6);
-		actionB = (Button) findViewById(R.id.button7);
-		directoryB = (Button) findViewById(R.id.button8);
+
+		newsB = (Button) findViewById(R.id.news);
+		calB = (Button) findViewById(R.id.calendar);
+		photoB = (Button) findViewById(R.id.photo);
+		reportB = (Button) findViewById(R.id.report);
+		actionB = (Button) findViewById(R.id.action);
+		directoryB = (Button) findViewById(R.id.directory);
 		thisAction = (TextView) findViewById(R.id.actionView);
 		searchB = (Button) findViewById(R.id.search);
 
@@ -83,7 +82,7 @@ public class ActionItem extends ListActivity implements OnClickListener {
 		WebSettings webSettings = webView.getSettings();
 		webSettings.setJavaScriptEnabled(true);
 
-		Uri data = getIntent().getData();
+		//Uri data = getIntent().getData();
 
 		if (savedInstanceState == null) {
 			String url = getIntent().getDataString();
@@ -195,28 +194,26 @@ public class ActionItem extends ListActivity implements OnClickListener {
 		// this switch listens for any and all click actions in the app
 		// each case is a button in the menu.
 		switch (v.getId()) {
-		case R.id.button1:
-			startActivity(new Intent(this, AndroidRssReader.class));
+		case R.id.news:
+			Intent i = new Intent(this, AndroidRssReader.class);
+			startActivity(i);
 			break;
-		case R.id.button2:
+		case R.id.calendar:
 			startActivity(new Intent(this, MainActivity.class));
 			finish();
 			break;
-		case R.id.button3:
-			startActivity(new Intent(this, MainActivity.class));
-			finish();
-			break;
-		case R.id.button5:
+		case R.id.photo:
 			startActivity(new Intent(this, CustomizedListView.class));
 			break;
-		case R.id.button6:
+		case R.id.report:
 			startActivity(new Intent(this, EReportLauncher.class));
+			finish();
 			break;
-		case R.id.button7:
+		case R.id.action:
 			startActivity(new Intent(this, ActionItem.class));
 			finish();
 			break;
-		case R.id.button8:
+		case R.id.directory:
 			startActivity(new Intent(this, MainActivity.class));
 			finish();
 			break;

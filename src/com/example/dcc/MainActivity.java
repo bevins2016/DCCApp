@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dcc.helpers.User;
@@ -49,18 +50,15 @@ public class MainActivity extends Activity implements OnClickListener {
 
 		//These are the buttons on the left side of the screen.
 		//The have been initialized in order.
-		newsB = (Button) findViewById(R.id.button1);
-		loginB = (Button) findViewById(R.id.button2);
-		calB = (Button) findViewById(R.id.button3);
-		photoB = (Button) findViewById(R.id.button5);
-		reportB = (Button) findViewById(R.id.button6);
-		actionB = (Button) findViewById(R.id.button7);
-		directoryB = (Button) findViewById(R.id.button8);
+		newsB = (Button) findViewById(R.id.news);
+		calB = (Button) findViewById(R.id.calendar);
+		photoB = (Button) findViewById(R.id.photo);
+		reportB = (Button) findViewById(R.id.report);
+		actionB = (Button) findViewById(R.id.action);
+		directoryB = (Button) findViewById(R.id.directory);
 		searchB = (Button) findViewById(R.id.search);
-
 		//Here the listener for each button that allows actions is set.
 		newsB.setOnClickListener(this);
-		loginB.setOnClickListener(this);
 		calB.setOnClickListener(this);
 		photoB.setOnClickListener(this);
 		reportB.setOnClickListener(this);
@@ -74,22 +72,19 @@ public class MainActivity extends Activity implements OnClickListener {
 		//this switch listens for any and all click actions in the app
 		//each case is a button in the menu.
 		switch (v.getId()) {
-		case R.id.button1:
+		case R.id.news:
 			Intent i = new Intent(this, AndroidRssReader.class);
 			i.putExtra("user", user);
 			startActivity(i);
 			break;
-		case R.id.button2:
-			showDialog(1);
-			break;
-		case R.id.button3:
+		case R.id.calendar:
 			startActivity(new Intent(this, MainActivity.class));
 			finish();
 			break;
-		case R.id.button5:
+		case R.id.photo:
 			startActivity(new Intent(this, CustomizedListView.class));
 			break;
-		case R.id.button6:
+		case R.id.report:
 			startActivity(new Intent(this, EReportLauncher.class));
 			finish();
 			break;
@@ -97,11 +92,11 @@ public class MainActivity extends Activity implements OnClickListener {
 			startActivity(new Intent(this, LaunchActivity.class));
 			finish();
 			break;
-		case R.id.button7:
+		case R.id.action:
 			startActivity(new Intent(this, ActionItem.class));
 			finish();
 			break;
-		case R.id.button8:
+		case R.id.directory:
 			startActivity(new Intent(this, MainActivity.class));
 			finish();
 			break;

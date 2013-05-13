@@ -12,45 +12,46 @@ android:layout_gravity="left"
 android:layout_row="0"
 android:orientation="vertical" >
 <Button
-android:id="@+id/button1"
+android:id="@+id/news"
 android:layout_width="match_parent"
 android:layout_height="wrap_content"
-android:text="@string/Button1_name"
+android:text="@string/news"
 android:drawableRight="@drawable/news"/>
 <Button
-android:id="@+id/button2"
+android:id="@+id/calendar"
 android:layout_width="match_parent"
 android:layout_height="wrap_content"
-android:text="@string/Button2_name" />
-<Button
-android:id="@+id/button3"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:text="@string/Button3_name"
+android:text="@string/calendar"
 android:drawableRight="@drawable/cal"/>
 <Button
-android:id="@+id/button5"
+android:id="@+id/photo"
 android:layout_width="match_parent"
 android:layout_height="wrap_content"
-android:text="@string/Button5_name"
+android:text="@string/photo"
 android:drawableRight="@drawable/gallery" />
 <Button
-android:id="@+id/button6"
+android:id="@+id/report"
 android:layout_width="match_parent"
 android:layout_height="wrap_content"
-android:text="@string/Button6_name"
+android:text="@string/report"
 android:drawableRight="@drawable/report" />
 <Button
-android:id="@+id/button7"
+android:id="@+id/action"
 android:layout_width="match_parent"
 android:layout_height="wrap_content"
-android:text="@string/Button7_name"
+android:text="@string/action"
 android:drawableRight="@drawable/ep" />
+<Button
+android:id="@+id/directory"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:text="@string/directory"
+android:drawableRight="@drawable/directory" />
 <Button
     	android:id="@+id/search"
     	android:layout_width="match_parent"
     	android:layout_height="wrap_content"
-    	android:text="Search" />
+    	android:text="@string/search" />
 </LinearLayout>
 　
 <GridLayout

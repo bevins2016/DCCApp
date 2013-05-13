@@ -77,22 +77,18 @@ public class EReportLauncher extends Activity implements OnClickListener {
 		defaultCheck();
 		
 		//These are the buttons on the left side of the screen.
-				//The have been initialized in order.
-				newsB = (Button) findViewById(R.id.button1);
-				loginB = (Button) findViewById(R.id.button2);
-				calB = (Button) findViewById(R.id.button3);
-//				mailB = (Button) findViewById(R.id.button4);
-				photoB = (Button) findViewById(R.id.button5);
-				reportB = (Button) findViewById(R.id.button6);
-				actionB = (Button) findViewById(R.id.button7);
-				directoryB = (Button) findViewById(R.id.button8);
-				searchB = (Button) findViewById(R.id.search);
+		newsB = (Button) findViewById(R.id.news);
+		calB = (Button) findViewById(R.id.calendar);
+		photoB = (Button) findViewById(R.id.photo);
+		reportB = (Button) findViewById(R.id.report);
+		actionB = (Button) findViewById(R.id.action);
+		directoryB = (Button) findViewById(R.id.directory);
+		searchB = (Button) findViewById(R.id.search);
 
 				//Here the listener for each button that allows actions is set.
 				newsB.setOnClickListener(this);
 				loginB.setOnClickListener(this);
 				calB.setOnClickListener(this);
-			//	mailB.setOnClickListener(this);
 				photoB.setOnClickListener(this);
 				reportB.setOnClickListener(this);
 				actionB.setOnClickListener(this);
@@ -132,36 +128,30 @@ public class EReportLauncher extends Activity implements OnClickListener {
 		Intent intent = new Intent();
 		
 		switch (v.getId()) {
-		case R.id.button1:
+		case R.id.news:
 			Intent i = new Intent(this, AndroidRssReader.class);
-		//	i.putExtra("user", user);
 			startActivity(i);
 			break;
-		case R.id.button2:
-			showDialog(1);
-			break;
-		case R.id.button3:
+		case R.id.calendar:
 			startActivity(new Intent(this, MainActivity.class));
 			finish();
 			break;
-	//	case R.id.button4:
-	//		startActivity(new Intent(this, EmailMain.class));
-	//		break;
-		case R.id.button5:
+		case R.id.photo:
 			startActivity(new Intent(this, CustomizedListView.class));
 			break;
-		case R.id.button6:
+		case R.id.report:
 			startActivity(new Intent(this, EReportLauncher.class));
+			finish();
 			break;
 		case R.id.search:
 			startActivity(new Intent(this, LaunchActivity.class));
 			finish();
 			break;
-		case R.id.button7:
+		case R.id.action:
 			startActivity(new Intent(this, ActionItem.class));
 			finish();
 			break;
-		case R.id.button8:
+		case R.id.directory:
 			startActivity(new Intent(this, MainActivity.class));
 			finish();
 			break;

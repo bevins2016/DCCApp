@@ -17,19 +17,20 @@
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-    
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.dcc.Login"
-            android:label="@string/app_name" >
+            android:name="com.example.dcc.LoginActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
@@ -144,21 +145,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.dcc.LoginActivity"
-            android:label="@string/title_activity_login"
-            android:windowSoftInputMode="adjustResize|stateVisible" >
-        </activity>
-        <activity
-            android:name=".ActionItem"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-          <activity
-            android:name=".EReportLauncher"
+            android:name="com.example.dcc.ActionItem"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -167,20 +154,29 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SetDefaults"
+            android:name="com.example.dcc.EReportLauncher"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.dcc.SetDefaults"
             android:label="@string/app_name" />
         <activity
-            android:name=".EDailyActivity"
-            android:label="@string/app_name"/>
-        <activity
-            android:name=".EReport"
+            android:name="com.example.dcc.EDailyActivity"
             android:label="@string/app_name" />
         <activity
-            android:name=".Record057"
+            android:name="com.example.dcc.EReport"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.example.dcc.Record057"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".AddStudent"
+            android:name="com.example.dcc.AddStudent"
             android:label="@string/app_name" >
         </activity>
     </application>
