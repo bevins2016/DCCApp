@@ -1,4 +1,4 @@
-package com.example.dcc.helpers.hacks;
+package com.example.dcc.helpers;
 
 import org.apache.http.impl.client.DefaultHttpClient;
 
