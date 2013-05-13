@@ -6,7 +6,9 @@ package com.example.dcc.helpers.mysql;
  */
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -53,6 +55,28 @@ public class HttpConnection{
 	private static final String LOG = "Dcc.HttpConnection";
 
 
+	private static synchronized HttpResponse getStreamPost(User user, String page, List<NameValuePair> nvp){
+		try {
+
+			HttpClient client = new DefaultHttpClient();
+			HttpGet httpGet = new HttpGet("/members/brandoncharmon/friends/");
+			httpGet.setHeader("Cookie",user.cookies);
+			HttpPost post = new HttpPost(page);
+			client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");
+
+			if(nvp!=null) post.setEntity(new UrlEncodedFormEntity(nvp));
+			
+			return client.execute(new HttpHost(HOST), post);
+			
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	/**
 	 * Authenticates the user and stores cookies.
 	 * @param log
@@ -66,21 +90,21 @@ public class HttpConnection{
 			DefaultHttpClient client = new DefaultHttpClient();
 			DCCCookieStore cookieJar = user.cookieJar;
 			client.setCookieStore(cookieJar);
-			
+
 			//Used to bypass some typical security settings
 			client.getCookieSpecs().register("easy", getCookieSpec());
 
 			//Build the header
 			HttpPost post = new HttpPost("/wp-login.php");
-			
+
 			client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");
 			List<NameValuePair> nvp = new ArrayList<NameValuePair>();
 			nvp.add(new BasicNameValuePair("rememberme", "forever"));
 			nvp.add(new BasicNameValuePair("redirect_to", "/intern/"));
 			nvp.add(new BasicNameValuePair("log", log));
 			nvp.add(new BasicNameValuePair("pwd", pwd));
-			nvp.add(new BasicNameValuePair("submit", "\n\n"));
-			
+			nvp.add(new BasicNameValuePair("submit", ""));
+
 			//Add everything to the header
 			post.setEntity(new UrlEncodedFormEntity(nvp));
 			post.setHeader(new BasicHeader("Referer", REFERER));
@@ -118,27 +142,27 @@ public class HttpConnection{
 			for(int i=0; i < cookieJar.getCookies().size(); i++){
 				Cookie c = cookieJar.getCookies().get(i);
 				if(c.getName().startsWith("wordpress_logged_in")||c.getName().startsWith("wordpress_test"))
-				sb.append(c.getName()+"="+c.getValue()+";");
+					sb.append(c.getName()+"="+c.getValue()+";");
 			}
-			
+
 			user.cookies = sb.toString();
 			Log.i("Cookies", sb.toString()+cookieJar.getCookies().size());
 			get.setHeader("Cookie", sb.toString());
 			response = client.execute(new HttpHost(HOST), get);
-			
+
 			buildUser(user, response);	
-			
+
 			return true;
 		}catch(IOException e){
 			Log.e(LOG, e.getLocalizedMessage());
 		} catch (URISyntaxException e) {
 			Log.e(LOG, e.getLocalizedMessage());
 		}
-		
+
 		return false;
 	}
 
-	
+
 	/**
 	 * Takes an input stream and parses all relevant data from the HTML file into the user object.
 	 * 
@@ -156,7 +180,7 @@ public class HttpConnection{
 			//Look for the span that contains user's name
 			Document doc = Jsoup.parse(total.toString());
 			Element span = doc.getElementById("ffl-logged-in-user");
-			
+
 			user.setName(span.text());
 		} catch (IllegalStateException e) {
 			Log.e(LOG, e.getLocalizedMessage());
