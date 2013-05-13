@@ -39,7 +39,8 @@ public class MainActivity extends Activity implements OnClickListener {
 	private Context context;
 	private LogInTask logTask;
 
-	public String userText,passwordText;
+	public String userText;
+	public String passwordText;
 
 	public User user = new User();
 
@@ -67,7 +68,6 @@ public class MainActivity extends Activity implements OnClickListener {
 		searchB.setOnClickListener(this);
 	}
 
-	@SuppressWarnings("deprecation")
 	public void onClick(View v) {
 		//this switch listens for any and all click actions in the app
 		//each case is a button in the menu.
