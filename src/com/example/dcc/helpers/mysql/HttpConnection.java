@@ -55,16 +55,14 @@ public class HttpConnection{
 	private static final String LOG = "Dcc.HttpConnection";
 
 
-	private static synchronized String getStreamGet(User user, String page, List<NameValuePair> nvp){
+	private static synchronized Document getParseToXML(User user, String page){
 		try {
 
 			HttpClient client = new DefaultHttpClient();
 			HttpGet get = new HttpGet(page);
 			get.setHeader("Cookie",user.cookies);
 			client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");
-			
-			//if(nvp!=null) get.setEntity(new UrlEncodedFormEntity(nvp));
-			
+						
 			HttpResponse response =  client.execute(new HttpHost(HOST), get);
 			
 			BufferedReader in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
@@ -72,7 +70,11 @@ public class HttpConnection{
 			String line;
 			while((line = in.readLine()) != null) total.append(line);
 			
-			return total.toString();
+			
+			Document doc = Jsoup.parse(total.toString());
+			
+			
+			return doc;
 			
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
@@ -81,6 +83,8 @@ public class HttpConnection{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		
 		return null;
 	}
 	/**

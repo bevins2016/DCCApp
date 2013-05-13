@@ -78,6 +78,6 @@ public class HTTPData {
 //	} catch (URISyntaxException e) {
 //		Log.e(LOG, e.getLocalizedMessage());
 //	}
-}
 
+	}
 }
