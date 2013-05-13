@@ -59,7 +59,7 @@ public class HttpConnection{
 		try {
 
 			HttpClient client = new DefaultHttpClient();
-			HttpGet get = new HttpGet("/members/brandoncharmon/friends/");
+			HttpGet get = new HttpGet(page);
 			get.setHeader("Cookie",user.cookies);
 			client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");
 			
