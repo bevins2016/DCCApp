@@ -1,11 +1,25 @@
 package com.example.dcc;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.http.HttpHost;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Node;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+
+import com.example.dcc.helpers.mysql.HttpConnection;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -27,6 +41,7 @@ public class CustomizedListView extends Activity {
 	static final String KEY_ARTIST = "dc:creator";
 	static final String KEY_DURATION = "description";
 	static final String KEY_THUMB_URL = "src";
+	String url;
 
 	LazyAdapter adapter;
 	NodeList nl;
@@ -151,7 +166,43 @@ public class CustomizedListView extends Activity {
 																	// element
 
 			nl = doc.getElementsByTagName(KEY_SONG);
+			
+			ImageURL img = new ImageURL("http://www.virtualdiscoverycenter.net/media/");
 
+//			img.getURLForImage();
+			
+//			org.jsoup.nodes.Document document = HttpConnection.getParseToXML("http://www.virtualdiscoverycenter.net/media/");
+			
+			try{
+			
+			HttpClient client = new DefaultHttpClient();
+			HttpGet get = new HttpGet(img.url);
+//			get.setHeader("Cookie", ObjectStorage.getUser().cookies);
+//			client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");
+						
+			HttpResponse response =  client.execute(new HttpHost(img.url), get);
+			
+			BufferedReader in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+			StringBuilder total = new StringBuilder();
+			String line;
+			while((line = in.readLine()) != null) total.append(line);
+			
+			
+			Document document = (Document) Jsoup.parse(total.toString());
+			
+			Element image = (Element) (((org.jsoup.nodes.Element) document).select("img").first());
+			url = ((Node) image).absUrl("src");
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		} catch (ClientProtocolException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+			
+			
+			
 			
 
 			for (int i = 0; i < nl.getLength(); i++) {
@@ -163,7 +214,7 @@ public class CustomizedListView extends Activity {
 				map.put(KEY_TITLE, parser.getValue(e, KEY_TITLE));
 				map.put(KEY_ARTIST, parser.getValue(e, KEY_ARTIST));
 				map.put(KEY_DURATION, parser.getValue(e, KEY_DURATION));
-				map.put(KEY_THUMB_URL, parser.getValue(e, KEY_THUMB_URL));
+				map.put(KEY_THUMB_URL, url);
 
 				// adding HashList to ArrayList
 				songsList.add(map);

@@ -6,7 +6,6 @@ package com.example.dcc.helpers.mysql;
  */
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
@@ -18,34 +17,24 @@ import org.apache.http.Header;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.ProtocolException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.RedirectHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.params.ClientPNames;
 import org.apache.http.cookie.Cookie;
-import org.apache.http.cookie.CookieOrigin;
-import org.apache.http.cookie.CookieSpec;
 import org.apache.http.cookie.CookieSpecFactory;
-import org.apache.http.cookie.MalformedCookieException;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.cookie.BasicClientCookie;
-import org.apache.http.impl.cookie.BrowserCompatSpec;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.params.HttpParams;
-import org.apache.http.protocol.HttpContext;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import android.util.Log;
 
-import com.example.dcc.helpers.DCCCookieStore;
 import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.User;
 import com.example.dcc.helpers.hacks.DCCCookieSpecFactory;
@@ -58,13 +47,13 @@ public class HttpConnection{
 	private static final String LOG = "Dcc.HttpConnection";
 
 
-	private static synchronized Document getParseToXML(String page){
+	public static synchronized Document getParseToXML(String page){
 		try {
 
 			HttpClient client = new DefaultHttpClient();
 			HttpGet get = new HttpGet(page);
-			get.setHeader("Cookie", ObjectStorage.getUser().cookies);
-			client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");
+//			get.setHeader("Cookie", ObjectStorage.getUser().cookies);
+//			client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");
 						
 			HttpResponse response =  client.execute(new HttpHost(HOST), get);
 			
