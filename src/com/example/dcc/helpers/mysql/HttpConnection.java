@@ -46,7 +46,10 @@ import org.jsoup.nodes.Element;
 import android.util.Log;
 
 import com.example.dcc.helpers.DCCCookieStore;
+import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.User;
+import com.example.dcc.helpers.hacks.DCCCookieSpecFactory;
+import com.example.dcc.helpers.hacks.DCCRedirectHandler;
 
 public class HttpConnection{
 
@@ -55,12 +58,12 @@ public class HttpConnection{
 	private static final String LOG = "Dcc.HttpConnection";
 
 
-	private static synchronized Document getParseToXML(User user, String page){
+	private static synchronized Document getParseToXML(String page){
 		try {
 
 			HttpClient client = new DefaultHttpClient();
 			HttpGet get = new HttpGet(page);
-			get.setHeader("Cookie",user.cookies);
+			get.setHeader("Cookie", ObjectStorage.getUser().cookies);
 			client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");
 						
 			HttpResponse response =  client.execute(new HttpHost(HOST), get);
@@ -87,6 +90,39 @@ public class HttpConnection{
 		
 		return null;
 	}
+	
+	private static synchronized Document postParseToXML(String page, List<NameValuePair> nvp){
+		try {
+
+			HttpClient client = new DefaultHttpClient();
+			HttpPost post = new HttpPost(page);
+			post.setHeader("Cookie",ObjectStorage.getUser().cookies);
+			client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");
+						
+			HttpResponse response =  client.execute(new HttpHost(HOST), post);
+			
+			post.setEntity(new UrlEncodedFormEntity(nvp));
+			post.setHeader(new BasicHeader("Referer", REFERER));
+			
+			BufferedReader in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+			StringBuilder total = new StringBuilder();
+			String line;
+			while((line = in.readLine()) != null) total.append(line);
+			
+			Document doc = Jsoup.parse(total.toString());
+			
+			return doc;
+			
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 	/**
 	 * Authenticates the user and stores cookies.
 	 * @param log
@@ -98,16 +134,10 @@ public class HttpConnection{
 		try{
 			//Basic settings
 			DefaultHttpClient client = new DefaultHttpClient();
-			DCCCookieStore cookieJar = user.cookieJar;
-			client.setCookieStore(cookieJar);
-
-			//Used to bypass some typical security settings
-			client.getCookieSpecs().register("easy", getCookieSpec());
 
 			//Build the header
 			HttpPost post = new HttpPost("/wp-login.php");
 
-			client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");
 			List<NameValuePair> nvp = new ArrayList<NameValuePair>();
 			nvp.add(new BasicNameValuePair("rememberme", "forever"));
 			nvp.add(new BasicNameValuePair("redirect_to", "/intern/"));
@@ -121,42 +151,28 @@ public class HttpConnection{
 
 			//Hack to keep from forwarding to the next page
 			//This will ensure we grab the header with the cookies we need
-			client.setRedirectHandler(new RedirectHandler() {
-				@Override
-				public boolean isRedirectRequested(HttpResponse response,
-						HttpContext context) {
-					return false;
-				}
-				@Override
-				public URI getLocationURI(HttpResponse response, HttpContext context)
-						throws ProtocolException {
-					return null;
-				}
-			});
+			client.setRedirectHandler(new DCCRedirectHandler());
 
 			//Send the request and parse the cookies
 			HttpResponse response = client.execute(new HttpHost(HOST), post);
 			Header[] cookies = (Header[]) response.getHeaders("Set-Cookie");
 
+			StringBuilder sb = new StringBuilder();
 			//Add all the cookies to the cookie jar
 			for(int h=0; h<cookies.length; h++){
-				Header temp = cookies[h];
-				cookieJar.addCookie(new BasicClientCookie(temp.getName(), temp.getValue()));
+				Header c = cookies[h];
+				if(c.getName().startsWith("wordpress_logged_in")||
+						c.getName().startsWith("wordpress_test")){
+					sb.append(c.getName()+"="+c.getValue()+";");
+				}
 			}
 
 			//Forward ourself to the intended forward site, this will enable us to get the user's data.
 			HttpGet get = new HttpGet();
 			get.setURI(new URI("/intern/"));
-			StringBuilder sb = new StringBuilder();
-			//Re-add the cookies to the request
-			for(int i=0; i < cookieJar.getCookies().size(); i++){
-				Cookie c = cookieJar.getCookies().get(i);
-				if(c.getName().startsWith("wordpress_logged_in")||c.getName().startsWith("wordpress_test"))
-					sb.append(c.getName()+"="+c.getValue()+";");
-			}
-
+			
 			user.cookies = sb.toString();
-			Log.i("Cookies", sb.toString()+cookieJar.getCookies().size());
+			
 			get.setHeader("Cookie", sb.toString());
 			response = client.execute(new HttpHost(HOST), get);
 
@@ -222,17 +238,6 @@ public class HttpConnection{
 	 * @return
 	 */
 	private static CookieSpecFactory getCookieSpec(){
-		return new CookieSpecFactory() {
-
-			@Override
-			public CookieSpec newInstance(HttpParams params) {
-				return new BrowserCompatSpec() {
-					@Override
-					public void validate(Cookie cookie, CookieOrigin origin)
-							throws MalformedCookieException {
-					}
-				};
-			}
-		};
+		return new DCCCookieSpecFactory();
 	}
 }
