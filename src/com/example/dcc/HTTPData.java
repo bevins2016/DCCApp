@@ -25,8 +25,8 @@ import org.apache.http.protocol.HttpContext;
 
 import android.util.Log;
 
-import com.example.dcc.helpers.DCCCookieStore;
 import com.example.dcc.helpers.User;
+import com.example.dcc.helpers.hacks.DCCCookieStore;
 
 public class HTTPData {
 	private String currentURL;

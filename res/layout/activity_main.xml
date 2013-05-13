@@ -52,6 +52,13 @@ android:drawableRight="@drawable/directory" />
    	android:layout_width="match_parent"
    	android:layout_height="wrap_content"
     	android:text="@string/search" />
+
+<ImageView
+    android:id="@+id/usericon"
+    android:layout_width="wrap_content"
+    android:layout_height="59dp"
+    android:src="@drawable/appbackground" />
+
 </LinearLayout>
 <GridLayout
 android:id="@+id/a"

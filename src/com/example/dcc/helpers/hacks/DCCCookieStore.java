@@ -1,4 +1,4 @@
-package com.example.dcc.helpers;
+package com.example.dcc.helpers.hacks;
 
 import java.io.Serializable;
 import org.apache.http.impl.client.BasicCookieStore;
