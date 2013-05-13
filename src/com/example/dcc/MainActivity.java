@@ -3,24 +3,14 @@
 package com.example.dcc;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.dcc.helpers.User;
-import com.example.dcc.helpers.mysql.HttpConnection;
 
 public class MainActivity extends Activity implements OnClickListener {
 
@@ -38,7 +28,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	public String userText;
 	public String passwordText;
 
-	public User user = new User();
+	public User user;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
