@@ -220,59 +220,35 @@ public final class R {
         public static final int admin_conf_popup=0x7f030006;
         public static final int admin_password_popup=0x7f030007;
         public static final int auto_rank=0x7f030008;
-        public static final int create_survey=0x7f030009;
-        public static final int default_popup=0x7f03000a;
-        public static final int default_screen=0x7f03000b;
-        public static final int details=0x7f03000c;
-        public static final int dialog_login=0x7f03000d;
-        public static final int edailygui=0x7f03000e;
-        public static final int edit_student_popup=0x7f03000f;
-        public static final int edit_students=0x7f030010;
-        public static final int ereport=0x7f030011;
-        /** 
-    Layout alias to replace the single-pane version of the layout with a
-    two-pane version on Large screens.
-
-    For more on layout aliases, see:
-    http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
-    
-
-    Layout alias to replace the single-pane version of the layout with a
-    two-pane version on Large screens.
-
-    For more on layout aliases, see:
-    http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
-    
-
-    Layout alias to replace the single-pane version of the layout with a
-    two-pane version on Large screens.
-
-    For more on layout aliases, see:
-    http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
-    
-         */
-        public static final int fragment_mainlistfragment=0x7f030027;
-        public static final int fragment_mainlistfragment_grid=0x7f030012;
-        public static final int fragment_mainlistfragment_list=0x7f030013;
-        public static final int gallery_listview=0x7f030014;
-        public static final int keyword_popup=0x7f030015;
-        public static final int keyword_select=0x7f030016;
-        public static final int launcher=0x7f030017;
-        public static final int list_row=0x7f030018;
-        public static final int log=0x7f030019;
-        public static final int main=0x7f03001a;
-        public static final int main_activity_frag=0x7f03001b;
-        public static final int manage_keywords=0x7f03001c;
-        public static final int manage_survey=0x7f03001d;
-        public static final int menu_fragment=0x7f03001e;
-        public static final int metasearch=0x7f03001f;
-        public static final int rss_webviewer=0x7f030020;
-        public static final int setdefault=0x7f030021;
-        public static final int simple_checked_row=0x7f030022;
-        public static final int simple_row=0x7f030023;
-        public static final int spinner_item=0x7f030024;
-        public static final int startdate_dialog=0x7f030025;
-        public static final int time_select=0x7f030026;
+        public static final int bottom_fragment=0x7f030009;
+        public static final int create_survey=0x7f03000a;
+        public static final int default_popup=0x7f03000b;
+        public static final int default_screen=0x7f03000c;
+        public static final int details=0x7f03000d;
+        public static final int dialog_login=0x7f03000e;
+        public static final int edailygui=0x7f03000f;
+        public static final int edit_student_popup=0x7f030010;
+        public static final int edit_students=0x7f030011;
+        public static final int ereport=0x7f030012;
+        public static final int gallery_listview=0x7f030013;
+        public static final int keyword_popup=0x7f030014;
+        public static final int keyword_select=0x7f030015;
+        public static final int launcher=0x7f030016;
+        public static final int list_row=0x7f030017;
+        public static final int log=0x7f030018;
+        public static final int main=0x7f030019;
+        public static final int main_activity_frag=0x7f03001a;
+        public static final int manage_keywords=0x7f03001b;
+        public static final int manage_survey=0x7f03001c;
+        public static final int menu_fragment=0x7f03001d;
+        public static final int metasearch=0x7f03001e;
+        public static final int rss_webviewer=0x7f03001f;
+        public static final int setdefault=0x7f030020;
+        public static final int simple_checked_row=0x7f030021;
+        public static final int simple_row=0x7f030022;
+        public static final int spinner_item=0x7f030023;
+        public static final int startdate_dialog=0x7f030024;
+        public static final int time_select=0x7f030025;
     }
     public static final class menu {
         public static final int activity_main=0x7f070000;
