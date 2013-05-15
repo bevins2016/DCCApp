@@ -1,56 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-   	android:orientation="vertical"
-   	android:background="#b0b0b0">
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical" >
 
     <Button
         android:id="@+id/news"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableRight="@drawable/news"
+        android:background="@drawable/background"
+        android:drawableRight="@drawable/collectionsviewaslist"
         android:text="@string/news" />
 
     <Button
         android:id="@+id/calendar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableRight="@drawable/cal"
+        android:background="@drawable/background"
+        android:drawableRight="@drawable/contentevent"
         android:text="@string/calendar" />
 
     <Button
         android:id="@+id/photo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableRight="@drawable/gallery"
+        android:background="@drawable/background"
+        android:drawableRight="@drawable/deviceaccesscamera"
         android:text="@string/photo" />
 
     <Button
         android:id="@+id/report"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableRight="@drawable/report"
+        android:background="@drawable/background"
+        android:drawableRight="@drawable/contentedit"
         android:text="@string/report" />
 
     <Button
         android:id="@+id/action"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableRight="@drawable/ep"
+        android:background="@drawable/background"
+        android:drawableRight="@drawable/actionabout"
         android:text="@string/action" />
 
     <Button
         android:id="@+id/directory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableRight="@drawable/directory"
+        android:background="@drawable/background"
+        android:drawableRight="@drawable/socialgroup"
         android:text="@string/directory" />
 
     <Button
         android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/background"
+        android:drawableRight="@drawable/actionsearch"
         android:text="@string/search" />
 
 </LinearLayout>

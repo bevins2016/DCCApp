@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.io.ObjectInputStream.GetField;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ import android.util.Log;
 
 
 import com.example.dcc.helpers.DccCookie;
+import com.example.dcc.helpers.Friend;
 import com.example.dcc.helpers.Links;
 
 import com.example.dcc.helpers.ObjectStorage;
@@ -59,21 +61,23 @@ public class HttpConnection{
 	private static final String USER_AGENT= "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:20.0) Gecko/20100101 Firefox/20.0";
 	private static final String LOG = "Dcc.HttpConnection";
 
-
-	public static synchronized Document getParseToXML(String page){
+	public static synchronized Document getParseToXML(User user, String page){
 		try {
+
+			if(user == null) user = ObjectStorage.getUser();
+
+			Log.e("Getting Page", page);
 
 			DefaultHttpClient client = new DefaultHttpClient();
 			HttpGet get = new HttpGet(page);
 
-			get.setHeader("Cookie", ObjectStorage.getUser().cookies);
+			client.setCookieStore(new DCCCookieStore());
+			client.getCookieSpecs().register("easy", getCookieSpec());
+			client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");
+
+			get.setHeader("Cookie", user.cookies);
 			get.setHeader("User-Agent", USER_AGENT);
 
-			client.setCookieStore(new DCCCookieStore());
-			client.getCookieSpecs().register("easy", getCookieSpec());
-			client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");
-
-
 			HttpResponse response =  client.execute(new HttpHost(HOST), get);
 
 			BufferedReader in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
@@ -86,44 +90,11 @@ public class HttpConnection{
 			return doc;
 
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+			Log.e("Requesting Page", e.getLocalizedMessage());
 		} catch (ClientProtocolException e) {
-			e.printStackTrace();
+			Log.e("Requesting Page", e.getLocalizedMessage());
 		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-
-		return null;
-	}
-	private static synchronized Document getParseToXML(User user, String page){
-		try {
-
-			DefaultHttpClient client = new DefaultHttpClient();
-			HttpGet get = new HttpGet(REFERER);
-			get.setHeader("Cookie", user.cookies);
-
-			client.setCookieStore(new DCCCookieStore());
-			client.getCookieSpecs().register("easy", getCookieSpec());
-			client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");
-
-			HttpResponse response =  client.execute(new HttpHost(HOST), get);
-
-			BufferedReader in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-			StringBuilder total = new StringBuilder();
-			String line;
-			while((line = in.readLine()) != null) total.append(line);
-
-			Document doc = Jsoup.parse(total.toString());
-
-			return doc;
-
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} catch (ClientProtocolException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e("Requesting Page", e.getLocalizedMessage());
 		}
 
 
@@ -155,13 +126,11 @@ public class HttpConnection{
 			return response;
 
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+			Log.e("Requesting Page", e.getLocalizedMessage());
 		} catch (ClientProtocolException e) {
-			e.printStackTrace();
+			Log.e("Requesting Page", e.getLocalizedMessage());
 		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e){
-			e.printStackTrace();
+			Log.e("Requesting Page", e.getLocalizedMessage());
 		}
 		Log.e("asdf", "returning null post response");
 		return null;
@@ -196,17 +165,15 @@ public class HttpConnection{
 			Header c = cookies[h];
 			if(c.getValue().startsWith("wordpress_test") || c.getValue().startsWith("wordpress_logged")){
 				sb.append(c.getValue()+";");
-				user.cook.add(new DccCookie(c.getValue()));
 			}
 		}
 
 		user.cookies = sb.toString();
-		Log.e("asdf", user.cookies);
 		try {
 			buildUser(user, response);
 			return true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.e("Error", e.getLocalizedMessage());
 			return false;
 		}	
 	}
@@ -224,23 +191,22 @@ public class HttpConnection{
 		try{
 			Document doc = getParseToXML(user, "/intern/");
 			Element span = doc.getElementById("ffl-logged-in-user");
-			Log.e("adf", span.text());
 			user.setName(span.text());
 			span = doc.getElementsByClass("username").first();
-			Log.e("adf2", span.text());
 			user.setHandle(span.text());
 
 			Elements div = doc.getElementById("buddyhead_img").children();
 			Element image = div.first();
 			String urlS = image.attr("src");
-			
+
 			URL url = new URL(urlS);
 			Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
 			user.setImage(bmp);
 
-			user.displayData();
+			getFriends(user);
 		}catch(Exception e){
-			Log.e("something", e.toString());
+			Log.e("Build User", e.getLocalizedMessage());
+
 		}
 	}
 
@@ -250,9 +216,30 @@ public class HttpConnection{
 	 * @throws ClientProtocolException
 	 * @throws IOException
 	 */
-	public void getFriends(CookieStore cookieStore) throws ClientProtocolException, IOException{
-		Document doc = getParseToXML(ObjectStorage.getUser().getURL(Links.FRIENDS));
-		Element e = doc.getElementById("members-list");
+	public static void getFriends(User u){
+		try{
+			Document doc = getParseToXML(u, u.getURL(Links.FRIENDS));
+			Log.e("added friend", "Adding Friend");
+			Element e = doc.getElementById("members-list");
+			Elements friends = e.getElementsByTag("li");
+			Log.e("added friend", friends.size()+"");
+
+			for(Element friend : friends){
+				Friend f = new Friend();
+				
+				Element temp = e.getElementsByClass("item-avatar").first();
+				Element img = temp.getElementsByTag("a").first().getElementsByTag("img").first();
+				f.setImgURL(img.attr("src"));
+				f.setName(img.attr("alt").replaceAll("Profile picture of ", ""));	
+				f.setPage(friend.getElementsByClass("item-title").get(0).getElementsByTag("a").attr("href"));
+				String url = f.getPage().substring(0, f.getPage().length()-1);
+				f.setHandle(url.substring(url.lastIndexOf("/")+1));
+
+				ObjectStorage.getUser().addFriend(f);
+			}
+		}catch(Exception e){
+			Log.e("Add Friends", e.getLocalizedMessage());
+		}
 	}
 
 	/**

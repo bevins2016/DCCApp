@@ -3,6 +3,7 @@ package com.example.dcc;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,8 @@ public class MenuFragment extends Fragment implements android.view.View.OnClickL
 	private Button directoryB;
 	private Button searchB;
 	
+	private Drawable bg;
+	private Drawable bg_dark;
 	private Activity activity;
 	
 	@Override
@@ -35,7 +38,6 @@ public class MenuFragment extends Fragment implements android.view.View.OnClickL
 		directoryB = (Button) view.findViewById(R.id.directory);
 		searchB = (Button) view.findViewById(R.id.search);
 
-		
 		newsB.setOnClickListener(this);
 		calB.setOnClickListener(this);
 		photoB.setOnClickListener(this);
