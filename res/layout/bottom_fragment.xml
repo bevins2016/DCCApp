@@ -8,6 +8,7 @@
     <ImageView
     android:id="@+id/usericon"
     android:layout_width="wrap_content"
+    android:layout_gravity="right"
     android:layout_height="100dp"
     android:src="@drawable/appbackground" />
 

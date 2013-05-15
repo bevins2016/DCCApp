@@ -7,47 +7,44 @@ package com.example.dcc.helpers.mysql;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
-import java.io.ObjectInputStream.GetField;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.http.Header;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.CookieStore;
-
-import org.apache.http.client.HttpClient;
-
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.params.ClientPNames;
-
-import org.apache.http.cookie.Cookie;
-
 import org.apache.http.cookie.CookieSpecFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
-
-import com.example.dcc.helpers.DccCookie;
 import com.example.dcc.helpers.Friend;
 import com.example.dcc.helpers.Links;
-
+import com.example.dcc.helpers.News;
 import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.User;
 import com.example.dcc.helpers.hacks.DCCCookieSpecFactory;
@@ -59,14 +56,12 @@ public class HttpConnection{
 	private static final String HOST = "www.virtualdiscoverycenter.net";
 	private static final String REFERER = "http://www.virtualdiscoverycenter.net/intern/";
 	private static final String USER_AGENT= "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:20.0) Gecko/20100101 Firefox/20.0";
-	private static final String LOG = "Dcc.HttpConnection";
+	//private static final String LOG = "Dcc.HttpConnection";
 
 	public static synchronized Document getParseToXML(User user, String page){
 		try {
 
 			if(user == null) user = ObjectStorage.getUser();
-
-			Log.e("Getting Page", page);
 
 			DefaultHttpClient client = new DefaultHttpClient();
 			HttpGet get = new HttpGet(page);
@@ -102,7 +97,39 @@ public class HttpConnection{
 	}
 
 
+	private static synchronized org.w3c.dom.Document getXMLfromURL(User user, String uri){
+		try{
+			if(user == null) user = ObjectStorage.getUser();
 
+			DefaultHttpClient client = new DefaultHttpClient();
+			HttpGet get = new HttpGet(uri);
+
+			client.setCookieStore(new DCCCookieStore());
+			client.getCookieSpecs().register("easy", getCookieSpec());
+			client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");
+
+			get.setHeader("Cookie", user.cookies);
+			get.setHeader("User-Agent", USER_AGENT);
+
+			HttpResponse response =  client.execute(new HttpHost(HOST), get);
+			
+			String xml = EntityUtils.toString(response.getEntity());
+			
+			org.w3c.dom.Document doc = null;
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			InputSource is = new InputSource();
+			
+			is.setCharacterStream(new StringReader(xml));
+			doc = db.parse(is);
+			
+			return doc;
+		}catch(Exception e){
+			Log.e("Parse XML", e.getMessage());
+		}
+		return null;
+	}
 
 	private static synchronized HttpResponse postResponse(User user, String page, List<NameValuePair> nvp, boolean holdFirst){
 		try {
@@ -171,6 +198,8 @@ public class HttpConnection{
 		user.cookies = sb.toString();
 		try {
 			buildUser(user, response);
+			ObjectStorage.setUser(user);
+			getNews();
 			return true;
 		} catch (Exception e) {
 			Log.e("Error", e.getLocalizedMessage());
@@ -205,8 +234,8 @@ public class HttpConnection{
 
 			getFriends(user);
 		}catch(Exception e){
+			e.printStackTrace();
 			Log.e("Build User", e.getLocalizedMessage());
-
 		}
 	}
 
@@ -226,7 +255,7 @@ public class HttpConnection{
 
 			for(Element friend : friends){
 				Friend f = new Friend();
-				
+
 				Element temp = e.getElementsByClass("item-avatar").first();
 				Element img = temp.getElementsByTag("a").first().getElementsByTag("img").first();
 				f.setImgURL(img.attr("src"));
@@ -235,7 +264,7 @@ public class HttpConnection{
 				String url = f.getPage().substring(0, f.getPage().length()-1);
 				f.setHandle(url.substring(url.lastIndexOf("/")+1));
 
-				ObjectStorage.getUser().addFriend(f);
+				u.addFriend(f);
 			}
 		}catch(Exception e){
 			Log.e("Add Friends", e.getLocalizedMessage());
@@ -248,5 +277,30 @@ public class HttpConnection{
 	 */
 	private static CookieSpecFactory getCookieSpec(){
 		return new DCCCookieSpecFactory();
+	}
+
+	public static synchronized List<News> getNews(){
+		try{
+			org.w3c.dom.Document doc = getXMLfromURL(ObjectStorage.getUser(), "/news/feed/");
+			NodeList nodeList = doc.getElementsByTagName("item");
+			List<News> newsPaper = new ArrayList<News>();
+			for(int i=0; i < nodeList.getLength(); i++){
+				NodeList n = nodeList.item(i).getChildNodes();
+				News news = new News();
+				news.setTitle(n.item(1).getTextContent());
+				news.setLink(n.item(3).getTextContent());
+				news.setPubdate(n.item(7).getTextContent());
+				news.setPublisher(n.item(9).getTextContent());
+				news.setCategory(n.item(11).getTextContent());
+				news.setText(n.item(13).getTextContent());
+				
+				newsPaper.add(news);
+			}
+			
+			return newsPaper;
+		}catch(Exception e){
+			Log.e("ahh", e.getLocalizedMessage());
+		}
+		return null;
 	}
 }

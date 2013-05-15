@@ -22,8 +22,8 @@ public class BottomFragment extends Fragment{
 		
 		userIcon = (ImageView)view.findViewById(R.id.usericon);
 		userIcon.setImageBitmap(ObjectStorage.getUser().getImage());
-		userIcon.setScaleX((float)2.0);
-		userIcon.setScaleY((float)2.0);
+		//userIcon.setScaleX((float)2.0);
+		//userIcon.setScaleY((float)2.0);
 		return view;
 	}
 }
