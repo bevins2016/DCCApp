@@ -94,8 +94,8 @@ public class News {
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("<b><u>"+title+"</u></b><br/>");
-		sb.append("Date: "+pubdate.substring(0, pubdate.indexOf("+")-1)+"&nbsp&nbsp&nbsp&nbsp");
-		sb.append("<b>--By</b>"+publisher);
+		sb.append("<b>Date</b> "+pubdate.substring(0, pubdate.indexOf("+")-1)+"&nbsp&nbsp&nbsp&nbsp");
+		sb.append("<b>By:</b> "+publisher);
         if(text.length()>140) sb.append("<br/>"+text.substring(0,139));
 		else sb.append("<br/>"+text);
 		
