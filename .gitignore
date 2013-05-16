@@ -28,11 +28,6 @@ local.properties
 # PDT-specific
 .buildpath
 
-#################
-#Android Studio
-#################
-out/
-.idea/
 
 #################
 ## Visual Studio

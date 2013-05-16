@@ -13,10 +13,6 @@
     </content>
     <orderEntry type="jdk" jdkName="Android 4.2.2" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-<<<<<<< HEAD
-    <orderEntry type="library" name="android-support-v4" level="project" />
-=======
->>>>>>> 2ed21e5afe137d013cfe2cd0dec6125590c00594
     <orderEntry type="library" name="libs" level="project" />
   </component>
 </module>
