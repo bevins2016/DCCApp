@@ -127,7 +127,7 @@ public class ActionItem extends ListActivity implements OnClickListener {
 		@Override
 		protected void onPostExecute(Void result) {
 			if (myRssFeed != null) {
-				//instanciate the textviews in the scrollview
+				//instantiate the textviews in the scrollview
 				TextView feedTitle = (TextView) findViewById(R.id.feedtitle);
 				TextView feedDescribtion = (TextView) findViewById(R.id.feeddescribtion);
 				TextView feedPubdate = (TextView) findViewById(R.id.feedpubdate);
