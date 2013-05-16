@@ -35,6 +35,6 @@ public class HTTPData {
 	public HTTPData(String currentURL){
 		this.currentURL = currentURL;
 
-		newXML = HttpConnection.getParseToXML(null, currentURL);
+		newXML = HttpConnection.getParseToXML(currentURL);
 	}
 }

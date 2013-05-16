@@ -17,12 +17,13 @@
     <ignored path="DCCApp.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368708904194" ignored="false" />
-    <file path="/fragment.java" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368712065010" ignored="false" />
+    <file path="/fragment.java" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368717399103" ignored="false" />
     <file path="/news_item.xml" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368712292691" ignored="false" />
     <file path="/NewsListFragment.java" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368712642072" ignored="false" />
     <file path="/News.java" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368713083451" ignored="false" />
     <file path="$PROJECT_DIR$/gen/com/example/dcc/BuildConfig.java" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368713462786" ignored="false" />
-    <file path="/HttpConnection.java" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368715386121" ignored="false" />
+    <file path="/HttpConnection.java" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368717269277" ignored="false" />
+    <file path="/LoginActivity.java" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368716357534" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,23 +84,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="HttpConnection.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="HttpConnection.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/example/dcc/helpers/mysql/HttpConnection.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="213" column="0" selection-start="7601" selection-end="7601" vertical-scroll-proportion="0.0">
+            <state line="69" column="0" selection-start="2547" selection-end="2547" vertical-scroll-proportion="2.578022">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#6726#6741#0" expanded="true" />
-                <element signature="e#10546#10552#0" expanded="true" />
+                <element signature="e#6688#6703#0" expanded="true" />
+                <element signature="e#10595#10601#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoginActivity.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="HTTPData.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/example/dcc/HTTPData.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="37" column="46" selection-start="1135" selection-end="1135" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ImageURL.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/example/dcc/ImageURL.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="16" column="57" selection-start="328" selection-end="328" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LoginActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/example/dcc/LoginActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="193" column="0" selection-start="5637" selection-end="5637" vertical-scroll-proportion="5.368421">
+            <state line="196" column="36" selection-start="5826" selection-end="5826" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -137,6 +156,9 @@
         <option value="$PROJECT_DIR$/res/layout/news_item.xml" />
         <option value="$PROJECT_DIR$/src/com/example/dcc/NewsListFragment.java" />
         <option value="$PROJECT_DIR$/src/com/example/dcc/helpers/News.java" />
+        <option value="$PROJECT_DIR$/src/com/example/dcc/LoginActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/example/dcc/HTTPData.java" />
+        <option value="$PROJECT_DIR$/src/com/example/dcc/ImageURL.java" />
         <option value="$PROJECT_DIR$/src/com/example/dcc/helpers/mysql/HttpConnection.java" />
       </list>
     </option>
@@ -350,7 +372,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <option name="MODE" value="default_activity" />
       <option name="DEPLOY" value="true" />
-      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="TARGET_SELECTION_MODE" value="USB_DEVICE" />
       <option name="PREFERRED_AVD" value="" />
       <option name="USE_COMMAND_LINE" value="true" />
       <option name="COMMAND_LINE" value="" />
@@ -403,12 +425,12 @@
       <changelist id="d1f09cdd-d58f-494e-b611-6b815c3cc46a" name="Default" comment="" />
       <created>1368708894877</created>
       <updated>1368708894877</updated>
-      <workItem from="1368708897992" duration="6399000" />
+      <workItem from="1368708897992" duration="8286000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6399000" />
+    <option name="totallyTimeSpent" value="8286000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1358" y="-8" width="1696" height="1026" extended-state="6" />
@@ -426,14 +448,14 @@
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32949308" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.48847926" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.44585255" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20195839" sideWeight="0.51152074" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20195839" sideWeight="0.5541475" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39976957" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.82373273" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.78341013" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -568,17 +590,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/dcc/helpers/mysql/HttpConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="213" column="0" selection-start="7601" selection-end="7601" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#6726#6741#0" expanded="true" />
-            <element signature="e#10546#10552#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/dcc/LaunchActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="46" column="13" selection-start="1430" selection-end="1430" vertical-scroll-proportion="0.0">
@@ -588,8 +599,33 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/dcc/LoginActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="193" column="0" selection-start="5637" selection-end="5637" vertical-scroll-proportion="5.368421">
+        <state line="196" column="36" selection-start="5826" selection-end="5826" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/dcc/HTTPData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="46" selection-start="1135" selection-end="1135" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/dcc/ImageURL.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="57" selection-start="328" selection-end="328" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/dcc/helpers/mysql/HttpConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="69" column="0" selection-start="2547" selection-end="2547" vertical-scroll-proportion="2.578022">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6688#6703#0" expanded="true" />
+            <element signature="e#10595#10601#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
