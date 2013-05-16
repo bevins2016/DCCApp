@@ -2,6 +2,8 @@ package com.example.dcc;
 import java.util.List;
 import java.util.zip.Inflater;
 
+import android.text.Html;
+import android.text.Spanned;
 import com.example.dcc.R;
 import com.example.dcc.helpers.News;
 import com.example.dcc.helpers.ObjectStorage;
@@ -23,8 +25,8 @@ import android.widget.ListView;
 public class NewsListFragment extends Fragment implements OnClickListener{
 
 	ListView listview;
-	ArrayAdapter<News> adapter;
-	ArrayAdapter<News> newsList;
+
+	ArrayAdapter<Spanned> adapter;
 	List<News> news;
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,21 +44,21 @@ public class NewsListFragment extends Fragment implements OnClickListener{
 		}
 		
 		listview = (ListView)view.findViewById(R.id.newslist);
-		adapter = new ArrayAdapter<News>(getActivity(), R.layout.news_item);
-		
+		adapter = new ArrayAdapter<Spanned>(getActivity(), R.layout.news_item);
+
 		listview.setAdapter(adapter);
-		
+
 		Log.e("asdf", news.size()+"");
-		
+
 		for(News n : news){
-			adapter.add(n);
+			adapter.add(Html.fromHtml(n.toString()));
 		}
 		return view;
 	}
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public class GetNewsTask extends AsyncTask<Void, Void, Boolean> {
