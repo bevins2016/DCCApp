@@ -1,9 +1,11 @@
 package com.example.dcc.helpers;
 
+import java.io.Serializable;
+
 /**
  * Created by Harmon on 5/16/13.
  */
-public class Member {
+public class Member implements Serializable{
 
     private String imageURL;
     private String name;

@@ -1,6 +1,8 @@
 package com.example.dcc.helpers;
 
-public class Friend {
+import java.io.Serializable;
+
+public class Friend implements Serializable{
 	private String imgURL;
 	private String page;
 	private String name;

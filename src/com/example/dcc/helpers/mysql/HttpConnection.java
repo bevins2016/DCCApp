@@ -100,10 +100,8 @@ public class HttpConnection {
         try{
             User user = ObjectStorage.getUser();
 
-
             DefaultHttpClient client = new DefaultHttpClient();
             HttpGet get = new HttpGet(uri);
-
             client.setCookieStore(new DCCCookieStore());
             client.getCookieSpecs().register("easy", getCookieSpec());
             client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");

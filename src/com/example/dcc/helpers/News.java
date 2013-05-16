@@ -2,7 +2,9 @@ package com.example.dcc.helpers;
 
 import android.util.Log;
 
-public class News {
+import java.io.Serializable;
+
+public class News implements Serializable{
 
 	private String title;
 	private String link;
