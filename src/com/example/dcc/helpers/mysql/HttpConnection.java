@@ -53,294 +53,291 @@ import com.example.dcc.helpers.hacks.DCCRedirectHandler;
 
 public class HttpConnection {
 
-	private static final String HOST = "www.virtualdiscoverycenter.net";
-	private static final String REFERER = "http://www.virtualdiscoverycenter.net/intern/";
-	private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:20.0) Gecko/20100101 Firefox/20.0";
-	private static final String LOG = "Dcc.HttpConnection";
+    private static final String HOST = "www.virtualdiscoverycenter.net";
+    private static final String REFERER = "http://www.virtualdiscoverycenter.net/intern/";
+    private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:20.0) Gecko/20100101 Firefox/20.0";
+    private static final String LOG = "Dcc.HttpConnection";
 
-	//private static final String LOG = "Dcc.HttpConnection";
+    //private static final String LOG = "Dcc.HttpConnection";
 
-	public static synchronized Document getParseToXML(User user, String page){
-		try {
+    public static synchronized Document getParseToXML(String page){
+        try {
 
-			if(user == null) user = ObjectStorage.getUser();
+            User user = ObjectStorage.getUser();
 
-			DefaultHttpClient client = new DefaultHttpClient();
-			HttpGet get = new HttpGet(page);
+            DefaultHttpClient client = new DefaultHttpClient();
+            HttpGet get = new HttpGet(page);
 
-			client.setCookieStore(new DCCCookieStore());
-			client.getCookieSpecs().register("easy", getCookieSpec());
-			client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");
+            client.setCookieStore(new DCCCookieStore());
+            client.getCookieSpecs().register("easy", getCookieSpec());
+            client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");
 
-			HttpResponse response = client.execute(new HttpHost(HOST), get);
+            get.setHeader("Cookie", user.cookies);
+            get.setHeader("User-Agent", USER_AGENT);
 
-			get.setHeader("Cookie", user.cookies);
-			get.setHeader("User-Agent", USER_AGENT);
+            HttpResponse response = client.execute(new HttpHost(HOST), get);
 
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					response.getEntity().getContent()));
-			StringBuilder total = new StringBuilder();
-			String line;
-			while ((line = in.readLine()) != null)
-				total.append(line);
+            BufferedReader in = new BufferedReader(new InputStreamReader(
+                    response.getEntity().getContent()));
+            StringBuilder total = new StringBuilder();
+            String line;
+            while ((line = in.readLine()) != null)
+                total.append(line);
 
-			Document doc = Jsoup.parse(total.toString());
+            Document doc = Jsoup.parse(total.toString());
 
-			return doc;
+            return doc;
 
-		} catch (UnsupportedEncodingException e) {
-			Log.e("Requesting Page", e.getLocalizedMessage());
-		} catch (ClientProtocolException e) {
-			Log.e("Requesting Page", e.getLocalizedMessage());
-		} catch (IOException e) {
-			Log.e("Requesting Page", e.getLocalizedMessage());
-		}
+        } catch (UnsupportedEncodingException e) {
+            Log.e("Requesting Page", e.getLocalizedMessage());
+        } catch (ClientProtocolException e) {
+            Log.e("Requesting Page", e.getLocalizedMessage());
+        } catch (IOException e) {
+            Log.e("Requesting Page", e.getLocalizedMessage());
+        }
 
-		return null;
-	}
-
-
-	private static synchronized org.w3c.dom.Document getXMLfromURL(User user, String uri){
-		try{
-			if(user == null) user = ObjectStorage.getUser();
+        return null;
+    }
 
 
-			DefaultHttpClient client = new DefaultHttpClient();
-			HttpGet get = new HttpGet(uri);
-
-			client.setCookieStore(new DCCCookieStore());
-			client.getCookieSpecs().register("easy", getCookieSpec());
-			client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");
+    private static synchronized org.w3c.dom.Document getXMLfromURL(String uri){
+        try{
+            User user = ObjectStorage.getUser();
 
 
-			get.setHeader("Cookie", user.cookies);
-			get.setHeader("User-Agent", USER_AGENT);
+            DefaultHttpClient client = new DefaultHttpClient();
+            HttpGet get = new HttpGet(uri);
 
-			Log.e("url", HOST+uri);
-			for(Header h : get.getAllHeaders()){
-				Log.e("Header" , h.getValue());
-			}
-			
-			HttpResponse response =  client.execute(new HttpHost(HOST), get);
-			Log.e("al", response.getStatusLine().getReasonPhrase());
-			String xml = EntityUtils.toString(response.getEntity());
-			Log.e("al", xml);
-			org.w3c.dom.Document doc = null;
-			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-
-			DocumentBuilder db = dbf.newDocumentBuilder();
-			InputSource is = new InputSource();
+            client.setCookieStore(new DCCCookieStore());
+            client.getCookieSpecs().register("easy", getCookieSpec());
+            client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");
 
 
-			is.setCharacterStream(new StringReader(xml));
-			doc = db.parse(is);
+            get.setHeader("Cookie", user.cookies);
+            get.setHeader("User-Agent", USER_AGENT);
+
+            HttpResponse response =  client.execute(new HttpHost(HOST), get);
+            String xml = EntityUtils.toString(response.getEntity());
+            org.w3c.dom.Document doc = null;
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            InputSource is = new InputSource();
 
 
-			return doc;
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+            is.setCharacterStream(new StringReader(xml));
+            doc = db.parse(is);
 
 
-		return null;
-	}
+            return doc;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 
-	private static synchronized HttpResponse postResponse(User user, String page, List<NameValuePair> nvp, boolean holdFirst){
+    private static synchronized HttpResponse postResponse(String page, List<NameValuePair> nvp, boolean holdFirst){
 
-		try {
+        try {
 
-			DefaultHttpClient client = new DefaultHttpClient();
-			HttpPost post = new HttpPost(page);
+            DefaultHttpClient client = new DefaultHttpClient();
+            HttpPost post = new HttpPost(page);
 
-			client.setCookieStore(new DCCCookieStore());
-			client.getCookieSpecs().register("easy", getCookieSpec());
-			client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");
+            client.setCookieStore(new DCCCookieStore());
+            client.getCookieSpecs().register("easy", getCookieSpec());
+            client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");
 
-			if (nvp != null)
-				post.setEntity(new UrlEncodedFormEntity(nvp));
-			post.setHeader(new BasicHeader("Referer", REFERER));
-			post.setHeader("User-Agent", USER_AGENT);
+            if (nvp != null) post.setEntity(new UrlEncodedFormEntity(nvp));
+            post.setHeader(new BasicHeader("Referer", REFERER));
+            post.setHeader("User-Agent", USER_AGENT);
 
-			// This will stop redirects if activated
-			if (holdFirst)
-				client.setRedirectHandler(new DCCRedirectHandler());
+            // This will stop redirects if activated
+            if (holdFirst)
+                client.setRedirectHandler(new DCCRedirectHandler());
 
-			HttpResponse response = client.execute(new HttpHost(HOST), post);
+            HttpResponse response = client.execute(new HttpHost(HOST), post);
 
-			return response;
+            return response;
 
-		} catch (UnsupportedEncodingException e) {
-			Log.e("Requesting Page", e.getLocalizedMessage());
-		} catch (ClientProtocolException e) {
-			Log.e("Requesting Page", e.getLocalizedMessage());
-		} catch (IOException e) {
+        } catch (UnsupportedEncodingException e) {
+            Log.e("Requesting Page", e.getLocalizedMessage());
+        } catch (ClientProtocolException e) {
+            Log.e("Requesting Page", e.getLocalizedMessage());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("Requesting Page", e.getLocalizedMessage());
+        }
+        Log.e("asdf", "returning null post response");
+        return null;
+    }
 
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-			Log.e("Requesting Page", e.getLocalizedMessage());
-		}
-		Log.e("asdf", "returning null post response");
-		return null;
-	}
+    /**
+     * Authenticates the user and stores cookies.
+     *
+     * @param log
+     * @param pwd
+     * @return Returns the cookies received from the wordpress site
+     * @throws URISyntaxException
+     */
+    public static synchronized boolean login(String log, String pwd) {
 
-	/**
-	 * Authenticates the user and stores cookies.
-	 * 
-	 * @param log
-	 * @param pwd
-	 * @return Returns the cookies received from the wordpress site
-	 * @throws URISyntaxException
-	 */
-	public static synchronized boolean login(User user, String log, String pwd) {
-		String page = "/wp-login.php";
+        User user = ObjectStorage.getUser();
 
-		List<NameValuePair> nvp = new ArrayList<NameValuePair>();
-		nvp.add(new BasicNameValuePair("rememberme", "forever"));
-		nvp.add(new BasicNameValuePair("redirect_to", "/intern/"));
-		nvp.add(new BasicNameValuePair("log", log));
-		nvp.add(new BasicNameValuePair("pwd", pwd));
-		nvp.add(new BasicNameValuePair("submit", ""));
+        String page = "/wp-login.php";
 
-		HttpResponse response = postResponse(user, page, nvp, true);
+        List<NameValuePair> nvp = new ArrayList<NameValuePair>();
+        nvp.add(new BasicNameValuePair("rememberme", "forever"));
+        nvp.add(new BasicNameValuePair("redirect_to", "/intern/"));
+        nvp.add(new BasicNameValuePair("log", log));
+        nvp.add(new BasicNameValuePair("pwd", pwd));
+        nvp.add(new BasicNameValuePair("submit", ""));
 
-		Header[] cookies = (Header[]) response.getHeaders("Set-Cookie");
+        HttpResponse response = postResponse(page, nvp, true);
 
-		Log.e("length", cookies.length + "");
-		StringBuilder sb = new StringBuilder();
+        Header[] cookies = (Header[]) response.getHeaders("Set-Cookie");
 
-		// Add all the cookies to the cookie string
-		for (int h = 0; h < cookies.length; h++) {
-			Header c = cookies[h];
+        StringBuilder sb = new StringBuilder();
 
-			if(c.getValue().startsWith("wordpress_test") || c.getValue().startsWith("wordpress_logged")){
-				sb.append(c.getValue()+";");
-			}
-		}
+        // Add all the cookies to the cookie string
+        for (int h = 0; h < cookies.length; h++) {
+            Header c = cookies[h];
 
-		user.cookies = sb.toString();
-		try {
-			buildUser(user, response);
-			ObjectStorage.setUser(user);
-			return true;
-		} catch (Exception e) {
-			Log.e("Error", e.getLocalizedMessage());
-			return false;
-		}
-	}
+            if(c.getValue().startsWith("wordpress_test") || c.getValue().startsWith("wordpress_logged")){
+                sb.append(c.getValue()+";");
+            }
+        }
 
-	/**
-	 * Takes an input stream and parses all relevant data from the HTML file
-	 * into the user object.
-	 * 
-	 * @param u
-	 * @param response
-	 * @throws Exception
-	 */
-	private static synchronized void buildUser(User user, HttpResponse response) {
+        Log.e("eh", sb.toString());
+        user.cookies = sb.toString();
+        Log.e("eh", user.cookies);
+        try {
+            buildUser(response);
+            getFriends();
 
-		try {
-			Document doc = getParseToXML(user, "/intern/");
-			Element span = doc.getElementById("ffl-logged-in-user");
-			user.setName(span.text());
-			span = doc.getElementsByClass("username").first();
-			user.setHandle(span.text());
+            ObjectStorage.setUser(user);
 
-			Elements div = doc.getElementById("buddyhead_img").children();
-			Element image = div.first();
-			String urlS = image.attr("src");
+            Log.e("Login", user.getName()+"\n"+user.getHandle()+"\n"+user.cookies);
+            return true;
+        } catch (Exception e) {
+            Log.e("Error", "no clue");
+            return false;
+        }
+    }
 
-			URL url = new URL(urlS);
-			Bitmap bmp = BitmapFactory.decodeStream(url.openConnection()
-					.getInputStream());
-			user.setImage(bmp);
+    /**
+     * Takes an input stream and parses all relevant data from the HTML file
+     * into the user object.
+     *
+     *
+     * @param response
+     * @throws Exception
+     */
+    private static synchronized void buildUser(HttpResponse response) {
+
+        User user = ObjectStorage.getUser();
+        try {
+            Document doc = getParseToXML("/intern/");
+            Element span = doc.getElementById("ffl-logged-in-user");
+            user.setName(span.text());
+
+            span = doc.getElementsByClass("username").first();
+            user.setHandle(span.text());
+
+            Elements div = doc.getElementById("buddyhead_img").children();
+            Element image = div.first();
+            String urlS = image.attr("src");
+
+            URL url = new URL(urlS);
+            Bitmap bmp = BitmapFactory.decodeStream(url.openConnection()
+                    .getInputStream());
+            user.setImage(bmp);
+
+        }catch(Exception e){
+            e.printStackTrace();
+            Log.e("Build User", "err");
+        }
+    }
+
+    /**
+     * Used to gather a list of friends of the user
+     *
+     * @throws IOException
+     */
+
+    public static void getFriends(){
+
+        User user = ObjectStorage.getUser();
+        try{
+            Document doc = getParseToXML(user.getURL(Links.FRIENDS));
+            Log.e("added friend", "Adding Friend");
+            Element e = doc.getElementById("members-list");
+            Elements friends = e.getElementsByTag("li");
+            Log.e("added friend", friends.size()+"");
+
+            for(Element friend : friends){
+                Friend f = new Friend();
+
+                Element temp = e.getElementsByClass("item-avatar").first();
+                Element img = temp.getElementsByTag("a").first().getElementsByTag("img").first();
+                f.setImgURL(img.attr("src"));
+                f.setName(img.attr("alt").replaceAll("Profile picture of ", ""));
+                f.setPage(friend.getElementsByClass("item-title").get(0).getElementsByTag("a").attr("href"));
+                String url = f.getPage().substring(0, f.getPage().length()-1);
+                f.setHandle(url.substring(url.lastIndexOf("/")+1));
+
+                user.addFriend(f);
+            }
+
+        }catch(Exception e){
+            Log.e("Add Friends", e.getLocalizedMessage());
+        }
+    }
+
+    /**
+     * Method used to bypass some cookie security features.
+     *
+     * @return
+     */
+    private static CookieSpecFactory getCookieSpec() {
+        return new DCCCookieSpecFactory();
+    }
 
 
-		}catch(Exception e){
-			e.printStackTrace();
-			Log.e("Build User", e.getLocalizedMessage());
-		}
-	}
+    public static synchronized List<News> getNews(){
+        List<News> newsPaper = new ArrayList<News>();
 
-	/**
-	 * Used to gather a list of friends of the user
-	 * 
-	 * @param cookieStore
-	 * @throws ClientProtocolException
-	 * @throws IOException
-	 */
+        try{
+            org.w3c.dom.Document doc = getXMLfromURL("/news/feed/");
+            NodeList nodeList = doc.getElementsByTagName("item");
 
-	public static void getFriends(User u){
-		try{
-			Document doc = getParseToXML(u, u.getURL(Links.FRIENDS));
-			Log.e("added friend", "Adding Friend");
-			Element e = doc.getElementById("members-list");
-			Elements friends = e.getElementsByTag("li");
-			Log.e("added friend", friends.size()+"");
+            for(int i=0; i < nodeList.getLength(); i++){
+                try{
+                    NodeList n = nodeList.item(i).getChildNodes();
+                    News news = new News();
 
-			for(Element friend : friends){
-				Friend f = new Friend();
+                    for(int h=0; h < n.getLength(); h++){
+                        String name = n.item(h).getNodeName();
+                        if(name.equals("title"))news.setTitle(n.item(h).getTextContent());
+                        else if(name.equals("link"))news.setLink(n.item(h).getTextContent());
+                        else if(name.equals("pubDate"))news.setPubdate(n.item(h).getTextContent());
+                        else if(name.equals("dc:creator"))news.setPublisher(n.item(h).getTextContent());
+                        else if(name.equals("category"))news.setCategory(n.item(h).getTextContent());
+                        else if(name.equals("description"))news.setText(n.item(h).getTextContent());
+                    }
+                    newsPaper.add(news);
 
-				Element temp = e.getElementsByClass("item-avatar").first();
-				Element img = temp.getElementsByTag("a").first().getElementsByTag("img").first();
-				f.setImgURL(img.attr("src"));
-				f.setName(img.attr("alt").replaceAll("Profile picture of ", ""));	
-				f.setPage(friend.getElementsByClass("item-title").get(0).getElementsByTag("a").attr("href"));
-				String url = f.getPage().substring(0, f.getPage().length()-1);
-				f.setHandle(url.substring(url.lastIndexOf("/")+1));
-
-				u.addFriend(f);
-				ObjectStorage.setUser(u);
-			}
-		}catch(Exception e){
-			Log.e("Add Friends", e.getLocalizedMessage());
-		}
-	}
-
-	/**
-	 * Method used to bypass some cookie security features.
-	 * 
-	 * @return
-	 */
-	private static CookieSpecFactory getCookieSpec() {
-		return new DCCCookieSpecFactory();
-	}
-
-
-	public static synchronized List<News> getNews(){
-		List<News> newsPaper = new ArrayList<News>();
-
-		try{
-			org.w3c.dom.Document doc = getXMLfromURL(ObjectStorage.getUser(), "/news/feed/");
-			NodeList nodeList = doc.getElementsByTagName("item");
-
-			for(int i=0; i < nodeList.getLength(); i++){
-				
-				try{
-					
-					NodeList n = nodeList.item(i).getChildNodes();
-					News news = new News();
-					
-					news.setTitle(n.item(1).getTextContent());
-					news.setLink(n.item(3).getTextContent());
-					news.setPubdate(n.item(7).getTextContent());
-					news.setPublisher(n.item(9).getTextContent());
-					news.setCategory(n.item(11).getTextContent());
-					news.setText(n.item(13).getTextContent());
-
-					news.logNews();
-					newsPaper.add(news);
-					
-				}catch(Exception e){
-					Log.e("adding loop", e.getLocalizedMessage());
-				}
-			}
-			return newsPaper;
-		}catch(Exception e){
-			Log.e("something", e.getLocalizedMessage());
-		}
-		return newsPaper;
-	}
+                }catch(Exception e){
+                    Log.e("adding loop", e.getLocalizedMessage());
+                }
+            }
+            return newsPaper;
+        }catch(Exception e){
+            Log.e("something", e.getLocalizedMessage());
+        }
+        return newsPaper;
+    }
 }
 

@@ -53,7 +53,7 @@ public class LoginActivity extends Activity {
 		setContentView(R.layout.activity_login);
 		context = this;
 		user = new User();
-		
+		ObjectStorage.setUser(user);
 		// Set up the login form.
 		mUser = "";
 		mUserView = (EditText) findViewById(R.id.email);
@@ -194,7 +194,7 @@ public class LoginActivity extends Activity {
 	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			if(HttpConnection.login(user, mUser, mPassword))
+			if(HttpConnection.login(mUser, mPassword))
 			{
 				
 			}else{
@@ -209,7 +209,6 @@ public class LoginActivity extends Activity {
 			showProgress(false);
 
 			if (success) {
-				ObjectStorage.setUser(user);
 				startActivity(new Intent(context, MainActivityFrag.class));
 				finish();
 			} else {
