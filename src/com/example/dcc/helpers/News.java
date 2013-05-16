@@ -1,46 +1,106 @@
 package com.example.dcc.helpers;
 
+import android.util.Log;
+
 public class News {
 
-	private Friend friend;
-	private String date;
-	private String posttitle;
-	private String entry;
-	private String[] tags;
+	private String title;
+	private String link;
+	private String comments;
+	private String pubdate;
+	private String text;
+	private String publisher;
+	private String category;
 	
 	public News(){
+		this.title = null;
+		this.link = null;
+		this.comments = null;
+		this.pubdate = null;
+		this.text = null;
+		this.publisher = null;
+		this.category = null;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+	public String getPubdate() {
+		return pubdate;
+	}
+
+	public void setPubdate(String pubdate) {
+		this.pubdate = pubdate;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public String getPublisher() {
+		return publisher;
+	}
+
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	
+	public void logNews(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("\nTitle: "+title);
+		sb.append("\nLink: "+link);
+		sb.append("\nComments: "+comments);
+		sb.append("\nDate: "+pubdate);
+		sb.append("\nPublisher: "+publisher);
+		sb.append("\nCategory"+category);
+		sb.append("\nText"+text);
 		
-	}
-	public Friend getFriend() {
-		return friend;
-	}
-	public void setFriend(Friend friend) {
-		this.friend = friend;
-	}
-	public String getDate() {
-		return date;
-	}
-	public void setDate(String date) {
-		this.date = date;
-	}
-	public String getPosttitle() {
-		return posttitle;
-	}
-	public void setPosttitle(String posttitle) {
-		this.posttitle = posttitle;
-	}
-	public String getEntry() {
-		return entry;
-	}
-	public void setEntry(String entry) {
-		this.entry = entry;
-	}
-	public String[] getTags() {
-		return tags;
-	}
-	public void setTags(String[] tags) {
-		this.tags = tags;
+		Log.e("News: ", sb.toString());
 	}
 	
-	
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("\nTitle: "+title);
+		sb.append("\nLink: "+link);
+		sb.append("\nComments: "+comments);
+		sb.append("\nDate: "+pubdate);
+		sb.append("\nPublisher: "+publisher);
+		sb.append("\nCategory"+category);
+		sb.append("\nText"+text);
+		
+		return sb.toString();
+	}
 }

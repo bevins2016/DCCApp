@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">DCC</string>
@@ -155,5 +156,6 @@
     <string name="ereportText">Days left blank will be automatically filled with, \"I did nothing on the project today.\"</string>
     <string name="first_proj">First Project:</string>
     <string name="second_proj">Second Project:</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -24,14 +24,14 @@ public class User implements Serializable{
 	private String name;
 	public String cookies;
 	private Bitmap image;
-	public List<DccCookie> cook;
+	private List<Friend> friends;
+	
 
 	public User(){
 		this.name = "";
-		this.handle = "";
 		this.cookies = "";
 		this.image = null;
-		this.cook = new LinkedList<DccCookie>();
+		this.friends = new ArrayList<Friend>();
 	}
 	
 	public void displayData(){
@@ -58,24 +58,27 @@ public class User implements Serializable{
 
 	public String getURL(Links link){
 		String base = "/members/"+handle+"/";
+		String url = "";
 		switch(link){
 		case PROFILE:
-			return "/intern/";
+			url = "/intern/"; break;
 		case MESSAGES:
-			return base+"messages/";
+			url = base+"messages/"; break;
 		case MEDIA:
-			return base+"media/";
+			url = base+"media/"; break;
 		case FRIENDS:
-			return base+"friends/";
+			url = base+"friends/"; break;
 		case GROUPS:
-			return base+"groups/";
+			url = base+"groups/"; break;
 		case MEMBERS:
-			return "/members/";
+			url = "/members/"; break;
 		case SETTINGS:
-			return "/settings/";
+			url = "/settings/"; break;
 		default:
-			return "/intern/";
+			url = "/intern/"; break;
 		}
+		Log.e("Link", url);
+		return url;
 	}
 
 	public Bitmap getImage() {
@@ -84,5 +87,9 @@ public class User implements Serializable{
 
 	public void setImage(Bitmap image) {
 		this.image = image;
+	}
+
+	public void addFriend(Friend f) {
+		friends.add(f);
 	}
 }

@@ -210,7 +210,7 @@ public class LoginActivity extends Activity {
 
 			if (success) {
 				ObjectStorage.setUser(user);
-				startActivity(new Intent(context, MainActivity.class));
+				startActivity(new Intent(context, MainActivityFrag.class));
 				finish();
 			} else {
 				mPasswordView

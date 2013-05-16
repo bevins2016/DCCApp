@@ -14,7 +14,7 @@ public class ImageURL {
 	}
 	
 	public String getURLForImage(){
-		Document document = HttpConnection.getParseToXML(url);
+		Document document = HttpConnection.getParseToXML(null, url);
 		Element image = document.select("img").first();
 		return url = image.absUrl("src");
 	}
