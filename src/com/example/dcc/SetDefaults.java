@@ -59,7 +59,7 @@ public class SetDefaults extends Activity implements OnClickListener {
 	private Spinner FirstProject;
 	private Spinner SecondProject;
 
-	private String project1 = "";
+	public static String project1 = "";
 	private String project2 = "";
 
 	private final String teamfile = Environment.getExternalStorageDirectory()

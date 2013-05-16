@@ -25,7 +25,7 @@ public class User implements Serializable{
 	public String cookies;
 	private Bitmap image;
 	private List<Friend> friends;
-	
+
 
 	public User(){
 		this.name = "";

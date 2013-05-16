@@ -28,11 +28,50 @@
         	 in a layout that is no full
         -->
 
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="0dip"
-            android:layout_weight="1" />
-
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Issues"
+                android:id="@+id/textView" android:layout_gravity="left|center_vertical"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/issues" android:layout_gravity="left|center_vertical"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dependability"
+                android:id="@+id/textView2" android:layout_gravity="left|center_vertical"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/dependability" android:layout_gravity="left|center_vertical"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reliability"
+                android:id="@+id/textView3" android:layout_gravity="left|center_vertical"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/reliability" android:layout_gravity="left|center_vertical"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hours"
+                android:id="@+id/textView4" android:layout_gravity="left|center_vertical"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/hours" android:layout_gravity="left|center_vertical"/>
         <Button
             android:id="@+id/sendButton"
             android:layout_width="wrap_content"
