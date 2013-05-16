@@ -42,15 +42,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-import com.example.dcc.helpers.DccCookie;
-=======
 import com.example.dcc.helpers.Friend;
->>>>>>> dea66ac48cbb8d1c1ded197f2502adcf1e94b529
-=======
-import com.example.dcc.helpers.Friend;
->>>>>>> dea66ac48cbb8d1c1ded197f2502adcf1e94b529
 import com.example.dcc.helpers.Links;
 import com.example.dcc.helpers.News;
 import com.example.dcc.helpers.ObjectStorage;
@@ -63,23 +55,12 @@ public class HttpConnection {
 
 	private static final String HOST = "www.virtualdiscoverycenter.net";
 	private static final String REFERER = "http://www.virtualdiscoverycenter.net/intern/";
-<<<<<<< HEAD
-<<<<<<< HEAD
 	private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:20.0) Gecko/20100101 Firefox/20.0";
 	private static final String LOG = "Dcc.HttpConnection";
 
-	public static synchronized Document getParseToXML(String page) {
-=======
-=======
->>>>>>> dea66ac48cbb8d1c1ded197f2502adcf1e94b529
-	private static final String USER_AGENT= "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:20.0) Gecko/20100101 Firefox/20.0";
 	//private static final String LOG = "Dcc.HttpConnection";
 
 	public static synchronized Document getParseToXML(User user, String page){
-<<<<<<< HEAD
->>>>>>> dea66ac48cbb8d1c1ded197f2502adcf1e94b529
-=======
->>>>>>> dea66ac48cbb8d1c1ded197f2502adcf1e94b529
 		try {
 
 			if(user == null) user = ObjectStorage.getUser();
@@ -91,17 +72,10 @@ public class HttpConnection {
 			client.getCookieSpecs().register("easy", getCookieSpec());
 			client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 			HttpResponse response = client.execute(new HttpHost(HOST), get);
-=======
+
 			get.setHeader("Cookie", user.cookies);
 			get.setHeader("User-Agent", USER_AGENT);
->>>>>>> dea66ac48cbb8d1c1ded197f2502adcf1e94b529
-=======
-			get.setHeader("Cookie", user.cookies);
-			get.setHeader("User-Agent", USER_AGENT);
->>>>>>> dea66ac48cbb8d1c1ded197f2502adcf1e94b529
 
 			BufferedReader in = new BufferedReader(new InputStreamReader(
 					response.getEntity().getContent()));
@@ -125,21 +99,11 @@ public class HttpConnection {
 		return null;
 	}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-	private static synchronized Document getParseToXML(User user, String page) {
-		try {
-=======
-=======
->>>>>>> dea66ac48cbb8d1c1ded197f2502adcf1e94b529
 
 	private static synchronized org.w3c.dom.Document getXMLfromURL(User user, String uri){
 		try{
 			if(user == null) user = ObjectStorage.getUser();
-<<<<<<< HEAD
->>>>>>> dea66ac48cbb8d1c1ded197f2502adcf1e94b529
-=======
->>>>>>> dea66ac48cbb8d1c1ded197f2502adcf1e94b529
+
 
 			DefaultHttpClient client = new DefaultHttpClient();
 			HttpGet get = new HttpGet(uri);
@@ -148,40 +112,7 @@ public class HttpConnection {
 			client.getCookieSpecs().register("easy", getCookieSpec());
 			client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-			HttpResponse response = client.execute(new HttpHost(HOST), get);
 
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					response.getEntity().getContent()));
-			StringBuilder total = new StringBuilder();
-			String line;
-			while ((line = in.readLine()) != null)
-				total.append(line);
-=======
-			get.setHeader("Cookie", user.cookies);
-			get.setHeader("User-Agent", USER_AGENT);
-
-			Log.e("url", HOST+uri);
-			for(Header h : get.getAllHeaders()){
-				Log.e("Header" , h.getValue());
-			}
-			
-			HttpResponse response =  client.execute(new HttpHost(HOST), get);
-			Log.e("al", response.getStatusLine().getReasonPhrase());
-			String xml = EntityUtils.toString(response.getEntity());
-			Log.e("al", xml);
-			org.w3c.dom.Document doc = null;
-			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-
-			DocumentBuilder db = dbf.newDocumentBuilder();
-			InputSource is = new InputSource();
->>>>>>> dea66ac48cbb8d1c1ded197f2502adcf1e94b529
-
-			is.setCharacterStream(new StringReader(xml));
-			doc = db.parse(is);
-
-=======
 			get.setHeader("Cookie", user.cookies);
 			get.setHeader("User-Agent", USER_AGENT);
 
@@ -200,35 +131,23 @@ public class HttpConnection {
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource();
 
+
 			is.setCharacterStream(new StringReader(xml));
 			doc = db.parse(is);
 
->>>>>>> dea66ac48cbb8d1c1ded197f2502adcf1e94b529
+
 			return doc;
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 
 		return null;
 	}
 
-	private static synchronized HttpResponse postResponse(User user,
-			String page, List<NameValuePair> nvp, boolean holdFirst) {
-=======
-		Log.e("adada", "Leaving Null!!!!");
-		return null;
-	}
 
-=======
-		Log.e("adada", "Leaving Null!!!!");
-		return null;
-	}
-
->>>>>>> dea66ac48cbb8d1c1ded197f2502adcf1e94b529
 	private static synchronized HttpResponse postResponse(User user, String page, List<NameValuePair> nvp, boolean holdFirst){
->>>>>>> dea66ac48cbb8d1c1ded197f2502adcf1e94b529
+
 		try {
 
 			DefaultHttpClient client = new DefaultHttpClient();
@@ -256,17 +175,11 @@ public class HttpConnection {
 		} catch (ClientProtocolException e) {
 			Log.e("Requesting Page", e.getLocalizedMessage());
 		} catch (IOException e) {
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-=======
 			Log.e("Requesting Page", e.getLocalizedMessage());
->>>>>>> dea66ac48cbb8d1c1ded197f2502adcf1e94b529
-=======
-			Log.e("Requesting Page", e.getLocalizedMessage());
->>>>>>> dea66ac48cbb8d1c1ded197f2502adcf1e94b529
 		}
 		Log.e("asdf", "returning null post response");
 		return null;
@@ -300,18 +213,9 @@ public class HttpConnection {
 		// Add all the cookies to the cookie string
 		for (int h = 0; h < cookies.length; h++) {
 			Header c = cookies[h];
-<<<<<<< HEAD
-			if (c.getValue().startsWith("wordpress_test")
-					|| c.getValue().startsWith("wordpress_logged")) {
-				sb.append(c.getValue() + ";");
-				user.cook.add(new DccCookie(c.getValue()));
-=======
+
 			if(c.getValue().startsWith("wordpress_test") || c.getValue().startsWith("wordpress_logged")){
 				sb.append(c.getValue()+";");
-<<<<<<< HEAD
->>>>>>> dea66ac48cbb8d1c1ded197f2502adcf1e94b529
-=======
->>>>>>> dea66ac48cbb8d1c1ded197f2502adcf1e94b529
 			}
 		}
 
@@ -352,23 +256,10 @@ public class HttpConnection {
 					.getInputStream());
 			user.setImage(bmp);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-			user.displayData();
-		} catch (Exception e) {
-			Log.e("something", e.toString());
-=======
-=======
->>>>>>> dea66ac48cbb8d1c1ded197f2502adcf1e94b529
-			getFriends(user);
 
 		}catch(Exception e){
 			e.printStackTrace();
 			Log.e("Build User", e.getLocalizedMessage());
-<<<<<<< HEAD
->>>>>>> dea66ac48cbb8d1c1ded197f2502adcf1e94b529
-=======
->>>>>>> dea66ac48cbb8d1c1ded197f2502adcf1e94b529
 		}
 	}
 
@@ -379,16 +270,7 @@ public class HttpConnection {
 	 * @throws ClientProtocolException
 	 * @throws IOException
 	 */
-<<<<<<< HEAD
-<<<<<<< HEAD
-	public void getFriends(CookieStore cookieStore)
-			throws ClientProtocolException, IOException {
-		Document doc = getParseToXML(ObjectStorage.getUser().getURL(
-				Links.FRIENDS));
-		Element e = doc.getElementById("members-list");
-=======
-=======
->>>>>>> dea66ac48cbb8d1c1ded197f2502adcf1e94b529
+
 	public static void getFriends(User u){
 		try{
 			Document doc = getParseToXML(u, u.getURL(Links.FRIENDS));
@@ -414,10 +296,6 @@ public class HttpConnection {
 		}catch(Exception e){
 			Log.e("Add Friends", e.getLocalizedMessage());
 		}
-<<<<<<< HEAD
->>>>>>> dea66ac48cbb8d1c1ded197f2502adcf1e94b529
-=======
->>>>>>> dea66ac48cbb8d1c1ded197f2502adcf1e94b529
 	}
 
 	/**
@@ -428,12 +306,7 @@ public class HttpConnection {
 	private static CookieSpecFactory getCookieSpec() {
 		return new DCCCookieSpecFactory();
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
-}
-=======
-=======
->>>>>>> dea66ac48cbb8d1c1ded197f2502adcf1e94b529
+
 
 	public static synchronized List<News> getNews(){
 		List<News> newsPaper = new ArrayList<News>();
@@ -448,13 +321,6 @@ public class HttpConnection {
 					
 					NodeList n = nodeList.item(i).getChildNodes();
 					News news = new News();
-					
-					Log.e("loop", n.item(1).getTextContent());
-					Log.e("loop", n.item(3).getTextContent());
-					Log.e("loop", n.item(7).getTextContent());
-					Log.e("loop", n.item(9).getTextContent());
-					Log.e("loop", n.item(11).getTextContent());
-					Log.e("loop", n.item(13).getTextContent());
 					
 					news.setTitle(n.item(1).getTextContent());
 					news.setLink(n.item(3).getTextContent());
@@ -477,4 +343,4 @@ public class HttpConnection {
 		return newsPaper;
 	}
 }
->>>>>>> dea66ac48cbb8d1c1ded197f2502adcf1e94b529
+
