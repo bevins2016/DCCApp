@@ -61,7 +61,6 @@ public class MainActivity extends Activity implements OnClickListener {
 		directoryB.setOnClickListener(this);
 		searchB.setOnClickListener(this);
 		
-		userIcon.setImageBitmap(user.getImage());	
 	}
 
 	public void onClick(View v) {

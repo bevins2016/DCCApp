@@ -75,8 +75,8 @@ public class EReportLauncher extends Activity implements OnClickListener {
 
 		/* Check if files/folders exist */
 		defaultCheck();
-		
-		//These are the buttons on the left side of the screen.
+
+		// These are the buttons on the left side of the screen.
 		newsB = (Button) findViewById(R.id.news);
 		calB = (Button) findViewById(R.id.calendar);
 		photoB = (Button) findViewById(R.id.photo);
@@ -85,15 +85,14 @@ public class EReportLauncher extends Activity implements OnClickListener {
 		directoryB = (Button) findViewById(R.id.directory);
 		searchB = (Button) findViewById(R.id.search);
 
-				//Here the listener for each button that allows actions is set.
-				newsB.setOnClickListener(this);
-				loginB.setOnClickListener(this);
-				calB.setOnClickListener(this);
-				photoB.setOnClickListener(this);
-				reportB.setOnClickListener(this);
-				actionB.setOnClickListener(this);
-				directoryB.setOnClickListener(this);
-				searchB.setOnClickListener(this);
+		// Here the listener for each button that allows actions is set.
+		newsB.setOnClickListener(this);
+		calB.setOnClickListener(this);
+		photoB.setOnClickListener(this);
+		reportB.setOnClickListener(this);
+		actionB.setOnClickListener(this);
+		directoryB.setOnClickListener(this);
+		searchB.setOnClickListener(this);
 	}
 
 	@Override
@@ -126,7 +125,7 @@ public class EReportLauncher extends Activity implements OnClickListener {
 	 */
 	public void onClick(View v) {
 		Intent intent = new Intent();
-		
+
 		switch (v.getId()) {
 		case R.id.news:
 			Intent i = new Intent(this, AndroidRssReader.class);
@@ -166,17 +165,15 @@ public class EReportLauncher extends Activity implements OnClickListener {
 		case R.id.Video057Button:
 			File f = new File(Environment.getExternalStorageDirectory()
 					+ "/enotebook/InternalStorage.txt");
-			if(f.exists()) {
+			if (f.exists()) {
 				setUpVideo(57);
 			} else {
 				setDefaultsPopup057();
 			}
 			break;
 		}
-		
+
 	}
-	
-	
 
 	/* Check if directories/files exits */
 	private void defaultCheck() {
@@ -269,8 +266,8 @@ public class EReportLauncher extends Activity implements OnClickListener {
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,
 									int which) {
-								Intent intent = new Intent(EReportLauncher.this,
-										SetDefaults.class);
+								Intent intent = new Intent(
+										EReportLauncher.this, SetDefaults.class);
 								startActivity(intent);
 							}
 						});

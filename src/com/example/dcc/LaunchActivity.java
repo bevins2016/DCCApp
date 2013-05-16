@@ -92,7 +92,6 @@ public class LaunchActivity extends Activity implements OnClickListener {
 		AdminButton = (Button) findViewById(R.id.admin_button);
 		AdminButton.setOnClickListener(this);
 		newsB.setOnClickListener(this);
-		loginB.setOnClickListener(this);
 		calB.setOnClickListener(this);
 		photoB.setOnClickListener(this);
 		reportB.setOnClickListener(this);
