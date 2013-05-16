@@ -1,15 +1,14 @@
 package com.example.dcc;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import android.widget.*;
+import com.example.dcc.helpers.ObjectStorage;
+import com.example.dcc.helpers.User;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -31,10 +30,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * eDaily Activity Allows user to create eDailys and send them to the specified
@@ -46,11 +41,19 @@ import android.widget.Toast;
 public class EDailyActivity extends Activity implements OnClickListener {
 
 	private EditText todayTF; // Today's Accomplishments Text Field
-	
+    private ArrayAdapter<String> adapter;
 	private Button sendButton; // Send Button
 	//http://storage.virtualdiscoverycenter.net/projectmorpheus/dcc/save.php
-	private String url = "http://www.virtualdiscoverycenter.net%2Fwp-content%2Fplugins%2Fbuddypress%2Fbp-themes%2Fbp-default%2FeDaily.php&h=3AQH7TTNw";//http://www.facebook.com/l.php?u=http%3A%2F%2Fwww.virtualdiscoverycenter.net%2Fwp-content%2Fplugins%2Fbuddypress%2Fbp-themes%2Fbp-default%2FeDaily.php&h=3AQH7TTNw
+	private String url = "http://www.virtualdiscoverycenter.net/wp-content/plugins/buddypress/bp-themes/bp-default/eDaily.php";//http://www.facebook.com/l.php?u=http%3A%2F%2Fwww.virtualdiscoverycenter.net%2Fwp-content%2Fplugins%2Fbuddypress%2Fbp-themes%2Fbp-default%2FeDaily.php&h=3AQH7TTNw
 	private String popupText = "Reports can not be submitted until sudent info is set!\n\nFill this out now?";
+    String first = "";
+    String last = "";
+    String name = "";
+    ActionItemData data;
+    private EditText issues;
+    private EditText dependability;
+    private EditText reliability;
+    private EditText hours;
 
 	/**
 	 * Attaches all variables to corresponding .xml widgets and sets up the
@@ -64,7 +67,30 @@ public class EDailyActivity extends Activity implements OnClickListener {
 
 		todayTF = (EditText) findViewById(R.id.todayTF);
 		sendButton = (Button) findViewById(R.id.sendButton);
+        issues = (EditText) findViewById(R.id.issues);
+        dependability = (EditText) findViewById(R.id.dependability);
+        reliability = (EditText) findViewById(R.id.reliability);
+        hours = (EditText) findViewById(R.id.hours);
 		sendButton.setOnClickListener(this);
+
+        name = ObjectStorage.getUser().getName();
+
+        data = new ActionItemData(name, "004");
+
+        boolean helper = false;
+
+        for(int i = 0; i < name.length(); i++){
+
+            if(name.charAt(i) == ' '){
+                helper = true;
+                continue;
+            }
+            if (helper){
+                last += name.charAt(i);
+            } else{
+                first += name.charAt(i);
+            }
+        }
 
 		File f = new File(Environment.getExternalStorageDirectory()
 				+ "/enotebook/InternalStorage.txt");
@@ -161,10 +187,25 @@ public class EDailyActivity extends Activity implements OnClickListener {
 			/* Send to server */
 			try {
 				ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-				nameValuePairs.add(new BasicNameValuePair("id", params[1]));
-				nameValuePairs.add(new BasicNameValuePair("type", "edaily"));
-				nameValuePairs.add(new BasicNameValuePair("edaily",
-						getEditText(todayTF)));
+
+//				nameValuePairs.add(new BasicNameValuePair("id", params[1]));
+//				nameValuePairs.add(new BasicNameValuePair("type", "edaily"));
+//				nameValuePairs.add(new BasicNameValuePair("edaily",
+//						getEditText(todayTF)));
+
+
+                nameValuePairs.add(new BasicNameValuePair("ID", params[1]));
+                nameValuePairs.add(new BasicNameValuePair("First", first));
+                nameValuePairs.add(new BasicNameValuePair("Last", last));
+                nameValuePairs.add(new BasicNameValuePair("Project", SetDefaults.project1));
+                nameValuePairs.add(new BasicNameValuePair("edaily-content",
+                        getEditText(todayTF)));
+                nameValuePairs.add(new BasicNameValuePair("Hours", getEditText(hours)));
+                nameValuePairs.add(new BasicNameValuePair("Issues", getEditText(issues)));
+                nameValuePairs.add(new BasicNameValuePair("Dependability", getEditText(dependability)));
+                nameValuePairs.add(new BasicNameValuePair("Reliability", getEditText(reliability)));
+                nameValuePairs.add(new BasicNameValuePair("reportdate", data.getDate()));
+
 				HttpClient httpclient = new DefaultHttpClient();
 				HttpPost httppost = new HttpPost(params[0]);
 				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -206,6 +247,36 @@ public class EDailyActivity extends Activity implements OnClickListener {
 		}
 
 	}
+
+//    /* Populate spinners, if teams are in the file, set spinners to those values */
+//    private void setupSpinners() {
+//
+//        String add = "";
+//        BufferedReader bufferedreader = null;
+//        adapter = new ArrayAdapter<String>(getApplicationContext(),
+//                R.layout.spinner_item);
+//
+//        adapter.setDropDownViewResource(R.layout.spinner_item);
+//
+//           for(int i = 1; i < 10; i++){
+//               adapter.add("" + i);
+//           }
+//
+//
+//
+//        issues.setAdapter(adapter);
+//        dependability.setAdapter(adapter);
+//        reliability.setAdapter(adapter);
+//
+////        for (int i = 0; i < adapter.getCount(); i++) {
+////            if (adapter.getItem(i).toString().matches(project1)) {
+////                FirstProject.setSelection(i);
+////            }
+////            if (adapter.getItem(i).toString().matches(project2)) {
+////                SecondProject.setSelection(i);
+////            }
+////        }
+//    }
 
 	public void onBackPressed() {
 		finish();
