@@ -62,13 +62,11 @@ public class ActionItem extends ListActivity implements OnClickListener {
 		searchB = (Button) findViewById(R.id.search);
 
 		newsB.setOnClickListener(this);
-		loginB.setOnClickListener(this);
 		calB.setOnClickListener(this);
 		photoB.setOnClickListener(this);
 		reportB.setOnClickListener(this);
 		actionB.setOnClickListener(this);
 		directoryB.setOnClickListener(this);
-		btnEmail.setOnClickListener(this);
 		searchB.setOnClickListener(this);
 
 		new MyTask().execute();

@@ -1,25 +1,18 @@
 package com.example.dcc;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import org.apache.http.HttpHost;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Node;
+import org.jsoup.select.Elements;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-
-import com.example.dcc.helpers.mysql.HttpConnection;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -33,7 +26,8 @@ import android.widget.ListView;
 public class CustomizedListView extends Activity {
 	ProgressDialog mProgressDialog;
 	// All static variables
-	static final String URL = "http://www.virtualdiscoverycenter.net/feed/"; //www.virtualdiscoverycenter.net/media/               
+	static final String URL = "http://www.virtualdiscoverycenter.net/feed/"; // www.virtualdiscoverycenter.net/media/
+																				// http://www.virtualdiscoverycenter.net/feed/
 	// XML node keys
 	static final String KEY_SONG = "item"; // parent node
 	static final String KEY_ID = "link";
@@ -41,14 +35,20 @@ public class CustomizedListView extends Activity {
 	static final String KEY_ARTIST = "dc:creator";
 	static final String KEY_DURATION = "description";
 	static final String KEY_THUMB_URL = "src";
+	String xml;
 	String url;
+	// The url of the website. This is just an example
+	private static final String webSiteURL = "http://www.virtualdiscoverycenter.net/media/";
 
 	LazyAdapter adapter;
 	NodeList nl;
-	// Document doc;
-	// String xml;
 	XMLParser parser;
-	ArrayList<HashMap<String, String>> songsList = new ArrayList<HashMap<String,String>>();
+	ArrayList<HashMap<String, String>> songsList = new ArrayList<HashMap<String, String>>();
+	String src;
+	Elements img;
+	Elements elTest;
+	Document documentO;
+	org.jsoup.nodes.Document doc;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -56,9 +56,9 @@ public class CustomizedListView extends Activity {
 		setContentView(R.layout.gallery_listview);
 
 		ListView list = (ListView) findViewById(R.id.list);
-		
+
 		adapter = new LazyAdapter(this, songsList);
-		
+
 		list.setAdapter(adapter);
 
 		list.setOnItemClickListener(new OnItemClickListener() {
@@ -67,7 +67,7 @@ public class CustomizedListView extends Activity {
 					int position, long id) {
 
 			}
-		});		
+		});
 
 		/* Progress dialog for download async task */
 		/*
@@ -111,8 +111,7 @@ public class CustomizedListView extends Activity {
 
 		DownloadTask downloadtask = new DownloadTask();
 		downloadtask.execute();
-		
-		
+
 	}
 
 	/* Async task to download student and team lists */
@@ -120,24 +119,40 @@ public class CustomizedListView extends Activity {
 		private Utility utility;
 		private String urlX;
 
-		
-
 		@Override
 		protected String doInBackground(String... params) {
 			utility = new Utility();
 			try {
-				
 
 				parser = new XMLParser();
-				// String xml = parser.getXmlFromUrl(URL); // getting XML from
+				String xml = parser.getXmlFromUrl(URL); // getting XML from
 				// URL
-				// Document doc = parser.getDomElement(xml); // getting DOM
+				documentO = parser.getDomElement(xml); // getting DOM
 				// element
 				urlX = parser.getXmlFromUrl(URL); // getting XML from URL
+				System.out.print(urlX);
 				utility.setXml(urlX);
 
 			} catch (Exception e1) {
 				e1.printStackTrace();
+			}
+
+			try {
+
+				// this is the link to the page that has the code
+				// http://examples.javacodegeeks.com/enterprise-java/html/download-images-from-a-website-using-jsoup/
+
+				// Connect to the website and get the html
+				 doc = Jsoup.connect(webSiteURL).get();
+
+				// Get all elements with img tag ,
+				img = doc.getElementsByTag("img");
+				elTest = doc.getElementsByTag("p");
+
+			} catch (IOException ex) {
+				System.err.println("There was an error");
+				Logger.getLogger(CustomizedListView.class.getName()).log(
+						Level.SEVERE, null, ex);
 			}
 
 			return null;
@@ -161,66 +176,170 @@ public class CustomizedListView extends Activity {
 
 			// XMLParser parser = new XMLParser();
 			// String xml = parser.getXmlFromUrl(URL); // getting XML from URL
-			Document doc = parser.getDomElement(utility.getXml()); // getting
+			documentO = parser.getDomElement(utility.getXml()); // getting
 																	// DOM
 																	// element
 
-			nl = doc.getElementsByTagName(KEY_SONG);
-			
-			ImageURL img = new ImageURL("http://www.virtualdiscoverycenter.net/media/");
+			nl = documentO.getElementsByTagName("item");
 
-//			img.getURLForImage();
+			// ImageURL img = new
+			// ImageURL("http://www.virtualdiscoverycenter.net/media/");
+			//
+			// // img.getURLForImage();
+			//
+			// // org.jsoup.nodes.Document document =
+			// HttpConnection.getParseToXML("http://www.virtualdiscoverycenter.net/media/");
+			//
+			// try{
+			//
+			// HttpClient client = new DefaultHttpClient();
+			// HttpGet get = new HttpGet(img.url);
+			// // get.setHeader("Cookie", ObjectStorage.getUser().cookies);
+			// // client.getParams().setParameter(ClientPNames.COOKIE_POLICY,
+			// "easy");
+			//
+			// HttpResponse response = client.execute(new HttpHost(img.url),
+			// get);
+			//
+			// BufferedReader in = new BufferedReader(new
+			// InputStreamReader(response.getEntity().getContent()));
+			// StringBuilder total = new StringBuilder();
+			// String line;
+			// while((line = in.readLine()) != null) total.append(line);
+			//
+			//
+			// Document document = (Document) Jsoup.parse(total.toString());
+			//
+			// Element image = (Element) (((org.jsoup.nodes.Element)
+			// document).select("img").first());
+			// url = ((Node) image).absUrl("src");
+			// } catch (UnsupportedEncodingException e1) {
+			// e1.printStackTrace();
+			// } catch (ClientProtocolException e1) {
+			// e1.printStackTrace();
+			// } catch (IOException e1) {
+			// e1.printStackTrace();
+			// }
+			//
+			//
 			
-//			org.jsoup.nodes.Document document = HttpConnection.getParseToXML("http://www.virtualdiscoverycenter.net/media/");
-			
-			try{
-			
-			HttpClient client = new DefaultHttpClient();
-			HttpGet get = new HttpGet(img.url);
-//			get.setHeader("Cookie", ObjectStorage.getUser().cookies);
-//			client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");
-						
-			HttpResponse response =  client.execute(new HttpHost(img.url), get);
-			
-			BufferedReader in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-			StringBuilder total = new StringBuilder();
-			String line;
-			while((line = in.readLine()) != null) total.append(line);
-			
-			
-			Document document = (Document) Jsoup.parse(total.toString());
-			
-			Element image = (Element) (((org.jsoup.nodes.Element) document).select("img").first());
-			url = ((Node) image).absUrl("src");
-		} catch (UnsupportedEncodingException e1) {
-			e1.printStackTrace();
-		} catch (ClientProtocolException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		
 			
 			
 			
 			
+			
+			///Test Code
+			
+			
+			
+			
+			
+			Elements body = doc.select("body");
+		    ArrayList<String> htmlPlainText = new ArrayList<String>();
+
+		    htmlPlainText.add(((org.jsoup.nodes.Document) doc).title());
+
+		    for(Iterator<org.jsoup.nodes.Element> it = body.iterator(); it.hasNext();)
+		    {
+		        org.jsoup.nodes.Element pBody = it.next();
+		        Elements pTag = ((org.jsoup.nodes.Element) pBody).getElementsByTag("p").parents();
+
+		            for(int pTagCount = 0; pTagCount < pTag.size(); pTagCount++)
+		            {
+		                org.jsoup.nodes.Element p = pTag.get(pTagCount);
+		                String pt = p.text();
+
+		                if(pt.length() != 0)
+		                {
+		                    htmlPlainText.add(pt);
+		                    pTagCount++;
+		                }
+
+		                pTag.parents().empty();     
+
+		            }
+		    }
+			
+			
+			
+		    
+		    
+		    
+//		    
+//		    
+//		    Elements divs = ((Elements) documentO).select("body div");
+//		  //initialize div map here
+//		  for(org.jsoup.nodes.Element div : divs) {
+//		      Elements paras = div.getElementsByTag("p");
+//		      for(org.jsoup.nodes.Element para : paras) {
+//		         String text = para.text();
+//		      }
+//		  }
+//		    
+//		    
+		    
+		    
+		    
+		    
+		    
+		    
+		    
+			///TestCode
+			
+			
+			
+			
+			
+			
+			
+			ArrayList<String> imageList = new ArrayList<String>();
+			ArrayList<String> descriptionList = new ArrayList<String>();
+			String test = null;
+			for (org.jsoup.nodes.Element el : img) {
+
+				// for each element get the srs url
+				src = el.absUrl("src");
+
+				System.out.println("Image Found!");
+				System.out.println("src attribute is : " + src);
+				imageList.add(src);
+			}
+			for (org.jsoup.nodes.Element elTest : img) {
+
+//				test = elTest.absUrl("");
+				
+				elTest.select("body > p");
+				test = elTest.val();
+				descriptionList.add(test);
+			}
 
 			for (int i = 0; i < nl.getLength(); i++) {
 				// creating new HashMap
 				HashMap<String, String> map = new HashMap<String, String>();
 				Element e = (Element) nl.item(i);
 				// adding each child node to HashMap key => value
-				map.put(KEY_ID, parser.getValue(e, KEY_ID));
-				map.put(KEY_TITLE, parser.getValue(e, KEY_TITLE));
-				map.put(KEY_ARTIST, parser.getValue(e, KEY_ARTIST));
+				try {
+					map.put(KEY_ID, parser.getValue(e, KEY_ID));
+				} catch (Exception e3) {
+				}
+				try {
+					map.put(KEY_TITLE, htmlPlainText.get(i+1));
+				} catch (Exception e2) {
+
+				}
 				map.put(KEY_DURATION, parser.getValue(e, KEY_DURATION));
-				map.put(KEY_THUMB_URL, url);
+				try {
+					map.put(KEY_THUMB_URL, imageList.get(i));
+
+				} catch (Exception e1) {
+
+				}
 
 				// adding HashList to ArrayList
 				songsList.add(map);
 				adapter.notifyDataSetChanged();
 			}
-		
+
 		}
 	}
 

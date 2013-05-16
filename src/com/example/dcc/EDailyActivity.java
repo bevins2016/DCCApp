@@ -48,8 +48,8 @@ public class EDailyActivity extends Activity implements OnClickListener {
 	private EditText todayTF; // Today's Accomplishments Text Field
 	
 	private Button sendButton; // Send Button
-	
-	private String url = "http://storage.virtualdiscoverycenter.net/projectmorpheus/dcc/save.php";
+	//http://storage.virtualdiscoverycenter.net/projectmorpheus/dcc/save.php
+	private String url = "http://www.virtualdiscoverycenter.net%2Fwp-content%2Fplugins%2Fbuddypress%2Fbp-themes%2Fbp-default%2FeDaily.php&h=3AQH7TTNw";//http://www.facebook.com/l.php?u=http%3A%2F%2Fwww.virtualdiscoverycenter.net%2Fwp-content%2Fplugins%2Fbuddypress%2Fbp-themes%2Fbp-default%2FeDaily.php&h=3AQH7TTNw
 	private String popupText = "Reports can not be submitted until sudent info is set!\n\nFill this out now?";
 
 	/**
