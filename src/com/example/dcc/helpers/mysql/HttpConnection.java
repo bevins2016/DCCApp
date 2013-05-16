@@ -111,23 +111,29 @@ public class HttpConnection{
 			get.setHeader("Cookie", user.cookies);
 			get.setHeader("User-Agent", USER_AGENT);
 
+			Log.e("url", HOST+uri);
+			for(Header h : get.getAllHeaders()){
+				Log.e("Header" , h.getValue());
+			}
+			
 			HttpResponse response =  client.execute(new HttpHost(HOST), get);
-			
+			Log.e("al", response.getStatusLine().getReasonPhrase());
 			String xml = EntityUtils.toString(response.getEntity());
-			
+			Log.e("al", xml);
 			org.w3c.dom.Document doc = null;
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-			
+
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource();
-			
+
 			is.setCharacterStream(new StringReader(xml));
 			doc = db.parse(is);
-			
+
 			return doc;
 		}catch(Exception e){
-			Log.e("Parse XML", e.getMessage());
+			e.printStackTrace();
 		}
+		Log.e("adada", "Leaving Null!!!!");
 		return null;
 	}
 
@@ -199,7 +205,6 @@ public class HttpConnection{
 		try {
 			buildUser(user, response);
 			ObjectStorage.setUser(user);
-			getNews();
 			return true;
 		} catch (Exception e) {
 			Log.e("Error", e.getLocalizedMessage());
@@ -233,6 +238,7 @@ public class HttpConnection{
 			user.setImage(bmp);
 
 			getFriends(user);
+
 		}catch(Exception e){
 			e.printStackTrace();
 			Log.e("Build User", e.getLocalizedMessage());
@@ -265,6 +271,7 @@ public class HttpConnection{
 				f.setHandle(url.substring(url.lastIndexOf("/")+1));
 
 				u.addFriend(f);
+				ObjectStorage.setUser(u);
 			}
 		}catch(Exception e){
 			Log.e("Add Friends", e.getLocalizedMessage());
@@ -280,27 +287,44 @@ public class HttpConnection{
 	}
 
 	public static synchronized List<News> getNews(){
+		List<News> newsPaper = new ArrayList<News>();
+
 		try{
 			org.w3c.dom.Document doc = getXMLfromURL(ObjectStorage.getUser(), "/news/feed/");
 			NodeList nodeList = doc.getElementsByTagName("item");
-			List<News> newsPaper = new ArrayList<News>();
+
 			for(int i=0; i < nodeList.getLength(); i++){
-				NodeList n = nodeList.item(i).getChildNodes();
-				News news = new News();
-				news.setTitle(n.item(1).getTextContent());
-				news.setLink(n.item(3).getTextContent());
-				news.setPubdate(n.item(7).getTextContent());
-				news.setPublisher(n.item(9).getTextContent());
-				news.setCategory(n.item(11).getTextContent());
-				news.setText(n.item(13).getTextContent());
 				
-				newsPaper.add(news);
+				try{
+					
+					NodeList n = nodeList.item(i).getChildNodes();
+					News news = new News();
+					
+					Log.e("loop", n.item(1).getTextContent());
+					Log.e("loop", n.item(3).getTextContent());
+					Log.e("loop", n.item(7).getTextContent());
+					Log.e("loop", n.item(9).getTextContent());
+					Log.e("loop", n.item(11).getTextContent());
+					Log.e("loop", n.item(13).getTextContent());
+					
+					news.setTitle(n.item(1).getTextContent());
+					news.setLink(n.item(3).getTextContent());
+					news.setPubdate(n.item(7).getTextContent());
+					news.setPublisher(n.item(9).getTextContent());
+					news.setCategory(n.item(11).getTextContent());
+					news.setText(n.item(13).getTextContent());
+
+					news.logNews();
+					newsPaper.add(news);
+					
+				}catch(Exception e){
+					Log.e("adding loop", e.getLocalizedMessage());
+				}
 			}
-			
 			return newsPaper;
 		}catch(Exception e){
-			Log.e("ahh", e.getLocalizedMessage());
+			Log.e("something", e.getLocalizedMessage());
 		}
-		return null;
+		return newsPaper;
 	}
 }

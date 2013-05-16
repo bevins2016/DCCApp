@@ -1,5 +1,7 @@
 package com.example.dcc.helpers;
 
+import android.util.Log;
+
 public class News {
 
 	private String title;
@@ -11,6 +13,13 @@ public class News {
 	private String category;
 	
 	public News(){
+		this.title = null;
+		this.link = null;
+		this.comments = null;
+		this.pubdate = null;
+		this.text = null;
+		this.publisher = null;
+		this.category = null;
 	}
 
 	public String getTitle() {
@@ -67,5 +76,31 @@ public class News {
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+	
+	public void logNews(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("\nTitle: "+title);
+		sb.append("\nLink: "+link);
+		sb.append("\nComments: "+comments);
+		sb.append("\nDate: "+pubdate);
+		sb.append("\nPublisher: "+publisher);
+		sb.append("\nCategory"+category);
+		sb.append("\nText"+text);
+		
+		Log.e("News: ", sb.toString());
+	}
+	
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("\nTitle: "+title);
+		sb.append("\nLink: "+link);
+		sb.append("\nComments: "+comments);
+		sb.append("\nDate: "+pubdate);
+		sb.append("\nPublisher: "+publisher);
+		sb.append("\nCategory"+category);
+		sb.append("\nText"+text);
+		
+		return sb.toString();
 	}
 }

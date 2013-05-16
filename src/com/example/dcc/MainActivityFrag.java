@@ -5,9 +5,6 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 
-import com.example.dcc.helpers.ObjectStorage;
-import com.example.dcc.helpers.User;
-
 public class MainActivityFrag extends Activity{
 	
 	protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +14,7 @@ public class MainActivityFrag extends Activity{
 		
 		FragmentTransaction transaction = manager.beginTransaction();
 		transaction.add(R.id.fragmentcontainerleft, new MenuFragment());
-		transaction.add(R.id.fragmentcontainerright, new DefaultFragment());
+		transaction.add(R.id.fragmentcontainerright, new NewsListFragment());
 		transaction.add(R.id.fragmentcontainerbottom, new BottomFragment());
 		transaction.commit();
 	}
