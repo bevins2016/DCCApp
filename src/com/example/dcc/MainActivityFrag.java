@@ -1,9 +1,11 @@
 package com.example.dcc;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import com.example.dcc.helpers.ObjectStorage;
 
 public class MainActivityFrag extends Activity{
 	
@@ -13,9 +15,17 @@ public class MainActivityFrag extends Activity{
 		FragmentManager manager = getFragmentManager();
 		
 		FragmentTransaction transaction = manager.beginTransaction();
-		transaction.add(R.id.fragmentcontainerleft, new MenuFragment());
-		transaction.add(R.id.fragmentcontainerright, new NewsListFragment());
-		transaction.add(R.id.fragmentcontainerbottom, new BottomFragment());
+        Fragment menu = new MenuFragment();
+        Fragment news = new NewsListFragment();
+        Fragment bottom = new BottomFragment();
+
+        ObjectStorage.setFragment(R.id.fragmentcontainerleft, menu);
+        ObjectStorage.setFragment(R.id.fragmentcontainerright, news);
+        ObjectStorage.setFragment(R.id.fragmentcontainerbottom, bottom);
+
+        transaction.add(R.id.fragmentcontainerleft,menu );
+		transaction.add(R.id.fragmentcontainerright,news);
+		transaction.add(R.id.fragmentcontainerbottom,bottom);
 		transaction.commit();
 	}
 

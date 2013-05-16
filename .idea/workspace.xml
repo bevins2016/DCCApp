@@ -9,20 +9,39 @@
   </component>
   <component name="AndroidLayouts">
     <shared>
-      <config />
+      <config>
+        <target>android-17</target>
+      </config>
     </shared>
+    <layouts>
+      <layout url="file://$PROJECT_DIR$/res/layout/news_list_fragment.xml">
+        <config>
+          <device>Nexus 10</device>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+    </layouts>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1f09cdd-d58f-494e-b611-6b815c3cc46a" name="Default" comment="" />
     <ignored path="DCCApp.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368718651083" ignored="false" />
-    <file path="/fragment.java" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368712065010" ignored="false" />
-    <file path="/news_item.xml" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368712292691" ignored="false" />
+    <file path="/Dummy.txt" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368725042405" ignored="false" />
+    <file path="/fragment.java" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368724543138" ignored="false" />
+    <file path="/news_item.xml" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368719669040" ignored="false" />
     <file path="/NewsListFragment.java" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368712642072" ignored="false" />
     <file path="/News.java" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368713083451" ignored="false" />
     <file path="$PROJECT_DIR$/gen/com/example/dcc/BuildConfig.java" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368713462786" ignored="false" />
-    <file path="/HttpConnection.java" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368715386121" ignored="false" />
+    <file path="/HttpConnection.java" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368724440883" ignored="false" />
+    <file path="/NewsDetailFragment.xml" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368721711306" ignored="false" />
+    <file path="/Member.java" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368726040128" ignored="false" />
+    <file path="/MembersListFragment.java" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368725708471" ignored="false" />
+    <file path="/member_item.xml" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368725234337" ignored="false" />
+    <file path="/members_list.xml" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368725496161" ignored="false" />
+    <file path="/MenuFragment.java" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368728121793" ignored="false" />
+    <file path="/ObjectStorage.java" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368726943622" ignored="false" />
+    <file path="/MainActivityFrag.java" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368727045378" ignored="false" />
+    <file path="/LoginActivity.java" changelist="d1f09cdd-d58f-494e-b611-6b815c3cc46a" time="1368727628505" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,46 +102,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="HttpConnection.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/example/dcc/helpers/mysql/HttpConnection.java">
+      <file leaf-file-name="MainActivityFrag.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/example/dcc/MainActivityFrag.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="213" column="0" selection-start="7541" selection-end="7541" vertical-scroll-proportion="0.0">
+            <state line="24" column="0" selection-start="892" selection-end="892" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MenuFragment.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/example/dcc/MenuFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="80" column="0" selection-start="2615" selection-end="2615" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoginActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/example/dcc/LoginActivity.java">
+      <file leaf-file-name="MembersListFragment.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/example/dcc/fragment/MembersListFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="193" column="0" selection-start="5665" selection-end="5665" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ImageURL.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/example/dcc/ImageURL.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="57" selection-start="328" selection-end="328" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HTTPData.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/example/dcc/HTTPData.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="46" selection-start="1135" selection-end="1135" vertical-scroll-proportion="1.6062992">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LaunchActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/example/dcc/LaunchActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="13" selection-start="1430" selection-end="1430" vertical-scroll-proportion="0.0">
+            <state line="41" column="8" selection-start="1118" selection-end="1118" vertical-scroll-proportion="0.42595977">
               <folding />
             </state>
           </provider>
@@ -146,15 +149,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/res/layout/main_activity_frag.xml" />
-        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/res/layout/news_item.xml" />
-        <option value="$PROJECT_DIR$/src/com/example/dcc/NewsListFragment.java" />
         <option value="$PROJECT_DIR$/src/com/example/dcc/helpers/News.java" />
+        <option value="$PROJECT_DIR$/res/layout/NewsDetailFragment.xml" />
         <option value="$PROJECT_DIR$/src/com/example/dcc/helpers/mysql/HttpConnection.java" />
+        <option value="$PROJECT_DIR$/res/layout/members_list.xml" />
+        <option value="$PROJECT_DIR$/res/layout/member_item.xml" />
+        <option value="$PROJECT_DIR$/src/com/example/dcc/helpers/Member.java" />
+        <option value="$PROJECT_DIR$/src/com/example/dcc/helpers/ObjectStorage.java" />
+        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/src/com/example/dcc/LaunchActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/example/dcc/EReportLauncher.java" />
+        <option value="$PROJECT_DIR$/src/com/example/dcc/ActionItem.java" />
         <option value="$PROJECT_DIR$/src/com/example/dcc/LoginActivity.java" />
-        <option value="$PROJECT_DIR$/src/com/example/dcc/ImageURL.java" />
-        <option value="$PROJECT_DIR$/src/com/example/dcc/HTTPData.java" />
+        <option value="$PROJECT_DIR$/src/com/example/dcc/MainActivityFrag.java" />
+        <option value="$PROJECT_DIR$/src/com/example/dcc/MenuFragment.java" />
+        <option value="$PROJECT_DIR$/src/com/example/dcc/fragment/MembersListFragment.java" />
       </list>
     </option>
   </component>
@@ -190,8 +200,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -244,6 +252,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -259,10 +269,13 @@
     <property name="restartRequiresConfirmation" value="true" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.dcc.fragment" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\bharm_000\Documents\GitHub\DCCApp\res\drawable-xhdpi" />
       <recent name="C:\Users\bharm_000\Documents\GitHub\DCCApp\res\drawable-mdpi" />
@@ -422,41 +435,69 @@
       <updated>1368708894877</updated>
       <workItem from="1368708897992" duration="6399000" />
       <workItem from="1368718646954" duration="123000" />
+      <workItem from="1368719223291" duration="8760000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6522000" />
+    <option name="totallyTimeSpent" value="15282000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1358" y="-8" width="1696" height="1026" extended-state="6" />
+    <frame x="1358" y="-8" width="1696" height="1026" extended-state="7" />
     <editor active="false" />
     <layout>
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" x="1551" y="565" width="799" height="363" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2613219" sideWeight="0.80990785" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2977941" sideWeight="0.80990785" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943925" sideWeight="0.67017543" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.82373273" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33986175" sideWeight="0.1383109" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32949308" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.48735633" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27419356" sideWeight="0.43451652" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33986175" sideWeight="0.8616891" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.249694" sideWeight="0.80990785" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20195839" sideWeight="0.17626728" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.82373273" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26560587" sideWeight="0.78341013" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1621787" sideWeight="0.66013825" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49654377" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21481028" sideWeight="0.78341013" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943925" sideWeight="0.67017543" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39976957" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26287878" sideWeight="0.67064846" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29924244" sideWeight="0.67064846" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943925" sideWeight="0.67017543" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32935154" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32935154" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.48735633" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.70989764" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20182094" sideWeight="0.67064846" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39976957" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4249147" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -519,113 +560,130 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/example/dcc/helpers/mysql/HttpConnection.java">
+    <entry file="file://$PROJECT_DIR$/res/layout/members_list.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="213" column="0" selection-start="7541" selection-end="7541" vertical-scroll-proportion="0.0">
+        <state line="10" column="40" selection-start="411" selection-end="411" vertical-scroll-proportion="0.27113238">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/dcc/LoginActivity.java">
+    <entry file="file://$PROJECT_DIR$/res/layout/member_item.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="193" column="0" selection-start="5665" selection-end="5665" vertical-scroll-proportion="0.0">
+        <state line="0" column="38" selection-start="38" selection-end="38" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/news_item.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="31" selection-start="355" selection-end="355" vertical-scroll-proportion="0.24401914">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/dcc/MainListFragmentFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="13" selection-start="727" selection-end="788" vertical-scroll-proportion="0.3264402">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/dcc/helpers/mysql/HttpConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="316" column="0" selection-start="11053" selection-end="11053" vertical-scroll-proportion="-0.22135922">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#10332#10340#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/dcc/helpers/Member.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="29" selection-start="927" selection-end="927" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="68" selection-start="1402" selection-end="1402" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/dcc/LaunchActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="13" selection-start="1430" selection-end="1430" vertical-scroll-proportion="0.0">
+        <state line="253" column="14" selection-start="7626" selection-end="7626" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/main_activity_frag.xml">
-      <provider editor-type-id="text-editor">
-        <state line="9" column="35" selection-start="373" selection-end="373" vertical-scroll-proportion="-2.04" />
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/activity_admin.xml">
-      <provider editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-17/android.jar!/android/os/AsyncTask.class">
+    <entry file="file://$PROJECT_DIR$/src/com/example/dcc/EReportLauncher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="0" selection-start="2155" selection-end="2155" vertical-scroll-proportion="0.68025076" />
+        <state line="153" column="14" selection-start="4429" selection-end="4429" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/dcc/helpers/User.java">
+    <entry file="file://$PROJECT_DIR$/src/com/example/dcc/ActionItem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="13" selection-start="351" selection-end="351" vertical-scroll-proportion="-1.6385542" />
+        <state line="199" column="14" selection-start="6634" selection-end="6634" vertical-scroll-proportion="0.047531992">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/dcc/NewsListFragment.java">
+    <entry file="file://$PROJECT_DIR$/src/com/example/dcc/helpers/ObjectStorage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="22" selection-start="738" selection-end="738" vertical-scroll-proportion="0.31785715">
+        <state line="32" column="0" selection-start="693" selection-end="693" vertical-scroll-proportion="0.7202925">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/dcc/helpers/News.java">
+    <entry file="file://$PROJECT_DIR$/src/com/example/dcc/helpers/Friend.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="95" column="43" selection-start="1727" selection-end="1727" vertical-scroll-proportion="0.7125" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/news_item.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="38" selection-start="38" selection-end="38" vertical-scroll-proportion="0.0" />
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="42" selection-start="1646" selection-end="1646" vertical-scroll-proportion="0.29464287">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/dcc/helpers/mysql/HttpConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="213" column="0" selection-start="7541" selection-end="7541" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/dcc/LaunchActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="13" selection-start="1430" selection-end="1430" vertical-scroll-proportion="0.0">
+        <state line="2" column="13" selection-start="47" selection-end="47" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/dcc/LoginActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="193" column="0" selection-start="5665" selection-end="5665" vertical-scroll-proportion="0.0">
+        <state line="58" column="67" selection-start="1612" selection-end="1612" vertical-scroll-proportion="-0.40402195">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/dcc/ImageURL.java">
+    <entry file="file://$PROJECT_DIR$/src/com/example/dcc/MainActivityFrag.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="57" selection-start="328" selection-end="328" vertical-scroll-proportion="0.0">
+        <state line="24" column="0" selection-start="892" selection-end="892" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/dcc/MenuFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="80" column="0" selection-start="2615" selection-end="2615" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/dcc/HTTPData.java">
+    <entry file="file://$PROJECT_DIR$/src/com/example/dcc/fragment/MembersListFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="46" selection-start="1135" selection-end="1135" vertical-scroll-proportion="1.6062992">
+        <state line="41" column="8" selection-start="1118" selection-end="1118" vertical-scroll-proportion="0.42595977">
           <folding />
         </state>
       </provider>

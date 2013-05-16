@@ -197,7 +197,7 @@ public class ActionItem extends ListActivity implements OnClickListener {
 			startActivity(i);
 			break;
 		case R.id.calendar:
-			startActivity(new Intent(this, MainActivity.class));
+			//startActivity(new Intent(this, MainActivity.class));
 			finish();
 			break;
 		case R.id.photo:
@@ -212,7 +212,7 @@ public class ActionItem extends ListActivity implements OnClickListener {
 			finish();
 			break;
 		case R.id.directory:
-			startActivity(new Intent(this, MainActivity.class));
+			//startActivity(new Intent(this, MainActivity.class));
 			finish();
 			break;
 		case R.id.email_button1:

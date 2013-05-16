@@ -17,6 +17,7 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import com.example.dcc.helpers.*;
 import org.apache.http.Header;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -42,11 +43,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
-import com.example.dcc.helpers.Friend;
-import com.example.dcc.helpers.Links;
-import com.example.dcc.helpers.News;
-import com.example.dcc.helpers.ObjectStorage;
-import com.example.dcc.helpers.User;
 import com.example.dcc.helpers.hacks.DCCCookieSpecFactory;
 import com.example.dcc.helpers.hacks.DCCCookieStore;
 import com.example.dcc.helpers.hacks.DCCRedirectHandler;
@@ -272,15 +268,13 @@ public class HttpConnection {
         User user = ObjectStorage.getUser();
         try{
             Document doc = getParseToXML(user.getURL(Links.FRIENDS));
-            Log.e("added friend", "Adding Friend");
             Element e = doc.getElementById("members-list");
             Elements friends = e.getElementsByTag("li");
-            Log.e("added friend", friends.size()+"");
 
             for(Element friend : friends){
                 Friend f = new Friend();
 
-                Element temp = e.getElementsByClass("item-avatar").first();
+                Element temp = friend.getElementsByClass("item-avatar").first();
                 Element img = temp.getElementsByTag("a").first().getElementsByTag("img").first();
                 f.setImgURL(img.attr("src"));
                 f.setName(img.attr("alt").replaceAll("Profile picture of ", ""));
@@ -294,6 +288,31 @@ public class HttpConnection {
         }catch(Exception e){
             Log.e("Add Friends", e.getLocalizedMessage());
         }
+    }
+
+    public static List<Member> getMembers(){
+        User user = ObjectStorage.getUser();
+        Document doc = getParseToXML("/members/");
+
+        Element main = doc.getElementById("members-list");
+        Elements members = main.getElementsByTag("li");
+
+        List<Member> memList = new ArrayList<Member>();
+        for(Element member : members){
+            Member m = new Member();
+
+            Element temp = member.getElementsByClass("item-avatar").first();
+            Element img = temp.getElementsByTag("a").first().getElementsByTag("img").first();
+            m.setImageURL(img.attr("src"));
+            m.setName(img.attr("alt").replaceAll("Profile picture of ", ""));
+            m.setMemURL(member.getElementsByClass("item-title").first().getElementsByTag("a").attr("href"));
+            String url = m.getMemURL().substring(0, m.getMemURL().length()-1);
+            m.setHandle(url.substring(url.lastIndexOf(url.lastIndexOf("/")+1)));
+
+            memList.add(m);
+        }
+
+        return memList;
     }
 
     /**

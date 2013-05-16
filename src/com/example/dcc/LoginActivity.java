@@ -1,5 +1,6 @@
 package com.example.dcc;
 
+import android.app.Fragment;
 import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.User;
 import com.example.dcc.helpers.mysql.HttpConnection;
@@ -20,6 +21,8 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.util.HashMap;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
@@ -53,6 +56,7 @@ public class LoginActivity extends Activity {
 		setContentView(R.layout.activity_login);
 		context = this;
 		user = new User();
+        ObjectStorage.setHashMap(new HashMap<Integer, Fragment>());
 		ObjectStorage.setUser(user);
 		// Set up the login form.
 		mUser = "";

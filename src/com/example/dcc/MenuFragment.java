@@ -2,6 +2,8 @@ package com.example.dcc;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +11,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import com.example.dcc.fragment.MembersListFragment;
+import com.example.dcc.helpers.ObjectStorage;
 
 public class MenuFragment extends Fragment implements OnClickListener{
 	
@@ -68,7 +72,15 @@ public class MenuFragment extends Fragment implements OnClickListener{
 			activity.startActivity(new Intent(activity, ActionItem.class));
 			break;
 		case R.id.directory:
-			activity.startActivity(new Intent(activity, MainActivity.class));
+            FragmentManager manager = activity.getFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+
+            Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
+            Fragment newer = new MembersListFragment();
+            ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
+
+            transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
+            transaction.commit();
 			break;
 		}		
 	}
