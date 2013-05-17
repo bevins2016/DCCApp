@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -151,7 +150,7 @@ public class CustomizedListView extends Activity {
 
 			} catch (IOException ex) {
 				System.err.println("There was an error");
-				Logger.getLogger(CustomizedListView.class.getName()).log(
+				Logger.getLogger(com.example.dcc.CustomizedListViewFrag.class.getName()).log(
 						Level.SEVERE, null, ex);
 			}
 
@@ -222,10 +221,6 @@ public class CustomizedListView extends Activity {
 			// }
 			//
 			//
-			
-			
-			
-			
 			
 			
 			///Test Code

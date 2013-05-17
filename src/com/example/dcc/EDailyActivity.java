@@ -8,7 +8,6 @@ import java.util.Locale;
 
 import android.widget.*;
 import com.example.dcc.helpers.ObjectStorage;
-import com.example.dcc.helpers.User;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;

@@ -136,18 +136,18 @@ public class EReportLauncher extends Activity implements OnClickListener {
 			finish();
 			break;
 		case R.id.photo:
-			startActivity(new Intent(this, CustomizedListView.class));
+			startActivity(new Intent(this, com.example.dcc.CustomizedListViewFrag.class));
 			break;
 		case R.id.report:
 			startActivity(new Intent(this, EReportLauncher.class));
 			finish();
 			break;
 		case R.id.search:
-			startActivity(new Intent(this, LaunchActivity.class));
+			startActivity(new Intent(this, LaunchActivityFrag.class));
 			finish();
 			break;
 		case R.id.action:
-			startActivity(new Intent(this, ActionItem.class));
+			startActivity(new Intent(this, ActionItemFrag.class));
 			finish();
 			break;
 		case R.id.directory:
@@ -155,11 +155,11 @@ public class EReportLauncher extends Activity implements OnClickListener {
 			finish();
 			break;
 		case R.id.eDailyButton:
-			intent.setClass(this, EDailyActivity.class);
+			intent.setClass(this, EDailyActivityFrag.class);
 			startActivity(intent);
 			break;
 		case R.id.eReportButton:
-			intent.setClass(this, EReport.class);
+			intent.setClass(this, EReportFrag.class);
 			startActivity(intent);
 			break;
 		case R.id.Video057Button:

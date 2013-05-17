@@ -14,7 +14,6 @@ import org.xml.sax.XMLReader;
 
 import android.app.ListActivity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -201,14 +200,14 @@ public class ActionItem extends ListActivity implements OnClickListener {
 			finish();
 			break;
 		case R.id.photo:
-			startActivity(new Intent(this, CustomizedListView.class));
+			startActivity(new Intent(this, com.example.dcc.CustomizedListViewFrag.class));
 			break;
 		case R.id.report:
 			startActivity(new Intent(this, EReportLauncher.class));
 			finish();
 			break;
 		case R.id.action:
-			startActivity(new Intent(this, ActionItem.class));
+			startActivity(new Intent(this, ActionItemFrag.class));
 			finish();
 			break;
 		case R.id.directory:
@@ -220,7 +219,7 @@ public class ActionItem extends ListActivity implements OnClickListener {
 			sendEmail(v);
 			break;
 		case R.id.search:
-			startActivity(new Intent(this, LaunchActivity.class));
+			startActivity(new Intent(this, LaunchActivityFrag.class));
 			finish();
 			break;
 		}

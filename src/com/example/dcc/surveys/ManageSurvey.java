@@ -17,7 +17,7 @@ import android.view.Menu;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.example.dcc.LaunchActivity;
+import com.example.dcc.LaunchActivityFrag;
 import com.example.dcc.R;
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -54,7 +54,7 @@ public class ManageSurvey extends Activity {
 	
 	/* Intent is here because otherwise onBackPressed exits the app */
 	public void onBackPressed() {
-		Intent intent = new Intent(ManageSurvey.this, LaunchActivity.class);
+		Intent intent = new Intent(ManageSurvey.this, LaunchActivityFrag.class);
 		finish();
 		startActivity(intent);
 	}
