@@ -11,6 +11,28 @@ public class ObjectStorage {
 	private static User user = null;
     private static HashMap<Integer, Fragment> fragment;
     private static List<String> memberActivity = new ArrayList<String>();
+    private static List<Member> memberList;
+    private static List<News> newsList;
+
+
+
+    public static List<Member> getMemberList() {
+        return memberList;
+    }
+
+    public static void setMemberList(List<Member> memberList) {
+        ObjectStorage.memberList = memberList;
+    }
+
+    public static List<News> getNewsList() {
+        return newsList;
+    }
+
+    public static void setNewsList(List<News> newsList) {
+        ObjectStorage.newsList = newsList;
+    }
+
+
 
     public static void setUser(User u){
 		if(user == null) user = u;

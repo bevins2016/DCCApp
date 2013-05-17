@@ -165,3 +165,5 @@ pip-log.txt
 #Android
 out/*
 *.class
+.idea/
+gen\
