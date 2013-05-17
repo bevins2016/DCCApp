@@ -2,6 +2,17 @@ package com.example.dcc.helpers;
 
 import java.io.Serializable;
 
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Toast;
+import com.example.dcc.R;
+import com.example.dcc.fragment.MemberDetailFragment;
+
 /**
  * Created by Harmon on 5/16/13.
  */
@@ -51,5 +62,20 @@ public class Member implements Serializable{
         StringBuilder sb = new StringBuilder();
         sb.append(name);
         return sb.toString();
+    }
+    public void launchWindow(Activity activity) {
+        MemberDetailFragment detailFrag = new MemberDetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("member", this);
+        detailFrag.setArguments(bundle);
+
+        FragmentManager manager = activity.getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+
+        Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
+        ObjectStorage.setFragment(R.id.fragmentcontainerright, detailFrag);
+        transaction.replace(R.id.fragmentcontainerright, detailFrag);
+
+        transaction.commit();
     }
 }

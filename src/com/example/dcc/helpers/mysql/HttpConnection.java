@@ -208,7 +208,7 @@ public class HttpConnection {
         user.cookies = sb.toString();
         Log.e("eh", user.cookies);
         try {
-            buildUser(response);
+            buildUser(response, log);
             getFriends();
 
             ObjectStorage.setUser(user);
@@ -229,20 +229,16 @@ public class HttpConnection {
      * @param response
      * @throws Exception
      */
-    private static synchronized void buildUser(HttpResponse response) {
+    private static synchronized void buildUser(HttpResponse response, String log) {
 
         User user = ObjectStorage.getUser();
         try {
-            Document doc = getParseToXML("/intern/");
-            Element span = doc.getElementById("ffl-logged-in-user");
-            user.setName(span.text());
-
-            span = doc.getElementsByClass("username").first();
-            user.setHandle(span.text());
-
-            Elements div = doc.getElementById("buddyhead_img").children();
-            Element image = div.first();
+            Document doc = getParseToXML("/members/"+log);
+            Element image = doc.getElementById("item-header-avatar").getElementsByTag("img").first();
+            user.setHandle(log);
             String urlS = image.attr("src");
+            String name = image.attr("alt");
+            name.replace("Profile picture of ", "");
 
             URL url = new URL(urlS);
             Bitmap bmp = BitmapFactory.decodeStream(url.openConnection()

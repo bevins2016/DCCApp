@@ -1,5 +1,8 @@
 package com.example.dcc;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.zip.Inflater;
 
 import android.text.Html;
@@ -24,58 +27,64 @@ import android.widget.ListView;
 
 public class NewsListFragment extends Fragment implements OnClickListener{
 
-	ListView listview;
+    ListView listview;
 
-	ArrayAdapter<Spanned> adapter;
-	List<News> news;
-	
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState){
-		super.onCreate(savedInstanceState);
-		View view = inflater.inflate(R.layout.news_list_fragment, container, false);
-		
-		new GetNewsTask().execute((Void)null);
-		
-		try {
-			Thread.currentThread().sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		listview = (ListView)view.findViewById(R.id.newslist);
-		adapter = new ArrayAdapter<Spanned>(getActivity(), R.layout.news_item);
+    ArrayAdapter<Spanned> adapter;
+    List<News> news;
 
-		listview.setAdapter(adapter);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
 
-		Log.e("asdf", news.size()+"");
+        View view = inflater.inflate(R.layout.news_list_fragment, container, false);
 
-		for(News n : news){
-			adapter.add(Html.fromHtml(n.toString()));
-		}
-		return view;
-	}
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
+        if((news = ObjectStorage.getNewsList()) == null){
+            GetNewsTask g = new GetNewsTask();
+            g.execute((Void) null);
+            try {
+                g.get(5, TimeUnit.SECONDS);
+                ObjectStorage.setNewsList(news);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (TimeoutException e) {
+                e.printStackTrace();
+            }
+        }
 
-	}
 
-	public class GetNewsTask extends AsyncTask<Void, Void, Boolean> {
-		@Override
-		protected Boolean doInBackground(Void... params) {
-			news  = HttpConnection.getNews();
-			return true;
-		}
+        listview = (ListView)view.findViewById(R.id.newslist);
+        adapter = new ArrayAdapter<Spanned>(getActivity(), R.layout.news_item);
+        listview.setAdapter(adapter);
 
-		@Override
-		protected void onPostExecute(final Boolean success) {
+        for(News n : news){
+            adapter.add(Html.fromHtml(n.toString()));
+        }
+        return view;
+    }
+    @Override
+    public void onClick(View v) {
+        // TODO Auto-generated method stub
 
-		}
+    }
 
-		@Override
-		protected void onCancelled() {
-		}
-	}
-	
+    public class GetNewsTask extends AsyncTask<Void, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            news  = HttpConnection.getNews();
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+
+        }
+
+        @Override
+        protected void onCancelled() {
+        }
+    }
+
 }

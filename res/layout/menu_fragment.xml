@@ -14,14 +14,6 @@
         android:text="@string/news" />
 
     <Button
-        android:id="@+id/calendar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/background"
-        android:drawableRight="@drawable/contentevent"
-        android:text="@string/calendar" />
-
-    <Button
         android:id="@+id/photo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

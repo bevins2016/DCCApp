@@ -17,7 +17,7 @@ import com.example.dcc.helpers.ObjectStorage;
 public class MenuFragment extends Fragment implements OnClickListener{
 	
 	private Button newsB;
-	private Button calB;
+	//private Button calB;
 	private Button photoB;
 	private Button reportB;
 	private Button actionB;
@@ -33,7 +33,7 @@ public class MenuFragment extends Fragment implements OnClickListener{
 				container, false);
 		activity = getActivity();
 		newsB = (Button) view.findViewById(R.id.news);
-		calB = (Button) view.findViewById(R.id.calendar);
+		//calB = (Button) view.findViewById(R.id.calendar);
 		photoB = (Button) view.findViewById(R.id.photo);
 		reportB = (Button) view.findViewById(R.id.report);
 		actionB = (Button) view.findViewById(R.id.action);
@@ -41,7 +41,7 @@ public class MenuFragment extends Fragment implements OnClickListener{
 		searchB = (Button) view.findViewById(R.id.search);
 
 		newsB.setOnClickListener(this);
-		calB.setOnClickListener(this);
+		//calB.setOnClickListener(this);
 		photoB.setOnClickListener(this);
 		reportB.setOnClickListener(this);
 		actionB.setOnClickListener(this);
@@ -67,8 +67,8 @@ public class MenuFragment extends Fragment implements OnClickListener{
             transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
             transaction.commit();
             break;
-		case R.id.calendar:
-			break;
+		//case R.id.calendar:
+			//break;
 		case R.id.photo:
 			activity.startActivity(new Intent(activity, com.example.dcc.CustomizedListViewFrag.class));
 			break;
