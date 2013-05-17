@@ -1,5 +1,6 @@
 package com.example.dcc;
 
+import android.widget.TextView;
 import com.example.dcc.helpers.ObjectStorage;
 
 import android.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 public class BottomFragment extends Fragment{
 
 	private ImageView userIcon;
+    private TextView textView;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -21,7 +23,11 @@ public class BottomFragment extends Fragment{
 				container, false);
 		
 		userIcon = (ImageView)view.findViewById(R.id.usericon);
+        textView = (TextView)view.findViewById(R.id.userdata);
+
 		userIcon.setImageBitmap(ObjectStorage.getUser().getImage());
+        textView.setText(ObjectStorage.getUser().getName()+"("+ObjectStorage.getUser().getHandle()+")");
+
 		//userIcon.setScaleX((float)2.0);
 		//userIcon.setScaleY((float)2.0);
 		return view;

@@ -14,7 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import com.example.dcc.R;
 import com.example.dcc.helpers.Member;
-import com.example.dcc.helpers.News;
+import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.mysql.HttpConnection;
 
 import java.util.List;
@@ -29,28 +29,44 @@ public class MembersListFragment extends Fragment implements OnClickListener{
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState){
+
 		super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+
 		View view = inflater.inflate(R.layout.members_list, container, false);
 		
-		new GetMembersTask().execute((Void)null);
+		new GetMembersTask().execute((Void) null);
 		
 		try {
 			Thread.currentThread().sleep(5000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
+        adapter = new ArrayAdapter<Spanned>(getActivity(), R.layout.member_item);
 		listview = (ListView)view.findViewById(R.id.membersList);
-		adapter = new ArrayAdapter<Spanned>(getActivity(), R.layout.member_item);
 
-		listview.setAdapter(adapter);
+        listview.setAdapter(adapter);
 
 		for(Member m : members){
 			adapter.add(Html.fromHtml(m.toString()));
 		}
-
 		return view;
 	}
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        List<String> memberList = ObjectStorage.getMemberActivity();
+        Log.e("Something", "Saving State");
+        if(!members.isEmpty()){
+            memberList.clear();
+            savedInstanceState.clear();
+            for(Member m : members){
+                memberList.add(m.getHandle());
+                savedInstanceState.putSerializable(m.getHandle(), m);
+            }
+        }
+    }
 
 	@Override
 	public void onClick(View v) {
