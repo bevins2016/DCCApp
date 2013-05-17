@@ -38,6 +38,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import com.example.dcc.LaunchActivityFrag;
 import utilities.KeywordUploader;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -68,7 +69,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.dcc.LaunchActivity;
 import com.example.dcc.R;
 
 public class MetaSearch extends Activity implements OnClickListener,
@@ -165,8 +165,8 @@ public class MetaSearch extends Activity implements OnClickListener,
 				teamfile, keywordListUrl, keywordfile);
 
 		/* Get start date and end date from LaunchActivity */
-		SearchStartDate = "&startdate=" + LaunchActivity.startdate;
-		SearchEndDate = "&enddate=" + LaunchActivity.today;
+		SearchStartDate = "&startdate=" + LaunchActivityFrag.startdate;
+		SearchEndDate = "&enddate=" + LaunchActivityFrag.today;
 		SearchUrl = "http://storage.virtualdiscoverycenter.net/projectmorpheus/dcc/found.php?";
 
 		/* Set Report type checkboxes to checked by default */
@@ -175,8 +175,8 @@ public class MetaSearch extends Activity implements OnClickListener,
 		edailyCheck.setChecked(true);
 
 		/* Set the text with date values */
-		startText.setText("Current Start Date: " + LaunchActivity.startdate);
-		endText.setText("Current End Date: " + LaunchActivity.today);
+		startText.setText("Current Start Date: " + LaunchActivityFrag.startdate);
+		endText.setText("Current End Date: " + LaunchActivityFrag.today);
 
 		/* Set up buttons */
 		MetaKeywordButton = (Button) findViewById(R.id.meta_add_remv_key_btn);
@@ -252,8 +252,8 @@ public class MetaSearch extends Activity implements OnClickListener,
 			 * This could easily be changed to accept parameters as
 			 * metasearchbtn does below
 			 */
-			SearchStartDate = "&startdate=" + LaunchActivity.today;
-			SearchEndDate = "&enddate=" + LaunchActivity.today;
+			SearchStartDate = "&startdate=" + LaunchActivityFrag.today;
+			SearchEndDate = "&enddate=" + LaunchActivityFrag.today;
 			ReportTypeEreport = "&num1=1";
 			ReportType057 = "&num2=3";
 			ReportTypeEdaily = "&num3=5";
@@ -675,11 +675,11 @@ public class MetaSearch extends Activity implements OnClickListener,
 
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			int year = Integer.parseInt(LaunchActivity.startdate
+			int year = Integer.parseInt(LaunchActivityFrag.startdate
 					.substring(0, 4));
-			int month = Integer.parseInt(LaunchActivity.startdate.substring(5,
+			int month = Integer.parseInt(LaunchActivityFrag.startdate.substring(5,
 					7)) - 1;// - 1 to conform to months starting at 0
-			int day = Integer.parseInt(LaunchActivity.startdate
+			int day = Integer.parseInt(LaunchActivityFrag.startdate
 					.substring(8, 10));
 
 			return new DatePickerDialog(getActivity(), this, year, month, day);

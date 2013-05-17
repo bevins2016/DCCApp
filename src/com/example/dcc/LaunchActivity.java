@@ -36,7 +36,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dcc.admin.AdminActivity;
@@ -236,18 +235,18 @@ public class LaunchActivity extends Activity implements OnClickListener {
 			finish();
 			break;
 		case R.id.photo:
-			startActivity(new Intent(this, CustomizedListView.class));
+			startActivity(new Intent(this, com.example.dcc.CustomizedListViewFrag.class));
 			break;
 		case R.id.report:
 			startActivity(new Intent(this, EReportLauncher.class));
 			finish();
 			break;
 		case R.id.search:
-			startActivity(new Intent(this, LaunchActivity.class));
+			startActivity(new Intent(this, LaunchActivityFrag.class));
 			finish();
 			break;
 		case R.id.action:
-			startActivity(new Intent(this, ActionItem.class));
+			startActivity(new Intent(this, ActionItemFrag.class));
 			finish();
 			break;
 		case R.id.directory:
@@ -255,18 +254,18 @@ public class LaunchActivity extends Activity implements OnClickListener {
 			finish();
 			break;
 		case R.id.meta_button:
-			intent.setClass(LaunchActivity.this, MetaSearch.class);
+			intent.setClass(this, MetaSearch.class);
 			startActivity(intent);
 			break;
 		case R.id.admin_button:
 			passwordPopup();
 			break;
 		case R.id.survey_button:
-			intent.setClass(LaunchActivity.this, CreateSurvey.class);
+			intent.setClass(this, CreateSurvey.class);
 			startActivity(intent);
 			break;
 		case R.id.manage_survey_button:
-			intent.setClass(LaunchActivity.this, ManageSurvey.class);
+			intent.setClass(this, ManageSurvey.class);
 			finish();
 			startActivity(intent);
 			break;

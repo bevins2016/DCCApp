@@ -60,23 +60,32 @@ public class MenuFragment extends Fragment implements OnClickListener{
 		case R.id.calendar:
 			break;
 		case R.id.photo:
-			activity.startActivity(new Intent(activity, CustomizedListView.class));
+			activity.startActivity(new Intent(activity, com.example.dcc.CustomizedListViewFrag.class));
 			break;
 		case R.id.report:
 			activity.startActivity(new Intent(activity, EReportLauncher.class));
 			break;
 		case R.id.search:
-			activity.startActivity(new Intent(activity, LaunchActivity.class));
+			activity.startActivity(new Intent(activity, LaunchActivityFrag.class));
 			break;
 		case R.id.action:
-			activity.startActivity(new Intent(activity, ActionItem.class));
-			break;
-		case R.id.directory:
+//			activity.startActivity(new Intent(activity, ActionItemFrag.class));
             FragmentManager manager = activity.getFragmentManager();
             FragmentTransaction transaction = manager.beginTransaction();
 
             Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-            Fragment newer = new MembersListFragment();
+            Fragment newer = new ActionItemFrag();
+            ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
+
+            transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
+            transaction.commit();
+			break;
+		case R.id.directory:
+             manager = activity.getFragmentManager();
+             transaction = manager.beginTransaction();
+
+             old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
+             newer = new MembersListFragment();
             ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
 
             transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));

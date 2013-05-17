@@ -52,10 +52,10 @@ public class LazyAdapter extends BaseAdapter {
         song = data.get(position);
         
         // Setting all values in listview
-        title.setText(song.get(CustomizedListView.KEY_TITLE));
-        artist.setText(song.get(CustomizedListView.KEY_ARTIST));
-        duration.setText(song.get(CustomizedListView.KEY_DURATION));
-        imageLoader.DisplayImage(song.get(CustomizedListView.KEY_THUMB_URL), thumb_image);
+        title.setText(song.get(com.example.dcc.CustomizedListViewFrag.KEY_TITLE));
+        artist.setText(song.get(com.example.dcc.CustomizedListViewFrag.KEY_ARTIST));
+        duration.setText(song.get(com.example.dcc.CustomizedListViewFrag.KEY_DURATION));
+        imageLoader.DisplayImage(song.get(com.example.dcc.CustomizedListViewFrag.KEY_THUMB_URL), thumb_image);
         return vi;
     }
 }
