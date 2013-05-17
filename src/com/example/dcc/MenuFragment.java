@@ -53,16 +53,16 @@ public class MenuFragment extends Fragment implements OnClickListener{
 
 	@Override
 	public void onClick(View v) {
-        FragmentManager manager = activity.getFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-
-        Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
 
         switch (v.getId()) {
 		case R.id.news:
 			//getActivity().startActivity(new Intent(getActivity(), AndroidRssReader.class));
-            Fragment newf = new NewsListFragment();
-            ObjectStorage.setFragment(R.id.fragmentcontainerright, newf);
+            FragmentManager manager = activity.getFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+
+            Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
+            Fragment newer = new AndroidRssReaderFrag();
+            ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
 
             transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
             transaction.commit();
@@ -79,13 +79,12 @@ public class MenuFragment extends Fragment implements OnClickListener{
 			activity.startActivity(new Intent(activity, LaunchActivityFrag.class));
 			break;
 		case R.id.action:
-<<<<<<< HEAD
 //			activity.startActivity(new Intent(activity, ActionItemFrag.class));
-            FragmentManager manager = activity.getFragmentManager();
-            FragmentTransaction transaction = manager.beginTransaction();
+           manager = activity.getFragmentManager();
+           transaction = manager.beginTransaction();
 
-            Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-            Fragment newer = new ActionItemFrag();
+            old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
+            newer = new ActionItemFrag();
             ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
 
             transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
@@ -98,17 +97,9 @@ public class MenuFragment extends Fragment implements OnClickListener{
              old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
              newer = new MembersListFragment();
             ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-=======
 			activity.startActivity(new Intent(activity, ActionItem.class));
 			break;
-		case R.id.directory:
-            Fragment dirf = new MembersListFragment();
-            ObjectStorage.setFragment(R.id.fragmentcontainerright, dirf);
->>>>>>> 57e6ff58c9a628b870590ea531c6be411a1e850a
 
-            transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-            transaction.commit();
-			break;
 		}		
 	}
 }
