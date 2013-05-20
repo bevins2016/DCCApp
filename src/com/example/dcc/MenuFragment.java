@@ -106,21 +106,13 @@ public class MenuFragment extends Fragment implements OnClickListener{
                 break;
             case R.id.action:
 //			activity.startActivity(new Intent(activity, ActionItemFrag.class));
-<<<<<<< HEAD
-                manager = activity.getFragmentManager();
-                transaction = manager.beginTransaction();
 
-                old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-                newer = new ActionItemFrag();
-                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-=======
            manager = activity.getFragmentManager();
            transaction = manager.beginTransaction();
 
             old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
             newer = new ActionItemFrag();
             ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
->>>>>>> 71adf780de75f304a940f5d825073c0d871cea58
 
                 transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
                 transaction.commit();
@@ -136,11 +128,7 @@ public class MenuFragment extends Fragment implements OnClickListener{
                 transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
                 transaction.commit();
                 break;
-<<<<<<< HEAD
-		}		
-	}
-=======
+
         }
     }
->>>>>>> 71adf780de75f304a940f5d825073c0d871cea58
 }
