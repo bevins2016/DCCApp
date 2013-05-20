@@ -1,6 +1,9 @@
 package com.example.dcc.helpers;
 
+import java.io.InputStream;
 import java.io.Serializable;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -8,9 +11,17 @@ import java.util.List;
 import org.apache.http.client.CookieStore;
 import org.apache.http.cookie.Cookie;
 
+import com.example.dcc.R;
+import com.example.dcc.fragment.MemberDetailFragment;
 import com.example.dcc.helpers.hacks.DCCCookieStore;
 
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.util.Log;
 
 public class User implements Serializable{
@@ -25,6 +36,7 @@ public class User implements Serializable{
 	private Bitmap image;
     private String phone;
 	private List<Friend> friends;
+    private int ID;
 
 
 	public User(){
@@ -32,6 +44,7 @@ public class User implements Serializable{
 		this.cookies = "";
 		this.image = null;
 		this.friends = new ArrayList<Friend>();
+        int ID = 0;
 	}
 	
 	public void displayData(){
@@ -92,8 +105,17 @@ public class User implements Serializable{
 		return image;
 	}
 
-	public void setImage(Bitmap image) {
-		this.image = image;
+	public void setImage(String img) {
+        try{
+		URL url = new URL(img);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setDoInput(true);
+            conn.connect();
+            this.image = BitmapFactory.decodeStream(conn.getInputStream());
+        }catch(Exception e){
+            Log.e("EH", e.getLocalizedMessage());
+        }
+
 	}
 
 	public void addFriend(Friend f) {
@@ -132,4 +154,36 @@ public class User implements Serializable{
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n"+name);
+        sb.append("\n"+project);
+        return sb.toString();
+    }
+
+    public void launchWindow(Activity activity) {
+        MemberDetailFragment detailFrag = new MemberDetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("member", this);
+        detailFrag.setArguments(bundle);
+
+        FragmentManager manager = activity.getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+
+        Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
+        ObjectStorage.setFragment(R.id.fragmentcontainerright, detailFrag);
+        transaction.replace(R.id.fragmentcontainerright, detailFrag);
+
+        transaction.commit();
+    }
+
 }
