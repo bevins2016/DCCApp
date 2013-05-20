@@ -20,10 +20,10 @@ public class User implements Serializable{
 	 */
 	private static final long serialVersionUID = -5285360029686080283L;
 	private static final String LOG = "User Object";
-	private String handle;
-	private String name;
-	public String cookies;
+	private String handle,email,name,cookies,project,project2;
+    public int id;
 	private Bitmap image;
+    private String phone;
 	private List<Friend> friends;
 
 
@@ -40,6 +40,13 @@ public class User implements Serializable{
 		Log.i(LOG, cookies);
 	}
 
+    public String getCookies(){
+        return cookies;
+    }
+
+    public void setCookie(String cookie){
+        this.cookies = cookie;
+    }
 	public String getHandle() {
 		return handle;
 	}
@@ -92,4 +99,37 @@ public class User implements Serializable{
 	public void addFriend(Friend f) {
 		friends.add(f);
 	}
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+
+    public String getProject() {
+        return project;
+    }
+
+    public void setProject(String project) {
+        this.project = project;
+    }
+
+    public String getProject2() {
+        return project2;
+    }
+
+    public void setProject2(String project2) {
+        this.project2 = project2;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 }

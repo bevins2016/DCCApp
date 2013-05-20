@@ -68,7 +68,7 @@ public class HttpConnection {
             client.getCookieSpecs().register("easy", getCookieSpec());
             client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");
 
-            get.setHeader("Cookie", user.cookies);
+            get.setHeader("Cookie", user.getCookies());
             get.setHeader("User-Agent", USER_AGENT);
 
             HttpResponse response = client.execute(new HttpHost(HOST), get);
@@ -107,7 +107,7 @@ public class HttpConnection {
             client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");
 
 
-            get.setHeader("Cookie", user.cookies);
+            get.setHeader("Cookie", user.getCookies());
             get.setHeader("User-Agent", USER_AGENT);
 
             HttpResponse response =  client.execute(new HttpHost(HOST), get);
@@ -198,89 +198,22 @@ public class HttpConnection {
         // Add all the cookies to the cookie string
         for (int h = 0; h < cookies.length; h++) {
             Header c = cookies[h];
-
             if(c.getValue().startsWith("wordpress_test") || c.getValue().startsWith("wordpress_logged")){
                 sb.append(c.getValue()+";");
             }
         }
-
-        Log.e("eh", sb.toString());
-        user.cookies = sb.toString();
-        Log.e("eh", user.cookies);
+        user.setCookie(sb.toString());
         try {
-            buildUser(response, log);
-            getFriends();
-
             ObjectStorage.setUser(user);
 
-            Log.e("Login", user.getName()+"\n"+user.getHandle()+"\n"+user.cookies);
+            MySQLQuery.validateUser("/DCC/validateUser.php", log);
+            MySQLQuery.updateFriends("/DCC/updateFriends.php");
+
+            Log.e("Login", user.getName()+"\n"+user.getHandle()+"\n"+user.getCookies());
             return true;
         } catch (Exception e) {
             Log.e("Error", "no clue");
             return false;
-        }
-    }
-
-    /**
-     * Takes an input stream and parses all relevant data from the HTML file
-     * into the user object.
-     *
-     *
-     * @param response
-     * @throws Exception
-     */
-    private static synchronized void buildUser(HttpResponse response, String log) {
-
-        User user = ObjectStorage.getUser();
-        try {
-            Document doc = getParseToXML("/members/"+log);
-            Element image = doc.getElementById("item-header-avatar").getElementsByTag("img").first();
-            user.setHandle(log);
-            String urlS = image.attr("src");
-            String name = image.attr("alt");
-            name.replace("Profile picture of ", "");
-
-            URL url = new URL(urlS);
-            Bitmap bmp = BitmapFactory.decodeStream(url.openConnection()
-                    .getInputStream());
-            user.setImage(bmp);
-
-        }catch(Exception e){
-            e.printStackTrace();
-            Log.e("Build User", "err");
-        }
-    }
-
-    /**
-     * Used to gather a list of friends of the user
-     *
-     * @throws IOException
-     */
-
-    public static void getFriends(){
-
-        User user = ObjectStorage.getUser();
-        try{
-            Document doc = getParseToXML(user.getURL(Links.FRIENDS));
-            Element e = doc.getElementById("members-list");
-            Elements friends = e.getElementsByTag("li");
-
-            for(Element friend : friends){
-                Friend f = new Friend();
-
-                Element temp = friend.getElementsByClass("item-avatar").first();
-                Element img = temp.getElementsByTag("a").first().getElementsByTag("img").first();
-                f.setImgURL(img.attr("src"));
-                f.setName(img.attr("alt").replaceAll("Profile picture of ", ""));
-                f.setPage(friend.getElementsByClass("item-title").get(0).getElementsByTag("a").attr("href"));
-                String url = f.getPage().substring(0, f.getPage().length()-1);
-                f.setHandle(url.substring(url.lastIndexOf("/")+1));
-
-                user.addFriend(f);
-            }
-
-        }catch(Exception e){
-            Log.e("Add Friends", e.getLocalizedMessage());
         }
     }
 
@@ -301,7 +234,9 @@ public class HttpConnection {
             m.setName(img.attr("alt").replaceAll("Profile picture of ", ""));
             m.setMemURL(member.getElementsByClass("item-title").first().getElementsByTag("a").attr("href"));
             String url = m.getMemURL().substring(0, m.getMemURL().length()-1);
-            m.setHandle(url.substring(url.lastIndexOf(url.lastIndexOf("/")+1)));
+            Log.e("blah0", url);
+            m.setHandle(url.substring(url.lastIndexOf("/")+1));
+
 
             memList.add(m);
         }

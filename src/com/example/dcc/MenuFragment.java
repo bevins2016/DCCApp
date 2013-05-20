@@ -15,42 +15,41 @@ import com.example.dcc.fragment.MembersListFragment;
 import com.example.dcc.helpers.ObjectStorage;
 
 public class MenuFragment extends Fragment implements OnClickListener{
-	
-	private Button newsB;
-	//private Button calB;
-	private Button photoB;
-	private Button reportB;
-	private Button actionB;
-	private Button directoryB;
-	private Button searchB;
-	
-	private Activity activity;
-	
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.menu_fragment,
-				container, false);
-		activity = getActivity();
-		newsB = (Button) view.findViewById(R.id.news);
-		//calB = (Button) view.findViewById(R.id.calendar);
-		photoB = (Button) view.findViewById(R.id.photo);
-		reportB = (Button) view.findViewById(R.id.report);
-		actionB = (Button) view.findViewById(R.id.action);
-		directoryB = (Button) view.findViewById(R.id.directory);
-		searchB = (Button) view.findViewById(R.id.search);
 
-		newsB.setOnClickListener(this);
-		//calB.setOnClickListener(this);
-		photoB.setOnClickListener(this);
-		reportB.setOnClickListener(this);
-		actionB.setOnClickListener(this);
-		directoryB.setOnClickListener(this);
-		searchB.setOnClickListener(this);
-		
-		return view;
-	}
+    private Button newsB;
+    //private Button calB;
+    private Button photoB;
+    private Button reportB;
+    private Button actionB;
+    private Button directoryB;
+    private Button searchB;
 
+    private Activity activity;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.menu_fragment,
+                container, false);
+        activity = getActivity();
+        newsB = (Button) view.findViewById(R.id.news);
+        //calB = (Button) view.findViewById(R.id.calendar);
+        photoB = (Button) view.findViewById(R.id.photo);
+        reportB = (Button) view.findViewById(R.id.report);
+        actionB = (Button) view.findViewById(R.id.action);
+        directoryB = (Button) view.findViewById(R.id.directory);
+        searchB = (Button) view.findViewById(R.id.search);
+
+        newsB.setOnClickListener(this);
+        //calB.setOnClickListener(this);
+        photoB.setOnClickListener(this);
+        reportB.setOnClickListener(this);
+        actionB.setOnClickListener(this);
+        directoryB.setOnClickListener(this);
+        searchB.setOnClickListener(this);
+
+        return view;
+    }
 	@Override
 	public void onClick(View v) {
 
@@ -107,12 +106,21 @@ public class MenuFragment extends Fragment implements OnClickListener{
                 break;
             case R.id.action:
 //			activity.startActivity(new Intent(activity, ActionItemFrag.class));
+<<<<<<< HEAD
                 manager = activity.getFragmentManager();
                 transaction = manager.beginTransaction();
 
                 old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
                 newer = new ActionItemFrag();
                 ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
+=======
+           manager = activity.getFragmentManager();
+           transaction = manager.beginTransaction();
+
+            old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
+            newer = new ActionItemFrag();
+            ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
+>>>>>>> 71adf780de75f304a940f5d825073c0d871cea58
 
                 transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
                 transaction.commit();
@@ -128,6 +136,11 @@ public class MenuFragment extends Fragment implements OnClickListener{
                 transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
                 transaction.commit();
                 break;
+<<<<<<< HEAD
 		}		
 	}
+=======
+        }
+    }
+>>>>>>> 71adf780de75f304a940f5d825073c0d871cea58
 }

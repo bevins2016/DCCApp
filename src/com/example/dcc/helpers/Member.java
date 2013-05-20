@@ -7,6 +7,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
@@ -60,8 +61,14 @@ public class Member implements Serializable{
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append(name);
+        sb.append("\n"+name);
+        sb.append("\n"+imageURL);
+        sb.append("\n"+handle);
         return sb.toString();
+    }
+
+    public void logMember(){
+        Log.e("Member", this.toString());
     }
     public void launchWindow(Activity activity) {
         MemberDetailFragment detailFrag = new MemberDetailFragment();

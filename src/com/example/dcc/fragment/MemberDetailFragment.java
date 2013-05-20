@@ -26,8 +26,8 @@ public class MemberDetailFragment extends Fragment {
 
         member = (Member)this.getArguments().getSerializable("member");
 
-        name = (Button)view.findViewById(R.id.memname);
-        handle = (Button) view.findViewById(R.id.memhandle);
+        name = (TextView)view.findViewById(R.id.memname);
+        handle = (TextView) view.findViewById(R.id.memhandle);
 
         name.setText(member.getName());
         name.setText(member.getHandle());
