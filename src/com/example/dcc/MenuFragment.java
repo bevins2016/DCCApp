@@ -55,51 +55,79 @@ public class MenuFragment extends Fragment implements OnClickListener{
 	public void onClick(View v) {
 
         switch (v.getId()) {
-		case R.id.news:
-			//getActivity().startActivity(new Intent(getActivity(), AndroidRssReader.class));
-            FragmentManager manager = activity.getFragmentManager();
-            FragmentTransaction transaction = manager.beginTransaction();
+            case R.id.news:
+//                getActivity().startActivity(new Intent(getActivity(), AndroidRssReader.class));
+                FragmentManager manager = activity.getFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
 
-            Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-            Fragment newer = new AndroidRssReaderFrag();
-            ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
+                Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
+                Fragment newer = new AndroidRssReaderFrag();
+                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
 
-            transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-            transaction.commit();
-            break;
-		//case R.id.calendar:
-			//break;
-		case R.id.photo:
-			activity.startActivity(new Intent(activity, com.example.dcc.CustomizedListViewFrag.class));
-			break;
-		case R.id.report:
-			activity.startActivity(new Intent(activity, EReportLauncher.class));
-			break;
-		case R.id.search:
-			activity.startActivity(new Intent(activity, LaunchActivityFrag.class));
-			break;
-		case R.id.action:
+                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
+                transaction.commit();
+                break;
+            case R.id.calendar:
+                break;
+            case R.id.photo:
+//                activity.startActivity(new Intent(activity, com.example.dcc.CustomizedListViewFrag.class));
+                manager = activity.getFragmentManager();
+                transaction = manager.beginTransaction();
+
+                old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
+                newer = new CustomizedListViewFrag();
+                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
+
+                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
+                transaction.commit();
+                break;
+            case R.id.report:
+//                activity.startActivity(new Intent(activity, EReportLauncher.class));
+                manager = activity.getFragmentManager();
+                transaction = manager.beginTransaction();
+
+                old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
+                newer = new EReportLauncherFrag();
+                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
+
+                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
+                transaction.commit();
+                break;
+            case R.id.search:
+//                activity.startActivity(new Intent(activity, LaunchActivityFrag.class));
+                manager = activity.getFragmentManager();
+                transaction = manager.beginTransaction();
+
+                old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
+                newer = new LaunchActivityFrag();
+                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
+
+                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
+                transaction.commit();
+                break;
+            case R.id.action:
 //			activity.startActivity(new Intent(activity, ActionItemFrag.class));
-           manager = activity.getFragmentManager();
-           transaction = manager.beginTransaction();
+                manager = activity.getFragmentManager();
+                transaction = manager.beginTransaction();
 
-            old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-            newer = new ActionItemFrag();
-            ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
+                old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
+                newer = new ActionItemFrag();
+                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
 
-            transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-            transaction.commit();
-			break;
-		case R.id.directory:
-             manager = activity.getFragmentManager();
-             transaction = manager.beginTransaction();
+                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
+                transaction.commit();
+                break;
+            case R.id.directory:
+                manager = activity.getFragmentManager();
+                transaction = manager.beginTransaction();
 
-             old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-             newer = new MembersListFragment();
-            ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-			activity.startActivity(new Intent(activity, ActionItem.class));
-			break;
+                old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
+                newer = new MembersListFragment();
+                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
 
+                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
+                transaction.commit();
+                break;
 		}		
 	}
 }
