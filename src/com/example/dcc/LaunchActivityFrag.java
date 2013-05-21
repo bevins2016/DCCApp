@@ -74,19 +74,19 @@ public class LaunchActivityFrag extends Fragment implements OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_launch,
+        View view = inflater.inflate(R.layout.activity_launch_frag,
                 container, false);
         activity = getActivity();
 
 		/* Check if directory exists, if not create it */
 		/* Call functions to get start and end dates */
         setDefaults();
-        newsB = (Button) view.findViewById(R.id.news);
-        calB = (Button) view.findViewById(R.id.calendar);
-        photoB = (Button) view.findViewById(R.id.photo);
-        reportB = (Button) view.findViewById(R.id.report);
-        actionB = (Button) view.findViewById(R.id.action);
-        searchB = (Button) view.findViewById(R.id.search);
+//        newsB = (Button) view.findViewById(R.id.news);
+//        calB = (Button) view.findViewById(R.id.calendar);
+//        photoB = (Button) view.findViewById(R.id.photo);
+//        reportB = (Button) view.findViewById(R.id.report);
+//        actionB = (Button) view.findViewById(R.id.action);
+//        searchB = (Button) view.findViewById(R.id.search);
 
 		/* Set up buttons */
         MetaSearchButton = (Button) view.findViewById(R.id.meta_button);
@@ -97,12 +97,12 @@ public class LaunchActivityFrag extends Fragment implements OnClickListener {
         ManageSurveyButton.setOnClickListener(this);
         AdminButton = (Button) view.findViewById(R.id.admin_button);
         AdminButton.setOnClickListener(this);
-        newsB.setOnClickListener(this);
-        calB.setOnClickListener(this);
-        photoB.setOnClickListener(this);
-        reportB.setOnClickListener(this);
-        actionB.setOnClickListener(this);
-        searchB.setOnClickListener(this);
+//        newsB.setOnClickListener(this);
+//        calB.setOnClickListener(this);
+//        photoB.setOnClickListener(this);
+//        reportB.setOnClickListener(this);
+//        actionB.setOnClickListener(this);
+//        searchB.setOnClickListener(this);
     return view;
     }
 

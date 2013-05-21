@@ -77,23 +77,23 @@ public class EReportLauncherFrag extends Fragment implements OnClickListener {
 		/* Check if files/folders exist */
         defaultCheck();
 
-        // These are the buttons on the left side of the screen.
-        newsB = (Button) view.findViewById(R.id.news);
-        calB = (Button) view.findViewById(R.id.calendar);
-        photoB = (Button) view.findViewById(R.id.photo);
-        reportB = (Button) view.findViewById(R.id.report);
-        actionB = (Button) view.findViewById(R.id.action);
-        directoryB = (Button) view.findViewById(R.id.directory);
-        searchB = (Button) view.findViewById(R.id.search);
-
-        // Here the listener for each button that allows actions is set.
-        newsB.setOnClickListener(this);
-        calB.setOnClickListener(this);
-        photoB.setOnClickListener(this);
-        reportB.setOnClickListener(this);
-        actionB.setOnClickListener(this);
-        directoryB.setOnClickListener(this);
-        searchB.setOnClickListener(this);
+//        // These are the buttons on the left side of the screen.
+//        newsB = (Button) view.findViewById(R.id.news);
+//        calB = (Button) view.findViewById(R.id.calendar);
+//        photoB = (Button) view.findViewById(R.id.photo);
+//        reportB = (Button) view.findViewById(R.id.report);
+//        actionB = (Button) view.findViewById(R.id.action);
+//        directoryB = (Button) view.findViewById(R.id.directory);
+//        searchB = (Button) view.findViewById(R.id.search);
+//
+//        // Here the listener for each button that allows actions is set.
+//        newsB.setOnClickListener(this);
+//        calB.setOnClickListener(this);
+//        photoB.setOnClickListener(this);
+//        reportB.setOnClickListener(this);
+//        actionB.setOnClickListener(this);
+//        directoryB.setOnClickListener(this);
+//        searchB.setOnClickListener(this);
         return view;
     }
 

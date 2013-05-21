@@ -4,57 +4,7 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:columnCount="4" >
-<LinearLayout
-android:layout_width="212dp"
-android:layout_height="match_parent"
-android:layout_column="0"
-android:layout_columnSpan="3"
-android:layout_gravity="left"
-android:layout_row="0"
-android:orientation="vertical" >
-<Button
-android:id="@+id/news"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:text="@string/news"
-android:drawableRight="@drawable/news"/>
-<Button
-android:id="@+id/calendar"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:text="@string/calendar"
-android:drawableRight="@drawable/cal"/>
-<Button
-android:id="@+id/photo"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:text="@string/photo"
-android:drawableRight="@drawable/gallery" />
-<Button
-android:id="@+id/report"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:text="@string/report"
-android:drawableRight="@drawable/report" />
-<Button
-android:id="@+id/action"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:text="@string/action"
-android:drawableRight="@drawable/ep" />
-<Button
-android:id="@+id/directory"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:text="@string/directory"
-android:drawableRight="@drawable/directory" />
-<Button
-    android:id="@+id/search"
-   	android:layout_width="match_parent"
-   	android:layout_height="wrap_content"
-    	android:text="@string/search" />
-</LinearLayout>
-<GridLayout
+    <GridLayout
 android:id="@+id/a"
 android:layout_width="wrap_content"
 android:layout_height="match_parent"

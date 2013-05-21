@@ -8,15 +8,15 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import android.app.*;
+import android.app.Activity;
+import android.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import com.example.dcc.fragment.MembersListFragment;
-import com.example.dcc.helpers.ObjectStorage;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -35,57 +35,26 @@ public class ActionItemFrag extends ListFragment implements OnClickListener {
     public static RSSFeed myRssFeed = null;
     private Button btnEmail = null;
     static WebView webView;
-    private Button newsB;
-    private Button loginB;
-    private Button calB;
-    private Button photoB;
-    private Button reportB;
-    private Button actionB;
-    private Button directoryB;
-    private Button searchB;
-
-    TextView feedTitle;
-    TextView feedDescribtion;
-    TextView feedPubdate;
-    TextView feedLink;
-    TextView textEmpty;
 
     String currentItem;
     TextView thisAction;
     int currentLocation;
 
-    private Activity activity;
+    Activity activity;
+
+    View view;
 
     /** Called when the activity is first created. */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.action_item,
+        view = inflater.inflate(R.layout.action_item_fragment,
                 container, false);
         activity = getActivity();
 
-        newsB = (Button) view.findViewById(R.id.news);
-        calB = (Button) view.findViewById(R.id.calendar);
-        photoB = (Button) view.findViewById(R.id.photo);
-        reportB = (Button) view.findViewById(R.id.report);
-        actionB = (Button) view.findViewById(R.id.action);
-        directoryB = (Button) view.findViewById(R.id.directory);
+        btnEmail = (Button) view.findViewById(R.id.email_button1);
+        btnEmail.setOnClickListener(this);
         thisAction = (TextView) view.findViewById(R.id.actionView);
-        searchB = (Button) view.findViewById(R.id.search);
-
-        feedTitle = (TextView) view.findViewById(R.id.feedtitle);
-        feedDescribtion = (TextView) view.findViewById(R.id.feeddescribtion);
-        feedPubdate = (TextView) view.findViewById(R.id.feedpubdate);
-        feedLink = (TextView) view.findViewById(R.id.feedlink);
-        textEmpty = (TextView) view.findViewById(android.R.id.empty);
-
-        newsB.setOnClickListener(this);
-        calB.setOnClickListener(this);
-        photoB.setOnClickListener(this);
-        reportB.setOnClickListener(this);
-        actionB.setOnClickListener(this);
-        directoryB.setOnClickListener(this);
-        searchB.setOnClickListener(this);
 
         new MyTask().execute();
 
@@ -146,7 +115,10 @@ public class ActionItemFrag extends ListFragment implements OnClickListener {
         protected void onPostExecute(Void result) {
             if (myRssFeed != null) {
                 //instanciate the textviews in the scrollview
-
+                TextView feedTitle = (TextView) view.findViewById(R.id.feedtitle);
+                TextView feedDescribtion = (TextView) view.findViewById(R.id.feeddescribtion);
+                TextView feedPubdate = (TextView) view.findViewById(R.id.feedpubdate);
+                TextView feedLink = (TextView) view.findViewById(R.id.feedlink);
                 //set the textviews to the info on the Rss feed located in RSSFeed
                 feedTitle.setText(myRssFeed.getTitle());
                 feedDescribtion.setText(myRssFeed.getDescription());
@@ -155,7 +127,7 @@ public class ActionItemFrag extends ListFragment implements OnClickListener {
 
                 //adapt the listview to the array.
                 ArrayAdapter<RSSItem> adapter = new ArrayAdapter<RSSItem>(
-                        getActivity(),
+                        activity,
                         android.R.layout.simple_list_item_1,
                         myRssFeed.getList());
                 setListAdapter(adapter);
@@ -165,7 +137,7 @@ public class ActionItemFrag extends ListFragment implements OnClickListener {
             } else {
 
                 //if the server is down or Rss is completely empty
-
+                TextView textEmpty = (TextView) view.findViewById(android.R.id.empty);
                 textEmpty.setText("No Feed Found!");
             }
 
@@ -204,79 +176,12 @@ public class ActionItemFrag extends ListFragment implements OnClickListener {
     }
 
     public void onClick(View v) {
+        // this switch listens for any and all click actions in the app
+        // each case is a button in the menu.
         switch (v.getId()) {
-            case R.id.news:
-//                getActivity().startActivity(new Intent(getActivity(), AndroidRssReader.class));
-                FragmentManager manager = activity.getFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-
-                Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-                Fragment newer = new AndroidRssReaderFrag();
-                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-
-                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-                transaction.commit();
-                break;
-            case R.id.calendar:
-                break;
-            case R.id.photo:
-//                activity.startActivity(new Intent(activity, com.example.dcc.CustomizedListViewFrag.class));
-                manager = activity.getFragmentManager();
-                transaction = manager.beginTransaction();
-
-                old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-                newer = new CustomizedListViewFrag();
-                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-
-                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-                transaction.commit();
-                break;
-            case R.id.report:
-//                activity.startActivity(new Intent(activity, EReportLauncher.class));
-                manager = activity.getFragmentManager();
-                transaction = manager.beginTransaction();
-
-                old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-                newer = new EReportLauncherFrag();
-                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-
-                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-                transaction.commit();
-                break;
-            case R.id.search:
-//                activity.startActivity(new Intent(activity, LaunchActivityFrag.class));
-                manager = activity.getFragmentManager();
-                transaction = manager.beginTransaction();
-
-                old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-                newer = new LaunchActivityFrag();
-                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-
-                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-                transaction.commit();
-                break;
-            case R.id.action:
-//			activity.startActivity(new Intent(activity, ActionItemFrag.class));
-                manager = activity.getFragmentManager();
-                transaction = manager.beginTransaction();
-
-                old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-                newer = new ActionItemFrag();
-                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-
-                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-                transaction.commit();
-                break;
-            case R.id.directory:
-                manager = activity.getFragmentManager();
-                transaction = manager.beginTransaction();
-
-                old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-                newer = new MembersListFragment();
-                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-
-                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-                transaction.commit();
+            case R.id.email_button1:
+                // Calling sendEmail from the activity class
+                sendEmail(v);
                 break;
         }
     }
