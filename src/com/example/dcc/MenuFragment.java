@@ -50,8 +50,8 @@ public class MenuFragment extends Fragment implements OnClickListener{
 
         return view;
     }
-	@Override
-	public void onClick(View v) {
+    @Override
+    public void onClick(View v) {
 
         switch (v.getId()) {
             case R.id.news:
@@ -60,7 +60,7 @@ public class MenuFragment extends Fragment implements OnClickListener{
                 FragmentTransaction transaction = manager.beginTransaction();
 
                 Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-                Fragment newer = new AndroidRssReaderFrag();
+                Fragment newer = new NewsListFragment();
                 ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
 
                 transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
@@ -107,12 +107,12 @@ public class MenuFragment extends Fragment implements OnClickListener{
             case R.id.action:
 //			activity.startActivity(new Intent(activity, ActionItemFrag.class));
 
-           manager = activity.getFragmentManager();
-           transaction = manager.beginTransaction();
+                manager = activity.getFragmentManager();
+                transaction = manager.beginTransaction();
 
-            old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-            newer = new ActionItemFrag();
-            ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
+                old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
+                newer = new ActionItemFrag();
+                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
 
                 transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
                 transaction.commit();

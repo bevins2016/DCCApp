@@ -218,12 +218,6 @@ public class HttpConnection {
     }
 
     public static List<User> getMembers(){
-        User user = ObjectStorage.getUser();
-        Document doc = getParseToXML("/members/");
-
-        Element main = doc.getElementById("members-list");
-        Elements members = main.getElementsByTag("li");
-
         List<User> memList = MySQLQuery.getAllMembers("/DCC/getAllUsers.php");
         return memList;
     }

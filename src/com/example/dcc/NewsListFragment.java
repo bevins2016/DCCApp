@@ -43,7 +43,7 @@ public class NewsListFragment extends Fragment implements OnClickListener{
             GetNewsTask g = new GetNewsTask();
             g.execute((Void) null);
             try {
-                g.get(5, TimeUnit.SECONDS);
+                g.get(10, TimeUnit.SECONDS);
                 ObjectStorage.setNewsList(news);
             } catch (InterruptedException e) {
                 e.printStackTrace();

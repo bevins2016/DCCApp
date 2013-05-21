@@ -16,6 +16,7 @@ import android.widget.ListView;
 import com.example.dcc.R;
 import com.example.dcc.helpers.Member;
 import com.example.dcc.helpers.ObjectStorage;
+import com.example.dcc.helpers.User;
 import com.example.dcc.helpers.mysql.HttpConnection;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class MembersListFragment extends Fragment implements OnClickListener{
     ListView listview;
 
     ArrayAdapter<Spanned> adapter;
-    List<Member> members;
+    List<User> members;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
@@ -44,7 +45,7 @@ public class MembersListFragment extends Fragment implements OnClickListener{
             GetMembersTask t =  new GetMembersTask();
             t.execute((Void) null);
             try {
-                t.get(5, TimeUnit.SECONDS);
+                t.get(20, TimeUnit.SECONDS);
                 ObjectStorage.setMemberList(members);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -66,7 +67,7 @@ public class MembersListFragment extends Fragment implements OnClickListener{
             }
         });
 
-        for(Member m : members){
+        for(User m : members){
             adapter.add(Html.fromHtml(m.toString()));
         }
 
@@ -81,7 +82,7 @@ public class MembersListFragment extends Fragment implements OnClickListener{
         if(!members.isEmpty()){
             memberList.clear();
             savedInstanceState.clear();
-            for(Member m : members){
+            for(User m : members){
                 memberList.add(m.getHandle());
                 savedInstanceState.putSerializable(m.getHandle(), m);
             }

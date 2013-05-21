@@ -94,8 +94,18 @@ public class MySQLQuery {
     }
 
     private synchronized static User convertUser(JSONObject jUser){
-        User u = new User();
-        return u;
+        try{
+            User user = new User();
+            user.setName(jUser.getString("display_name"));
+            user.setEmail(jUser.getString("user_email"));
+            user.setPhone(jUser.getString("phone"));
+            user.setHandle(jUser.getString("user_login"));
+            user.setProject(jUser.getString("project"));
+            user.setProject2(jUser.getString("project2"));
+            return user;
+        }catch(Exception e){
+            return null;
+        }
     }
 
     public synchronized static User validateUser(String url, String login){
@@ -119,9 +129,9 @@ public class MySQLQuery {
             String s;
             while((s = reader.readLine())!=null){
                 sb.append(s);
-                Log.e("IMG", s);
             }
-            user.setImage(sb.toString());
+
+            user.setImageURL(sb.toString());
         }catch(Exception e){
 
         }
@@ -142,15 +152,16 @@ public class MySQLQuery {
             }
 
             is.close();
+
             result=sb.toString();
 
             Log.e("User", result);
             return new JSONObject(result);
         }catch(Exception e){
-            Log.e("getArray", "Error fetching data from: "+url+"//"+e.getMessage());
             try {
                 return new JSONArray(result);
             } catch (JSONException e1) {
+                Log.e("getArray", "Error fetching data from: "+url+"//"+e.getMessage());
                 return null;
             }
         }
@@ -163,13 +174,15 @@ public class MySQLQuery {
         for(int i = 0 ; i < jMembers.length(); i++){
             try {
                 JSONObject jMember = jMembers.getJSONObject(i);
-                User m = new User();
-                m = convertUser(jMember);
                 int uid = Integer.parseInt(jMember.getString("ID"));
+                User m;
                 if(!ObjectStorage.hasUser(uid)){
+                    m = convertUser(jMember);
                     ObjectStorage.setUser(uid, m);
-                    lMembers.add(m);
+                }else{
+                    m = ObjectStorage.getUser(uid);
                 }
+                lMembers.add(m);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
