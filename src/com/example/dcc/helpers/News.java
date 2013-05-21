@@ -13,7 +13,8 @@ public class News implements Serializable{
 	private String text;
 	private String publisher;
 	private String category;
-	
+	private String id;
+
 	public News(){
 		this.title = null;
 		this.link = null;
@@ -22,6 +23,7 @@ public class News implements Serializable{
 		this.text = null;
 		this.publisher = null;
 		this.category = null;
+        this.id = null;
 	}
 
 	public String getTitle() {
@@ -96,11 +98,21 @@ public class News implements Serializable{
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("<b><u>"+title+"</u></b><br/>");
-		sb.append("<b>Date</b> "+pubdate.substring(0, pubdate.indexOf("+")-1)+"&nbsp&nbsp&nbsp&nbsp");
+		sb.append("<b>Date</b> "+pubdate+"&nbsp&nbsp&nbsp&nbsp");
 		sb.append("<b>By:</b> "+publisher);
         if(text.length()>140) sb.append("<br/>"+text.substring(0,139));
 		else sb.append("<br/>"+text);
 		
 		return sb.toString();
 	}
+
+    public void setID(String id) {
+        this.id = id;
+    }
+
+    public String getID(){
+        return id;
+    }
+
 }
+

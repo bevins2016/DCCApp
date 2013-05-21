@@ -83,7 +83,6 @@ public class HttpConnection {
             Document doc = Jsoup.parse(total.toString());
 
             return doc;
-
         } catch (UnsupportedEncodingException e) {
             Log.e("Requesting Page", e.getLocalizedMessage());
         } catch (ClientProtocolException e) {
@@ -95,7 +94,7 @@ public class HttpConnection {
         return null;
     }
 
-
+/*
     private static synchronized org.w3c.dom.Document getXMLfromURL(String uri){
         try{
             User user = ObjectStorage.getUser();
@@ -130,6 +129,7 @@ public class HttpConnection {
         return null;
     }
 
+*/
 
     private static synchronized HttpResponse postResponse(String page, List<NameValuePair> nvp, boolean holdFirst){
 
@@ -217,30 +217,8 @@ public class HttpConnection {
         }
     }
 
-    public static List<Member> getMembers(){
-        User user = ObjectStorage.getUser();
-        Document doc = getParseToXML("/members/");
-
-        Element main = doc.getElementById("members-list");
-        Elements members = main.getElementsByTag("li");
-
-        List<Member> memList = new ArrayList<Member>();
-        for(Element member : members){
-            Member m = new Member();
-
-            Element temp = member.getElementsByClass("item-avatar").first();
-            Element img = temp.getElementsByTag("a").first().getElementsByTag("img").first();
-            m.setImageURL(img.attr("src"));
-            m.setName(img.attr("alt").replaceAll("Profile picture of ", ""));
-            m.setMemURL(member.getElementsByClass("item-title").first().getElementsByTag("a").attr("href"));
-            String url = m.getMemURL().substring(0, m.getMemURL().length()-1);
-            Log.e("blah0", url);
-            m.setHandle(url.substring(url.lastIndexOf("/")+1));
-
-
-            memList.add(m);
-        }
-
+    public static List<User> getMembers(){
+        List<User> memList = MySQLQuery.getAllMembers("/DCC/getAllUsers.php");
         return memList;
     }
 
@@ -255,36 +233,7 @@ public class HttpConnection {
 
 
     public static synchronized List<News> getNews(){
-        List<News> newsPaper = new ArrayList<News>();
-
-        try{
-            org.w3c.dom.Document doc = getXMLfromURL("/news/feed/");
-            NodeList nodeList = doc.getElementsByTagName("item");
-
-            for(int i=0; i < nodeList.getLength(); i++){
-                try{
-                    NodeList n = nodeList.item(i).getChildNodes();
-                    News news = new News();
-
-                    for(int h=0; h < n.getLength(); h++){
-                        String name = n.item(h).getNodeName();
-                        if(name.equals("title"))news.setTitle(n.item(h).getTextContent());
-                        else if(name.equals("link"))news.setLink(n.item(h).getTextContent());
-                        else if(name.equals("pubDate"))news.setPubdate(n.item(h).getTextContent());
-                        else if(name.equals("dc:creator"))news.setPublisher(n.item(h).getTextContent());
-                        else if(name.equals("category"))news.setCategory(n.item(h).getTextContent());
-                        else if(name.equals("description"))news.setText(n.item(h).getTextContent());
-                    }
-                    newsPaper.add(news);
-
-                }catch(Exception e){
-                    Log.e("adding loop", e.getLocalizedMessage());
-                }
-            }
-            return newsPaper;
-        }catch(Exception e){
-            Log.e("something", e.getLocalizedMessage());
-        }
+        List<News> newsPaper = MySQLQuery.getNews("/DCC/getNews.php");
         return newsPaper;
     }
 }

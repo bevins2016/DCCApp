@@ -11,16 +11,27 @@ public class ObjectStorage {
 	private static User user = null;
     private static HashMap<Integer, Fragment> fragment;
     private static List<String> memberActivity = new ArrayList<String>();
-    private static List<Member> memberList;
+    private static List<User> memberList;
     private static List<News> newsList;
+    private static HashMap<Integer, User> userCache = new HashMap<Integer, User>();
 
 
+    public static User getUser(int user){
+        return userCache.get(user);
+    }
 
-    public static List<Member> getMemberList() {
+    public static Boolean hasUser(int user){
+        return userCache.containsKey(user);
+    }
+
+    public static void setUser(int id, User user){
+        userCache.put(id, user);
+    }
+    public static List<User> getMemberList() {
         return memberList;
     }
 
-    public static void setMemberList(List<Member> memberList) {
+    public static void setMemberList(List<User> memberList) {
         ObjectStorage.memberList = memberList;
     }
 

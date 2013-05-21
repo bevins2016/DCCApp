@@ -157,5 +157,6 @@
     <string name="first_proj">First Project:</string>
     <string name="second_proj">Second Project:</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sentfromdcc">--Sent from DCC App</string>
 
 </resources>

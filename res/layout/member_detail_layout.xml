@@ -6,45 +6,92 @@
               android:layout_height="match_parent">
 
     <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/memicon" android:layout_below="@+id/textView" android:layout_alignParentLeft="true"/>
+    <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/userpic" android:layout_gravity="left|center_vertical"
-            android:layout_alignParentLeft="true" android:layout_marginLeft="0dp" android:layout_alignParentTop="true"
-            android:layout_marginTop="0dp"/>
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Member Info"
+            android:id="@+id/textView"
+            android:layout_alignParentTop="true" android:layout_centerHorizontal="true"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Personal"
+            android:id="@+id/textView2"
+            android:layout_below="@+id/memicon" android:layout_alignLeft="@+id/textView6"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/memname" android:layout_gravity="right|center_vertical"
-            android:layout_below="@+id/textView2" android:layout_alignLeft="@+id/textView2"/>
+            android:text="Name:"
+            android:id="@+id/textView3"
+            android:layout_below="@+id/textView2" android:layout_alignParentLeft="true"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User Name"
+            android:id="@+id/memname"
+            android:layout_alignBottom="@+id/textView3" android:layout_toRightOf="@+id/textView3"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/memhandle" android:layout_gravity="right|center_vertical"
-            android:layout_alignParentRight="true"/>
+            android:text="Handle:"
+            android:id="@+id/textView4" android:layout_below="@+id/textView3" android:layout_alignParentLeft="true"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/memmajor"
-            android:layout_below="@+id/textView" android:layout_alignLeft="@+id/textView"/>
+            android:text="Project1:"
+            android:id="@+id/lmemproj1" android:layout_below="@+id/textView4" android:layout_alignParentLeft="true"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="memschool"
-            android:id="@+id/textView4" android:layout_centerVertical="true" android:layout_alignParentLeft="true"/>
+            android:text="Project2:"
+            android:id="@+id/textView5" android:layout_below="@+id/lmemproj1" android:layout_alignParentLeft="true"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/textView5" android:layout_below="@+id/textView4" android:layout_alignParentLeft="true"/>
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Contact"
+            android:id="@+id/textView6" android:layout_centerVertical="true" android:layout_centerHorizontal="true"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/textView6" android:layout_below="@+id/textView5" android:layout_alignParentLeft="true"/>
+            android:text="Handle"
+            android:id="@+id/memhandle" android:layout_above="@+id/lmemproj1"
+            android:layout_toRightOf="@+id/lmemproj1"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Proj 1"
+            android:id="@+id/memproj1"
+            android:layout_above="@+id/textView5" android:layout_toRightOf="@+id/lmemproj1"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Proj2"
+            android:id="@+id/memproj2"
+            android:layout_alignBottom="@+id/textView5" android:layout_toRightOf="@+id/textView5"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:background="@drawable/background"
+            android:id="@+id/mememail" android:layout_below="@+id/textView6" android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Message"
+            android:background="@drawable/background"
+            android:id="@+id/button" android:layout_below="@+id/mememail" android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"/>
+
+
 </RelativeLayout>
