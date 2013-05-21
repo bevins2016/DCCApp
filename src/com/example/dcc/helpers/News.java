@@ -1,6 +1,13 @@
 package com.example.dcc.helpers;
 
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.os.Bundle;
 import android.util.Log;
+import com.example.dcc.R;
+import com.example.dcc.fragment.NewsDetailFragment;
 
 import java.io.Serializable;
 
@@ -114,5 +121,20 @@ public class News implements Serializable{
         return id;
     }
 
+    public void launchWindow(Activity activity){
+        NewsDetailFragment detailFrag = new NewsDetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("news", this);
+        detailFrag.setArguments(bundle);
+
+        FragmentManager manager = activity.getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+
+        Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
+        ObjectStorage.setFragment(R.id.fragmentcontainerright, detailFrag);
+        transaction.replace(R.id.fragmentcontainerright, detailFrag);
+
+        transaction.commit();
+    }
 }
 
