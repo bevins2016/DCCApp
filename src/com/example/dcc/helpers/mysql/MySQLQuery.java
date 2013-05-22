@@ -3,10 +3,7 @@ package com.example.dcc.helpers.mysql;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.dcc.helpers.Member;
-import com.example.dcc.helpers.News;
-import com.example.dcc.helpers.ObjectStorage;
-import com.example.dcc.helpers.User;
+import com.example.dcc.helpers.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -188,5 +185,28 @@ public class MySQLQuery {
             }
         }
         return lMembers;
+    }
+
+    public static List<ActionItem> getActionItems(String s) {
+        List<ActionItem> actionItems = new ArrayList<ActionItem>();
+        JSONArray jActionItems = (JSONArray)getArray(s);
+        for(int i = 0; i < jActionItems.length(); i++){
+            try {
+                JSONObject jActionItem = jActionItems.getJSONObject(i);
+                ActionItem item = new ActionItem();
+                item.setAid(Integer.parseInt(jActionItem.getString("id")));
+                item.setDescription(jActionItem.getString("description"));
+                item.setTag(jActionItem.getString("tag"));
+                item.setBody(jActionItem.getString("body"));
+                item.setSubject(jActionItem.getString("subject"));
+                item.setDate(jActionItem.getString("date"));
+                item.setTime(jActionItem.getString("time"));
+                item.setStatus(Integer.parseInt(jActionItem.getString("status")));
+                actionItems.add(item);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return actionItems;
     }
 }

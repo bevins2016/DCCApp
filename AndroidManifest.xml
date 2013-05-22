@@ -90,7 +90,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ActionItemFrag"
+            android:name=".fragment.ActionItemFrag"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -125,7 +125,7 @@
             android:label="@string/app_name" >
         </activity>
         <fragment
-            android:name="com.example.dcc.MenuFragment"
+            android:name="com.example.dcc.fragment.MenuFragment"
             android:label="@string/app_name" >
         </fragment>
     </application>

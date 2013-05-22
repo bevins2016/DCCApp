@@ -18,7 +18,7 @@ android:orientation="vertical" >
     android:layout_width="wrap_content"
     android:layout_height="59dp"
     android:src="@drawable/appbackground"
-    class="com.example.dcc.MenuFragment" />
+    class="com.example.dcc.fragment.MenuFragment" />
 
 </LinearLayout>
 <GridLayout

@@ -1,6 +1,8 @@
 package com.example.dcc.fragment;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
@@ -63,7 +65,21 @@ public class MembersListFragment extends Fragment implements OnClickListener{
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                members.get(i).launchWindow(getActivity());
+               User member =  members.get(i);
+
+                MemberDetailFragment detailFrag = new MemberDetailFragment();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("member", member);
+                detailFrag.setArguments(bundle);
+
+                FragmentManager manager = getActivity().getFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+
+                Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
+                ObjectStorage.setFragment(R.id.fragmentcontainerright, detailFrag);
+                transaction.replace(R.id.fragmentcontainerright, detailFrag);
+
+                transaction.commit();
             }
         });
 

@@ -37,7 +37,7 @@ public class User implements Serializable{
     private static final String LOG = "User Object";
     private String handle,email,name,cookies,project,project2;
     public int id;
-    private Bitmap image;
+    //private Bitmap image;
     private String imageURL;
     private String phone;
     private List<Friend> friends;
@@ -47,7 +47,7 @@ public class User implements Serializable{
     public User(){
         this.name = "";
         this.cookies = "";
-        this.image = null;
+        //this.image = null;
         this.friends = new ArrayList<Friend>();
         int ID = 0;
     }
@@ -111,14 +111,6 @@ public class User implements Serializable{
     }
 
     public Bitmap getImage() {
-        if(image==null){
-            setImage(imageURL);
-        }
-        return image;
-    }
-
-    public void setImage(String img) {
-
         try{
             String uri = "/DCC/getUserGravitar.php?email=" + email;
 
@@ -133,13 +125,15 @@ public class User implements Serializable{
             setImageURL(sb.toString());
             in.close();
 
-            new GetImageTask().execute().get();
 
+            return new GetImageTask().execute().get();
         }catch(Exception e){
             Log.e("EH", e.getLocalizedMessage());
         }
-
+        return null;
     }
+
+
 
     public void addFriend(Friend f) {
         friends.add(f);
@@ -194,35 +188,24 @@ public class User implements Serializable{
     }
 
     public void launchWindow(Activity activity) {
-        MemberDetailFragment detailFrag = new MemberDetailFragment();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("member", this);
-        detailFrag.setArguments(bundle);
 
-        FragmentManager manager = activity.getFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-
-        Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-        ObjectStorage.setFragment(R.id.fragmentcontainerright, detailFrag);
-        transaction.replace(R.id.fragmentcontainerright, detailFrag);
-
-        transaction.commit();
     }
 
-    public class GetImageTask extends AsyncTask<String, Void, Void>{
+    public class GetImageTask extends AsyncTask<String, Void, Bitmap>{
         @Override
-        protected Void doInBackground(String... strings) {
+        protected Bitmap doInBackground(String... strings) {
+            Bitmap image;
             try{
                 URL url = new URL(imageURL);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setDoInput(true);
                 conn.connect();
-                image = BitmapFactory.decodeStream(conn.getInputStream());
+               image = BitmapFactory.decodeStream(conn.getInputStream());
                 conn.disconnect();
             }catch(Exception e){
                 return null;
             }
-            return null;
+            return image;
         }
     }
 }

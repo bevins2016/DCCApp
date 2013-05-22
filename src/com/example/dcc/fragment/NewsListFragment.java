@@ -1,14 +1,18 @@
-package com.example.dcc;
+package com.example.dcc.fragment;
+import java.io.Serializable;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.zip.Inflater;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.text.Html;
 import android.text.Spanned;
 import android.widget.AdapterView;
 import com.example.dcc.R;
+import com.example.dcc.fragment.NewsDetailFragment;
 import com.example.dcc.helpers.News;
 import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.mysql.HttpConnection;
@@ -63,7 +67,19 @@ public class NewsListFragment extends Fragment implements OnClickListener{
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                news.get(i).launchWindow(getActivity());
+                NewsDetailFragment detailFrag = new NewsDetailFragment();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("news", news.get(i));
+                detailFrag.setArguments(bundle);
+
+                FragmentManager manager = getActivity().getFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+
+                Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
+                ObjectStorage.setFragment(R.id.fragmentcontainerright, detailFrag);
+                transaction.replace(R.id.fragmentcontainerright, detailFrag);
+
+                transaction.commit();
             }
         });
 

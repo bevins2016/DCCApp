@@ -48,7 +48,7 @@ public class EDailyActivity extends Activity implements OnClickListener {
     String first = "";
     String last = "";
     String name = "";
-    ActionItemData data;
+    //ActionItemData data;
     private EditText issues;
     private EditText dependability;
     private EditText reliability;
@@ -74,7 +74,7 @@ public class EDailyActivity extends Activity implements OnClickListener {
 
         name = ObjectStorage.getUser().getName();
 
-        data = new ActionItemData(name, "004");
+       // data = new ActionItemData(name, "004");
 
         boolean helper = false;
 
@@ -203,7 +203,7 @@ public class EDailyActivity extends Activity implements OnClickListener {
                 nameValuePairs.add(new BasicNameValuePair("Issues", getEditText(issues)));
                 nameValuePairs.add(new BasicNameValuePair("Dependability", getEditText(dependability)));
                 nameValuePairs.add(new BasicNameValuePair("Reliability", getEditText(reliability)));
-                nameValuePairs.add(new BasicNameValuePair("reportdate", data.getDate()));
+               // nameValuePairs.add(new BasicNameValuePair("reportdate", data.getDate()));
 
 				HttpClient httpclient = new DefaultHttpClient();
 				HttpPost httppost = new HttpPost(params[0]);

@@ -44,7 +44,7 @@ public class BottomFragment extends Fragment implements View.OnClickListener{
 
             View menuV = ObjectStorage.getMenuFrame();
             ViewGroup.LayoutParams menuP = menuV.getLayoutParams();
-            menuP.width = 150;
+            menuP.width = 200;
             menuV.setLayoutParams(menuP);
         }else{
             ObjectStorage.menuHidden = true;

@@ -7,15 +7,10 @@ package com.example.dcc.helpers.mysql;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 
 import com.example.dcc.helpers.*;
 import org.apache.http.Header;
@@ -31,16 +26,9 @@ import org.apache.http.cookie.CookieSpecFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.example.dcc.helpers.hacks.DCCCookieSpecFactory;
@@ -233,8 +221,11 @@ public class HttpConnection {
 
 
     public static synchronized List<News> getNews(){
-        List<News> newsPaper = MySQLQuery.getNews("/DCC/getNews.php");
-        return newsPaper;
+        return MySQLQuery.getNews("/DCC/getNews.php");
+    }
+
+    public static synchronized List<ActionItem> getActionItems(){
+        return MySQLQuery.getActionItems("/DCC/getActionItems.php");
     }
 }
 
