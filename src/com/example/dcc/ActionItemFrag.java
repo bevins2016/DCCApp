@@ -48,7 +48,7 @@ public class ActionItemFrag extends ListFragment implements OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.action_item_fragment,
+        view = inflater.inflate(R.layout.action_item,
                 container, false);
         activity = getActivity();
 

@@ -1,159 +1,79 @@
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:columnCount="4" >
-<LinearLayout
-	android:layout_width="212dp"
-	android:layout_height="match_parent"
-	android:layout_column="0"
-	android:layout_columnSpan="3"
-	android:layout_gravity="left"
-	android:layout_row="0"
-	android:orientation="vertical" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:columnCount="4" >
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="238dp"
+        android:layout_height="fill_parent"
+        android:layout_column="3"
+        android:layout_gravity="left|center_vertical"
+        android:layout_row="0"
+        android:background="@android:color/black" >
 
-<Button
-android:id="@+id/news"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:text="@string/news"
-android:drawableRight="@drawable/news"/>
-<Button
-android:id="@+id/calendar"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:text="@string/calendar"
-android:drawableRight="@drawable/cal"/>
-<Button
-android:id="@+id/photo"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:text="@string/photo"
-android:drawableRight="@drawable/gallery" />
-<Button
-android:id="@+id/report"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:text="@string/report"
-android:drawableRight="@drawable/report" />
-<Button
-android:id="@+id/action"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:text="@string/action"
-android:drawableRight="@drawable/ep" />
-<Button
-android:id="@+id/directory"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:text="@string/directory"
-android:drawableRight="@drawable/directory" />
-	<Button
-    android:id="@+id/search"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Search" />
-</LinearLayout>
-<GridLayout
-android:id="@+id/a"
-android:layout_width="wrap_content"
-android:layout_height="match_parent"
-android:layout_column="1"
-android:layout_columnSpan="2"
-android:layout_gravity="left"
-android:layout_row="0"
-android:columnCount="2" >
-</GridLayout>
-<ImageView
-android:id="@+id/imageView1"
-android:layout_width="10dp"
-android:layout_height="fill_parent"
-android:layout_column="2"
-android:layout_gravity="left"
-android:layout_row="0"
-android:background="@drawable/black"
-tools:ignore="ContentDescription" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
 
-　
+            <TextView
+                android:id="@+id/feedtitle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
 
+            <TextView
+                android:id="@+id/feeddescribtion"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
 
+            <TextView
+                android:id="@+id/feedpubdate"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
 
-<ScrollView
-    android:id="@+id/scrollView1"
-    android:layout_width="238dp"
-    android:layout_height="fill_parent"
-    android:layout_column="3"
-    android:layout_gravity="left|top"
-    android:layout_row="0"
-    android:background="@android:color/black" >
+            <TextView
+                android:id="@+id/feedlink"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="web" />
 
+            <ListView
+                android:id="@android:id/list"
+                android:layout_width="fill_parent"
+                android:layout_height="594dp" >
+            </ListView>
+
+            <TextView
+                android:id="@android:id/empty"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="waiting" />
+        </LinearLayout>
+    </ScrollView>
     <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+        <Button
+        android:id="@+id/email_button1"
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
-
+        android:layout_height="114dp"
+        android:layout_column="3"
+        android:layout_row="0"
+        android:text="Submit Action Item Now" />
         <TextView
-            android:id="@+id/feedtitle"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/feeddescribtion"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/feedpubdate"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/feedlink"
-            android:layout_width="fill_parent"
+            android:id="@+id/actionView"
+            android:layout_width="245dp"
             android:layout_height="wrap_content"
-            android:autoLink="web" />
-
-        <ListView
-            android:id="@android:id/list"
-            android:layout_width="fill_parent"
-            android:layout_height="594dp" >
-        </ListView>
-
-        <TextView
-            android:id="@android:id/empty"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="waiting" />
+            android:layout_gravity="left|center_vertical"
+            android:text="Loading" />
+        <WebView
+                android:id="@+id/webView1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_column="3"
+                android:layout_gravity="center"
+                android:layout_row="0" />
     </LinearLayout>
-</ScrollView>
-
-<WebView
-    android:id="@+id/webView1"
-    android:layout_width="830dp"
-    android:layout_height="555dp"
-    android:layout_column="3"
-    android:layout_gravity="right|bottom"
-    android:layout_row="0" />
-
-<Button
-    android:id="@+id/email_button1"
-    android:layout_width="585dp"
-    android:layout_height="114dp"
-    android:layout_column="3"
-    android:layout_gravity="center_horizontal|top"
-    android:layout_row="0"
-    android:text="Submit Action Item Now" />
-
-<TextView
-    android:id="@+id/actionView"
-    android:layout_width="243dp"
-    android:layout_height="113dp"
-    android:layout_column="3"
-    android:layout_gravity="right|top"
-    android:layout_row="0"
-    android:text="Loading" />
-
-
-</GridLayout>
-
-
+</LinearLayout>
