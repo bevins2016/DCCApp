@@ -106,10 +106,6 @@ public class MenuFragment extends Fragment implements OnClickListener{
                 break;
             case R.id.action:
 //			activity.startActivity(new Intent(activity, ActionItemFrag.class));
-<<<<<<< HEAD
-=======
-
->>>>>>> c016561020efa32fa3c288463c03e92b2109a154
                 manager = activity.getFragmentManager();
                 transaction = manager.beginTransaction();
 
