@@ -7,6 +7,7 @@ import java.util.zip.Inflater;
 
 import android.text.Html;
 import android.text.Spanned;
+import android.widget.AdapterView;
 import com.example.dcc.R;
 import com.example.dcc.helpers.News;
 import com.example.dcc.helpers.ObjectStorage;
@@ -58,6 +59,13 @@ public class NewsListFragment extends Fragment implements OnClickListener{
         listview = (ListView)view.findViewById(R.id.newslist);
         adapter = new ArrayAdapter<Spanned>(getActivity(), R.layout.news_item);
         listview.setAdapter(adapter);
+
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                news.get(i).launchWindow(getActivity());
+            }
+        });
 
         for(News n : news){
             adapter.add(Html.fromHtml(n.toString()));

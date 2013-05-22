@@ -114,6 +114,7 @@ public class MenuFragment extends Fragment implements OnClickListener, TextToSpe
                 break;
             case R.id.action:
 //			activity.startActivity(new Intent(activity, ActionItemFrag.class));
+<<<<<<< HEAD
                 action();
                 break;
             case R.id.directory:
@@ -134,6 +135,10 @@ public class MenuFragment extends Fragment implements OnClickListener, TextToSpe
     public void news(){
         FragmentManager manager = activity.getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
+=======
+                manager = activity.getFragmentManager();
+                transaction = manager.beginTransaction();
+>>>>>>> f2eb15cc05cad391c6b1865c93b6806cb0e66a1e
 
         Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
         Fragment newer = new NewsListFragment();

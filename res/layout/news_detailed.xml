@@ -11,27 +11,25 @@
             android:text="Title"
             android:background="#000000"
             android:textColor="#FFFFFF"
-            android:id="@+id/titleview" android:layout_alignParentTop="true" android:layout_alignParentLeft="true"
+            android:id="@+id/newstitle" android:layout_alignParentTop="true" android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="date"
-            android:id="@+id/newstitle" android:layout_below="@+id/titleview" android:layout_alignParentLeft="true"
-            />
+            android:text="Medium Text"
+            android:id="@+id/newsdate" android:layout_below="@+id/newstitle" android:layout_alignParentLeft="true"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="publisher"
-            android:id="@+id/publisher" android:layout_below="@+id/titleview" android:layout_alignParentRight="true"/>
+            android:text="Medium Text"
+            android:id="@+id/newspublisher" android:layout_below="@+id/newstitle" android:layout_alignParentRight="true"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Body"
-            android:id="@+id/bodyText" android:layout_below="@+id/newstitle" android:layout_alignParentLeft="true"
-            android:layout_marginTop="11dp" android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"/>
+            android:text="Medium Text"
+            android:id="@+id/newsbody" android:layout_below="@+id/newsdate" android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/newspublisher"/>
 </RelativeLayout>
