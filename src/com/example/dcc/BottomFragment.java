@@ -1,6 +1,7 @@
 package com.example.dcc;
 
-import android.widget.TextView;
+import android.util.Log;
+import android.widget.*;
 import com.example.dcc.helpers.ObjectStorage;
 
 import android.app.Fragment;
@@ -9,12 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView.FindListener;
-import android.widget.ImageView;
 
-public class BottomFragment extends Fragment{
+public class BottomFragment extends Fragment implements View.OnClickListener{
 
 	private ImageView userIcon;
     private TextView textView;
+    private Button menuVisibility;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -25,11 +26,34 @@ public class BottomFragment extends Fragment{
 		userIcon = (ImageView)view.findViewById(R.id.usericon);
         textView = (TextView)view.findViewById(R.id.userdata);
 
+        menuVisibility = (Button)view.findViewById(R.id.menu_button);
+        menuVisibility.setOnClickListener(this);
+
 		userIcon.setImageBitmap(ObjectStorage.getUser().getImage());
         textView.setText(ObjectStorage.getUser().getName()+"("+ObjectStorage.getUser().getHandle()+")");
 
-		//userIcon.setScaleX((float)2.0);
-		//userIcon.setScaleY((float)2.0);
 		return view;
 	}
+
+    @Override
+    public void onClick(View view) {
+        if(ObjectStorage.menuHidden){
+            ObjectStorage.menuHidden = false;
+            menuVisibility.setBackgroundResource(R.drawable.navigationpreviousitem);
+
+
+            View menuV = ObjectStorage.getMenuFrame();
+            ViewGroup.LayoutParams menuP = menuV.getLayoutParams();
+            menuP.width = 150;
+            menuV.setLayoutParams(menuP);
+        }else{
+            ObjectStorage.menuHidden = true;
+
+            menuVisibility.setBackgroundResource(R.drawable.navigationnextitem);
+            View menuV = ObjectStorage.getMenuFrame();
+            ViewGroup.LayoutParams menuP = menuV.getLayoutParams();
+            menuP.width = 1;
+            menuV.setLayoutParams(menuP);
+        }
+    }
 }
