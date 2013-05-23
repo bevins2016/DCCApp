@@ -16,6 +16,7 @@ public class BottomFragment extends Fragment implements View.OnClickListener{
 	private ImageView userIcon;
     private TextView textView;
     private Button menuVisibility;
+    private int norm_width;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
