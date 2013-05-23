@@ -114,7 +114,6 @@ public class MenuFragment extends Fragment implements OnClickListener, TextToSpe
                 break;
             case R.id.action:
 //			activity.startActivity(new Intent(activity, ActionItemFrag.class));
-<<<<<<< HEAD
                 action();
                 break;
             case R.id.directory:
@@ -135,10 +134,9 @@ public class MenuFragment extends Fragment implements OnClickListener, TextToSpe
     public void news(){
         FragmentManager manager = activity.getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-=======
-                manager = activity.getFragmentManager();
-                transaction = manager.beginTransaction();
->>>>>>> f2eb15cc05cad391c6b1865c93b6806cb0e66a1e
+        manager = activity.getFragmentManager();
+        transaction = manager.beginTransaction();
+
 
         Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
         Fragment newer = new NewsListFragment();
@@ -285,6 +283,15 @@ public class MenuFragment extends Fragment implements OnClickListener, TextToSpe
             if (matches.contains("item")) {
                 action();
             }
+            if (matches.contains("directory")) {
+                directory();
+            }
+            if (matches.contains("email")) {
+                directory();
+            }
+            if (matches.contains("contacts")) {
+                directory();
+            }
             if (matches.contains("close")) {
                 activity.finish();
             }
@@ -338,7 +345,6 @@ public class MenuFragment extends Fragment implements OnClickListener, TextToSpe
 
     @Override
     public void onDestroy() {
-        // TODO Auto-generated method stub
         super.onDestroy();
         myTTS.shutdown();
     }

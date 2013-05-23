@@ -45,7 +45,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LaunchActivityFrag"
+            android:name=".LaunchActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -81,7 +81,7 @@
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".CustomizedListViewFrag"
+            android:name=".CustomizedListView"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -90,7 +90,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ActionItemFrag"
+            android:name=".ActionItem"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -111,10 +111,10 @@
             android:name="com.example.dcc.SetDefaults"
             android:label="@string/app_name" />
         <activity
-            android:name=".EDailyActivityFrag"
+            android:name=".EDailyActivity"
             android:label="@string/app_name" />
         <activity
-            android:name=".EReportFrag"
+            android:name=".EReport"
             android:label="@string/app_name" />
         <activity
             android:name="com.example.dcc.AddStudent"

@@ -55,10 +55,15 @@
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:layout_gravity="center_horizontal|top">
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Button"
+                android:id="@+id/button" android:layout_gravity="left|center_vertical"/>
         <Button
                 android:id="@+id/email_button1"
-                android:layout_width="fill_parent"
+                android:layout_width="765dp"
                 android:layout_height="114dp"
                 android:layout_gravity="center_horizontal|top"
                 android:text="Submit Action Item Now" />

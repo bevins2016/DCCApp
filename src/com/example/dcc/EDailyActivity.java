@@ -192,11 +192,10 @@ public class EDailyActivity extends Activity implements OnClickListener {
 //				nameValuePairs.add(new BasicNameValuePair("edaily",
 //						getEditText(todayTF)));
 
-
                 nameValuePairs.add(new BasicNameValuePair("ID", params[1]));
                 nameValuePairs.add(new BasicNameValuePair("First", first));
                 nameValuePairs.add(new BasicNameValuePair("Last", last));
-                nameValuePairs.add(new BasicNameValuePair("Project", SetDefaults.project1));
+                nameValuePairs.add(new BasicNameValuePair("Project", "Batman"));
                 nameValuePairs.add(new BasicNameValuePair("edaily-content",
                         getEditText(todayTF)));
                 nameValuePairs.add(new BasicNameValuePair("Hours", getEditText(hours)));
