@@ -24,8 +24,6 @@ import android.view.*;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
-import com.example.dcc.fragment.ActionItemFrag;
-import com.example.dcc.fragment.MembersListFragment;
 import com.example.dcc.helpers.ObjectStorage;
 
 /**
@@ -40,14 +38,6 @@ public class EReportLauncherFrag extends Fragment implements OnClickListener {
     private Button eDailyButton; // eDaily Button
     private Button eReportButton; // eReport Button
     private Button fiftysevenButton; // 0:57 Button
-    private Button newsB;
-    private Button loginB;
-    private Button calB;
-    private Button photoB;
-    private Button reportB;
-    private Button actionB;
-    private Button directoryB;
-    private Button searchB;
     private String filename = "";
     private String fiftysevenFile = Environment.getExternalStorageDirectory()
             + "/enotebook/057s";
@@ -78,27 +68,10 @@ public class EReportLauncherFrag extends Fragment implements OnClickListener {
 		/* Check if files/folders exist */
         defaultCheck();
 
-//        // These are the buttons on the left side of the screen.
-//        newsB = (Button) view.findViewById(R.id.news);
-//        calB = (Button) view.findViewById(R.id.calendar);
-//        photoB = (Button) view.findViewById(R.id.photo);
-//        reportB = (Button) view.findViewById(R.id.report);
-//        actionB = (Button) view.findViewById(R.id.action);
-//        directoryB = (Button) view.findViewById(R.id.directory);
-//        searchB = (Button) view.findViewById(R.id.search);
-//
-//        // Here the listener for each button that allows actions is set.
-//        newsB.setOnClickListener(this);
-//        calB.setOnClickListener(this);
-//        photoB.setOnClickListener(this);
-//        reportB.setOnClickListener(this);
-//        actionB.setOnClickListener(this);
-//        directoryB.setOnClickListener(this);
-//        searchB.setOnClickListener(this);
         return view;
     }
 
-	/* Create menu */
+    /* Create menu */
     public boolean onCreateOptionsMenu(Menu menu) {
         activity.getMenuInflater().inflate(R.menu.menu, menu);
         return true;
@@ -127,88 +100,15 @@ public class EReportLauncherFrag extends Fragment implements OnClickListener {
      */
     public void onClick(View v) {
         Intent intent = new Intent();
+        FragmentManager manager;
+        FragmentTransaction transaction;
+        Fragment newer;
 
         switch (v.getId()) {
-            case R.id.news:
-//                getActivity().startActivity(new Intent(getActivity(), AndroidRssReader.class));
-                FragmentManager manager = activity.getFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-
-                Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-                Fragment newer = new AndroidRssReaderFrag();
-                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-
-                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-                transaction.commit();
-                break;
-            case R.id.calendar:
-                break;
-            case R.id.photo:
-//                activity.startActivity(new Intent(activity, com.example.dcc.CustomizedListViewFrag.class));
-                manager = activity.getFragmentManager();
-                transaction = manager.beginTransaction();
-
-                old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-                newer = new CustomizedListViewFrag();
-                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-
-                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-                transaction.commit();
-                break;
-            case R.id.report:
-//                activity.startActivity(new Intent(activity, EReportLauncher.class));
-                manager = activity.getFragmentManager();
-                transaction = manager.beginTransaction();
-
-                old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-                newer = new EReportLauncherFrag();
-                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-
-                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-                transaction.commit();
-                break;
-            case R.id.search:
-//                activity.startActivity(new Intent(activity, LaunchActivityFrag.class));
-                manager = activity.getFragmentManager();
-                transaction = manager.beginTransaction();
-
-                old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-                newer = new LaunchActivityFrag();
-                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-
-                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-                transaction.commit();
-                break;
-            case R.id.action:
-//			activity.startActivity(new Intent(activity, ActionItemFrag.class));
-                manager = activity.getFragmentManager();
-                transaction = manager.beginTransaction();
-
-                old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-                newer = new ActionItemFrag();
-                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-
-                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-                transaction.commit();
-                break;
-            case R.id.directory:
-                manager = activity.getFragmentManager();
-                transaction = manager.beginTransaction();
-
-                old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-                newer = new MembersListFragment();
-                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-
-                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-                transaction.commit();
-                break;
             case R.id.eDailyButton:
-//                intent.setClass(activity, EDailyActivityFrag.class);
-//                startActivity(intent);
                 manager = activity.getFragmentManager();
                 transaction = manager.beginTransaction();
 
-                old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
                 newer = new EDailyActivityFrag();
                 ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
 
@@ -216,12 +116,9 @@ public class EReportLauncherFrag extends Fragment implements OnClickListener {
                 transaction.commit();
                 break;
             case R.id.eReportButton:
-//                intent.setClass(activity, EReportFrag.class);
-//                startActivity(intent);
                 manager = activity.getFragmentManager();
                 transaction = manager.beginTransaction();
 
-                old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
                 newer = new EReportFrag();
                 ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
 
