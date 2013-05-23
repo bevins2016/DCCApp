@@ -33,33 +33,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-<<<<<<< HEAD
-            android:name="com.example.dcc.AndroidRssReader"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:scheme="http" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".LaunchActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-=======
->>>>>>> 4cf666150937fe1bef4e322b9821fd539207c916
-            android:name="com.example.dcc.surveys.CreateSurvey"
-            android:label="@string/app_name" >
-        </activity>
         <activity
             android:name="com.example.dcc.surveys.ManageSurvey"
             android:label="@string/app_name" >
@@ -84,48 +58,12 @@
             android:label="@string/app_name" >
         </activity>
         <activity
-<<<<<<< HEAD
-            android:name=".CustomizedListView"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ActionItem"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.example.dcc.EReportLauncher"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name="com.example.dcc.SetDefaults"
             android:label="@string/app_name" />
         <activity
             android:name=".EDailyActivity"
             android:label="@string/app_name" />
         <activity
-            android:name=".EReport"
-            android:label="@string/app_name" />
-        <activity
-=======
-            android:name="com.example.dcc.SetDefaults"
-            android:label="@string/app_name" />
-        <activity
->>>>>>> 4cf666150937fe1bef4e322b9821fd539207c916
             android:name="com.example.dcc.AddStudent"
             android:label="@string/app_name" >
         </activity>
