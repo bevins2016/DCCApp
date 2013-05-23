@@ -4,20 +4,26 @@
     android:layout_height="match_parent"
     android:orientation="vertical" 
     android:background="#a09f9f">
-    
+    <Button
+        android:id="@+id/menu_button"
+        android:layout_height="75dp"
+        android:layout_width="75dp"
+        android:background="@drawable/navigationnextitem"
+        android:layout_alignParentLeft="true"
+        />
     <ImageView
     android:id="@+id/usericon"
     android:layout_width="150dp"
     android:layout_gravity="right"
-    android:layout_height="100dp"
+    android:layout_height="75dp"
     android:src="@drawable/appbackground" android:layout_alignParentTop="true" android:layout_alignParentRight="true"/>
 
     <TextView
         android:id="@+id/userdata"
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
+        android:layout_height="75dp"
         android:layout_toLeftOf="@id/usericon"
-        android:textSize="36sp"
+        android:textSize="24sp"
         />
 
 </RelativeLayout>

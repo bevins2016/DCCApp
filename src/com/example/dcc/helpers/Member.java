@@ -71,18 +71,6 @@ public class Member implements Serializable{
         Log.e("Member", this.toString());
     }
     public void launchWindow(Activity activity) {
-        MemberDetailFragment detailFrag = new MemberDetailFragment();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("member", this);
-        detailFrag.setArguments(bundle);
 
-        FragmentManager manager = activity.getFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-
-        Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-        ObjectStorage.setFragment(R.id.fragmentcontainerright, detailFrag);
-        transaction.replace(R.id.fragmentcontainerright, detailFrag);
-
-        transaction.commit();
     }
 }

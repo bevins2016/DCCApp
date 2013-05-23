@@ -1,54 +1,55 @@
 package com.example.dcc.fragment;
-
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.text.Html;
-import android.text.Spanned;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import com.example.dcc.R;
-import com.example.dcc.helpers.Member;
-import com.example.dcc.helpers.ObjectStorage;
-import com.example.dcc.helpers.User;
-import com.example.dcc.helpers.mysql.HttpConnection;
-
+import java.io.Serializable;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.zip.Inflater;
+
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.text.Html;
+import android.text.Spanned;
+import android.widget.AdapterView;
+import com.example.dcc.R;
+import com.example.dcc.fragment.NewsDetailFragment;
+import com.example.dcc.helpers.News;
+import com.example.dcc.helpers.ObjectStorage;
+import com.example.dcc.helpers.mysql.HttpConnection;
+
+import android.app.Fragment;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 
-public class MembersListFragment extends Fragment implements OnClickListener{
+public class NewsListFragment extends Fragment implements OnClickListener{
 
     ListView listview;
 
     ArrayAdapter<Spanned> adapter;
-    List<User> members;
+    List<News> news;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
-
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
 
-        View view = inflater.inflate(R.layout.members_list, container, false);
+        View view = inflater.inflate(R.layout.news_list_fragment, container, false);
 
-        if((members = ObjectStorage.getMemberList())==null){
-
-            GetMembersTask t =  new GetMembersTask();
-            t.execute((Void) null);
+        if((news = ObjectStorage.getNewsList()) == null){
+            GetNewsTask g = new GetNewsTask();
+            g.execute((Void) null);
             try {
-                t.get(20, TimeUnit.SECONDS);
-                ObjectStorage.setMemberList(members);
+                g.get(10, TimeUnit.SECONDS);
+                ObjectStorage.setNewsList(news);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {
@@ -58,18 +59,17 @@ public class MembersListFragment extends Fragment implements OnClickListener{
             }
         }
 
-        adapter = new ArrayAdapter<Spanned>(getActivity(), R.layout.member_item);
-        listview = (ListView)view.findViewById(R.id.membersList);
-        ObjectStorage.setMemberList(members);
+
+        listview = (ListView)view.findViewById(R.id.newslist);
+        adapter = new ArrayAdapter<Spanned>(getActivity(), R.layout.news_item);
         listview.setAdapter(adapter);
+
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-               User member =  members.get(i);
-
-                MemberDetailFragment detailFrag = new MemberDetailFragment();
+                NewsDetailFragment detailFrag = new NewsDetailFragment();
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("member", member);
+                bundle.putSerializable("news", news.get(i));
                 detailFrag.setArguments(bundle);
 
                 FragmentManager manager = getActivity().getFragmentManager();
@@ -83,36 +83,21 @@ public class MembersListFragment extends Fragment implements OnClickListener{
             }
         });
 
-        for(User m : members){
-            adapter.add(Html.fromHtml(m.toString()));
+        for(News n : news){
+            adapter.add(Html.fromHtml(n.toString()));
         }
-
         return view;
     }
-
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState){
-        super.onSaveInstanceState(savedInstanceState);
-        List<String> memberList = ObjectStorage.getMemberActivity();
-        Log.e("Something", "Saving State");
-        if(!members.isEmpty()){
-            memberList.clear();
-            savedInstanceState.clear();
-            for(User m : members){
-                memberList.add(m.getHandle());
-                savedInstanceState.putSerializable(m.getHandle(), m);
-            }
-        }
-    }
-
     @Override
     public void onClick(View v) {
+        // TODO Auto-generated method stub
+
     }
 
-    public class GetMembersTask extends AsyncTask<Void, Void, Boolean> {
+    public class GetNewsTask extends AsyncTask<Void, Void, Boolean> {
         @Override
         protected Boolean doInBackground(Void... params) {
-            members  = HttpConnection.getMembers();
+            news  = HttpConnection.getNews();
             return true;
         }
 

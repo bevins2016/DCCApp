@@ -122,19 +122,7 @@ public class News implements Serializable{
     }
 
     public void launchWindow(Activity activity){
-        NewsDetailFragment detailFrag = new NewsDetailFragment();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("news", this);
-        detailFrag.setArguments(bundle);
 
-        FragmentManager manager = activity.getFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-
-        Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-        ObjectStorage.setFragment(R.id.fragmentcontainerright, detailFrag);
-        transaction.replace(R.id.fragmentcontainerright, detailFrag);
-
-        transaction.commit();
     }
 }
 

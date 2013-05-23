@@ -1,6 +1,7 @@
 package com.example.dcc.helpers;
 
 import android.app.Fragment;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +14,26 @@ public class ObjectStorage {
     private static List<String> memberActivity = new ArrayList<String>();
     private static List<User> memberList;
     private static List<News> newsList;
+    private static List<ActionItem> actionItems;
     private static HashMap<Integer, User> userCache = new HashMap<Integer, User>();
+    public static Boolean menuHidden = true;
+    private static View menuFrame;
+
+    public static void setActionItems(List<ActionItem> ais){
+        actionItems = ais;
+    }
+    public static List<ActionItem> getActionItems(){
+        return actionItems;
+    }
+    public static View getMenuFrame() {
+        return menuFrame;
+    }
+
+    public static void setMenuFrame(View menu) {
+        menuFrame = menu;
+    }
+
+
 
 
     public static User getUser(int user){

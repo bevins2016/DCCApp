@@ -52,8 +52,8 @@ public class AddStudent extends Activity implements OnClickListener {
 	private String studentEmail = "";
 	private String url = "http://storage.virtualdiscoverycenter.net/projectmorpheus/dcc/add.php";
 	
-	private final String teamListUrl = "http://storage.virtualdiscoverycenter.net/projectmorpheus/dcc/projects.txt";
-	private final String teamfile = Environment.getExternalStorageDirectory()
+	private static final String teamListUrl = "http://storage.virtualdiscoverycenter.net/projectmorpheus/dcc/projects.txt";
+	private static final String teamfile = Environment.getExternalStorageDirectory()
 			.getPath() + "/dcc/teamlist.txt";
 
 	private EditText Fname;
