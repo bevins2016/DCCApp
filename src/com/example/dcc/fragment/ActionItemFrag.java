@@ -1,5 +1,10 @@
 package com.example.dcc.fragment;
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -7,10 +12,13 @@ import java.util.concurrent.TimeoutException;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.os.Environment;
 import android.text.Html;
 import android.text.Spanned;
-import android.widget.AdapterView;
+import android.util.Log;
+import android.widget.*;
 import com.example.dcc.R;
+import com.example.dcc.SetDefaults;
 import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.ActionItem;
 import com.example.dcc.helpers.mysql.HttpConnection;
@@ -22,8 +30,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 
 
 public class ActionItemFrag extends Fragment implements OnClickListener{
@@ -33,6 +46,8 @@ public class ActionItemFrag extends Fragment implements OnClickListener{
     ArrayAdapter<Spanned> adapter;
     List<ActionItem> actionItems;
     Activity activity;
+
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
@@ -87,11 +102,12 @@ public class ActionItemFrag extends Fragment implements OnClickListener{
         }
         return view;
     }
+
     @Override
-    public void onClick(View v) {
-        // TODO Auto-generated method stub
+    public void onClick(View view) {
 
     }
+
 
     public class GetNewsTask extends AsyncTask<Void, Void, Boolean> {
         @Override
@@ -109,5 +125,9 @@ public class ActionItemFrag extends Fragment implements OnClickListener{
         protected void onCancelled() {
         }
     }
+
+
+
+
 
 }
