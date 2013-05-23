@@ -27,13 +27,13 @@ public class ActionItemActionFrag extends Fragment implements View.OnClickListen
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.member_detail_layout, container, false);
+        View view = inflater.inflate(R.layout.action_item_action_frag, container, false);
         super.onCreate(savedInstanceState);
 
         actionitem = (ActionItem)this.getArguments().getSerializable("actionitem");
 
         aitext = (TextView)view.findViewById(R.id.aitext);
-        aitext.setText(actionitem.getSubject());
+        aitext.setText(actionitem.getBody());
 
 
         return view;

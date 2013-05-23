@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,10 +29,10 @@ public class ActionItemDetailFrag extends Fragment implements View.OnClickListen
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.member_detail_layout, container, false);
+        View view = inflater.inflate(R.layout.action_item_detail_frag, container, false);
         super.onCreate(savedInstanceState);
 
-        actionitem = (ActionItem)this.getArguments().getSerializable("actionitem");
+        actionitem = (ActionItem)getArguments().getSerializable("actionitem");
 
         aisubject = (TextView)view.findViewById(R.id.aisubject);
         aisubject.setText(actionitem.getSubject());
@@ -50,7 +51,7 @@ public class ActionItemDetailFrag extends Fragment implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-        MemberDetailFragment detailFrag = new MemberDetailFragment();
+        ActionItemActionFrag detailFrag = new ActionItemActionFrag();
         Bundle bundle = new Bundle();
         bundle.putSerializable("actionitem", actionitem);
         detailFrag.setArguments(bundle);
