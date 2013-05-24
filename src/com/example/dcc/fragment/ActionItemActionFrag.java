@@ -43,16 +43,18 @@ public class ActionItemActionFrag extends Fragment implements View.OnClickListen
     Button aisubmit;
     Button aicancel;
     Activity activity;
-    String first = "";
-    String last = "";
+    String first = "Sam";
+    String last = "Bevins";
     String name = "";
-    private String url = "http://www.virtualdiscoverycenter.net/wp-content/plugins/buddypress/bp-themes/bp-default/eDaily.php";//http://www.facebook.com/l.php?u=http%3A%2F%2Fwww.virtualdiscoverycenter.net%2Fwp-content%2Fplugins%2Fbuddypress%2Fbp-themes%2Fbp-default%2FeDaily.php&h=3AQH7TTNw
+    private String url = "http://www.virtualdiscoverycenter.net/wp-content/plugins/buddypress/bp-themes/bp-default/ai-submit.php";//http://www.facebook.com/l.php?u=http%3A%2F%2Fwww.virtualdiscoverycenter.net%2Fwp-content%2Fplugins%2Fbuddypress%2Fbp-themes%2Fbp-default%2FeDaily.php&h=3AQH7TTNw
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
 
         View view = inflater.inflate(R.layout.action_item_action_frag, container, false);
         super.onCreate(savedInstanceState);
+
+        activity = getActivity();
 
         aisubmit = (Button) view.findViewById(R.id.aisubmut);
 
@@ -84,9 +86,21 @@ public class ActionItemActionFrag extends Fragment implements View.OnClickListen
 
         switch(view.getId()){
             case R.id.aisubmut:
+                File f = new File(Environment.getExternalStorageDirectory() + "/enotebook/InternalStorage.txt");
+
+                String studentID = "";
+                try {
+                    BufferedReader br = new BufferedReader(new FileReader(new File(
+                            "sdcard/eNotebook/InternalStorage.txt")));
+                    br.readLine(); // Skip Title
+                    studentID = br.readLine(); // Get Student ID#
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
                 Uploader uploader = new Uploader();
                 uploader.execute(url, "");
-
                 break;
         }
 
@@ -110,14 +124,13 @@ public class ActionItemActionFrag extends Fragment implements View.OnClickListen
 //						getEditText(todayTF)));
 
 
-                nameValuePairs.add(new BasicNameValuePair("uid", params[1]));
+                nameValuePairs.add(new BasicNameValuePair("uid", "" + ObjectStorage.getUser().getID()));
                 nameValuePairs.add(new BasicNameValuePair("first", first));
                 nameValuePairs.add(new BasicNameValuePair("uemail", "bevins2012@hotmail.com"));
                 nameValuePairs.add(new BasicNameValuePair("last", last));
-                nameValuePairs.add(new BasicNameValuePair("complete", "1"));
-                nameValuePairs.add(new BasicNameValuePair("subject", ""));
-                nameValuePairs.add(new BasicNameValuePair("response", "TestAction"));
-                nameValuePairs.add(new BasicNameValuePair("aiid", "7"));
+                nameValuePairs.add(new BasicNameValuePair("subject", "test subject"));
+                nameValuePairs.add(new BasicNameValuePair("response", "" + aitext.getText()));
+                nameValuePairs.add(new BasicNameValuePair("aiid", "" + actionitem.getAid()));
                 nameValuePairs.add(new BasicNameValuePair("aitag", "test"));
 
                 //  nameValuePairs.add(new BasicNameValuePair("reportdate", data.getDate()));
@@ -127,6 +140,7 @@ public class ActionItemActionFrag extends Fragment implements View.OnClickListen
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 HttpResponse response = httpclient.execute(httppost);
                 response.getEntity();
+                System.out.println(nameValuePairs);
             } catch (Exception e) {
                 Log.e("log_tag", "Error in http connection " + e.toString());
             }
@@ -148,8 +162,6 @@ public class ActionItemActionFrag extends Fragment implements View.OnClickListen
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
             return null;
         }
 

@@ -106,7 +106,6 @@ public class EReportLauncherFrag extends Fragment implements OnClickListener {
 
         switch (v.getId()) {
             case R.id.eDailyButton:
-<<<<<<< HEAD
                 intent.setClass(activity, EDailyActivity.class);
                 startActivity(intent);
 //                manager = activity.getFragmentManager();
@@ -118,8 +117,6 @@ public class EReportLauncherFrag extends Fragment implements OnClickListener {
 //
 //                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
 //                transaction.commit();
-=======
->>>>>>> af979473e0a1844d901ff9dc16ec7798f6934b45
                 manager = activity.getFragmentManager();
                 transaction = manager.beginTransaction();
 
