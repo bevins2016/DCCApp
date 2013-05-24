@@ -19,9 +19,6 @@ import com.example.dcc.CustomizedListViewFrag;
 import com.example.dcc.EReportLauncherFrag;
 import com.example.dcc.LaunchActivityFrag;
 import com.example.dcc.R;
-import com.example.dcc.fragment.ActionItemFrag;
-import com.example.dcc.fragment.MembersListFragment;
-import com.example.dcc.fragment.NewsListFragment;
 import com.example.dcc.helpers.ObjectStorage;
 
 import java.util.ArrayList;
@@ -138,27 +135,25 @@ public class MenuFragment extends Fragment implements OnClickListener,
                 break;
             //Temp Button for debugging purposes only
             case R.id.ha:
-//            case R.id.ha:
-//                FragmentManager manager = activity.getFragmentManager();
-//                FragmentTransaction transaction = manager.beginTransaction();
-//                Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-//                Fragment newer = new AdminSearchFragment();
-//                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-//
-//                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-//                transaction.commit();
-//                break;
-            case R.id.createaction:
                 FragmentManager manager = activity.getFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
-
                 Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-                Fragment newer = new CreateActionItemFrag();
+                Fragment newer = new AdminSearchFragment();
                 ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
 
-                transaction.replace(R.id.fragmentcontainerright,
-                        ObjectStorage.getFragment(R.id.fragmentcontainerright));
+                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
                 transaction.commit();
+                break;
+            case R.id.createaction:
+                FragmentManager manager2 = activity.getFragmentManager();
+                FragmentTransaction transaction2 = manager2.beginTransaction();
+
+                Fragment newerq = new CreateActionItemFrag();
+                ObjectStorage.setFragment(R.id.fragmentcontainerright, newerq);
+
+                transaction2.replace(R.id.fragmentcontainerright,
+                        ObjectStorage.getFragment(R.id.fragmentcontainerright));
+                transaction2.commit();
                 break;
             case R.id.button:
                 speakWords("Speak Now");
