@@ -28,10 +28,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class MenuFragment extends Fragment implements OnClickListener, TextToSpeech.OnInitListener{
+/**
+ * This fragment is the left aligned navigation bar used to allow the
+ * user to transition between fragments.
+ */
+public class MenuFragment extends Fragment implements OnClickListener,
+        TextToSpeech.OnInitListener{
 
     private Button newsB;
-    //private Button calB;
     private Button photoB;
     private Button reportB;
     private Button actionB;
@@ -58,8 +62,9 @@ public class MenuFragment extends Fragment implements OnClickListener, TextToSpe
                 container, false);
         activity = getActivity();
         assert view != null;
+
+        //Get all buttons from the view
         newsB = (Button) view.findViewById(R.id.news);
-        //calB = (Button) view.findViewById(R.id.calendar);
         photoB = (Button) view.findViewById(R.id.photo);
         reportB = (Button) view.findViewById(R.id.report);
         actionB = (Button) view.findViewById(R.id.action);
@@ -71,14 +76,13 @@ public class MenuFragment extends Fragment implements OnClickListener, TextToSpe
         voiceButton = (Button) view.findViewById(R.id.button);
         mList = (ListView) view.findViewById(R.id.list);
 
-
         // check for TTS data
         Intent checkTTSIntent = new Intent();
         checkTTSIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
         startActivityForResult(checkTTSIntent, MY_DATA_CHECK_CODE);
 
+        //Set on click listeners
         newsB.setOnClickListener(this);
-        //calB.setOnClickListener(this);
         photoB.setOnClickListener(this);
         reportB.setOnClickListener(this);
         actionB.setOnClickListener(this);
@@ -86,11 +90,13 @@ public class MenuFragment extends Fragment implements OnClickListener, TextToSpe
         searchB.setOnClickListener(this);
         toggleSound.setOnClickListener(this);
         headache.setOnClickListener(this);
+
         // Check to see if a recognition activity is present
         // if running on AVD virtual device it will give this message. The mic
         // required only works on an actual android device//
         PackageManager pm = activity.getPackageManager();
-        List<ResolveInfo> activities = pm.queryIntentActivities(new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
+        List<ResolveInfo> activities = pm.queryIntentActivities(new Intent
+                (RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
         if (activities.size() != 0) {
             voiceButton.setOnClickListener(this);
         } else {
@@ -105,31 +111,27 @@ public class MenuFragment extends Fragment implements OnClickListener, TextToSpe
 
         switch (v.getId()) {
             case R.id.news:
-//                getActivity().startActivity(new Intent(getActivity(), AndroidRssReader.class));
                 news();
                 break;
             case R.id.photo:
-//                activity.startActivity(new Intent(activity, com.example.dcc.CustomizedListViewFrag.class));
                 photo();
                 break;
             case R.id.report:
-//                activity.startActivity(new Intent(activity, EReportLauncher.class));
                 report();
                 break;
             case R.id.search:
-//                activity.startActivity(new Intent(activity, LaunchActivityFrag.class));
                 search();
                 break;
             case R.id.action:
-//			activity.startActivity(new Intent(activity, ActionItemFrag.class));
                 action();
                 break;
             case R.id.directory:
-                directory();;
+                directory();
                 break;
             case R.id.toggle:
                 toggle();
                 break;
+            //Temp Button for debugging purposes only
             case R.id.ha:
                 FragmentManager manager = activity.getFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
@@ -137,84 +139,55 @@ public class MenuFragment extends Fragment implements OnClickListener, TextToSpe
                 Fragment newer = new AdminSearchFragment();
                 ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
 
-                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
+                transaction.replace(R.id.fragmentcontainerright,
+                        ObjectStorage.getFragment(R.id.fragmentcontainerright));
                 transaction.commit();
                 break;
             case R.id.button:
                 speakWords("Speak Now");
                 startVoiceRecognitionActivity(); // call for voice recognition
-                // activity
                 break;
         }
 
     }
 
-    public void news(){
+    /**
+     * Method that launches the fragment into the right container;
+     * @param newer
+     */
+    private void launchFragment(Fragment newer){
         FragmentManager manager = activity.getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
 
-        Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-        Fragment newer = new NewsListFragment();
         ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
 
         transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
         transaction.commit();
+    }
+
+    public void news(){
+        launchFragment(new NewsListFragment());
     }
 
     public void photo(){
-        FragmentManager manager = activity.getFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-
-        Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
         Fragment newer = new CustomizedListViewFrag();
-        ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-
-        transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-        transaction.commit();
+        launchFragment(newer);
     }
     public void report(){
-        FragmentManager manager = activity.getFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-
-        Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
         Fragment newer = new EReportLauncherFrag();
-        ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-
-        transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-        transaction.commit();
+        launchFragment(newer);
     }
     public void search(){
-        FragmentManager manager = activity.getFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-
-        Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
         Fragment newer = new LaunchActivityFrag();
-        ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-
-        transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-        transaction.commit();
+        launchFragment(newer);
     }
     public void action(){
-        FragmentManager manager = activity.getFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-
-        Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-        Fragment newer = new ActionItemFrag();
-        ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-
-        transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-        transaction.commit();
+        Fragment newer = new ActionItemActionFrag();
+        launchFragment(newer);
     }
     public void directory(){
-        FragmentManager manager = activity.getFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-
-        Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
         Fragment newer = new MembersListFragment();
-        ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-
-        transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-        transaction.commit();
+        launchFragment(newer);
     }
     public void toggle(){
         if(toggleSound.isChecked()){
