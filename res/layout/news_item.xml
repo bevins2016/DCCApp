@@ -3,9 +3,10 @@
 <TextView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/textbg"
+        android:background="@drawable/text_selector"
         android:gravity="left"
         android:textSize="22sp"
         android:drawableRight="@drawable/avplay">

@@ -1,41 +1,43 @@
 package com.example.dcc.fragment;
-import java.io.Serializable;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-import java.util.zip.Inflater;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
 import com.example.dcc.R;
-import com.example.dcc.fragment.NewsDetailFragment;
 import com.example.dcc.helpers.News;
 import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.mysql.HttpConnection;
 
-import android.app.Fragment;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
+/**
+ * Used to display a list of aritlces from the VDC site.
+ *
+ * @author Brandon Harmon
+ */
+public class NewsListFragment extends Fragment{
 
-public class NewsListFragment extends Fragment implements OnClickListener{
-
-    ListView listview;
-
-    ArrayAdapter<Spanned> adapter;
-    List<News> news;
+    /*XML layout option*/
+    private ListView listview;
+    /*Adapter to append more news articles to the list*/
+    private ArrayAdapter<Spanned> adapter;
+    /*A List<E> of the news items that are pushed into the adapter*/
+    private List<News> news;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
@@ -72,10 +74,11 @@ public class NewsListFragment extends Fragment implements OnClickListener{
                 bundle.putSerializable("news", news.get(i));
                 detailFrag.setArguments(bundle);
 
+
+
                 FragmentManager manager = getActivity().getFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
 
-                Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
                 ObjectStorage.setFragment(R.id.fragmentcontainerright, detailFrag);
                 transaction.replace(R.id.fragmentcontainerright, detailFrag);
 
@@ -88,26 +91,13 @@ public class NewsListFragment extends Fragment implements OnClickListener{
         }
         return view;
     }
-    @Override
-    public void onClick(View v) {
-        // TODO Auto-generated method stub
 
-    }
 
     public class GetNewsTask extends AsyncTask<Void, Void, Boolean> {
         @Override
         protected Boolean doInBackground(Void... params) {
             news  = HttpConnection.getNews();
             return true;
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-
-        }
-
-        @Override
-        protected void onCancelled() {
         }
     }
 

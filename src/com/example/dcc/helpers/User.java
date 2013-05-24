@@ -36,8 +36,6 @@ public class User implements Serializable{
     private static final long serialVersionUID = -5285360029686080283L;
     private static final String LOG = "User Object";
     private String handle,email,name,cookies,project,project2;
-    public int id;
-    //private Bitmap image;
     private String imageURL;
     private String phone;
     private List<Friend> friends;

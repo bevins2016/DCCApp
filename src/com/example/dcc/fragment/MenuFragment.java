@@ -38,7 +38,7 @@ public class MenuFragment extends Fragment implements OnClickListener, TextToSpe
     private Button directoryB;
     private Button searchB;
     private ToggleButton toggleSound;
-
+    private Button headache;
     private Activity activity;
 
     public static final int VOICE_RECOGNITION_REQUEST_CODE = 1234;
@@ -65,6 +65,8 @@ public class MenuFragment extends Fragment implements OnClickListener, TextToSpe
         actionB = (Button) view.findViewById(R.id.action);
         directoryB = (Button) view.findViewById(R.id.directory);
         searchB = (Button) view.findViewById(R.id.search);
+        headache = (Button)view.findViewById(R.id.ha);
+
         toggleSound = (ToggleButton) view.findViewById(R.id.toggle);
         voiceButton = (Button) view.findViewById(R.id.button);
         mList = (ListView) view.findViewById(R.id.list);
@@ -83,7 +85,7 @@ public class MenuFragment extends Fragment implements OnClickListener, TextToSpe
         directoryB.setOnClickListener(this);
         searchB.setOnClickListener(this);
         toggleSound.setOnClickListener(this);
-
+        headache.setOnClickListener(this);
         // Check to see if a recognition activity is present
         // if running on AVD virtual device it will give this message. The mic
         // required only works on an actual android device//
@@ -128,6 +130,16 @@ public class MenuFragment extends Fragment implements OnClickListener, TextToSpe
             case R.id.toggle:
                 toggle();
                 break;
+            case R.id.ha:
+                FragmentManager manager = activity.getFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
+                Fragment newer = new AdminSearchFragment();
+                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
+
+                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
+                transaction.commit();
+                break;
             case R.id.button:
                 speakWords("Speak Now");
                 startVoiceRecognitionActivity(); // call for voice recognition
@@ -140,7 +152,6 @@ public class MenuFragment extends Fragment implements OnClickListener, TextToSpe
     public void news(){
         FragmentManager manager = activity.getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-
         Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
         Fragment newer = new NewsListFragment();
         ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
@@ -148,6 +159,7 @@ public class MenuFragment extends Fragment implements OnClickListener, TextToSpe
         transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
         transaction.commit();
     }
+
     public void photo(){
         FragmentManager manager = activity.getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();

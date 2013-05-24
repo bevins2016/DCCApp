@@ -1,33 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Small Text"
+            android:minHeight="90dp"
             android:id="@+id/aitext" android:layout_alignParentLeft="true" android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"/>
     <EditText
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="50dp"
             android:id="@+id/userinput" android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true" android:layout_below="@+id/aitext"
-            android:layout_above="@+id/aisubmut" android:text="Type Here"/>
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/background"
-            android:text="Submit"
-            android:id="@+id/aisubmut" android:layout_alignParentBottom="true" android:layout_alignParentRight="true"/>
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/background"
-            android:text="Cancel"
-            android:id="@+id/aicancel" android:layout_alignParentBottom="true" android:layout_alignParentLeft="true"/>
+            android:text="Type Here"/>
+
+    <RelativeLayout
+            android:id="@+id/button_line"
+            android:layout_height="50dp"
+            android:layout_width="fill_parent"
+            android:layout_alignParentBottom="true">
+
+        <Button
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/background"
+                android:text="Cancel"
+                android:id="@+id/aicancel" android:layout_alignParentBottom="true" android:layout_alignParentLeft="true"/>
+        <Button
+                android:layout_width="200dp"
+                android:layout_height="fill_parent"
+                android:background="@drawable/background"
+                android:text="Submit"
+                android:id="@+id/aisubmut" android:layout_alignParentBottom="true" android:layout_alignParentRight="true"/>
+    </RelativeLayout>
 </RelativeLayout>

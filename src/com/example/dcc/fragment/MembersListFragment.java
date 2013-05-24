@@ -21,6 +21,7 @@ import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.User;
 import com.example.dcc.helpers.mysql.HttpConnection;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -47,7 +48,7 @@ public class MembersListFragment extends Fragment implements OnClickListener{
             GetMembersTask t =  new GetMembersTask();
             t.execute((Void) null);
             try {
-                t.get(20, TimeUnit.SECONDS);
+                members = t.get(20, TimeUnit.SECONDS);
                 ObjectStorage.setMemberList(members);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -65,7 +66,7 @@ public class MembersListFragment extends Fragment implements OnClickListener{
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-               User member =  members.get(i);
+                User member =  members.get(i);
 
                 MemberDetailFragment detailFrag = new MemberDetailFragment();
                 Bundle bundle = new Bundle();
@@ -90,36 +91,31 @@ public class MembersListFragment extends Fragment implements OnClickListener{
         return view;
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState){
-        super.onSaveInstanceState(savedInstanceState);
-        List<String> memberList = ObjectStorage.getMemberActivity();
-        Log.e("Something", "Saving State");
-        if(!members.isEmpty()){
-            memberList.clear();
-            savedInstanceState.clear();
-            for(User m : members){
-                memberList.add(m.getHandle());
-                savedInstanceState.putSerializable(m.getHandle(), m);
-            }
+    public List<User> getMemberList(){
+        GetMembersTask gmt = new GetMembersTask();
+        try {
+            List<User> members =  gmt.get(20, TimeUnit.SECONDS);
+            return members;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
         }
-    }
+        return null;
 
+    }
     @Override
     public void onClick(View v) {
     }
 
-    public class GetMembersTask extends AsyncTask<Void, Void, Boolean> {
+    public class GetMembersTask extends AsyncTask<Void, Void, List<User>> {
         @Override
-        protected Boolean doInBackground(Void... params) {
-            members  = HttpConnection.getMembers();
-            return true;
+        protected List<User> doInBackground(Void... params) {
+            return HttpConnection.getMembers();
         }
 
-        @Override
-        protected void onPostExecute(final Boolean success) {
-
-        }
 
         @Override
         protected void onCancelled() {
