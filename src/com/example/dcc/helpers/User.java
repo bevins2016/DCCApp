@@ -84,28 +84,7 @@ public class User implements Serializable{
     }
 
     public String getURL(Links link){
-        String base = "/members/"+handle+"/";
-        String url = "";
-        switch(link){
-            case PROFILE:
-                url = "/intern/"; break;
-            case MESSAGES:
-                url = base+"messages/"; break;
-            case MEDIA:
-                url = base+"media/"; break;
-            case FRIENDS:
-                url = base+"friends/"; break;
-            case GROUPS:
-                url = base+"groups/"; break;
-            case MEMBERS:
-                url = "/members/"; break;
-            case SETTINGS:
-                url = "/settings/"; break;
-            default:
-                url = "/intern/"; break;
-        }
-        Log.e("Link", url);
-        return url;
+        return null;
     }
 
     public Bitmap getImage() {

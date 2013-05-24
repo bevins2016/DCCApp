@@ -20,6 +20,7 @@ import com.example.dcc.helpers.Member;
 import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.User;
 import com.example.dcc.helpers.mysql.HttpConnection;
+import com.example.dcc.helpers.mysql.MySQLQuery;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,7 +114,7 @@ public class MembersListFragment extends Fragment implements OnClickListener{
     public class GetMembersTask extends AsyncTask<Void, Void, List<User>> {
         @Override
         protected List<User> doInBackground(Void... params) {
-            return HttpConnection.getMembers();
+            return MySQLQuery.getAllMembers("/DCC/getAllUsers.php");
         }
 
 

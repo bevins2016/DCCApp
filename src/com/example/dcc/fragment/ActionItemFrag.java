@@ -30,6 +30,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import com.example.dcc.helpers.mysql.MySQLQuery;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -112,7 +113,7 @@ public class ActionItemFrag extends Fragment implements OnClickListener{
     public class GetNewsTask extends AsyncTask<Void, Void, Boolean> {
         @Override
         protected Boolean doInBackground(Void... params) {
-            actionItems  = HttpConnection.getActionItems();
+            actionItems  = MySQLQuery.getActionItems("/DCC/getActionItems.php");
             return true;
         }
 
