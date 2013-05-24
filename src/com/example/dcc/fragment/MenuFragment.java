@@ -39,6 +39,7 @@ public class MenuFragment extends Fragment implements OnClickListener, TextToSpe
     private Button searchB;
     private ToggleButton toggleSound;
     private Button headache;
+    Button createButton;
     private Activity activity;
 
     public static final int VOICE_RECOGNITION_REQUEST_CODE = 1234;
@@ -70,6 +71,9 @@ public class MenuFragment extends Fragment implements OnClickListener, TextToSpe
         toggleSound = (ToggleButton) view.findViewById(R.id.toggle);
         voiceButton = (Button) view.findViewById(R.id.button);
         mList = (ListView) view.findViewById(R.id.list);
+
+        createButton = (Button) view.findViewById(R.id.createaction);
+        createButton.setOnClickListener(this);
 
 
         // check for TTS data
@@ -130,11 +134,22 @@ public class MenuFragment extends Fragment implements OnClickListener, TextToSpe
             case R.id.toggle:
                 toggle();
                 break;
-            case R.id.ha:
+//            case R.id.ha:
+//                FragmentManager manager = activity.getFragmentManager();
+//                FragmentTransaction transaction = manager.beginTransaction();
+//                Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
+//                Fragment newer = new AdminSearchFragment();
+//                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
+//
+//                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
+//                transaction.commit();
+//                break;
+            case R.id.createaction:
                 FragmentManager manager = activity.getFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
+
                 Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-                Fragment newer = new AdminSearchFragment();
+                Fragment newer = new CreateActionItemFrag();
                 ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
 
                 transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));

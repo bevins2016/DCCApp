@@ -2,6 +2,7 @@ package com.example.dcc.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -31,40 +32,38 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * Created by Harmon on 5/22/13.
+ * Created by Sam on 5/24/13.
  */
-public class ActionItemActionFrag extends Fragment implements View.OnClickListener{
-
-    ActionItem actionitem;
-    TextView aitext;
-    EditText userInput;
-    Button aisubmit;
-    Button aiCancel;
+public class CreateActionItemFrag extends Fragment implements View.OnClickListener {
     Activity activity;
     String first = "";
     String last = "";
     String name = "";
-    private String url = "http://www.virtualdiscoverycenter.net/wp-content/plugins/buddypress/bp-themes/bp-default/ai-submit.php";//http://www.facebook.com/l.php?u=http%3A%2F%2Fwww.virtualdiscoverycenter.net%2Fwp-content%2Fplugins%2Fbuddypress%2Fbp-themes%2Fbp-default%2FeDaily.php&h=3AQH7TTNw
+    Button submit;
+    Button createButton;
+    EditText tag;
+    EditText date;
+    EditText time;
+    EditText title;
+    EditText content;
 
+    private String url = "http://www.virtualdiscoverycenter.net/wp-content/plugins/buddypress/bp-themes/bp-default/ai-post.php";
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
 
-        View view = inflater.inflate(R.layout.action_item_action_frag, container, false);
+        View view = inflater.inflate(R.layout.createactionitem, container, false);
         super.onCreate(savedInstanceState);
 
         activity = getActivity();
 
-        aisubmit = (Button) view.findViewById(R.id.aisubmut);
-        aiCancel = (Button) view.findViewById(R.id.aicancel);
-        userInput = (EditText) view.findViewById(R.id.userinput);
+        tag = (EditText) view.findViewById(R.id.edittag);
+        date = (EditText) view.findViewById(R.id.editdate);
+        time = (EditText) view.findViewById(R.id.edittime);
+        title = (EditText) view.findViewById(R.id.edittitle);
+        content = (EditText) view.findViewById(R.id.editbody);
+        submit = (Button) view.findViewById(R.id.createai);
 
-        actionitem = (ActionItem)this.getArguments().getSerializable("actionitem");
-
-        aitext = (TextView)view.findViewById(R.id.aitext);
-
-        aitext.setText(actionitem.getBody());
-
-        aisubmit.setOnClickListener(this);
+        submit.setOnClickListener(this);
 
         boolean helper = false;
 
@@ -87,36 +86,9 @@ public class ActionItemActionFrag extends Fragment implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-        /*
-        MemberDetailFragment detailFrag = new MemberDetailFragment();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("actionitem", actionitem);
-        detailFrag.setArguments(bundle);
-
-        FragmentManager manager = getActivity().getFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-
-        Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-        ObjectStorage.setFragment(R.id.fragmentcontainerright, detailFrag);
-        transaction.replace(R.id.fragmentcontainerright, detailFrag);
-
-        transaction.commit();*/
 
         switch(view.getId()){
-            case R.id.aisubmut:
-                File f = new File(Environment.getExternalStorageDirectory() + "/enotebook/InternalStorage.txt");
-
-                String studentID = "";
-                try {
-                    BufferedReader br = new BufferedReader(new FileReader(new File(
-                            "sdcard/eNotebook/InternalStorage.txt")));
-                    br.readLine(); // Skip Title
-                    studentID = br.readLine(); // Get Student ID#
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
+            case R.id.createai:
                 Uploader uploader = new Uploader();
                 uploader.execute(url, "");
                 break;
@@ -135,23 +107,21 @@ public class ActionItemActionFrag extends Fragment implements View.OnClickListen
 			/* Send to server */
             try {
                 ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                String dueDate = String.valueOf(date.getText());
 
-//				nameValuePairs.add(new BasicNameValuePair("id", params[1]));
-//				nameValuePairs.add(new BasicNameValuePair("type", "edaily"));
-//				nameValuePairs.add(new BasicNameValuePair("edaily",
-//						getEditText(todayTF)));
+                nameValuePairs.add(new BasicNameValuePair("tag", "" + tag.getText()));
+                nameValuePairs.add(new BasicNameValuePair("ai-date", dueDate));
+                nameValuePairs.add(new BasicNameValuePair("time", String.valueOf(time.getText())));
+                nameValuePairs.add(new BasicNameValuePair("title", title.getText().toString()));
+                nameValuePairs.add(new BasicNameValuePair("content", content.getText().toString()));
+                nameValuePairs.add(new BasicNameValuePair("15", ""));
 
-
-                nameValuePairs.add(new BasicNameValuePair("uid", "" + ObjectStorage.getUser().getID()));
-                nameValuePairs.add(new BasicNameValuePair("first", first));
-                nameValuePairs.add(new BasicNameValuePair("uemail", ObjectStorage.getUser().getEmail()));
-                nameValuePairs.add(new BasicNameValuePair("last", last));
-                nameValuePairs.add(new BasicNameValuePair("subject", "test subject"));
-                nameValuePairs.add(new BasicNameValuePair("response", "" + userInput.getText()));
-                nameValuePairs.add(new BasicNameValuePair("aiid", "" + actionitem.getAid()));
-                nameValuePairs.add(new BasicNameValuePair("aitag", "test"));
-
-                //  nameValuePairs.add(new BasicNameValuePair("reportdate", data.getDate()));
+//                nameValuePairs.add(new BasicNameValuePair("tag", "" + "Justice League"));
+//                nameValuePairs.add(new BasicNameValuePair("ai-date", "05/24"));
+//                nameValuePairs.add(new BasicNameValuePair("time", "2:14pm"));
+//                nameValuePairs.add(new BasicNameValuePair("title", "Superman will LaserEyes everyone"));
+//                nameValuePairs.add(new BasicNameValuePair("content", "Superman flies a mile into the air, shoots his lasers and kill his enemies. End of movie."));
+//                nameValuePairs.add(new BasicNameValuePair("15", ""));
 
                 HttpClient httpclient = new DefaultHttpClient();
                 HttpPost httppost = new HttpPost(params[0]);
@@ -191,5 +161,5 @@ public class ActionItemActionFrag extends Fragment implements View.OnClickListen
             Toast.makeText(activity, "Report Sent!",
                     Toast.LENGTH_SHORT).show();
         }
-}
+    }
 }

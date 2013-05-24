@@ -1,42 +1,29 @@
 package com.example.dcc.fragment;
-import java.io.*;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import com.example.dcc.R;
+import com.example.dcc.helpers.ActionItem;
+import com.example.dcc.helpers.ObjectStorage;
+import com.example.dcc.helpers.mysql.HttpConnection;
+
 import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-
-import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.os.Environment;
-import android.text.Html;
-import android.text.Spanned;
-import android.util.Log;
-import android.widget.*;
-import com.example.dcc.R;
-import com.example.dcc.SetDefaults;
-import com.example.dcc.helpers.ObjectStorage;
-import com.example.dcc.helpers.ActionItem;
-import com.example.dcc.helpers.mysql.HttpConnection;
-
-import android.app.Fragment;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 
 
 public class ActionItemFrag extends Fragment implements OnClickListener{
