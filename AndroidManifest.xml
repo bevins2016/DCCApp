@@ -34,6 +34,13 @@
             </intent-filter>
         </activity>
 
+<<<<<<< HEAD
+        <activity
+            android:name="com.example.dcc.surveys.CreateSurvey"
+            android:label="@string/app_name" >
+        </activity>
+=======
+>>>>>>> af979473e0a1844d901ff9dc16ec7798f6934b45
         <activity
             android:name="com.example.dcc.surveys.ManageSurvey"
             android:label="@string/app_name" >
@@ -58,6 +65,8 @@
             android:label="@string/app_name" >
         </activity>
         <activity
+<<<<<<< HEAD
+=======
             android:name="com.example.dcc.SetDefaults"
             android:label="@string/app_name" />
         <activity
@@ -68,6 +77,7 @@
             android:label="@string/app_name" >
         </activity>
         <activity
+>>>>>>> af979473e0a1844d901ff9dc16ec7798f6934b45
             android:name="com.example.dcc.MainActivityFrag"
             android:label="@string/app_name" >
         </activity>

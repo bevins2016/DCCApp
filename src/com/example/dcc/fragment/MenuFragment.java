@@ -152,6 +152,7 @@ public class MenuFragment extends Fragment implements OnClickListener, TextToSpe
     public void news(){
         FragmentManager manager = activity.getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
+
         Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
         Fragment newer = new NewsListFragment();
         ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
