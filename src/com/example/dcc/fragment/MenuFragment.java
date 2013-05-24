@@ -377,6 +377,6 @@ public class MenuFragment extends Fragment implements OnClickListener, TextToSpe
     @Override
     public void onDestroy() {
         super.onDestroy();
-        myTTS.shutdown();
+        //myTTS.shutdown();
     }
 }

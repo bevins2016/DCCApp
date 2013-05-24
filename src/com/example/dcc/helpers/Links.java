@@ -1,5 +1,9 @@
 package com.example.dcc.helpers;
 
 public enum Links {
-	PROFILE, MESSAGES, MEDIA, FRIENDS, GROUPS, MEMBERS, SETTINGS
+	SOMETHING("/google.com");
+
+    private Links(String url){
+
+    }
 }

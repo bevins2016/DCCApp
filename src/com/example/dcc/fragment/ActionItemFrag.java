@@ -20,10 +20,28 @@ import com.example.dcc.helpers.ActionItem;
 import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.mysql.HttpConnection;
 
+<<<<<<< HEAD
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+=======
+import android.app.Fragment;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import com.example.dcc.helpers.mysql.MySQLQuery;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+>>>>>>> 6c962294da81b879240213230b01b45998af34bf
 
 
 public class ActionItemFrag extends Fragment implements OnClickListener{
@@ -99,7 +117,7 @@ public class ActionItemFrag extends Fragment implements OnClickListener{
     public class GetNewsTask extends AsyncTask<Void, Void, Boolean> {
         @Override
         protected Boolean doInBackground(Void... params) {
-            actionItems  = HttpConnection.getActionItems();
+            actionItems  = MySQLQuery.getActionItems("/DCC/getActionItems.php");
             return true;
         }
 

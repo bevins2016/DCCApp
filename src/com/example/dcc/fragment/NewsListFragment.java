@@ -17,6 +17,7 @@ import com.example.dcc.R;
 import com.example.dcc.helpers.News;
 import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.mysql.HttpConnection;
+import com.example.dcc.helpers.mysql.MySQLQuery;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -94,7 +95,7 @@ public class NewsListFragment extends Fragment{
     public class GetNewsTask extends AsyncTask<Void, Void, Boolean> {
         @Override
         protected Boolean doInBackground(Void... params) {
-            news  = HttpConnection.getNews();
+            news  = MySQLQuery.getNews("/DCC/getNews.php");
             return true;
         }
     }
