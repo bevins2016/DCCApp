@@ -18,7 +18,10 @@ import android.widget.*;
 import com.example.dcc.CustomizedListViewFrag;
 import com.example.dcc.EReportLauncherFrag;
 import com.example.dcc.LaunchActivityFrag;
+<<<<<<< HEAD
+=======
 import com.example.dcc.R;
+>>>>>>> 3297504beea7dfe1393710dd1ec7226b753e61cb
 import com.example.dcc.helpers.ObjectStorage;
 
 import java.util.ArrayList;
@@ -87,8 +90,13 @@ public class MenuFragment extends Fragment implements OnClickListener,
         voiceButton = (Button) view.findViewById(R.id.button);
         mList = (ListView) view.findViewById(R.id.list);
 
+<<<<<<< HEAD
+        createButton = (Button) view.findViewById(R.id.createaction);
+        createButton.setOnClickListener(this);
+=======
         //createButton = (Button) view.findViewById(R.id.createaction);
         //createButton.setOnClickListener(this);
+>>>>>>> 3297504beea7dfe1393710dd1ec7226b753e61cb
 
 
         // check for TTS data
@@ -146,6 +154,40 @@ public class MenuFragment extends Fragment implements OnClickListener,
             case R.id.toggle:
                 toggle();
                 break;
+<<<<<<< HEAD
+//            case R.id.ha:
+//                FragmentManager manager = activity.getFragmentManager();
+//                FragmentTransaction transaction = manager.beginTransaction();
+//                Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
+//                Fragment newer = new AdminSearchFragment();
+//                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
+//
+//                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
+//                transaction.commit();
+//                break;
+
+            //Temp Button for debugging purposes only
+//            case R.id.ha:
+//                FragmentManager manager = activity.getFragmentManager();
+//                FragmentTransaction transaction = manager.beginTransaction();
+//                Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
+//                Fragment newer = new AdminSearchFragment();
+//                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
+//
+//                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
+//                transaction.commit();
+//                break;
+            case R.id.createaction:
+                FragmentManager manager2 = activity.getFragmentManager();
+                FragmentTransaction transaction2 = manager2.beginTransaction();
+
+                Fragment newerq = new CreateActionItemFrag();
+                ObjectStorage.setFragment(R.id.fragmentcontainerright, newerq);
+
+                transaction2.replace(R.id.fragmentcontainerright,
+                        ObjectStorage.getFragment(R.id.fragmentcontainerright));
+                transaction2.commit();
+=======
             //Temp Button for debugging purposes only
             case R.id.ha:
                 FragmentManager manager = activity.getFragmentManager();
@@ -156,6 +198,7 @@ public class MenuFragment extends Fragment implements OnClickListener,
 
                 transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
                 transaction.commit();
+>>>>>>> 3297504beea7dfe1393710dd1ec7226b753e61cb
                 break;
             case R.id.createaction:
                 FragmentManager manager2 = activity.getFragmentManager();
