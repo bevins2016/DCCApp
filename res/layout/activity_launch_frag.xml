@@ -51,6 +51,14 @@
                 android:layout_marginTop="10dp"
                 android:background="@android:color/white"
                 android:text="@string/title_activity_admin" />
+        <Button
+                android:id="@+id/createaction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/white"
+                android:text="Create Action Item"/>
+
     </LinearLayout>
 
 </RelativeLayout>

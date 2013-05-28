@@ -46,6 +46,7 @@ public class MenuFragment extends Fragment implements OnClickListener, TextToSpe
 
     public ListView mList;
     public Button voiceButton;
+    View view;
 
     // TTS object
     public TextToSpeech myTTS;
@@ -55,8 +56,20 @@ public class MenuFragment extends Fragment implements OnClickListener, TextToSpe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.menu_fragment,
-                container, false);
+        if(!ObjectStorage.getUser().getName().equalsIgnoreCase("robert williams")){
+            view = inflater.inflate(R.layout.menu_fragment,
+                    container, false);
+
+
+
+        }else{
+            view = inflater.inflate(R.layout.menu_fragment_director,
+                    container, false);
+            searchB = (Button) view.findViewById(R.id.search);
+            searchB.setOnClickListener(this);
+
+        }
+
         activity = getActivity();
         assert view != null;
         newsB = (Button) view.findViewById(R.id.news);
@@ -65,7 +78,7 @@ public class MenuFragment extends Fragment implements OnClickListener, TextToSpe
         reportB = (Button) view.findViewById(R.id.report);
         actionB = (Button) view.findViewById(R.id.action);
         directoryB = (Button) view.findViewById(R.id.directory);
-        searchB = (Button) view.findViewById(R.id.search);
+
         headache = (Button)view.findViewById(R.id.ha);
 
         toggleSound = (ToggleButton) view.findViewById(R.id.toggle);
@@ -144,17 +157,7 @@ public class MenuFragment extends Fragment implements OnClickListener, TextToSpe
 //                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
 //                transaction.commit();
 //                break;
-            case R.id.createaction:
-                FragmentManager manager = activity.getFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
 
-                Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-                Fragment newer = new CreateActionItemFrag();
-                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-
-                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-                transaction.commit();
-                break;
             case R.id.button:
                 speakWords("Speak Now");
                 startVoiceRecognitionActivity(); // call for voice recognition
