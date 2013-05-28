@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:text="Enter the tag for the subject line."
                 android:id="@+id/texttag" android:layout_gravity="left|center_vertical"
-                android:layout_alignTop="@+id/15checkBox" android:layout_alignLeft="@+id/eventcheckBox"/>
+                android:layout_alignTop="@+id/fifteencheckBox" android:layout_alignLeft="@+id/eventcheckBox"/>
         <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -120,21 +120,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="15 Week Students"
-            android:id="@+id/15checkBox" android:layout_gravity="left|center_vertical"
+            android:id="@+id/fifteencheckBox" android:layout_gravity="left|center_vertical"
             android:layout_marginRight="20dp" android:layout_above="@+id/checkBox"
-            android:layout_alignRight="@+id/editbody" android:layout_marginBottom="24dp"/>
+            android:layout_alignRight="@+id/editbody" android:layout_marginBottom="24dp" android:checked="false"/>
     <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="10 Week Students"
-            android:id="@+id/10checkBox" android:layout_gravity="left|center_vertical"
-            android:layout_alignTop="@+id/edittitle" android:layout_alignLeft="@+id/15checkBox"/>
+            android:id="@+id/tencheckBox" android:layout_gravity="left|center_vertical"
+            android:layout_alignTop="@+id/edittitle" android:layout_alignLeft="@+id/fifteencheckBox"
+            android:checked="false"/>
     <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="5 Week Students"
             android:id="@+id/checkBox" android:layout_gravity="left|center_vertical"
-            android:layout_alignTop="@+id/learningcheckBox" android:layout_alignLeft="@+id/10checkBox"/>
+            android:layout_alignTop="@+id/learningcheckBox" android:layout_alignLeft="@+id/tencheckBox"
+            android:checked="false"/>
     <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

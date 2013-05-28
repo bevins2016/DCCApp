@@ -87,8 +87,8 @@ public class MenuFragment extends Fragment implements OnClickListener,
         voiceButton = (Button) view.findViewById(R.id.button);
         mList = (ListView) view.findViewById(R.id.list);
 
-        createButton = (Button) view.findViewById(R.id.createaction);
-        createButton.setOnClickListener(this);
+        //createButton = (Button) view.findViewById(R.id.createaction);
+        //createButton.setOnClickListener(this);
 
 
         // check for TTS data
@@ -102,7 +102,7 @@ public class MenuFragment extends Fragment implements OnClickListener,
         reportB.setOnClickListener(this);
         actionB.setOnClickListener(this);
         directoryB.setOnClickListener(this);
-        searchB.setOnClickListener(this);
+        //searchB.setOnClickListener(this);
         toggleSound.setOnClickListener(this);
         headache.setOnClickListener(this);
 
@@ -146,19 +146,6 @@ public class MenuFragment extends Fragment implements OnClickListener,
             case R.id.toggle:
                 toggle();
                 break;
-<<<<<<< HEAD
-//            case R.id.ha:
-//                FragmentManager manager = activity.getFragmentManager();
-//                FragmentTransaction transaction = manager.beginTransaction();
-//                Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-//                Fragment newer = new AdminSearchFragment();
-//                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-//
-//                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-//                transaction.commit();
-//                break;
-
-=======
             //Temp Button for debugging purposes only
             case R.id.ha:
                 FragmentManager manager = activity.getFragmentManager();
@@ -181,7 +168,6 @@ public class MenuFragment extends Fragment implements OnClickListener,
                         ObjectStorage.getFragment(R.id.fragmentcontainerright));
                 transaction2.commit();
                 break;
->>>>>>> 8eda0bc43b14ef002e8a4efce0d9bf125e99d04e
             case R.id.button:
                 speakWords("Speak Now");
                 startVoiceRecognitionActivity(); // call for voice recognition

@@ -18,30 +18,13 @@ import android.widget.ListView;
 import com.example.dcc.R;
 import com.example.dcc.helpers.ActionItem;
 import com.example.dcc.helpers.ObjectStorage;
-import com.example.dcc.helpers.mysql.HttpConnection;
+import com.example.dcc.helpers.mysql.MySQLQuery;
 
-<<<<<<< HEAD
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-=======
-import android.app.Fragment;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import com.example.dcc.helpers.mysql.MySQLQuery;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
->>>>>>> 6c962294da81b879240213230b01b45998af34bf
+
 
 
 public class ActionItemFrag extends Fragment implements OnClickListener{
@@ -60,13 +43,13 @@ public class ActionItemFrag extends Fragment implements OnClickListener{
         setRetainInstance(true);
 
         View view = inflater.inflate(R.layout.news_list_fragment, container, false);
-
         activity = getActivity();
+
         if((actionItems = ObjectStorage.getActionItems()) == null){
             GetNewsTask g = new GetNewsTask();
             g.execute((Void) null);
             try {
-                g.get(10, TimeUnit.SECONDS);
+                g.get(20, TimeUnit.SECONDS);
                 ObjectStorage.setActionItems(actionItems);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -94,7 +77,6 @@ public class ActionItemFrag extends Fragment implements OnClickListener{
                 FragmentManager manager = activity.getFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
 
-                Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
                 ObjectStorage.setFragment(R.id.fragmentcontainerright, detailFrag);
                 transaction.replace(R.id.fragmentcontainerright, detailFrag);
 
@@ -105,6 +87,7 @@ public class ActionItemFrag extends Fragment implements OnClickListener{
         for(ActionItem n : actionItems){
             adapter.add(Html.fromHtml(n.toString()));
         }
+
         return view;
     }
 
