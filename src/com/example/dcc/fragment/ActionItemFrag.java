@@ -16,6 +16,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+<<<<<<< HEAD
+=======
+import com.example.dcc.R;
+>>>>>>> 3297504beea7dfe1393710dd1ec7226b753e61cb
 import com.example.dcc.helpers.ActionItem;
 import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.mysql.MySQLQuery;
@@ -24,6 +28,10 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3297504beea7dfe1393710dd1ec7226b753e61cb
 
 
 @SuppressLint("NewApi")
@@ -43,13 +51,13 @@ public class ActionItemFrag extends Fragment implements OnClickListener{
         setRetainInstance(true);
 
         View view = inflater.inflate(R.layout.news_list_fragment, container, false);
-
         activity = getActivity();
+
         if((actionItems = ObjectStorage.getActionItems()) == null){
             GetNewsTask g = new GetNewsTask();
             g.execute((Void) null);
             try {
-                g.get(10, TimeUnit.SECONDS);
+                g.get(20, TimeUnit.SECONDS);
                 ObjectStorage.setActionItems(actionItems);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -77,7 +85,6 @@ public class ActionItemFrag extends Fragment implements OnClickListener{
                 FragmentManager manager = activity.getFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
 
-                Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
                 ObjectStorage.setFragment(R.id.fragmentcontainerright, detailFrag);
                 transaction.replace(R.id.fragmentcontainerright, detailFrag);
 
@@ -88,6 +95,7 @@ public class ActionItemFrag extends Fragment implements OnClickListener{
         for(ActionItem n : actionItems){
             adapter.add(Html.fromHtml(n.toString()));
         }
+
         return view;
     }
 

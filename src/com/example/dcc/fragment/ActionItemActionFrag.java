@@ -49,6 +49,7 @@ public class ActionItemActionFrag extends Fragment implements View.OnClickListen
     ActionItem actionitem;
     //Textbox title of the action item body
     TextView aitext;
+<<<<<<< HEAD
     EditText userInput;
 
     Button aiCancel;
@@ -58,12 +59,20 @@ public class ActionItemActionFrag extends Fragment implements View.OnClickListen
     String name = "";
     private String url = "http://www.virtualdiscoverycenter.net/wp-content/plugins/buddypress/bp-themes/bp-default/ai-submit.php";//http://www.facebook.com/l.php?u=http%3A%2F%2Fwww.virtualdiscoverycenter.net%2Fwp-content%2Fplugins%2Fbuddypress%2Fbp-themes%2Fbp-default%2FeDaily.php&h=3AQH7TTNw
 
+=======
+
+    EditText userInput;
+>>>>>>> 3297504beea7dfe1393710dd1ec7226b753e61cb
     //Text area for user input
     EditText userinput;
     //Submit button
     Button aisubmit;
     //Cancel button
+<<<<<<< HEAD
     Button aicancel;
+=======
+    Button aiCancel;
+>>>>>>> 3297504beea7dfe1393710dd1ec7226b753e61cb
     //Current activity
     Activity activity;
     //Stores the values set inside of the action item frag
@@ -97,6 +106,7 @@ public class ActionItemActionFrag extends Fragment implements View.OnClickListen
         //Set Listeners
         aisubmit.setOnClickListener(this);
 
+<<<<<<< HEAD
         boolean helper = false;
 
         name = ObjectStorage.getUser().getName();
@@ -116,6 +126,8 @@ public class ActionItemActionFrag extends Fragment implements View.OnClickListen
         return view;
     }
 
+=======
+>>>>>>> 3297504beea7dfe1393710dd1ec7226b753e61cb
     @Override
     public void onClick(View view) {
         switch(view.getId()){
@@ -151,6 +163,7 @@ public class ActionItemActionFrag extends Fragment implements View.OnClickListen
 
         @Override
         protected String doInBackground(String... params) {
+<<<<<<< HEAD
 
 			/* Send to server */
             try {
@@ -202,6 +215,9 @@ public class ActionItemActionFrag extends Fragment implements View.OnClickListen
             }
             HttpConnection.sendActionItem(nameValuePairs);
 
+=======
+            HttpConnection.sendActionItem(nameValuePairs);
+>>>>>>> 3297504beea7dfe1393710dd1ec7226b753e61cb
             return null;
         }
 
