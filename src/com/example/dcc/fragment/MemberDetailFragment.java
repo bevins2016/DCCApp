@@ -10,41 +10,57 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.dcc.R;
-import com.example.dcc.helpers.Member;
 import com.example.dcc.helpers.User;
 
 /**
+ * This fragment is used to display the details of the user passed into this
+ * fragment.
  * Created by Harmon on 5/17/13.
  */
 public class MemberDetailFragment extends Fragment implements View.OnClickListener{
 
+    //User to display
     User member;
+    //Labels that give the member's details
     TextView memname,memhandle, memproj1, memproj2;
+    //Button that activates the email activity populated by this user's email
     Button mememail;
+    //Image of the user's gravitar
     ImageView userIcon;
 
+    /**
+     * Override method used to create the view of this fragment
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.member_detail_layout, container, false);
         super.onCreate(savedInstanceState);
 
+        //Get the user object that should be displayed
         member = (User)this.getArguments().getSerializable("member");
 
+        //Get the lables that need to be updated to this user's information
         memname = (TextView)view.findViewById(R.id.memname);
         memhandle = (TextView)view.findViewById(R.id.memhandle);
         memproj1 = (TextView)view.findViewById(R.id.memproj1);
         memproj2 = (TextView)view.findViewById(R.id.memproj2);
 
+        //Get the user's icon
         userIcon = (ImageView)view.findViewById(R.id.memicon);
 
+        //Get the button and set the listener
         mememail = (Button)view.findViewById(R.id.mememail);
         mememail.setOnClickListener(this);
 
+        //Update the labels with the relevant member data
         memname.setText(member.getName());
         memhandle.setText(member.getHandle());
         memproj1.setText(member.getProject());
         memproj2.setText(member.getProject2());
-
         mememail.setText(member.getEmail());
 
         if(member.getImage()!=null)
@@ -52,9 +68,15 @@ public class MemberDetailFragment extends Fragment implements View.OnClickListen
         return view;
     }
 
+    /**
+     * The only button on this screen is currently the email button, this will launch
+     * an email activity from the device's default client.
+     * @param view
+     */
     @Override
     public void onClick(View view) {
         switch(view.getId()){
+            //Launch Email
             case R.id.mememail:
                 String email = member.getEmail();
                 Intent i = new Intent(android.content.Intent.ACTION_SEND);

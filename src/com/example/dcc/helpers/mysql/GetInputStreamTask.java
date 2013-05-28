@@ -19,30 +19,36 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 /**
+ * This is used to get a basic input stream for posting to a URI
  * Created by Harmon on 5/17/13.
  */
 public class GetInputStreamTask extends AsyncTask<String, Void, InputStream>{
 
+    //URL of the main HOST
     private static final String HOST = "www.virtualdiscoverycenter.net";
+
 
     @Override
     public InputStream doInBackground(String... url) {
-        User user = ObjectStorage.getUser();
+
         try{
-            Log.i("getis", url[0]);
+            User user = ObjectStorage.getUser();
+
+            //Get HTTP Client
             DefaultHttpClient client = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(url[0]);
 
+            //Mod cookies to allow for lower standards
             client.setCookieStore(new DCCCookieStore());
             client.getCookieSpecs().register("easy", getCookieSpec());
             client.getParams().setParameter(ClientPNames.COOKIE_POLICY, "easy");
 
+            //Set Cookies
             httpPost.setHeader("Cookie", user.getCookies());
-           // httpPost.setHeader("User-Agent", USER_AGENT);
 
-            HttpResponse response = client.execute(new HttpHost(HOST), httpPost);
-            HttpEntity entity = response.getEntity();
-            return entity.getContent();
+            //Execute the post and get the returned content(JSON file)
+            return client.execute(new HttpHost(HOST), httpPost).getEntity().getContent();
+
         }catch(Exception e){
             e.printStackTrace();
             return null;

@@ -1,53 +1,35 @@
 package com.example.dcc.helpers;
 
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.util.Log;
+import com.example.dcc.helpers.mysql.GetInputStreamTask;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
-import android.os.AsyncTask;
-import com.example.dcc.helpers.mysql.GetInputStreamTask;
-import org.apache.http.client.CookieStore;
-import org.apache.http.cookie.Cookie;
-
-import com.example.dcc.R;
-import com.example.dcc.fragment.MemberDetailFragment;
-import com.example.dcc.helpers.hacks.DCCCookieStore;
-
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Bundle;
-import android.util.Log;
-
+/**
+ * Used to store data that represents users of VDC
+ */
 public class User implements Serializable{
 
-    /**
-     *
-     */
+    //Serial number
     private static final long serialVersionUID = -5285360029686080283L;
-    private static final String LOG = "User Object";
-    private String handle,email,name,cookies,project,project2;
-    private String imageURL;
-    private String phone;
-    private List<Friend> friends;
+    //Logging name
+    private static final String LOG = "dcc.User";
+    //String that define the object
+    private String handle,email,name,cookies,project,project2,imageURL,phone;
+    //ID number of the user
     private int ID;
 
 
     public User(){
-        this.name = "";
-        this.cookies = "";
-        //this.image = null;
-        this.friends = new ArrayList<Friend>();
-        int ID = 0;
     }
 
     public void setImageURL(String url){
@@ -84,28 +66,7 @@ public class User implements Serializable{
     }
 
     public String getURL(Links link){
-        String base = "/members/"+handle+"/";
-        String url = "";
-        switch(link){
-            case PROFILE:
-                url = "/intern/"; break;
-            case MESSAGES:
-                url = base+"messages/"; break;
-            case MEDIA:
-                url = base+"media/"; break;
-            case FRIENDS:
-                url = base+"friends/"; break;
-            case GROUPS:
-                url = base+"groups/"; break;
-            case MEMBERS:
-                url = "/members/"; break;
-            case SETTINGS:
-                url = "/settings/"; break;
-            default:
-                url = "/intern/"; break;
-        }
-        Log.e("Link", url);
-        return url;
+        return null;
     }
 
     public Bitmap getImage() {
@@ -131,11 +92,6 @@ public class User implements Serializable{
         return null;
     }
 
-
-
-    public void addFriend(Friend f) {
-        friends.add(f);
-    }
 
     public String getEmail() {
         return email;
@@ -180,14 +136,11 @@ public class User implements Serializable{
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("\n"+name);
-        sb.append("<br/>"+project);
+        sb.append("\n").append(name);
+        sb.append("<br/>").append(project);
         return sb.toString();
     }
 
-    public void launchWindow(Activity activity) {
-
-    }
 
     public class GetImageTask extends AsyncTask<String, Void, Bitmap>{
         @Override

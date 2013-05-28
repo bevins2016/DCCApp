@@ -27,6 +27,7 @@ import java.util.concurrent.ExecutionException;
 import android.app.*;
 import android.view.ViewGroup;
 import com.example.dcc.fragment.ActionItemFrag;
+import com.example.dcc.fragment.CreateActionItemFrag;
 import com.example.dcc.fragment.MembersListFragment;
 import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.search.MetaSearchFrag;
@@ -81,7 +82,7 @@ public class LaunchActivityFrag extends Fragment implements OnClickListener {
         ManageSurveyButton.setOnClickListener(this);
         AdminButton = (Button) view.findViewById(R.id.admin_button);
         AdminButton.setOnClickListener(this);
-    return view;
+        return view;
     }
 
     /*
@@ -225,6 +226,17 @@ public class LaunchActivityFrag extends Fragment implements OnClickListener {
                 intent.setClass(activity, ManageSurvey.class);
                 activity.finish();
                 startActivity(intent);
+                break;
+            case R.id.createaction:
+                manager = activity.getFragmentManager();
+                transaction = manager.beginTransaction();
+
+                old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
+                newer = new CreateActionItemFrag();
+                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
+
+                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
+                transaction.commit();
                 break;
         }
     }

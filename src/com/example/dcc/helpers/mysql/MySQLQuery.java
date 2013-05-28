@@ -8,27 +8,39 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
+ * This class manages the communication between the application and sql queries.
+ * Primarily parses database information from JSon objects into Lists of items.
  * Created by Harmon on 5/17/13.
  */
 public class MySQLQuery {
+
+    /**
+     * Returns an input stream from the designated URL that contains the contents of the request.
+     * @param url
+     * @return
+     */
     private synchronized static InputStream getInputStream(String url){
-        try{
+        try {
             return new GetInputStreamTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, url).get();
-        }catch(Exception e){
-            e.printStackTrace();
-            Log.e("MySQLConnection", url);
-            return null;
+        } catch (InterruptedException e) {
+            Log.e("dcc.MySQLQuery", e.getMessage());
+        } catch (ExecutionException e) {
+            Log.e("dcc.MySQLQuery", e.getMessage());
         }
+        return null;
     }
 
+    /**
+     * This will reset the user's list of friends. The list of friends only contains the Names
+     * @param url
+     */
     public synchronized static void updateFriends(String url){
         try{
             StringBuilder sb = new StringBuilder();
@@ -49,8 +61,12 @@ public class MySQLQuery {
                 JSONObject json_data = jArray.getJSONObject(i);
             }
 
-        }catch(Exception e){
-
+        } catch (UnsupportedEncodingException e) {
+            Log.e("dcc.MySQLQuery", e.getMessage());
+        } catch (IOException e) {
+            Log.e("dcc.MySQLQuery", e.getMessage());
+        } catch (JSONException e) {
+            Log.e("dcc.MySQLQuery", e.getMessage());
         }
     }
 
@@ -78,7 +94,7 @@ public class MySQLQuery {
                 n.setID(temp.getString("ID"));
                 newsList.add(n);
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.e("dcc.MySQLQuery", e.getMessage());
             }
 
 
@@ -100,9 +116,10 @@ public class MySQLQuery {
             user.setProject(jUser.getString("project"));
             user.setProject2(jUser.getString("project2"));
             return user;
-        }catch(Exception e){
-            return null;
+        } catch (JSONException e) {
+            Log.e("dcc.MySQLQuery", e.getMessage());
         }
+        return null;
     }
 
     public synchronized static User validateUser(String url, String login){
@@ -129,8 +146,12 @@ public class MySQLQuery {
             }
 
             user.setImageURL(sb.toString());
-        }catch(Exception e){
-
+        } catch (UnsupportedEncodingException e) {
+            Log.e("dcc.MySQLQuery", e.getMessage());
+        } catch (IOException e) {
+            Log.e("dcc.MySQLQuery", e.getMessage());
+        } catch (JSONException e) {
+            Log.e("dcc.MySQLQuery", e.getMessage());
         }
 
         return null;
@@ -154,14 +175,18 @@ public class MySQLQuery {
 
             Log.e("User", result);
             return new JSONObject(result);
-        }catch(Exception e){
+        } catch (UnsupportedEncodingException e) {
+            Log.e("dcc.MySQLQuery", e.getMessage());
+        } catch (IOException e) {
+            Log.e("dcc.MySQLQuery", e.getMessage());
+        } catch (JSONException e) {
             try {
                 return new JSONArray(result);
             } catch (JSONException e1) {
-                Log.e("getArray", "Error fetching data from: "+url+"//"+e.getMessage());
-                return null;
+                Log.e("dcc.MySQLQuery", e.getMessage());
             }
         }
+        return null;
     }
 
     public synchronized static List<User> getAllMembers(String url){
@@ -181,7 +206,7 @@ public class MySQLQuery {
                 }
                 lMembers.add(m);
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.e("dcc.MySQLQuery", e.getMessage());
             }
         }
         return lMembers;
@@ -204,7 +229,7 @@ public class MySQLQuery {
                 item.setStatus(Integer.parseInt(jActionItem.getString("status")));
                 actionItems.add(item);
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.e("dcc.MySQLQuery", e.getMessage());
             }
         }
         return actionItems;

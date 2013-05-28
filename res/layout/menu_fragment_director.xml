@@ -61,6 +61,13 @@
                 android:drawableRight="@drawable/socialgroup"
                 android:text="@string/directory" />
 
+        <Button
+                android:id="@+id/search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background"
+                android:drawableRight="@drawable/actionsearch"
+                android:text="Director" />
         <ToggleButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

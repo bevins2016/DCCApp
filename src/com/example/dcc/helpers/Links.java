@@ -1,5 +1,12 @@
 package com.example.dcc.helpers;
 
+/**
+ * Enum that contains all the links used in contacting the database.
+ */
 public enum Links {
-	PROFILE, MESSAGES, MEDIA, FRIENDS, GROUPS, MEMBERS, SETTINGS
+	SOMETHING("/google.com");
+
+    private Links(String url){
+
+    }
 }

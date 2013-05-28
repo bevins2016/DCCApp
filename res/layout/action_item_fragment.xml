@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
@@ -84,12 +83,3 @@
 
 
 </LinearLayout>
-
-=======
-<?xml version="1.0" encoding="utf-8"?>
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
-          android:id="@+id/actionlist"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent" >
-</ListView>
->>>>>>> af979473e0a1844d901ff9dc16ec7798f6934b45

@@ -19,21 +19,27 @@ import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.User;
 
 /**
+ * This is fragment creates a detailed view of the action item details
  * Created by Harmon on 5/17/13.
  */
+
+//TODO: Move all the strings to the <class>Links</class> links.
 public class ActionItemDetailFrag extends Fragment implements View.OnClickListener{
 
-    ActionItem actionitem;
-    TextView aisubject, aidate, aitime, aibody;
-    Button aibutton;
+    private ActionItem actionitem;
+    private TextView aisubject, aidate, aitime, aibody;
+    private Button aibutton;
+    private static final String ACTIONITEM = "actionitem";
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.action_item_detail_frag, container, false);
         super.onCreate(savedInstanceState);
 
-        actionitem = (ActionItem)getArguments().getSerializable("actionitem");
+        //Get the action item object
+        actionitem = (ActionItem)getArguments().getSerializable(ACTIONITEM);
 
+        //Get text items and set the text labels.
         aisubject = (TextView)view.findViewById(R.id.aisubject);
         aisubject.setText(actionitem.getSubject());
         aidate = (TextView)view.findViewById(R.id.aidate);
@@ -49,11 +55,15 @@ public class ActionItemDetailFrag extends Fragment implements View.OnClickListen
         return view;
     }
 
+    /**
+     * On click listener which will forward the fragment to allow the user to respond.
+     * @param view
+     */
     @Override
     public void onClick(View view) {
         ActionItemActionFrag detailFrag = new ActionItemActionFrag();
         Bundle bundle = new Bundle();
-        bundle.putSerializable("actionitem", actionitem);
+        bundle.putSerializable(ACTIONITEM, actionitem);
         detailFrag.setArguments(bundle);
 
         FragmentManager manager = getActivity().getFragmentManager();

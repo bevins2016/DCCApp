@@ -9,16 +9,14 @@ import android.text.Html;
 import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import com.example.dcc.R;
 import com.example.dcc.helpers.News;
 import com.example.dcc.helpers.ObjectStorage;
-import com.example.dcc.helpers.mysql.HttpConnection;
+import com.example.dcc.helpers.mysql.MySQLQuery;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -32,10 +30,6 @@ import java.util.concurrent.TimeoutException;
  */
 public class NewsListFragment extends Fragment{
 
-    /*XML layout option*/
-    private ListView listview;
-    /*Adapter to append more news articles to the list*/
-    private ArrayAdapter<Spanned> adapter;
     /*A List<E> of the news items that are pushed into the adapter*/
     private List<News> news;
 
@@ -43,9 +37,9 @@ public class NewsListFragment extends Fragment{
                              Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-
         View view = inflater.inflate(R.layout.news_list_fragment, container, false);
 
+        //Get new news list if static object is null
         if((news = ObjectStorage.getNewsList()) == null){
             GetNewsTask g = new GetNewsTask();
             g.execute((Void) null);
@@ -61,11 +55,13 @@ public class NewsListFragment extends Fragment{
             }
         }
 
-
-        listview = (ListView)view.findViewById(R.id.newslist);
-        adapter = new ArrayAdapter<Spanned>(getActivity(), R.layout.news_item);
+        //Set listview with the adapter
+        ListView listview = (ListView) view.findViewById(R.id.newslist);
+        ArrayAdapter<Spanned> adapter = new ArrayAdapter<Spanned>(getActivity(), R.layout.news_item);
         listview.setAdapter(adapter);
 
+        //Add a listener that launches the detailed view after passing in the
+        //relevant news item
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -73,8 +69,6 @@ public class NewsListFragment extends Fragment{
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("news", news.get(i));
                 detailFrag.setArguments(bundle);
-
-
 
                 FragmentManager manager = getActivity().getFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
@@ -92,11 +86,13 @@ public class NewsListFragment extends Fragment{
         return view;
     }
 
-
+    /*
+     *Retrives the newslist from the mysql database
+     */
     public class GetNewsTask extends AsyncTask<Void, Void, Boolean> {
         @Override
         protected Boolean doInBackground(Void... params) {
-            news  = HttpConnection.getNews();
+            news  = MySQLQuery.getNews("/DCC/getNews.php");
             return true;
         }
     }
