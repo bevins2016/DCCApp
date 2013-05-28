@@ -40,24 +40,22 @@ public class ActionItemFrag extends Fragment implements OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setRetainInstance(true);
+        //setRetainInstance(true);
 
         View view = inflater.inflate(R.layout.news_list_fragment, container, false);
         activity = getActivity();
 
-        if((actionItems = ObjectStorage.getActionItems()) == null){
-            GetNewsTask g = new GetNewsTask();
-            g.execute((Void) null);
-            try {
-                g.get(20, TimeUnit.SECONDS);
-                ObjectStorage.setActionItems(actionItems);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (TimeoutException e) {
-                e.printStackTrace();
-            }
+        GetNewsTask g = new GetNewsTask();
+        g.execute((Void) null);
+        try {
+            g.get(20, TimeUnit.SECONDS);
+            ObjectStorage.setActionItems(actionItems);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
         }
 
 

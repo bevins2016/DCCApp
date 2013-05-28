@@ -57,7 +57,7 @@ public class MenuFragment extends Fragment implements OnClickListener,
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if(!ObjectStorage.getUser().getName().equalsIgnoreCase("robert williams")){
+        if(!ObjectStorage.getUser().getName().equalsIgnoreCase("sam bevins")){
             view = inflater.inflate(R.layout.menu_fragment,
                     container, false);
 
@@ -207,7 +207,7 @@ public class MenuFragment extends Fragment implements OnClickListener,
         launchFragment(newer);
     }
     public void action(){
-        Fragment newer = new ActionItemActionFrag();
+        Fragment newer = new ActionItemFrag();
         launchFragment(newer);
     }
     public void directory(){

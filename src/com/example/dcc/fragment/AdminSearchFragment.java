@@ -39,6 +39,14 @@ public class AdminSearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.edaily_query,
                 container, false);
+
+
+        //Make a list of users names
+        populateSpinner(view);
+        return view;
+    }
+
+    private void populateSpinner(View view){
         if((members = ObjectStorage.getMemberList())==null) {
             try {
                 members = new GetMembersTask().get(20, TimeUnit.SECONDS);
@@ -52,7 +60,6 @@ public class AdminSearchFragment extends Fragment {
             ObjectStorage.setMemberList(members);
         }
 
-        //Make a list of users names
         List<String> names = new ArrayList<String>();
         for(User m: members){
             names.add(m.getName());
@@ -64,9 +71,7 @@ public class AdminSearchFragment extends Fragment {
 
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinner.setAdapter(adapter);
-        return view;
     }
-
     /**
      * This class is used to get the list of members if the value in the ObjectStorage class
      * is null.
