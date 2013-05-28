@@ -82,7 +82,7 @@ public class ActionItemActionFrag extends Fragment implements View.OnClickListen
         aiCancel = (Button) view.findViewById(R.id.aicancel);
         userInput = (EditText) view.findViewById(R.id.userinput);
 
-        actionitem = (ActionItem)this.getArguments().getSerializable("actionitem");
+        actionitem = (ActionItem)getArguments().getSerializable("actionitem");
         aitext = (TextView)view.findViewById(R.id.aitext);
 
         aitext.setText(actionitem.getBody());

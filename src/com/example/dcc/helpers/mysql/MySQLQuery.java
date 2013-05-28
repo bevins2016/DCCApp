@@ -60,7 +60,6 @@ public class MySQLQuery {
             for(int i=0; i<jArray.length(); i++){
                 JSONObject json_data = jArray.getJSONObject(i);
             }
-
         } catch (UnsupportedEncodingException e) {
             Log.e("dcc.MySQLQuery", e.getMessage());
         } catch (IOException e) {
@@ -109,6 +108,7 @@ public class MySQLQuery {
     private synchronized static User convertUser(JSONObject jUser){
         try{
             User user = new User();
+            user.setID(Integer.parseInt(jUser.getString("ID")));
             user.setName(jUser.getString("display_name"));
             user.setEmail(jUser.getString("user_email"));
             user.setPhone(jUser.getString("phone"));
