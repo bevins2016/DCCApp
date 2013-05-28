@@ -1,14 +1,5 @@
 package com.example.dcc.helpers;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.os.Bundle;
-import android.util.Log;
-import com.example.dcc.R;
-import com.example.dcc.fragment.NewsDetailFragment;
-
 import java.io.Serializable;
 
 /**
@@ -122,25 +113,23 @@ public class News implements Serializable{
     /*Sends details about this object to the logging statement*/
 	public void logNews(){
 		StringBuilder sb = new StringBuilder();
-		sb.append("\nTitle: "+title);
-		sb.append("\nLink: "+link);
-		sb.append("\nComments: "+comments);
-		sb.append("\nDate: "+pubdate);
-		sb.append("\nPublisher: "+publisher);
-		sb.append("\nCategory"+category);
-		sb.append("\nText"+text);
-		
-		Log.e("News: ", sb.toString());
+		sb.append("\nTitle: ").append(title);
+		sb.append("\nLink: ").append(link);
+		sb.append("\nComments: ").append(comments);
+		sb.append("\nDate: ").append(pubdate);
+		sb.append("\nPublisher: ").append(publisher);
+		sb.append("\nCategory").append(category);
+		sb.append("\nText").append(text);
 	}
 
     /*Prints pertinent details aobut the article(In HTML format)*/
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
-		sb.append("<b><u>"+title+"</u></b><br/>");
-		sb.append("<b>Date:</b> "+pubdate+"&nbsp&nbsp&nbsp&nbsp");
-		sb.append("<b>By:</b> "+publisher);
-        if(text.length()>140) sb.append("<br/>"+text.substring(0,139));
-		else sb.append("<br/>"+text);
+		sb.append("<b><u>").append(title).append("</u></b><br/>");
+		sb.append("<b>Date:</b> ").append(pubdate).append("&nbsp&nbsp&nbsp&nbsp");
+		sb.append("<b>By:</b> ").append(publisher);
+        if(text.length()>140) sb.append("<br/>").append(text.substring(0, 139));
+		else sb.append("<br/>").append(text);
 		
 		return sb.toString();
 	}

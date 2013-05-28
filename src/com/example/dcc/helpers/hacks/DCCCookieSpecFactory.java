@@ -8,6 +8,9 @@ import org.apache.http.cookie.MalformedCookieException;
 import org.apache.http.impl.cookie.BrowserCompatSpec;
 import org.apache.http.params.HttpParams;
 
+/**
+ * Class that relaxes the standards of the standard cookie factory
+ */
 public class DCCCookieSpecFactory implements CookieSpecFactory{
 
 	@Override

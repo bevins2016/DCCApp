@@ -184,6 +184,10 @@ public class HttpConnection {
         return new DCCCookieSpecFactory();
     }
 
+    /**
+     * Sends the action item to the ai script in the server
+     * @param results
+     */
     public static synchronized void sendActionItem(List<NameValuePair> results){
         postResponse("/wp-content/plugins/buddypress/bp-themes/bp-default/ai-submit.php", results, false);
     }

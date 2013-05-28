@@ -1,7 +1,7 @@
 package com.example.dcc.helpers;
 
 import java.io.Serializable;
-
+//TODO: delete, replace with user
 public class Friend implements Serializable{
 	private String imgURL;
 	private String page;
