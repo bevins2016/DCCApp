@@ -82,7 +82,7 @@ public class ActionItemActionFrag extends Fragment implements View.OnClickListen
         switch(view.getId()){
             case R.id.aisubmut:
 
-                 nameValuePairs = new ArrayList<NameValuePair>();
+                nameValuePairs = new ArrayList<NameValuePair>();
 
                 nameValuePairs.add(new BasicNameValuePair("subject", actionitem.getSubject()));
                 nameValuePairs.add(new BasicNameValuePair("response", (String) aitext.getText()));
@@ -98,7 +98,7 @@ public class ActionItemActionFrag extends Fragment implements View.OnClickListen
                 } catch (TimeoutException e) {
                     e.printStackTrace();
                 }
-            //TODO: RETURN TO ACTIVITY LIST FRAGMENT
+                //TODO: RETURN TO ACTIVITY LIST FRAGMENT
         }
 
 
@@ -121,5 +121,5 @@ public class ActionItemActionFrag extends Fragment implements View.OnClickListen
 			/* Update complete toast */
 
         }
-}
+    }
 }

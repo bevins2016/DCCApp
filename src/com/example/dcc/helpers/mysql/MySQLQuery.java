@@ -4,6 +4,9 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.dcc.helpers.*;
+import com.example.dcc.helpers.hacks.DCCArrayList;
+
+import org.apache.http.NameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -132,12 +135,10 @@ public class MySQLQuery {
             sb.append(reader.readLine()).append("\n");
             String line;
             while ((line = reader.readLine()) != null) sb.append(line).append("\n");
-
             is.close();
 
             result=sb.toString();
-
-            Log.e("User", result);
+            Log.e("getarray", result);
             return new JSONObject(result);
         } catch (UnsupportedEncodingException e) {
             Log.e("dcc.MySQLQuery", e.getMessage());
@@ -152,6 +153,7 @@ public class MySQLQuery {
         }
         return null;
     }
+
 
     public synchronized static List<User> getAllMembers(String url){
         List<User> lMembers = new ArrayList<User>();
@@ -197,5 +199,31 @@ public class MySQLQuery {
             }
         }
         return actionItems;
+    }
+
+    public static DCCArrayList<EDaily> getEdailys(String url) {
+        DCCArrayList<EDaily> edailys = new DCCArrayList<EDaily>();
+        JSONArray jEDailys = (JSONArray)getArray(url);
+        for(int i = 0; i < jEDailys.length(); i++){
+            try {
+                JSONObject jEdaily = jEDailys.getJSONObject(i);
+                EDaily edaily = new EDaily();
+
+                edaily.setIss(jEdaily.getInt("issues"));
+                edaily.setRel(jEdaily.getInt("reliable"));
+                edaily.setDep(jEdaily.getInt("dependable"));
+                edaily.setUsr_id(jEdaily.getInt("ID"));
+                edaily.setBody(jEdaily.getString("body"));
+                edaily.setHours(jEdaily.getInt("hours"));
+                edaily.setDate(jEdaily.getString("date"));
+                edaily.setSubmitted(jEdaily.getString("submitted"));
+                edaily.setColor(jEdaily.getString("color"));
+
+                edailys.add(edaily);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return edailys;
     }
 }

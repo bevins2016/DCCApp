@@ -1,6 +1,8 @@
 package com.example.dcc.fragment;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,10 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import com.example.dcc.R;
+import com.example.dcc.helpers.EDaily;
 import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.User;
+import com.example.dcc.helpers.hacks.DCCArrayList;
 import com.example.dcc.helpers.mysql.MySQLQuery;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,6 +45,8 @@ public class AdminSearchFragment extends Fragment implements View.OnClickListene
     CheckBox issCB, relCB, depCB;
     SeekBar seekBar;
 
+    /*Executes on create view*/
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.edaily_query,
@@ -49,8 +57,12 @@ public class AdminSearchFragment extends Fragment implements View.OnClickListene
         return view;
     }
 
+    /**
+     * This gets and inits all objects that represent the layout
+     * @param view
+     */
     private void getFields(View view) {
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         startDate = (EditText)view.findViewById(R.id.edailystartdate);
         endDate = (EditText)view.findViewById(R.id.edailyenddate);
 
@@ -75,7 +87,10 @@ public class AdminSearchFragment extends Fragment implements View.OnClickListene
         search.setOnClickListener(this);
     }
 
-
+    /**
+     * This validates and populates the spinner object
+     * @param view
+     */
     private void populateSpinner(View view){
         if((members = ObjectStorage.getMemberList())==null) {
             try {
@@ -91,7 +106,7 @@ public class AdminSearchFragment extends Fragment implements View.OnClickListene
         }
 
         List<String> names = new ArrayList<String>();
-        names.add("Select User");
+        names.add("Select User");//Used as a default value
         for(User m: members){
             names.add(m.getName());
         }
@@ -104,20 +119,50 @@ public class AdminSearchFragment extends Fragment implements View.OnClickListene
         spinner.setAdapter(adapter);
     }
 
+    /*Ends execute on create view*/
+
     @Override
     public void onClick(View view) {
         String query = buildQuery();
-        Log.e("test", query);
+        try {
+            DCCArrayList<EDaily> edailies = new GetEdailyReports().
+                    execute("/DCC/getSomeDailys.php?query="+query).get(20, TimeUnit.SECONDS);
+            EDailyList detailFrag = new EDailyList();
+            //Place the member to be displayed into a bundle
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("edailies", edailies);
+            detailFrag.setArguments(bundle);
+
+            //Launch the fragment activity
+            FragmentManager manager = getActivity().getFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+
+            ObjectStorage.setFragment(R.id.fragmentcontainerright, detailFrag);
+            transaction.replace(R.id.fragmentcontainerright, detailFrag);
+
+            transaction.commit();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        }
+
     }
 
+    /**
+     * Checks the value of each field and populates the necessary string.
+     * @return HTML encoded string.
+     */
     private String buildQuery() {
 
         StringBuilder sb = new StringBuilder();
 
         if(spinner.getSelectedItemPosition() > 0)
             sb.append("ID=").append(members.get(spinner.getSelectedItemPosition()-1).getID()).append(" AND ");
-        sb.append("submitted between ").append(startDate.getText()).append(" AND ").append(endDate.getText())
-                .append(" AND ");
+        sb.append("submitted BETWEEN '").append(startDate.getText()).append("' AND '").append(endDate.getText())
+                .append("' AND ");
         RadioButton temp = (RadioButton)getView().findViewById(depRG.getCheckedRadioButtonId());
         if(temp!=null){
             sb.append("dependable ").append(temp.getText());
@@ -134,12 +179,19 @@ public class AdminSearchFragment extends Fragment implements View.OnClickListene
         if(temp!=null){
             sb.append("reliable ").append(temp.getText());
             if(relCB.isChecked()) sb.append("= ");
-            sb.append(" ").append(relCB.getText()).append(" AND ");
+            sb.append(" ").append(relNo.getText()).append(" AND ");
         }
         if(seekBar.getProgress()>0) sb.append(" grade >= ").append(seekBar.getProgress()).append(" AND ");
 
-        return sb.append(" 1=1 ").toString();
+        String str = sb.append(" 1=1 ").toString();
+        try {
+            Log.e("QUERY", str);
+            return URLEncoder.encode(str, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            return null;
+        }
     }
+
     /**
      * This class is used to get the list of members if the value in the ObjectStorage class
      * is null.
@@ -150,10 +202,17 @@ public class AdminSearchFragment extends Fragment implements View.OnClickListene
         protected List<User> doInBackground(Void... params) {
             return MySQLQuery.getAllMembers("/DCC/getAllUsers.php");
         }
+    }
 
-
+    /**
+     * This class is used to get the list of members if the value in the ObjectStorage class
+     * is null.
+     */
+    public class GetEdailyReports extends AsyncTask<String, Void, DCCArrayList<EDaily>> {
         @Override
-        protected void onCancelled() {
+        protected DCCArrayList<EDaily> doInBackground(String... strings) {
+            Log.e("this one ", strings[0]);
+            return MySQLQuery.getEdailys(strings[0]);
         }
     }
 }

@@ -15,10 +15,6 @@ import android.view.ViewGroup;
  */
 public class TopFragment extends Fragment implements View.OnClickListener{
 
-    //User icon image
-    private ImageView userIcon;
-    //Displays the user's name
-    private TextView textView;
     //Toggles the menu visibility
     private Button menuVisibility;
     //Menu Width
@@ -31,8 +27,8 @@ public class TopFragment extends Fragment implements View.OnClickListener{
                 container, false);
 
         //Get needed fields
-        userIcon = (ImageView)view.findViewById(R.id.usericon);
-        textView = (TextView)view.findViewById(R.id.userdata);
+        ImageView userIcon = (ImageView) view.findViewById(R.id.usericon);
+        TextView textView = (TextView) view.findViewById(R.id.userdata);
         menuVisibility = (Button)view.findViewById(R.id.menu_button);
 
         //Set listener
@@ -40,7 +36,7 @@ public class TopFragment extends Fragment implements View.OnClickListener{
 
         //Set unique data
         userIcon.setImageBitmap(ObjectStorage.getUser().getImage());
-        textView.setText(ObjectStorage.getUser().getName()+"("+ObjectStorage.getUser().getHandle()+")");
+        textView.setText(ObjectStorage.getUser().getName() + "(" + ObjectStorage.getUser().getHandle() + ")");
 
         return view;
     }

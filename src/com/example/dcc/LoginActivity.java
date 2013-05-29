@@ -35,9 +35,7 @@ public class LoginActivity extends Activity {
 	 */
 	private UserLoginTask mAuthTask = null;
 
-	// Values for email and password at the time of the login attempt.
-	private User user;
-	private String mUser;
+    private String mUser;
 	private String mPassword;
 
 	// UI references.
@@ -55,7 +53,7 @@ public class LoginActivity extends Activity {
 
 		setContentView(R.layout.activity_login);
 		context = this;
-		user = new User();
+        User user = new User();
         ObjectStorage.setHashMap(new HashMap<Integer, Fragment>());
 		ObjectStorage.setUser(user);
 		// Set up the login form.
@@ -198,13 +196,11 @@ public class LoginActivity extends Activity {
 	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			if(HttpConnection.login(mUser, mPassword))
-			{
-				
-			}else{
-				cancel(true);
-			}
-			return true;
+            if (!HttpConnection.login(mUser, mPassword)) {
+
+                cancel(true);
+            }
+            return true;
 		}
 
 		@Override

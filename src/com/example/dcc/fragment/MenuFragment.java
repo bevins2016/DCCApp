@@ -33,7 +33,7 @@ public class MenuFragment extends Fragment implements OnClickListener,
         TextToSpeech.OnInitListener{
 
     private ToggleButton toggleSound;
-    Button createButton;
+    //Button createButton;
     private Activity activity;
 
     public static final int VOICE_RECOGNITION_REQUEST_CODE = 1234;

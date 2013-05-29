@@ -121,7 +121,7 @@
                 <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/eq"
+                        android:text="@string/lt"
                         android:id="@+id/edailyrellt" android:checked="false"/>
                 <RadioButton
                         android:layout_width="wrap_content"
