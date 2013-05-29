@@ -1,6 +1,7 @@
-package com.example.dcc;
+package com.example.dcc.fragment;
 
 import android.widget.*;
+import com.example.dcc.R;
 import com.example.dcc.helpers.ObjectStorage;
 
 import android.app.Fragment;
@@ -12,7 +13,7 @@ import android.view.ViewGroup;
 /**
  * Just Kidding, this is actually the top fragment
  */
-public class BottomFragment extends Fragment implements View.OnClickListener{
+public class TopFragment extends Fragment implements View.OnClickListener{
 
     //User icon image
     private ImageView userIcon;
