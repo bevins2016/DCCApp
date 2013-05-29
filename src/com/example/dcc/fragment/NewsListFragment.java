@@ -79,10 +79,14 @@ public class NewsListFragment extends Fragment{
                 transaction.commit();
             }
         });
+            try {
+                for(News n : news){
+                    adapter.add(Html.fromHtml(n.toString()));
+                }
+            }catch(Exception e){
 
-        for(News n : news){
-            adapter.add(Html.fromHtml(n.toString()));
-        }
+            }
+
         return view;
     }
 

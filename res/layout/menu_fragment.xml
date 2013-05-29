@@ -61,22 +61,15 @@
                 android:drawableRight="@drawable/socialgroup"
                 android:text="@string/directory" />
 
-        <ToggleButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Toggle Sound"
-
-                android:id="@+id/toggle" android:layout_gravity="left|center_vertical"/>
         <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Speak"
+                android:shadowColor="#000000"
+                android:shadowRadius="0"
+                android:background="@drawable/background"
+                android:drawableRight="@drawable/socialgroup"
+                android:text="Speech Action"
                 android:id="@+id/button" android:layout_gravity="left|center_vertical"/>
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Headache"
-                android:id="@+id/ha" android:layout_gravity="left|center_vertical"/>
 
         <ListView
                 android:layout_width="0dp"

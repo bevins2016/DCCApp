@@ -73,9 +73,8 @@ public class MenuFragment extends Fragment implements OnClickListener{
         Button actionB = (Button) view.findViewById(R.id.action);
         Button directoryB = (Button) view.findViewById(R.id.directory);
 
-        Button headache = (Button) view.findViewById(R.id.ha);
 
-        toggleSound = (ToggleButton) view.findViewById(R.id.toggle);
+
         voiceButton = (Button) view.findViewById(R.id.button);
         mList = (ListView) view.findViewById(R.id.list);
 
@@ -91,8 +90,8 @@ public class MenuFragment extends Fragment implements OnClickListener{
         actionB.setOnClickListener(this);
         directoryB.setOnClickListener(this);
         //searchB.setOnClickListener(this);
-        toggleSound.setOnClickListener(this);
-        headache.setOnClickListener(this);
+
+
 
         // Check to see if a recognition activity is present
         // if running on AVD virtual device it will give this message. The mic
@@ -130,20 +129,6 @@ public class MenuFragment extends Fragment implements OnClickListener{
                 break;
             case R.id.directory:
                 directory();
-                break;
-            case R.id.toggle:
-                toggle();
-                break;
-            //Temp Button for debugging purposes only
-            case R.id.ha:
-                FragmentManager manager = activity.getFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-
-                Fragment newer = new AdminSearchFragment();
-                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-
-                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-                transaction.commit();
                 break;
             case R.id.createaction:
                 FragmentManager manager2 = activity.getFragmentManager();
