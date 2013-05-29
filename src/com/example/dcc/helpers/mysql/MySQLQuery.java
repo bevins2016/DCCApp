@@ -94,8 +94,9 @@ public class MySQLQuery {
         jUser = (JSONObject)getArray(url);
 
         User user = ObjectStorage.getUser();
-        Log.e("test", (user!=null)+" ");
+
         try{
+            Log.e("test", jUser.getString("display_name"));
             user.setName(jUser.getString("display_name"));
             user.setEmail(jUser.getString("user_email"));
             user.setHandle(jUser.getString("user_login"));

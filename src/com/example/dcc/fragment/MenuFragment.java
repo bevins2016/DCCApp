@@ -80,8 +80,8 @@ public class MenuFragment extends Fragment implements OnClickListener,
         voiceButton = (Button) view.findViewById(R.id.button);
         mList = (ListView) view.findViewById(R.id.list);
 
-        createButton = (Button) view.findViewById(R.id.createaction);
-        createButton.setOnClickListener(this);
+       // createButton = (Button) view.findViewById(R.id.createaction);
+       // createButton.setOnClickListener(this);
 
 
         // check for TTS data
