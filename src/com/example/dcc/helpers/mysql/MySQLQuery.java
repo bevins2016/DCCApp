@@ -6,7 +6,6 @@ import android.util.Log;
 import com.example.dcc.helpers.*;
 import com.example.dcc.helpers.hacks.DCCArrayList;
 
-import org.apache.http.NameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -218,6 +217,9 @@ public class MySQLQuery {
                 edaily.setDate(jEdaily.getString("date"));
                 edaily.setSubmitted(jEdaily.getString("submitted"));
                 edaily.setColor(jEdaily.getString("color"));
+                edaily.setGrade(jEdaily.getInt("grade"));
+                edaily.setFirstname(jEdaily.getString("first"));
+                edaily.setLastname(jEdaily.getString("last"));
 
                 edailys.add(edaily);
             } catch (JSONException e) {

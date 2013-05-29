@@ -7,8 +7,8 @@ import java.io.Serializable;
  * Created by harmonbc on 5/29/13.
  */
 public class EDaily implements Serializable{
-    private String body, color, date, submitted;
-    private int usr_id, iss, dep, rel, hours;
+    private String body, color, date, submitted, firstname, lastname;
+    private int usr_id, iss, dep, rel, hours, grade;
 
     public EDaily(){
     }
@@ -83,5 +83,29 @@ public class EDaily implements Serializable{
 
     public void setHours(int hours) {
         this.hours = hours;
+    }
+
+    public int getGrade() {
+        return grade;
+    }
+
+    public void setGrade(int grade) {
+        this.grade = grade;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 }

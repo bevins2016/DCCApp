@@ -2,6 +2,8 @@ package com.example.dcc.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +38,7 @@ public class NewsDetailFragment extends Fragment {
         newstitle.setText(news.getTitle());
         newsdate.setText(news.getPubdate());
         newspublisher.setText(news.getPublisher());
-        newsBody.setText(news.getText());
+        newsBody.setText(Html.fromHtml(news.getText()));
 
         return view;
     }

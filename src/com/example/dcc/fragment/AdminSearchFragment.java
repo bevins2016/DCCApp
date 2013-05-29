@@ -3,6 +3,7 @@ package com.example.dcc.fragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,6 +42,8 @@ public class AdminSearchFragment extends Fragment implements View.OnClickListene
     Spinner spinner;
     Button search;
     EditText startDate, endDate, depNo, relNo, issNo;
+    LinearLayout colorbox;
+    TextView numvalue;
     RadioGroup depRG, relRG, issRG;
     CheckBox issCB, relCB, depCB;
     SeekBar seekBar;
@@ -81,8 +84,44 @@ public class AdminSearchFragment extends Fragment implements View.OnClickListene
         relCB = (CheckBox)view.findViewById(R.id.edailyreleq);
         depCB = (CheckBox)view.findViewById(R.id.edailydepeq);
 
-        seekBar = (SeekBar)view.findViewById(R.id.scoreSeek);
+        colorbox = (LinearLayout)view.findViewById(R.id.colorvalue);
+        numvalue = (TextView)view.findViewById(R.id.numvalue);
 
+        seekBar = (SeekBar)view.findViewById(R.id.scoreSeek);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+                /**
+                 * 0-2 red
+                 * 3-5 yellow
+                 * 6-13 green
+                 * 14+ blue
+                 */
+                if(i==-1){
+                    colorbox.setBackgroundColor(Color.BLACK);
+                }else if(i<=2){
+                    colorbox.setBackgroundColor(Color.RED);
+                }else if(i<=5){
+                    colorbox.setBackgroundColor(Color.YELLOW);
+                }else if(i<=13){
+                    colorbox.setBackgroundColor(Color.GREEN);
+                }else{
+                    colorbox.setBackgroundColor(Color.BLUE);
+                }
+                numvalue.setText(""+i);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
         search = (Button)view.findViewById(R.id.edailysearch);
         search.setOnClickListener(this);
     }

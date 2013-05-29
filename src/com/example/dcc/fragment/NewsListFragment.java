@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import com.example.dcc.R;
 import com.example.dcc.helpers.News;
 import com.example.dcc.helpers.ObjectStorage;
@@ -44,7 +46,7 @@ public class NewsListFragment extends Fragment{
             GetNewsTask g = new GetNewsTask();
             g.execute((Void) null);
             try {
-                g.get(10, TimeUnit.SECONDS);
+                g.get(20, TimeUnit.SECONDS);
                 ObjectStorage.setNewsList(news);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -79,11 +81,15 @@ public class NewsListFragment extends Fragment{
                 transaction.commit();
             }
         });
-
-        for(News n : news){
-            adapter.add(Html.fromHtml(n.toString()));
+        try{
+            for(News n : news){
+                adapter.add(Html.fromHtml(n.toString()));
+            }
+            return view;
+        }catch (NullPointerException e){
+            Toast.makeText (getActivity(), "Aggregation Timed Out", Toast.LENGTH_LONG);
+            return view;
         }
-        return view;
     }
 
     /*

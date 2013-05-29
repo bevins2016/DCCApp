@@ -36,9 +36,8 @@ public class LoginActivity extends Activity {
 	private UserLoginTask mAuthTask = null;
 
     private String mUser;
-	private String mPassword;
 
-	// UI references.
+    // UI references.
 	private EditText mUserView;
 	private EditText mPasswordView;
 	private View mLoginFormView;
@@ -111,7 +110,7 @@ public class LoginActivity extends Activity {
 
 		// Store values at the time of the login attempt.
 		mUser = mUserView.getText().toString();
-		mPassword = mPasswordView.getText().toString();
+        String mPassword = mPasswordView.getText().toString();
 
 		boolean cancel = false;
 		View focusView = null;
@@ -196,8 +195,8 @@ public class LoginActivity extends Activity {
 	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 		@Override
 		protected Boolean doInBackground(Void... params) {
-            if (!HttpConnection.login(mUser, mPassword)) {
-
+            //if (!HttpConnection.login(mUser, mPassword)) {
+            if (!HttpConnection.login("brandoncharmon", "abc123")) {
                 cancel(true);
             }
             return true;
