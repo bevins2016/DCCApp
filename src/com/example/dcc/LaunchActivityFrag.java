@@ -27,6 +27,7 @@ import java.util.concurrent.ExecutionException;
 import android.app.*;
 import android.view.ViewGroup;
 import com.example.dcc.fragment.ActionItemFrag;
+import com.example.dcc.fragment.AdminSearchFragment;
 import com.example.dcc.fragment.CreateActionItemFrag;
 import com.example.dcc.fragment.MembersListFragment;
 import com.example.dcc.helpers.ObjectStorage;
@@ -85,6 +86,8 @@ public class LaunchActivityFrag extends Fragment implements OnClickListener {
         AdminButton.setOnClickListener(this);
         createAI = (Button) view.findViewById(R.id.createaction);
         createAI.setOnClickListener(this);
+        Button search = (Button) view.findViewById(R.id.meta_button);
+        search.setOnClickListener(this);
         return view;
     }
 
@@ -208,11 +211,20 @@ public class LaunchActivityFrag extends Fragment implements OnClickListener {
             case R.id.meta_button:
 //                intent.setClass(activity, MetaSearch.class);
 //                startActivity(intent);
+//                manager = activity.getFragmentManager();
+//                transaction = manager.beginTransaction();
+//
+//                old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
+//                newer = new MetaSearchFrag();
+//                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
+//
+//                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
+//                transaction.commit();
+
                 manager = activity.getFragmentManager();
                 transaction = manager.beginTransaction();
 
-                old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-                newer = new MetaSearchFrag();
+                newer = new AdminSearchFragment();
                 ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
 
                 transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
