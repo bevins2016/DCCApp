@@ -43,19 +43,12 @@ public class AdminSearchFragment extends Fragment implements View.OnClickListene
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.edaily_query,
                 container, false);
-<<<<<<< HEAD
-
-
         //Make a list of users names
-=======
         getFields(view);
->>>>>>> 4dfec120dd511d589689e93e8ed2db1b12d2e143
         populateSpinner(view);
         return view;
     }
 
-<<<<<<< HEAD
-=======
     private void getFields(View view) {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         startDate = (EditText)view.findViewById(R.id.edailystartdate);
@@ -82,7 +75,7 @@ public class AdminSearchFragment extends Fragment implements View.OnClickListene
         search.setOnClickListener(this);
     }
 
->>>>>>> 4dfec120dd511d589689e93e8ed2db1b12d2e143
+
     private void populateSpinner(View view){
         if((members = ObjectStorage.getMemberList())==null) {
             try {
@@ -109,8 +102,6 @@ public class AdminSearchFragment extends Fragment implements View.OnClickListene
 
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinner.setAdapter(adapter);
-<<<<<<< HEAD
-=======
     }
 
     @Override
@@ -148,7 +139,6 @@ public class AdminSearchFragment extends Fragment implements View.OnClickListene
         if(seekBar.getProgress()>0) sb.append(" grade >= ").append(seekBar.getProgress()).append(" AND ");
 
         return sb.append(" 1=1 ").toString();
->>>>>>> 4dfec120dd511d589689e93e8ed2db1b12d2e143
     }
     /**
      * This class is used to get the list of members if the value in the ObjectStorage class
