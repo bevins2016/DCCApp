@@ -167,5 +167,17 @@
     <string name="daterange">Date Range:</string>
     <string name="end">End:</string>
     <string name="iss">Iss:</string>
+    <string name="handle">Handle</string>
+    <string name="contact">Contact</string>
+    <string name="project21">Project2:</string>
+    <string name="project12">Project1:</string>
+    <string name="namecol">Name:</string>
+    <string name="personaltitle">Personal</string>
+    <string name="handlecol">Handle:</string>
+    <string name="usrname">User Name</string>
+    <string name="memberinfo">Member Info</string>
+    <string name="usericon">User Icon</string>
+    <string name="usercol">User:</string>
+    <string name="scorecol">Score:</string>
 
 </resources>
