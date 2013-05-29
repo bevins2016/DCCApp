@@ -54,6 +54,7 @@ public class LaunchActivityFrag extends Fragment implements OnClickListener {
     private Button CreateSurveyButton;
     private Button ManageSurveyButton;
     private Button AdminButton;
+    private Button createAI;
 
     public static String startdate = "";
     public static String today;
@@ -82,6 +83,8 @@ public class LaunchActivityFrag extends Fragment implements OnClickListener {
         ManageSurveyButton.setOnClickListener(this);
         AdminButton = (Button) view.findViewById(R.id.admin_button);
         AdminButton.setOnClickListener(this);
+        createAI = (Button) view.findViewById(R.id.createaction);
+        createAI.setOnClickListener(this);
         return view;
     }
 

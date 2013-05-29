@@ -29,8 +29,7 @@ import java.util.Locale;
  * This fragment is the left aligned navigation bar used to allow the
  * user to transition between fragments.
  */
-public class MenuFragment extends Fragment implements OnClickListener,
-        TextToSpeech.OnInitListener{
+public class MenuFragment extends Fragment implements OnClickListener{
 
     private ToggleButton toggleSound;
     //Button createButton;
@@ -80,14 +79,10 @@ public class MenuFragment extends Fragment implements OnClickListener,
         voiceButton = (Button) view.findViewById(R.id.button);
         mList = (ListView) view.findViewById(R.id.list);
 
-       // createButton = (Button) view.findViewById(R.id.createaction);
-       // createButton.setOnClickListener(this);
+        // createButton = (Button) view.findViewById(R.id.createaction);
+        // createButton.setOnClickListener(this);
 
 
-        // check for TTS data
-        Intent checkTTSIntent = new Intent();
-        checkTTSIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
-        startActivityForResult(checkTTSIntent, MY_DATA_CHECK_CODE);
 
         //Set on click listeners
         newsB.setOnClickListener(this);
@@ -162,7 +157,7 @@ public class MenuFragment extends Fragment implements OnClickListener,
                 transaction2.commit();
                 break;
             case R.id.button:
-                speakWords("Speak Now");
+//                speakWords("Speak Now");
                 startVoiceRecognitionActivity(); // call for voice recognition
                 break;
         }
@@ -208,21 +203,13 @@ public class MenuFragment extends Fragment implements OnClickListener,
         launchFragment(newer);
     }
     public void toggle(){
-        if(toggleSound.isChecked()){
-            speakWords("Access Granted. Welcome ");
-        }else{
-            speakWords("Voice Prompts Off");
-        }
+//        if(toggleSound.isChecked()){
+//            speakWords("Access Granted. Welcome ");
+//        }else{
+//            speakWords("Voice Prompts Off");
+//        }
     }
 
-    // speak the user text
-    private void speakWords(String speech) {
-
-        // speak straight away
-        if (myTTS != null) {
-            myTTS.speak(speech, TextToSpeech.QUEUE_FLUSH, null);
-        }
-    }
 
     /**
      * Fire an intent to start the speech recognition activity.
@@ -321,38 +308,38 @@ public class MenuFragment extends Fragment implements OnClickListener,
         }
 
 
-        if (requestCode == MY_DATA_CHECK_CODE) {
-            if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
-                // the user has the necessary data - create the TTS
-                myTTS = new TextToSpeech(activity, this);
-            } else {
-                // no data - install it now
-                Intent installTTSIntent = new Intent();
-                installTTSIntent
-                        .setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
-                startActivity(installTTSIntent);
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
+//        if (requestCode == MY_DATA_CHECK_CODE) {
+//            if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
+//                // the user has the necessary data - create the TTS
+//                myTTS = new TextToSpeech(activity, this);
+//            } else {
+//                // no data - install it now
+//                Intent installTTSIntent = new Intent();
+//                installTTSIntent
+//                        .setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
+//                startActivity(installTTSIntent);
+//            }
+//        }
+//        super.onActivityResult(requestCode, resultCode, data);
+//    }
+//
+//
+//    // setup TTS
+//    public void onInit(int initStatus) {
+//
+//        // check for successful instantiation
+//        if (initStatus == TextToSpeech.SUCCESS) {
+//            if (myTTS.isLanguageAvailable(Locale.US) == TextToSpeech.LANG_AVAILABLE)
+//                myTTS.setLanguage(Locale.US);
+//        } else if (initStatus == TextToSpeech.ERROR) {
+//            Toast.makeText(activity, "Sorry! Text To Speech failed...",
+//                    Toast.LENGTH_LONG).show();
+//        }
+//    }
 
-
-    // setup TTS
-    public void onInit(int initStatus) {
-
-        // check for successful instantiation
-        if (initStatus == TextToSpeech.SUCCESS) {
-            if (myTTS.isLanguageAvailable(Locale.US) == TextToSpeech.LANG_AVAILABLE)
-                myTTS.setLanguage(Locale.US);
-        } else if (initStatus == TextToSpeech.ERROR) {
-            Toast.makeText(activity, "Sorry! Text To Speech failed...",
-                    Toast.LENGTH_LONG).show();
-        }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        //myTTS.shutdown();
-    }
-}
+//    @Override
+//    public void onDestroy() {
+//        super.onDestroy();
+//        //myTTS.shutdown();
+//    }
+    }}

@@ -91,7 +91,7 @@ public class HttpConnection {
      * @param holdFirst
      * @return
      */
-    private static synchronized HttpResponse postResponse(String page,
+    public static synchronized HttpResponse postResponse(String page,
                                                           List<NameValuePair> nvp,
                                                           boolean holdFirst){
 
