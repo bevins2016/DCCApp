@@ -43,11 +43,6 @@ public class ObjectStorage {
         actionItems = ais;
     }
 
-    /*Returns a List<E> of Action Item objects*/
-    public static List<ActionItem> getActionItems(){
-        return actionItems;
-    }
-
     /*Returns a view that represents the navigation menu*/
     public static View getMenuFrame() {
         return menuFrame;

@@ -1,6 +1,5 @@
 package com.example.dcc.helpers;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -21,10 +20,8 @@ public class User implements Serializable{
 
     //Serial number
     private static final long serialVersionUID = -5285360029686080283L;
-    //Logging name
-    private static final String LOG = "dcc.User";
     //String that define the object
-    private String handle,email,name,cookies,project,project2,imageURL,phone;
+    private String handle,email,name,cookies,project,project2,imageURL;
     //ID number of the user
     private int ID;
 
@@ -34,12 +31,6 @@ public class User implements Serializable{
 
     public void setImageURL(String url){
         this.imageURL = url;
-    }
-
-    public void displayData(){
-        Log.i(LOG, name);
-        Log.i(LOG, handle);
-        Log.i(LOG, cookies);
     }
 
     public String getCookies(){
@@ -63,10 +54,6 @@ public class User implements Serializable{
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getURL(Links link){
-        return null;
     }
 
     public Bitmap getImage() {
@@ -116,14 +103,6 @@ public class User implements Serializable{
 
     public void setProject2(String project2) {
         this.project2 = project2;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public int getID() {

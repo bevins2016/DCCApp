@@ -57,7 +57,7 @@ public class CreateActionItemFrag extends Fragment implements View.OnClickListen
         activity = getActivity();
 
         tag = (EditText) view.findViewById(R.id.edittag);
-        date = (EditText) view.findViewById(R.id.editdate);
+        //date = (EditText) view.findViewById(R.id.editdate);
         time = (EditText) view.findViewById(R.id.edittime);
         title = (EditText) view.findViewById(R.id.edittitle);
         content = (EditText) view.findViewById(R.id.editbody);

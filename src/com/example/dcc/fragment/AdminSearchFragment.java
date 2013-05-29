@@ -21,7 +21,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import static android.R.layout.*;
 
 /**
  * This fragment is used by administrators to search edaily reports.
@@ -108,7 +107,6 @@ public class AdminSearchFragment extends Fragment implements View.OnClickListene
     public void onClick(View view) {
         String query = buildQuery();
         Log.e("test", query);
-        Toast.makeText(getActivity(), query, Toast.LENGTH_LONG);
     }
 
     private String buildQuery() {

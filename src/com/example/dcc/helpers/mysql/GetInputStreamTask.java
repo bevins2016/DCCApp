@@ -1,22 +1,17 @@
 package com.example.dcc.helpers.mysql;
 
-import java.io.InputStream;
-
+import android.os.AsyncTask;
 import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.User;
 import com.example.dcc.helpers.hacks.DCCCookieSpecFactory;
 import com.example.dcc.helpers.hacks.DCCCookieStore;
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.params.ClientPNames;
 import org.apache.http.cookie.CookieSpecFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import android.os.AsyncTask;
-import android.util.Log;
+import java.io.InputStream;
 
 /**
  * This is used to get a basic input stream for posting to a URI

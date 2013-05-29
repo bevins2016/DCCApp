@@ -171,7 +171,7 @@ public class HttpConnection {
         user.setCookie(sb.toString());
 
         //Get more data for the user
-        MySQLQuery.validateUser("/DCC/validateUser.php", log);
+        MySQLQuery.validateUser("/DCC/validateUser.php");
         return true;
     }
 

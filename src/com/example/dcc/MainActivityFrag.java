@@ -5,9 +5,9 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.widget.Button;
 import com.example.dcc.fragment.MenuFragment;
 import com.example.dcc.fragment.NewsListFragment;
+import com.example.dcc.fragment.TopFragment;
 import com.example.dcc.helpers.ObjectStorage;
 
 /**
@@ -19,7 +19,6 @@ public class MainActivityFrag extends FragmentActivity {
     public static final int LEFT_FRAG = R.id.fragmentcontainerleft;
     public static final int RIGHT_FRAG = R.id.fragmentcontainerright;
     public static final int BOTTOM_FRAG = R.id.fragmentcontainerbottom;
-    private Button menuVisibility;
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -32,7 +31,7 @@ public class MainActivityFrag extends FragmentActivity {
         Fragment menu = new MenuFragment();
         Fragment news = (ObjectStorage.getHashMap().containsKey(RIGHT_FRAG)) ?
                  ObjectStorage.getFragment(RIGHT_FRAG):new NewsListFragment();
-        Fragment bottom = new BottomFragment();
+        Fragment bottom = new TopFragment();
 
         //Set fragments
         ObjectStorage.setFragment(LEFT_FRAG, menu);

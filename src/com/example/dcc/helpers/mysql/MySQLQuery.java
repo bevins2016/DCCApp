@@ -37,38 +37,6 @@ public class MySQLQuery {
         return null;
     }
 
-    /**
-     * This will reset the user's list of friends. The list of friends only contains the Names
-     * @param url
-     */
-    public synchronized static void updateFriends(String url){
-        try{
-            StringBuilder sb = new StringBuilder();
-            InputStream is = getInputStream(url);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
-            sb.append(reader.readLine() + "\n");
-
-            String line="";
-            while ((line = reader.readLine()) != null) {
-                sb.append(line + "\n");
-            }
-            is.close();
-            String result=sb.toString();
-
-            JSONArray jArray = new JSONArray(result);
-
-            for(int i=0; i<jArray.length(); i++){
-                JSONObject json_data = jArray.getJSONObject(i);
-            }
-        } catch (UnsupportedEncodingException e) {
-            Log.e("dcc.MySQLQuery", e.getMessage());
-        } catch (IOException e) {
-            Log.e("dcc.MySQLQuery", e.getMessage());
-        } catch (JSONException e) {
-            Log.e("dcc.MySQLQuery", e.getMessage());
-        }
-    }
-
     public synchronized static List<News> getNews(String url){
         JSONArray jNews = (JSONArray)getArray(url);
         List<News> newsList = new ArrayList<News>();
@@ -90,7 +58,6 @@ public class MySQLQuery {
                 n.setPubdate(temp.getString("post_date"));
                 n.setTitle(temp.getString("post_title"));
                 n.setText(temp.getString("post_content"));
-                n.setID(temp.getString("ID"));
                 newsList.add(n);
             } catch (JSONException e) {
                 Log.e("dcc.MySQLQuery", e.getMessage());
@@ -111,7 +78,6 @@ public class MySQLQuery {
             user.setID(Integer.parseInt(jUser.getString("ID")));
             user.setName(jUser.getString("display_name"));
             user.setEmail(jUser.getString("user_email"));
-            user.setPhone(jUser.getString("phone"));
             user.setHandle(jUser.getString("user_login"));
             user.setProject(jUser.getString("project"));
             user.setProject2(jUser.getString("project2"));
@@ -122,9 +88,9 @@ public class MySQLQuery {
         return null;
     }
 
-    public synchronized static User validateUser(String url, String login){
+    public synchronized static User validateUser(String url){
 
-        JSONObject jUser = null;
+        JSONObject jUser;
         jUser = (JSONObject)getArray(url);
 
         User user = ObjectStorage.getUser();
@@ -132,7 +98,6 @@ public class MySQLQuery {
         try{
             user.setName(jUser.getString("display_name"));
             user.setEmail(jUser.getString("user_email"));
-            user.setPhone(jUser.getString("phone"));
             user.setHandle(jUser.getString("user_login"));
             user.setProject(jUser.getString("project"));
             user.setProject2(jUser.getString("project2"));
@@ -163,11 +128,9 @@ public class MySQLQuery {
             StringBuilder sb = new StringBuilder();
             InputStream is = getInputStream(url);
             BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
-            sb.append(reader.readLine() + "\n");
-            String line="";
-            while ((line = reader.readLine()) != null) {
-                sb.append(line + "\n");
-            }
+            sb.append(reader.readLine()).append("\n");
+            String line;
+            while ((line = reader.readLine()) != null) sb.append(line).append("\n");
 
             is.close();
 

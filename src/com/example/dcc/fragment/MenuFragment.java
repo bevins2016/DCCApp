@@ -18,10 +18,7 @@ import android.widget.*;
 import com.example.dcc.CustomizedListViewFrag;
 import com.example.dcc.EReportLauncherFrag;
 import com.example.dcc.LaunchActivityFrag;
-<<<<<<< HEAD
-=======
 import com.example.dcc.R;
->>>>>>> 3297504beea7dfe1393710dd1ec7226b753e61cb
 import com.example.dcc.helpers.ObjectStorage;
 
 import java.util.ArrayList;
@@ -35,14 +32,7 @@ import java.util.Locale;
 public class MenuFragment extends Fragment implements OnClickListener,
         TextToSpeech.OnInitListener{
 
-    private Button newsB;
-    private Button photoB;
-    private Button reportB;
-    private Button actionB;
-    private Button directoryB;
-    private Button searchB;
     private ToggleButton toggleSound;
-    private Button headache;
     Button createButton;
     private Activity activity;
 
@@ -69,7 +59,7 @@ public class MenuFragment extends Fragment implements OnClickListener,
         }else{
             view = inflater.inflate(R.layout.menu_fragment_director,
                     container, false);
-            searchB = (Button) view.findViewById(R.id.search);
+            Button searchB = (Button) view.findViewById(R.id.search);
             searchB.setOnClickListener(this);
 
         }
@@ -78,25 +68,20 @@ public class MenuFragment extends Fragment implements OnClickListener,
         assert view != null;
 
         //Get all buttons from the view
-        newsB = (Button) view.findViewById(R.id.news);
-        photoB = (Button) view.findViewById(R.id.photo);
-        reportB = (Button) view.findViewById(R.id.report);
-        actionB = (Button) view.findViewById(R.id.action);
-        directoryB = (Button) view.findViewById(R.id.directory);
+        Button newsB = (Button) view.findViewById(R.id.news);
+        Button photoB = (Button) view.findViewById(R.id.photo);
+        Button reportB = (Button) view.findViewById(R.id.report);
+        Button actionB = (Button) view.findViewById(R.id.action);
+        Button directoryB = (Button) view.findViewById(R.id.directory);
 
-        headache = (Button)view.findViewById(R.id.ha);
+        Button headache = (Button) view.findViewById(R.id.ha);
 
         toggleSound = (ToggleButton) view.findViewById(R.id.toggle);
         voiceButton = (Button) view.findViewById(R.id.button);
         mList = (ListView) view.findViewById(R.id.list);
 
-<<<<<<< HEAD
         createButton = (Button) view.findViewById(R.id.createaction);
         createButton.setOnClickListener(this);
-=======
-        //createButton = (Button) view.findViewById(R.id.createaction);
-        //createButton.setOnClickListener(this);
->>>>>>> 3297504beea7dfe1393710dd1ec7226b753e61cb
 
 
         // check for TTS data
@@ -154,51 +139,16 @@ public class MenuFragment extends Fragment implements OnClickListener,
             case R.id.toggle:
                 toggle();
                 break;
-<<<<<<< HEAD
-//            case R.id.ha:
-//                FragmentManager manager = activity.getFragmentManager();
-//                FragmentTransaction transaction = manager.beginTransaction();
-//                Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-//                Fragment newer = new AdminSearchFragment();
-//                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-//
-//                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-//                transaction.commit();
-//                break;
-
-            //Temp Button for debugging purposes only
-//            case R.id.ha:
-//                FragmentManager manager = activity.getFragmentManager();
-//                FragmentTransaction transaction = manager.beginTransaction();
-//                Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-//                Fragment newer = new AdminSearchFragment();
-//                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-//
-//                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-//                transaction.commit();
-//                break;
-            case R.id.createaction:
-                FragmentManager manager2 = activity.getFragmentManager();
-                FragmentTransaction transaction2 = manager2.beginTransaction();
-
-                Fragment newerq = new CreateActionItemFrag();
-                ObjectStorage.setFragment(R.id.fragmentcontainerright, newerq);
-
-                transaction2.replace(R.id.fragmentcontainerright,
-                        ObjectStorage.getFragment(R.id.fragmentcontainerright));
-                transaction2.commit();
-=======
             //Temp Button for debugging purposes only
             case R.id.ha:
                 FragmentManager manager = activity.getFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
-                Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
+
                 Fragment newer = new AdminSearchFragment();
                 ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
 
                 transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
                 transaction.commit();
->>>>>>> 3297504beea7dfe1393710dd1ec7226b753e61cb
                 break;
             case R.id.createaction:
                 FragmentManager manager2 = activity.getFragmentManager();
