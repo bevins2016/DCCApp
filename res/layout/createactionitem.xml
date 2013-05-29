@@ -10,7 +10,6 @@
             android:layout_height="wrap_content"
             android:text="This is the main body of the action item."
             android:id="@+id/textbody"
-
             android:layout_above="@+id/editbody" android:layout_centerHorizontal="true"/>
 
     <EditText
@@ -24,132 +23,123 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_alignTop="@+id/linearLayout"
-            android:id="@+id/linearLayout2" android:layout_alignBottom="@+id/linearLayout">
+            android:id="@+id/linearLayout2" android:layout_alignBottom="@+id/linearLayout"
+            android:layout_toLeftOf="@+id/textbody">
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Enter due date in format mm/dd"
-                android:id="@+id/textdate" android:layout_gravity="left|center_vertical"/>
+                android:id="@+id/textdate"/>
 
+        <EditText
+                android:layout_width="216dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/editdate" />
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Enter time due in format 12:00am"
-                android:id="@+id/texttime" android:layout_gravity="left|center_vertical"
-                android:layout_above="@+id/eventcheckBox" android:layout_toRightOf="@+id/edittag"/>
+                android:id="@+id/texttime"/>
         <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="210dp"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:id="@+id/edittime" android:layout_gravity="left|center_vertical"
-                android:layout_below="@+id/learningcheckBox" android:layout_alignRight="@+id/textbody"
-                android:layout_marginTop="50dp"/>
+                android:id="@+id/edittime"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Enter the title that students will see."
-                android:id="@+id/texttitle" android:layout_gravity="left|center_vertical"
-                android:layout_below="@+id/texttime" android:layout_toLeftOf="@+id/mentorcheckBox"/>
+                android:id="@+id/texttitle"/>
         <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="204dp"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:id="@+id/edittitle" android:layout_gravity="left|center_vertical"
-                android:layout_below="@+id/groupleadcheckBox" android:layout_toRightOf="@+id/createai"/>
+                android:id="@+id/edittitle"/>
+
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Enter the tag for the subject line."
-                android:id="@+id/texttag" android:layout_gravity="left|center_vertical"
-                android:layout_alignTop="@+id/fifteencheckBox" android:layout_alignLeft="@+id/eventcheckBox"/>
+                android:id="@+id/texttag" />
         <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="199dp"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:id="@+id/edittag" android:layout_gravity="left|center_vertical"
-                android:layout_alignBaseline="@+id/tencheckBox" android:layout_alignBottom="@+id/tencheckBox"/>
-        <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:id="@+id/editdate" android:layout_gravity="left|center_vertical"
+                android:id="@+id/edittag"
                 />
+
 
     </LinearLayout>
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:layout_gravity="right|center_vertical"
-        android:id="@+id/linearLayout"
-        android:layout_alignParentTop="true" android:layout_alignParentRight="true">
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_gravity="right|center_vertical"
+            android:id="@+id/linearLayout"
+            android:layout_alignParentTop="true" android:layout_alignParentRight="true">
 
-    <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Group Lead"
-            android:id="@+id/groupleadcheckBox" android:layout_gravity="left|center_vertical"
-            android:layout_below="@+id/textbody" android:layout_alignLeft="@+id/eventcheckBox"/>
-    <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Deputy Group Lead"
-            android:id="@+id/deputyleadcheckBox" android:layout_gravity="left|center_vertical"
-            android:layout_alignTop="@+id/edittime" android:layout_alignRight="@+id/eventcheckBox"/>
-    <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mentor"
-            android:id="@+id/mentorcheckBox" android:layout_gravity="left|center_vertical"
-            android:layout_above="@+id/deputyleadcheckBox" android:layout_alignRight="@+id/createai"/>
-    <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Project Lead"
-            android:id="@+id/projectcheckBox" android:layout_gravity="left|center_vertical"
-            android:layout_centerVertical="true" android:layout_alignLeft="@+id/eventcheckBox"/>
-    <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Event Manager"
-            android:id="@+id/eventcheckBox" android:layout_gravity="left|center_vertical"
-            android:layout_below="@+id/edittime" android:layout_alignRight="@+id/learningcheckBox"
-            android:layout_marginRight="25dp" android:layout_marginTop="21dp"/>
-    <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="15 Week Students"
-            android:id="@+id/fifteencheckBox" android:layout_gravity="left|center_vertical"
-            android:layout_marginRight="20dp" android:layout_above="@+id/checkBox"
-            android:layout_alignRight="@+id/editbody" android:layout_marginBottom="24dp" android:checked="false"/>
-    <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="10 Week Students"
-            android:id="@+id/tencheckBox" android:layout_gravity="left|center_vertical"
-            android:layout_alignTop="@+id/edittitle" android:layout_alignLeft="@+id/fifteencheckBox"
-            android:checked="false"/>
-
-    <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="5 Week Students"
-            android:id="@+id/checkBox" android:layout_gravity="left|center_vertical"
-            android:layout_alignTop="@+id/learningcheckBox" android:layout_alignLeft="@+id/tencheckBox"
-            android:checked="false"/>
-    <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Learning Interns"
-            android:id="@+id/learningcheckBox" android:layout_gravity="left|center_vertical"
-            android:layout_below="@+id/editdate" android:layout_alignLeft="@+id/createai"
-            android:layout_marginTop="48dp"/>
+        <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Group Lead"
+                android:id="@+id/groupleadcheckBox" android:layout_gravity="left|center_vertical"
+                android:layout_below="@+id/textbody" android:layout_alignLeft="@+id/eventcheckBox"/>
+        <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Deputy Group Lead"
+                android:id="@+id/deputyleadcheckBox" android:layout_gravity="left|center_vertical"
+                android:layout_alignTop="@+id/edittime" android:layout_alignRight="@+id/eventcheckBox"/>
+        <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mentor"
+                android:id="@+id/mentorcheckBox" android:layout_gravity="left|center_vertical"
+                android:layout_above="@+id/deputyleadcheckBox" android:layout_alignRight="@+id/createai"/>
+        <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Project Lead"
+                android:id="@+id/projectcheckBox" android:layout_gravity="left|center_vertical"
+                android:layout_centerVertical="true" android:layout_alignLeft="@+id/eventcheckBox"/>
+        <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Event Manager"
+                android:id="@+id/eventcheckBox" android:layout_gravity="left|center_vertical"
+                android:layout_below="@+id/edittime" android:layout_alignRight="@+id/learningcheckBox"
+                android:layout_marginRight="25dp" android:layout_marginTop="21dp"/>
+        <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="15 Week Students"
+                android:id="@+id/fifteencheckBox" android:layout_gravity="left|center_vertical"
+                android:layout_marginRight="20dp" android:layout_above="@+id/checkBox"
+                android:layout_alignRight="@+id/editbody" android:layout_marginBottom="24dp" android:checked="false"/>
+        <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10 Week Students"
+                android:id="@+id/tencheckBox" android:layout_gravity="left|center_vertical"
+                android:layout_alignTop="@+id/edittitle" android:layout_alignLeft="@+id/fifteencheckBox"
+                android:checked="false"/>
+        <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5 Week Students"
+                android:id="@+id/checkBox" android:layout_gravity="left|center_vertical"
+                android:layout_alignTop="@+id/learningcheckBox" android:layout_alignLeft="@+id/tencheckBox"
+                android:checked="false"/>
+        <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Learning Interns"
+                android:id="@+id/learningcheckBox" android:layout_gravity="left|center_vertical"
+                android:layout_below="@+id/editdate" android:layout_alignLeft="@+id/createai"
+                android:layout_marginTop="48dp"/>
         <Button
                 android:layout_width="235dp"
                 android:layout_height="123dp"
                 android:text="Submit"
                 android:id="@+id/createai" android:layout_gravity="left|center_vertical"
-/>
+                />
     </LinearLayout>
 
 
