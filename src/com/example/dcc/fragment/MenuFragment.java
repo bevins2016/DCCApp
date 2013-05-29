@@ -87,8 +87,7 @@ public class MenuFragment extends Fragment implements OnClickListener,
         voiceButton = (Button) view.findViewById(R.id.button);
         mList = (ListView) view.findViewById(R.id.list);
 
-        //createButton = (Button) view.findViewById(R.id.createaction);
-        //createButton.setOnClickListener(this);
+
 
 
         // check for TTS data
@@ -146,7 +145,7 @@ public class MenuFragment extends Fragment implements OnClickListener,
             case R.id.toggle:
                 toggle();
                 break;
-            //Temp Button for debugging purposes only
+
             case R.id.ha:
                 FragmentManager manager = activity.getFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();

@@ -180,13 +180,13 @@
                 android:layout_height="fill_parent"
                 android:inputType="number"
                 android:ems="10"
-                android:id="@+id/edailyissdep"/>
+                android:id="@+id/edailyissno"/>
     </LinearLayout>
     <SeekBar
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:max="18"
-            android:id="@+id/seekBar" android:layout_gravity="center"/>
+            android:id="@+id/scoreSeek" android:layout_gravity="center"/>
     <LinearLayout
             android:layout_width="50dp"
             android:layout_height="50dp"

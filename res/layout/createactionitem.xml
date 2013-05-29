@@ -68,7 +68,11 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:id="@+id/edittag" android:layout_gravity="left|center_vertical"
+<<<<<<< HEAD
+                android:layout_alignBaseline="@+id/tencheckBox" android:layout_alignBottom="@+id/tencheckBox"
+=======
                 android:layout_alignBaseline="@+id/10checkBox" android:layout_alignBottom="@+id/10checkBox"
+>>>>>>> 3297504beea7dfe1393710dd1ec7226b753e61cb
                 android:layout_toRightOf="@+id/deputyleadcheckBox"/>
         <EditText
                 android:layout_width="wrap_content"
@@ -122,14 +126,22 @@
             android:text="15 Week Students"
             android:id="@+id/fifteencheckBox" android:layout_gravity="left|center_vertical"
             android:layout_marginRight="20dp" android:layout_above="@+id/checkBox"
+<<<<<<< HEAD
+            android:layout_alignRight="@+id/editbody" android:layout_marginBottom="24dp"/>
+=======
             android:layout_alignRight="@+id/editbody" android:layout_marginBottom="24dp" android:checked="false"/>
+>>>>>>> 3297504beea7dfe1393710dd1ec7226b753e61cb
     <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="10 Week Students"
             android:id="@+id/tencheckBox" android:layout_gravity="left|center_vertical"
+<<<<<<< HEAD
+            android:layout_alignTop="@+id/edittitle" android:layout_alignLeft="@+id/fifteencheckBox"/>
+=======
             android:layout_alignTop="@+id/edittitle" android:layout_alignLeft="@+id/fifteencheckBox"
             android:checked="false"/>
+>>>>>>> 3297504beea7dfe1393710dd1ec7226b753e61cb
     <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

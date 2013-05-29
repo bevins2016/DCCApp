@@ -1,5 +1,6 @@
 package com.example.dcc.fragment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -15,7 +16,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+<<<<<<< HEAD
+=======
 import com.example.dcc.R;
+>>>>>>> 3297504beea7dfe1393710dd1ec7226b753e61cb
 import com.example.dcc.helpers.ActionItem;
 import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.mysql.MySQLQuery;
@@ -24,9 +28,13 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3297504beea7dfe1393710dd1ec7226b753e61cb
 
 
-
+@SuppressLint("NewApi")
 public class ActionItemFrag extends Fragment implements OnClickListener{
 
     ListView listview;
