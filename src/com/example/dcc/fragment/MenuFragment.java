@@ -40,6 +40,7 @@ public class MenuFragment extends Fragment implements OnClickListener{
     public ListView mList;
     public Button voiceButton;
     View view;
+    boolean director;
 
     // TTS object
     public TextToSpeech myTTS;
@@ -60,6 +61,7 @@ public class MenuFragment extends Fragment implements OnClickListener{
                     container, false);
             Button searchB = (Button) view.findViewById(R.id.search);
             searchB.setOnClickListener(this);
+            director = true;
 
         }
 
@@ -187,6 +189,10 @@ public class MenuFragment extends Fragment implements OnClickListener{
         Fragment newer = new MembersListFragment();
         launchFragment(newer);
     }
+    public void searchReport(){
+        Fragment newer = new AdminSearchFragment();
+        launchFragment(newer);
+    }
     public void toggle(){
 //        if(toggleSound.isChecked()){
 //            speakWords("Access Granted. Welcome ");
@@ -194,6 +200,21 @@ public class MenuFragment extends Fragment implements OnClickListener{
 //            speakWords("Voice Prompts Off");
 //        }
     }
+    public void createActionItems(){
+
+        Intent intent = new Intent();
+        FragmentManager manager = activity.getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+
+        Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
+        Fragment newer = new CreateActionItemFrag();
+        ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
+
+        transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
+        transaction.commit();
+    }
+
+
 
 
     /**
@@ -238,58 +259,60 @@ public class MenuFragment extends Fragment implements OnClickListener{
             if (matches.contains("news")) {
                 news();
             }
-            if (matches.contains("gallery")) {
+            else if (matches.contains("gallery")) {
                 photo();
             }
-            if (matches.contains("photo")) {
+            else if (matches.contains("photo")) {
                 photo();
             }
-            if (matches.contains("report")) {
+            else if (matches.contains("report")) {
                 report();
             }
-            if (matches.contains("ereport")) {
+            else if (matches.contains("ereport")) {
                 report();
             }
-            if (matches.contains("search")) {
-                search();
-            }
-            if (matches.contains("action")) {
+            else if (matches.contains("action")) {
                 action();
             }
-            if (matches.contains("action item")) {
+            else if (matches.contains("action item")) {
                 action();
             }
-            if (matches.contains("item")) {
+            else if (matches.contains("item")) {
                 action();
             }
-            if (matches.contains("directory")) {
+            else if (matches.contains("directory")) {
                 directory();
             }
-            if (matches.contains("email")) {
+            else if (matches.contains("email")) {
                 directory();
             }
-            if (matches.contains("contacts")) {
+            else if (matches.contains("contacts")) {
                 directory();
             }
-            if (matches.contains("close")) {
+            else if (matches.contains("close")) {
                 activity.finish();
             }
-            if (matches.contains("stop")) {
+            else if (matches.contains("stop")) {
                 activity.finish();
             }
-            if (matches.contains("finish")) {
+            else if (matches.contains("finish")) {
                 activity.finish();
             }
-            if (matches.contains("toggle")) {
+            else if (matches.contains("toggle")) {
                 toggle();
             }
-            if (matches.contains("switch")) {
+            else if (matches.contains("switch")) {
                 toggle();
             }
-            if (matches.contains("speak")) {
-                toggle();
+            else if (matches.contains("create") && director) {
+                createActionItems();
             }
-
+            else if (matches.contains("post") && director) {
+                createActionItems();
+            }
+            else if (matches.contains("search") && director) {
+                searchReport();
+            }
         }
 
 

@@ -123,15 +123,13 @@ public class CreateActionItemFrag extends Fragment implements View.OnClickListen
 
 			/* Send to server */
             try {
-
                 ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-//                String dueDate = String.valueOf(date.getText());
 
                 nameValuePairs.add(new BasicNameValuePair("tag", "" + tag.getText()));
-                nameValuePairs.add(new BasicNameValuePair("ai-date", date.getText().toString()));
-                nameValuePairs.add(new BasicNameValuePair("time", time.getText().toString()));
-                nameValuePairs.add(new BasicNameValuePair("title", title.getText().toString()));
-                nameValuePairs.add(new BasicNameValuePair("content", content.getText().toString()));
+                nameValuePairs.add(new BasicNameValuePair("ai-date", "" + date.getText()));
+                nameValuePairs.add(new BasicNameValuePair("time", "" + time.getText()));
+                nameValuePairs.add(new BasicNameValuePair("title", "" + title.getText()));
+                nameValuePairs.add(new BasicNameValuePair("content", "" + content.getText()));
 
                 //these will check if each checkbox is sent and add the appropriate tags
                 if(glCheck.isChecked()){

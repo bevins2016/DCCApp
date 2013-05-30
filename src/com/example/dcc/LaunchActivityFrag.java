@@ -243,19 +243,24 @@ public class LaunchActivityFrag extends Fragment implements OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.createaction:
-                manager = activity.getFragmentManager();
-                transaction = manager.beginTransaction();
 
-                old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-                newer = new CreateActionItemFrag();
-                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-
-                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-                transaction.commit();
                 break;
         }
     }
 
+    public void createActionItems(){
+
+        Intent intent = new Intent();
+        FragmentManager manager = activity.getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+
+        Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
+        Fragment newer = new CreateActionItemFrag();
+        ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
+
+        transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
+        transaction.commit();
+    }
     public void onBackPressed() {
         activity.finish();
     }
