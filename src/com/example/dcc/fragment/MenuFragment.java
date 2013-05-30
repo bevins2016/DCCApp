@@ -5,8 +5,10 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
@@ -14,7 +16,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
+
 import com.example.dcc.CustomizedListViewFrag;
 import com.example.dcc.EReportLauncherFrag;
 import com.example.dcc.LaunchActivityFrag;
@@ -23,7 +30,6 @@ import com.example.dcc.helpers.ObjectStorage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * This fragment is the left aligned navigation bar used to allow the
@@ -41,26 +47,31 @@ public class MenuFragment extends Fragment implements OnClickListener{
     public Button voiceButton;
     View view;
     boolean director;
-
+String login;
     // TTS object
     public TextToSpeech myTTS;
     // status check code
     public int MY_DATA_CHECK_CODE = 0;
+    MediaPlayer mp;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if(!ObjectStorage.getUser().getName().equalsIgnoreCase("brandon harmon")){
-            view = inflater.inflate(R.layout.menu_fragment,
-                    container, false);
-        }else{
+        login = ObjectStorage.getUser().getName();
+        if(ObjectStorage.getUser().getName().equalsIgnoreCase("brandon harmon") || ObjectStorage.getUser().getName().equalsIgnoreCase("sam bevins")){
             view = inflater.inflate(R.layout.menu_fragment_director,
                     container, false);
             Button searchB = (Button) view.findViewById(R.id.search);
             searchB.setOnClickListener(this);
+        }else{
+            view = inflater.inflate(R.layout.menu_fragment,
+                    container, false);
+
 
             director = true;
         }
+
+        mp = MediaPlayer.create(activity, R.raw.sweet);
 
         activity = getActivity();
         assert view != null;
@@ -71,6 +82,7 @@ public class MenuFragment extends Fragment implements OnClickListener{
         Button reportB = (Button) view.findViewById(R.id.report);
         Button actionB = (Button) view.findViewById(R.id.action);
         Button directoryB = (Button) view.findViewById(R.id.directory);
+        Button delete = (Button) view.findViewById(R.id.logout);
 
 
 
@@ -88,6 +100,7 @@ public class MenuFragment extends Fragment implements OnClickListener{
         reportB.setOnClickListener(this);
         actionB.setOnClickListener(this);
         directoryB.setOnClickListener(this);
+        delete.setOnClickListener(this);
         //searchB.setOnClickListener(this);
 
 
@@ -128,6 +141,17 @@ public class MenuFragment extends Fragment implements OnClickListener{
                 break;
             case R.id.directory:
                 directory();
+                break;
+            case R.id.logout:
+                SharedPreferences mPreferences;
+                mPreferences = activity.getSharedPreferences("CurrentUser", 0);
+                SharedPreferences.Editor editor=mPreferences.edit();
+                editor.putString("UserName", "");
+                editor.putString("PassWord", "");
+                editor.commit();
+
+                Toast.makeText(activity, "Login data cleared",
+                        Toast.LENGTH_SHORT).show();
                 break;
             case R.id.createaction:
                 FragmentManager manager2 = activity.getFragmentManager();
@@ -310,6 +334,18 @@ public class MenuFragment extends Fragment implements OnClickListener{
             else if (matches.contains("search") && director) {
                 searchReport();
             }
+            else if (matches.contains("free") && director) {
+                mp.start();
+            }
+            else if (matches.contains("tacos") && director) {
+                mp.start();
+            }
+            else if (matches.contains("give me a taco") && director) {
+                mp.start();
+            }
+            else if (matches.contains("I wish I could talk to ghosts") && director) {
+                mp.start();
+            }
         }
 
 
@@ -347,4 +383,6 @@ public class MenuFragment extends Fragment implements OnClickListener{
 //        super.onDestroy();
 //        //myTTS.shutdown();
 //    }
-    }}
+    }
+
+}

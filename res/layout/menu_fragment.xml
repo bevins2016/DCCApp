@@ -70,8 +70,16 @@
                 android:drawableRight="@drawable/socialgroup"
                 android:text="Speech Action"
                 android:id="@+id/button" android:layout_gravity="left|center_vertical"/>
-
-        <ListView
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:shadowColor="#000000"
+                android:shadowRadius="0"
+                android:background="@drawable/background"
+                android:drawableRight="@drawable/socialgroup"
+                android:text="Delete Auto Login Info"
+                android:id="@+id/logout" android:layout_gravity="left|center_vertical"/>
+         <ListView
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:id="@+id/list"/>

@@ -11,10 +11,13 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -23,6 +26,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
@@ -51,6 +60,7 @@ public class LoginActivity extends Activity {
     private TextView mLoginStatusMessageView;
 
     private Context context;
+    boolean helper = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -62,6 +72,8 @@ public class LoginActivity extends Activity {
         User user = new User();
         ObjectStorage.setHashMap(new HashMap<Integer, Fragment>());
         ObjectStorage.setUser(user);
+
+
 
         /* Set up the login form. */
         mUser = "";
@@ -98,6 +110,17 @@ public class LoginActivity extends Activity {
                         attemptLogin();
                     }
                 });
+
+        try{
+            SharedPreferences sp1=this.getSharedPreferences("CurrentUser", MODE_PRIVATE);
+
+//            mUser =sp1.getString("UserName", null);
+//            mPassword = sp1.getString("PassWord", null);
+            if(sp1.getString("UserName", null) != "") attemptLogin();
+
+        }catch(Exception e){
+
+        }
     }
 
     @Override
@@ -128,8 +151,28 @@ public class LoginActivity extends Activity {
         mUser = mUserView.getText().toString();
         mPassword = mPasswordView.getText().toString();
 
+        SharedPreferences sp1=this.getSharedPreferences("CurrentUser", MODE_PRIVATE);
+
+        if(sp1.getString("UserName", null) == "" && mUser == "" && mPassword == ""){
+            Log.e("Fail", "Failed attempt");
+            return;
+        }
+
+        if(sp1.getString("UserName", null) != ""){
+            mUser =sp1.getString("UserName", null);
+            mPassword = sp1.getString("PassWord", null);
+        }
+
+        SharedPreferences mPreferences;
+        mPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
+        SharedPreferences.Editor editor=mPreferences.edit();
+        editor.putString("UserName", mUser);
+        editor.putString("PassWord", mPassword);
+        editor.commit();
+
         boolean cancel = false;
         View focusView = null;
+
 
         // Check for a valid password.
         if (TextUtils.isEmpty(mPassword))
@@ -241,8 +284,6 @@ public class LoginActivity extends Activity {
         {
             try{
                 if (!HttpConnection.login(mUser, mPassword))
-
-
                 {
                     cancel(true);
                     return false;
