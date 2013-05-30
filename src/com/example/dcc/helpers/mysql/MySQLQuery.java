@@ -56,7 +56,7 @@ public class MySQLQuery {
                     u = convertUser ((JSONObject)getArray("/DCC/getUserById.php?id="+authorID));
                     ObjectStorage.setUser(authorID, u);
                 }
-                n.setPublisher(u.getName());
+                n.setPublisher(u);
                 n.setPubdate(temp.getString("post_date"));
                 n.setTitle(temp.getString("post_title"));
                 n.setText(temp.getString("post_content"));

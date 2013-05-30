@@ -1,12 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<TextView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_marginLeft="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/text_selector"
-        android:gravity="left"
-        android:textSize="22sp"
-        android:drawableRight="@drawable/avplay">
-</TextView>
+<RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:id="@+id/actionitemimageView"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Description"
+            android:id="@+id/actionitemdescription"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/actionitemimageView"
+            android:layout_above="@+id/actionitemdate"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="DateDue"
+            android:id="@+id/actionitemdate"
+            android:layout_alignBottom="@+id/actionitemimageView"
+            android:layout_toRightOf="@+id/actionitemimageView"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text=" @ "
+            android:id="@+id/textView"
+            android:layout_alignTop="@+id/actionitemdate"
+            android:layout_toRightOf="@+id/actionitemdate"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Time"
+            android:id="@+id/actionitemstime"
+            android:layout_alignTop="@+id/textView"
+            android:layout_toRightOf="@+id/textView"/>
+</RelativeLayout>

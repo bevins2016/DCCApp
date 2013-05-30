@@ -37,7 +37,7 @@ public class NewsDetailFragment extends Fragment {
         //Populate text views with news details
         newstitle.setText(news.getTitle());
         newsdate.setText(news.getPubdate());
-        newspublisher.setText(news.getPublisher());
+        newspublisher.setText(news.getPublisher().getName());
         newsBody.setText(Html.fromHtml(news.getText()));
 
         return view;

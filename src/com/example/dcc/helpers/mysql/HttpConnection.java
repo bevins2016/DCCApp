@@ -120,11 +120,11 @@ public class HttpConnection {
             return client.execute(new HttpHost(HOST), post);
 
         } catch (UnsupportedEncodingException e) {
-            Log.e(LOG, e.getLocalizedMessage());
+            Log.e(LOG, "UnsupportedEncodingException: "+page);
         } catch (ClientProtocolException e) {
-            Log.e(LOG, e.getLocalizedMessage());
+            Log.e(LOG, "ClientProtocolException: "+page);
         } catch (IOException e) {
-            Log.e(LOG, e.getLocalizedMessage());
+            Log.e(LOG, "IOException: "+page);
         }
         return null;
     }

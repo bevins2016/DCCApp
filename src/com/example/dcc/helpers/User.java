@@ -25,7 +25,6 @@ public class User implements Serializable{
     //ID number of the user
     private int ID;
 
-
     public User(){
     }
 
@@ -57,9 +56,11 @@ public class User implements Serializable{
     }
 
     public Bitmap getImage() {
+
         try{
             String uri = "/DCC/getUserGravitar.php?email=" + email;
-
+            if(BitmapCache.getBitmap(uri) != null) return BitmapCache.getBitmap(uri);
+            Log.e("Fetching Image ",name+"---"+uri);
             StringBuilder sb = new StringBuilder();
             InputStream in = new GetInputStreamTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, uri).get();
             BufferedReader reader = new BufferedReader(new InputStreamReader(in,"iso-8859-1"),8);
@@ -72,7 +73,12 @@ public class User implements Serializable{
             in.close();
 
 
-            return new GetImageTask().execute().get();
+            Bitmap image =  new GetImageTask().execute().get();
+
+            BitmapCache.addBitmap(uri, image);
+
+            return image;
+
         }catch(Exception e){
             Log.e("EH", e.getLocalizedMessage());
         }

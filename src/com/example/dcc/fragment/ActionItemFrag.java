@@ -19,6 +19,7 @@ import android.widget.ListView;
 import com.example.dcc.R;
 import com.example.dcc.helpers.ActionItem;
 import com.example.dcc.helpers.ObjectStorage;
+import com.example.dcc.helpers.hacks.ActionArrayAdapter;
 import com.example.dcc.helpers.mysql.MySQLQuery;
 
 import java.util.List;
@@ -32,18 +33,16 @@ public class ActionItemFrag extends Fragment implements OnClickListener{
 
     ListView listview;
 
-    ArrayAdapter<Spanned> adapter;
+    ActionArrayAdapter adapter;
     List<ActionItem> actionItems;
     Activity activity;
-
-
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         //setRetainInstance(true);
 
-        View view = inflater.inflate(R.layout.news_list_fragment, container, false);
+        View view = inflater.inflate(R.layout.action_item_fragment, container, false);
         activity = getActivity();
 
         GetNewsTask g = new GetNewsTask();
@@ -60,8 +59,8 @@ public class ActionItemFrag extends Fragment implements OnClickListener{
         }
 
 
-        listview = (ListView)view.findViewById(R.id.newslist);
-        adapter = new ArrayAdapter<Spanned>(getActivity(), R.layout.news_item);
+        listview = (ListView)view.findViewById(R.id.ailistView);
+        adapter = new ActionArrayAdapter(getActivity(), actionItems);
         listview.setAdapter(adapter);
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -84,7 +83,7 @@ public class ActionItemFrag extends Fragment implements OnClickListener{
         });
 
         for(ActionItem n : actionItems){
-            adapter.add(Html.fromHtml(n.toString()));
+            adapter.add(n);
         }
 
         return view;

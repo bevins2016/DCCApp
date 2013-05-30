@@ -85,7 +85,7 @@ public class ActionItemActionFrag extends Fragment implements View.OnClickListen
                 nameValuePairs = new ArrayList<NameValuePair>();
 
                 nameValuePairs.add(new BasicNameValuePair("subject", actionitem.getSubject()));
-                nameValuePairs.add(new BasicNameValuePair("response", (String) aitext.getText()));
+                nameValuePairs.add(new BasicNameValuePair("response", userInput.getText().toString()));
                 nameValuePairs.add(new BasicNameValuePair("aiid", ""+actionitem.getAid()));
                 nameValuePairs.add(new BasicNameValuePair("aitag", actionitem.getTag()));
 

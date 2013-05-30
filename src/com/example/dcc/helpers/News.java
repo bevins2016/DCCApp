@@ -16,7 +16,7 @@ public class News implements Serializable{
     /*Message in the article*/
 	private String text;
     /*User that created the article*/
-	private String publisher;
+	private User publisher;
 
     /**
      * Constructor of the News object.
@@ -60,12 +60,12 @@ public class News implements Serializable{
 	}
 
     /*Returns the name of the author*/
-	public String getPublisher() {
+	public User getPublisher() {
 		return publisher;
 	}
 
     /*Sets the name of the author*/
-	public void setPublisher(String publisher) {
+	public void setPublisher(User publisher) {
 		this.publisher = publisher;
 	}
 

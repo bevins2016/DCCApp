@@ -38,7 +38,6 @@ public class EDailyList extends ListFragment {
 
         //Get the listview, set the listview and the adapter
         listview = (ListView)view.findViewById(R.id.edailylistv);
-        Log.e("GILMORE", (listview != null) + " " + (adapter != null));
         listview.setAdapter(adapter);
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {

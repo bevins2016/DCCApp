@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.dcc.R;
 import com.example.dcc.helpers.News;
 import com.example.dcc.helpers.ObjectStorage;
+import com.example.dcc.helpers.hacks.NewsArrayAdapter;
 import com.example.dcc.helpers.mysql.MySQLQuery;
 
 import java.util.List;
@@ -32,6 +33,8 @@ import java.util.concurrent.TimeoutException;
  */
 public class NewsListFragment extends Fragment{
 
+    private NewsArrayAdapter adapter;
+    private ListView listview;
     /*A List<E> of the news items that are pushed into the adapter*/
     private List<News> news;
 
@@ -57,13 +60,12 @@ public class NewsListFragment extends Fragment{
             }
         }
 
-        //Set listview with the adapter
-        ListView listview = (ListView) view.findViewById(R.id.newslist);
-        ArrayAdapter<Spanned> adapter = new ArrayAdapter<Spanned>(getActivity(), R.layout.news_item);
+        adapter = new NewsArrayAdapter(getActivity(), news);
+
+        listview = (ListView)view.findViewById(R.id.newslist);
+
         listview.setAdapter(adapter);
 
-        //Add a listener that launches the detailed view after passing in the
-        //relevant news item
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -84,14 +86,14 @@ public class NewsListFragment extends Fragment{
 
         try{
             for(News n : news){
-                adapter.add(Html.fromHtml(n.toString()));
+                adapter.add(n);
             }
-            return view;
-        }catch (NullPointerException e){
-            Toast.makeText (getActivity(), "Aggregation Timed Out", Toast.LENGTH_LONG);
-            return view;
+        }catch(NullPointerException e){
+            Toast.makeText(getActivity(), "Connection Timed Out", Toast.LENGTH_LONG).show();
         }
+        return view;
     }
+
 
     /*
      *Retrives the newslist from the mysql database
