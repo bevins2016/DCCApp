@@ -150,32 +150,32 @@ public class EDailyActivity extends Activity implements OnClickListener {
 	 * their information in SetDefaults.txt if InternalStorage.txt does not exit
 	 */
 	private void setDefaultsPopup() {
-		LayoutInflater factory = LayoutInflater.from(this);
-		final View popup = factory.inflate(R.layout.default_popup, null);
-		TextView textview = (TextView) popup.findViewById(R.id.defaultPopupText);
-		textview.setText(popupText);
-		AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
-		alertBuilder
-				.setCancelable(true)
-				.setTitle("Student Info")
-				.setView(popup)
-				.setNegativeButton("No", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						dialog.cancel();
-					}
-				})
-				.setPositiveButton("Yes",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,
-									int which) {
-								Intent intent = new Intent(EDailyActivity.this,
-										SetDefaults.class);
-								startActivity(intent);
-							}
-						});
-
-		AlertDialog alertdialog = alertBuilder.create();
-		alertdialog.show();
+//		LayoutInflater factory = LayoutInflater.from(this);
+//		final View popup = factory.inflate(R.layout.default_popup, null);
+//		TextView textview = (TextView) popup.findViewById(R.id.defaultPopupText);
+//		textview.setText(popupText);
+//		AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+//		alertBuilder
+//				.setCancelable(true)
+//				.setTitle("Student Info")
+//				.setView(popup)
+//				.setNegativeButton("No", new DialogInterface.OnClickListener() {
+//					public void onClick(DialogInterface dialog, int id) {
+//						dialog.cancel();
+//					}
+//				})
+//				.setPositiveButton("Yes",
+//						new DialogInterface.OnClickListener() {
+//							public void onClick(DialogInterface dialog,
+//									int which) {
+//								Intent intent = new Intent(EDailyActivity.this,
+//										SetDefaults.class);
+//								startActivity(intent);
+//							}
+//						});
+//
+//		AlertDialog alertdialog = alertBuilder.create();
+//		alertdialog.show();
 	}
 
 	/* Send eDaily to the server */
@@ -193,10 +193,10 @@ public class EDailyActivity extends Activity implements OnClickListener {
 //				nameValuePairs.add(new BasicNameValuePair("edaily",
 //						getEditText(todayTF)));
 
-                nameValuePairs.add(new BasicNameValuePair("ID", "10"));
+                nameValuePairs.add(new BasicNameValuePair("ID", "" + ObjectStorage.getUser().getID()));
                 nameValuePairs.add(new BasicNameValuePair("First", first));
                 nameValuePairs.add(new BasicNameValuePair("Last", last));
-                nameValuePairs.add(new BasicNameValuePair("Project", "Spiderman"));
+                nameValuePairs.add(new BasicNameValuePair("Project", ObjectStorage.getUser().getProject()));
                 nameValuePairs.add(new BasicNameValuePair("edaily-content",
                         getEditText(todayTF)));
                 nameValuePairs.add(new BasicNameValuePair("Hours", getEditText(hours)));
