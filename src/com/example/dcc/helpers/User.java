@@ -16,7 +16,7 @@ import java.net.URL;
 /**
  * Used to store data that represents users of VDC
  */
-public class User implements Serializable{
+public class User implements Serializable, Comparable{
 
     //Serial number
     private static final long serialVersionUID = -5285360029686080283L;
@@ -136,7 +136,7 @@ public class User implements Serializable{
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setDoInput(true);
                 conn.connect();
-               image = BitmapFactory.decodeStream(conn.getInputStream());
+                image = BitmapFactory.decodeStream(conn.getInputStream());
                 conn.disconnect();
             }catch(Exception e){
                 return null;
@@ -144,4 +144,18 @@ public class User implements Serializable{
             return image;
         }
     }
+
+    public int compareTo(Object anotherUser) throws ClassCastException{
+        try{
+        if(!(anotherUser instanceof User))throw new ClassCastException("Incorrect Object");
+        String lastNameOther = ((User) anotherUser).getName().split(" ")[1];
+        String lastNameThis = getName().split(" ")[1];
+
+        //Multiply by -1 to reverse the order. Orders list from min to max.
+        return lastNameOther.compareTo(lastNameThis)*-1;
+        }catch(ArrayIndexOutOfBoundsException e){
+            return 0;
+        }
+    }
 }
+

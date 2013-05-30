@@ -220,6 +220,7 @@ public class MySQLQuery {
                 edaily.setGrade(jEdaily.getInt("grade"));
                 edaily.setFirstname(jEdaily.getString("first"));
                 edaily.setLastname(jEdaily.getString("last"));
+                edaily.setProj(jEdaily.getString("project"));
 
                 edailys.add(edaily);
             } catch (JSONException e) {

@@ -242,7 +242,6 @@ public class LoginActivity extends Activity {
             try{
                 if (!HttpConnection.login(mUser, mPassword))
 
-
                 {
                     cancel(true);
                     return false;

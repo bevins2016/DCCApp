@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.dcc.EDailyDetailedActivity;
 import com.example.dcc.R;
 import com.example.dcc.helpers.EDaily;
 import com.example.dcc.helpers.ObjectStorage;
@@ -23,7 +25,7 @@ import com.example.dcc.helpers.hacks.EdailyArrayAdapter;
  *
  * Created by harmonbc on 5/29/13.
  */
-public class EDailyList extends ListFragment {
+public class EDailyList extends Fragment {
     EdailyArrayAdapter adapter;
     ListView listview;
     DCCArrayList edailies;
@@ -45,21 +47,11 @@ public class EDailyList extends ListFragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //Get the corrosponding item
                 EDaily edaily = (EDaily) edailies.get(i);
-                //Make the fragment that will be launched
-                MemberDetailFragment detailFrag = new MemberDetailFragment();
-                //Place the member to be displayed into a bundle
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("edaily", edaily);
-                detailFrag.setArguments(bundle);
 
-                //Launch the fragment activity
-                FragmentManager manager = getActivity().getFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
+                Intent intent = new Intent(getActivity(), EDailyDetailedActivity.class);
+                intent.putExtra("edaily", edaily);
+                getActivity().startActivity(intent);
 
-                ObjectStorage.setFragment(R.id.fragmentcontainerright, detailFrag);
-                transaction.replace(R.id.fragmentcontainerright, detailFrag);
-
-                transaction.commit();
             }
         });
 
