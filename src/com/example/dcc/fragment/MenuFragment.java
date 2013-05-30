@@ -50,11 +50,8 @@ public class MenuFragment extends Fragment implements OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if(!ObjectStorage.getUser().getName().equalsIgnoreCase("sam bevins")){
+        if(!ObjectStorage.getUser().getName().equalsIgnoreCase("sam bevins") || !ObjectStorage.getUser().getName().equalsIgnoreCase("brandon harmon")){
             view = inflater.inflate(R.layout.menu_fragment,
-                    container, false);
-        }else if(!ObjectStorage.getUser().getName().equalsIgnoreCase("brandon harmon")){
-            view = inflater.inflate(R.layout.menu_fragment_director,
                     container, false);
         }else{
             view = inflater.inflate(R.layout.menu_fragment_director,
@@ -202,16 +199,8 @@ public class MenuFragment extends Fragment implements OnClickListener{
     }
     public void createActionItems(){
 
-        Intent intent = new Intent();
-        FragmentManager manager = activity.getFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-
-        Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
         Fragment newer = new CreateActionItemFrag();
-        ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-
-        transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-        transaction.commit();
+        launchFragment(newer);
     }
 
 
