@@ -126,25 +126,25 @@ public class EReportLauncherFrag extends Fragment implements OnClickListener {
                 transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
                 transaction.commit();
                 break;
-            case R.id.eReportButton:
-                manager = activity.getFragmentManager();
-                transaction = manager.beginTransaction();
-
-                newer = new EReportFrag();
-                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-
-                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-                transaction.commit();
-                break;
-            case R.id.Video057Button:
-                File f = new File(Environment.getExternalStorageDirectory()
-                        + "/enotebook/InternalStorage.txt");
-                if (f.exists()) {
-                    setUpVideo(57);
-                } else {
-                    setDefaultsPopup057();
-                }
-                break;
+//            case R.id.eReportButton:
+//                manager = activity.getFragmentManager();
+//                transaction = manager.beginTransaction();
+//
+//                newer = new EReportFrag();
+//                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
+//
+//                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
+//                transaction.commit();
+//                break;
+//            case R.id.Video057Button:
+//                File f = new File(Environment.getExternalStorageDirectory()
+//                        + "/enotebook/InternalStorage.txt");
+//                if (f.exists()) {
+//                    setUpVideo(57);
+//                } else {
+//                    setDefaultsPopup057();
+//                }
+//                break;
         }
 
     }
@@ -158,9 +158,9 @@ public class EReportLauncherFrag extends Fragment implements OnClickListener {
         }
         f = new File(Environment.getExternalStorageDirectory()
                 + "/enotebook/InternalStorage.txt");
-        if (!f.exists()) {
-            setDefaultsPopup();
-        }
+//        if (!f.exists()) {
+//            setDefaultsPopup();
+//        }
         f = new File(Environment.getExternalStorageDirectory()
                 + "/enotebook/057s");
         if (!f.exists()) {

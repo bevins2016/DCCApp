@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.example.dcc.R;
 import com.example.dcc.helpers.ObjectStorage;
-import com.example.dcc.helpers.mysql.HttpConnection;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -39,7 +38,6 @@ public class CreateActionItemFrag extends Fragment implements View.OnClickListen
     String last = "";
     String name = "";
     Button submit;
-    Button createButton;
     EditText tag;
     EditText date;
     EditText time;
