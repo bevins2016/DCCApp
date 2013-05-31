@@ -11,13 +11,14 @@
             android:layout_height="75dp"
             android:id="@+id/actionitemimageView"
             android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"/>
+            android:layout_alignParentLeft="true"
+            android:contentDescription="@string/status"/>
 
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Description"
+            android:text="@string/Description"
             android:id="@+id/actionitemdescription"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/actionitemimageView"
@@ -27,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="DateDue"
+            android:text="@string/DateDue"
             android:id="@+id/actionitemdate"
             android:layout_alignBottom="@+id/actionitemimageView"
             android:layout_toRightOf="@+id/actionitemimageView"/>
@@ -36,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text=" @ "
+            android:text="@string/at"
             android:id="@+id/textView"
             android:layout_alignTop="@+id/actionitemdate"
             android:layout_toRightOf="@+id/actionitemdate"/>
@@ -45,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Time"
+            android:text="@string/Time"
             android:id="@+id/actionitemstime"
             android:layout_alignTop="@+id/textView"
             android:layout_toRightOf="@+id/textView"/>

@@ -36,7 +36,7 @@ public class TopFragment extends Fragment implements View.OnClickListener{
 
         //Set unique data
         userIcon.setImageBitmap(ObjectStorage.getUser().getImage());
-        textView.setText(ObjectStorage.getUser().getName() + "(" + ObjectStorage.getUser().getHandle() + ")");
+        textView.setText(ObjectStorage.getUser().getName());
 
         return view;
     }

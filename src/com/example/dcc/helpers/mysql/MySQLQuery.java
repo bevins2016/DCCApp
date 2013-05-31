@@ -229,4 +229,22 @@ public class MySQLQuery {
         }
         return edailys;
     }
+
+    public static void removeActionItem(String url, ActionItem ai){
+        try{
+            InputStream is = getInputStream(url+ai.getAid());
+        StringBuilder sb = new StringBuilder();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is,"iso-8859-1"),8);
+        sb.append(reader.readLine()).append("\n");
+        String line;
+        while ((line = reader.readLine()) != null) sb.append(line).append("\n");
+        is.close();
+
+        Log.e("getarray", sb.toString());
+        }catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -2,6 +2,7 @@ package com.example.dcc.helpers.hacks;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,7 @@ public class NewsArrayAdapter extends ArrayAdapter<News> {
 
         News news = newsList.get(position);
 
-        title.setText(news.getTitle());
+        title.setText(Html.fromHtml(news.getTitle()));
         date.setText(news.getPubdate());
         name.setText(news.getPublisher().getName());
         String text = news.getText();

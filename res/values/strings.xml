@@ -179,5 +179,19 @@
     <string name="usericon">User Icon</string>
     <string name="usercol">User:</string>
     <string name="scorecol">Score:</string>
+    <string name="typehere">Type Here</string>
+    <string name="cancel">Cancel</string>
+    <string name="submit">Submit</string>
+    <string name="status">status</string>
+    <string name="Description">Description</string>
+    <string name="DateDue">Date Due</string>
+    <string name="at"> at </string>
+    <string name="Time">Time</string>
+    <string name="Namecol">Name:</string>
+    <string name="Datep">Date:</string>
+    <string name="depd">DEP-</string>
+    <string name="pound">#</string>
+    <string name="reld">REL-</string>
+    <string name="ISS">ISS</string>
 
 </resources>
