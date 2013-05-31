@@ -77,6 +77,10 @@ public class ActionItemActionFrag extends Fragment implements View.OnClickListen
         return view;
     }
 
+    /**
+     * Only button
+     * @param view
+     */
     @Override
     public void onClick(View view) {
         switch(view.getId()){

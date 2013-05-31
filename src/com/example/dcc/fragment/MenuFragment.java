@@ -5,25 +5,38 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
+import android.net.Uri;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
+
 import com.example.dcc.CustomizedListViewFrag;
 import com.example.dcc.EReportLauncherFrag;
+import com.example.dcc.EasterEggs;
 import com.example.dcc.LaunchActivityFrag;
 import com.example.dcc.R;
+import com.example.dcc.Zork;
 import com.example.dcc.helpers.ObjectStorage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * This fragment is the left aligned navigation bar used to allow the
@@ -42,26 +55,54 @@ public class MenuFragment extends Fragment implements OnClickListener{
     View view;
     boolean director;
 
+    SoundPool soundPool;
+    int sound;
+
+    String login;
     // TTS object
     public TextToSpeech myTTS;
     // status check code
     public int MY_DATA_CHECK_CODE = 0;
 
+
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if(!ObjectStorage.getUser().getName().equalsIgnoreCase("sam bevins") || !ObjectStorage.getUser().getName().equalsIgnoreCase("brandon harmon")){
+
+/*        if(!ObjectStorage.getUser().getName().equalsIgnoreCase("sam bevins") || !ObjectStorage.getUser().getName().equalsIgnoreCase("brandon harmon")){
 
             view = inflater.inflate(R.layout.menu_fragment,
                     container, false);
         }else{
+
+        login = ObjectStorage.getUser().getName();*/
+        if(ObjectStorage.getUser().getName().equalsIgnoreCase("brandon harmon") || ObjectStorage.getUser().getName().equalsIgnoreCase("sam bevins")){
+
             view = inflater.inflate(R.layout.menu_fragment_director,
                     container, false);
             Button searchB = (Button) view.findViewById(R.id.search);
             searchB.setOnClickListener(this);
+        }else{
+            view = inflater.inflate(R.layout.menu_fragment,
+                    container, false);
+
 
             director = true;
         }
+
+//        mp = MediaPlayer.create(activity, R.raw.sweet);
+//        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//
+//            @Override
+//            public void onCompletion(MediaPlayer mp) {
+//                // TODO Auto-generated method stub
+//                mp.release();
+//            }
+//
+//        });
 
         activity = getActivity();
         assert view != null;
@@ -72,6 +113,7 @@ public class MenuFragment extends Fragment implements OnClickListener{
         Button reportB = (Button) view.findViewById(R.id.report);
         Button actionB = (Button) view.findViewById(R.id.action);
         Button directoryB = (Button) view.findViewById(R.id.directory);
+        Button delete = (Button) view.findViewById(R.id.logout);
 
 
 
@@ -89,6 +131,7 @@ public class MenuFragment extends Fragment implements OnClickListener{
         reportB.setOnClickListener(this);
         actionB.setOnClickListener(this);
         directoryB.setOnClickListener(this);
+        delete.setOnClickListener(this);
         //searchB.setOnClickListener(this);
 
 
@@ -114,6 +157,8 @@ public class MenuFragment extends Fragment implements OnClickListener{
         switch (v.getId()) {
             case R.id.news:
                 news();
+//                mp.start();
+//                EasterEggs.glandular.start();
                 break;
             case R.id.photo:
                 photo();
@@ -129,6 +174,17 @@ public class MenuFragment extends Fragment implements OnClickListener{
                 break;
             case R.id.directory:
                 directory();
+                break;
+            case R.id.logout:
+                SharedPreferences mPreferences;
+                mPreferences = activity.getSharedPreferences("CurrentUser", 0);
+                SharedPreferences.Editor editor=mPreferences.edit();
+                editor.putString("UserName", "");
+                editor.putString("PassWord", "");
+                editor.commit();
+
+                Toast.makeText(activity, "Login data cleared",
+                        Toast.LENGTH_SHORT).show();
                 break;
             case R.id.createaction:
                 FragmentManager manager2 = activity.getFragmentManager();
@@ -303,6 +359,57 @@ public class MenuFragment extends Fragment implements OnClickListener{
             else if (matches.contains("search") && director) {
                 searchReport();
             }
+            else if (matches.contains("free")) {
+                EasterEggs.sweeet.start();
+            }
+            else if (matches.contains("tacos")) {
+                EasterEggs.sweeet.start();
+            }
+            else if (matches.contains("give me a taco")) {
+                EasterEggs.sweeet.start();
+            }
+            else if (matches.contains("I wish I could talk to ghosts")) {
+                EasterEggs.sweeet.start();
+            }
+            else if (matches.contains("I have a mustache too")) {
+                EasterEggs.speakItalian.start();
+            }
+            else if (matches.contains("spaghetti")) {
+                EasterEggs.speakItalian.start();
+            }
+            else if (matches.contains("I have a glandular problem")) {
+                EasterEggs.glandular.start();
+            }
+            else if (matches.contains("tuba")) {
+                EasterEggs.glandular.start();
+            }
+            else if (matches.contains("oh crap")) {
+                EasterEggs.doh.start();
+            }
+            else if (matches.contains("whoops")) {
+                EasterEggs.doh.start();
+            }
+
+            else if (matches.contains("zork")) {
+                Fragment newer = new Zork();
+                launchFragment(newer);
+            }
+            else if (matches.contains("dark")) {
+                Fragment newer = new Zork();
+                launchFragment(newer);
+            }
+            else if (matches.contains("dork")) {
+                Fragment newer = new Zork();
+                launchFragment(newer);
+            }
+            else if (matches.contains("york")) {
+                Fragment newer = new Zork();
+                launchFragment(newer);
+            }
+            else if (matches.contains("let's play a game")) {
+                Fragment newer = new Zork();
+                launchFragment(newer);
+            }
         }
 
 
@@ -340,4 +447,35 @@ public class MenuFragment extends Fragment implements OnClickListener{
 //        super.onDestroy();
 //        //myTTS.shutdown();
 //    }
-    }}
+    }
+    public void playSound(int resources){
+        try{
+            boolean mStartPlaying = true;
+            MediaPlayer  mPlayer=null;
+            if (mStartPlaying==true){
+                mPlayer = new MediaPlayer();
+
+                Uri uri = Uri.parse("android.resource://YOUR_PACKAGENAME/" + resources);
+                try {
+                    mPlayer.setDataSource(activity,uri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                mPlayer.prepare();
+                mPlayer.start();
+            }
+            else{
+                mPlayer.release();
+                mPlayer = null;
+            }
+            mStartPlaying = !mStartPlaying;
+        }
+        catch (IOException e){
+//            Log.e(LOG_TAG, "prepare() failed");
+        }
+
+//       MediaPlayer mp = MediaPlayer.create(SpyMainActivity.this, resources);
+//       mp.start();
+
+    }
+}

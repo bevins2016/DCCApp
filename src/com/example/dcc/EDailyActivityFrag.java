@@ -41,7 +41,7 @@ public class EDailyActivityFrag extends Fragment implements OnClickListener {
     private Button sendButton; // Send Button
     //http://storage.virtualdiscoverycenter.net/projectmorpheus/dcc/save.php
     private String url = "http://www.virtualdiscoverycenter.net/wp-content/plugins/buddypress/bp-themes/bp-default/eDaily.php";//http://www.facebook.com/l.php?u=http%3A%2F%2Fwww.virtualdiscoverycenter.net%2Fwp-content%2Fplugins%2Fbuddypress%2Fbp-themes%2Fbp-default%2FeDaily.php&h=3AQH7TTNw
-    private String popupText = "Reports can not be submitted until sudent info is set!\n\nFill this out now?";
+    private String popupText = "Reports can not be submitted until student info is set!\n\nFill this out now?";
     String first = "";
     String last = "";
     String name = "";
