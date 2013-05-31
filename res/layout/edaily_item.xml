@@ -1,11 +1,12 @@
 <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@drawable/text_selector">
 
     <LinearLayout
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="25dp"
+            android:layout_height="75dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:orientation="horizontal"
@@ -28,14 +29,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Name: "
+                    android:text="@string/Namecol"
                     android:id="@+id/edailyname"/>
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="name"
                     android:id="@+id/edailynamev"/>
         </LinearLayout>
 
@@ -47,14 +47,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Date: "
+                    android:text="@string/Datep"
                     android:id="@+id/textView2"/>
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="date"
                     android:id="@+id/edailydatev"/>
         </LinearLayout>
 
@@ -76,14 +75,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="DEP-"
+                    android:text="@string/depd"
                     android:id="@+id/textView3"/>
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="#"
+                    android:text="@string/pound"
                     android:id="@+id/edailydepv"/>
         </LinearLayout>
 
@@ -97,15 +96,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="REL-"
-                    android:id="@+id/edailydepv"/>
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="#"
+                    android:text="@string/reld"
                     android:id="@+id/edailyrelv"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/edailyrelp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -118,14 +116,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="ISS"
+                    android:text="@string/ISS"
                     android:id="@+id/textView"/>
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="#"
                     android:id="@+id/edailyissv"/>
         </LinearLayout>
 

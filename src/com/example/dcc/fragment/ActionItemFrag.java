@@ -46,9 +46,8 @@ public class ActionItemFrag extends Fragment implements OnClickListener{
         activity = getActivity();
 
         GetNewsTask g = new GetNewsTask();
-        g.execute((Void) null);
         try {
-            g.get(20, TimeUnit.SECONDS);
+            g.execute((Void) null).get(20, TimeUnit.SECONDS);
             ObjectStorage.setActionItems(actionItems);
         } catch (InterruptedException e) {
             e.printStackTrace();

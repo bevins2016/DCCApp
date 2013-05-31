@@ -19,6 +19,8 @@ import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.User;
 import com.example.dcc.helpers.mysql.MySQLQuery;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -54,6 +56,7 @@ public class MembersListFragment extends Fragment{
             t.execute((Void) null);
             try {
                 members = t.get(20, TimeUnit.SECONDS);
+                Collections.sort(members);
                 ObjectStorage.setMemberList(members);
             } catch (InterruptedException e) {
                 Log.e(LOG, e.getMessage());

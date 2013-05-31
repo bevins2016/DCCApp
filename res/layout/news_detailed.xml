@@ -29,5 +29,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:background="#FFFFFF"
             android:id="@+id/newsbody" android:layout_below="@+id/newsdate" android:layout_alignParentLeft="true"
-            android:layout_alignRight="@+id/newspublisher"/>
+            android:layout_alignRight="@+id/newspublisher"
+            android:scrollbars="vertical"
+            android:maxLines="300"/>
 </RelativeLayout>

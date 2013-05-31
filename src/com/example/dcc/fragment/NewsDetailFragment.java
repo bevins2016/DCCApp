@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,11 +36,12 @@ public class NewsDetailFragment extends Fragment {
         newsBody = (TextView)view.findViewById(R.id.newsbody);
 
         //Populate text views with news details
-        newstitle.setText(news.getTitle());
-        newsdate.setText(news.getPubdate());
-        newspublisher.setText(news.getPublisher().getName());
+        newstitle.setText(Html.fromHtml(news.getTitle()));
+        newsdate.setText(Html.fromHtml("<b>"+news.getPubdate()+"</b>"));
+        newspublisher.setText(Html.fromHtml("<b>" + news.getPublisher().getName() + "</b>"));
         newsBody.setText(Html.fromHtml(news.getText()));
 
+        newsBody.setMovementMethod(new ScrollingMovementMethod());
         return view;
     }
 }

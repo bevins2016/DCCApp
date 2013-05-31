@@ -2,18 +2,6 @@ package com.example.dcc;
 
 import android.app.Activity;
 import android.app.ListFragment;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.TextView;
-
-import com.example.dcc.dummy.DummyContent;
 
 /**
  * A fragment representing a list of Items.

@@ -51,6 +51,7 @@ public class MenuFragment extends Fragment implements OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if(!ObjectStorage.getUser().getName().equalsIgnoreCase("sam bevins") || !ObjectStorage.getUser().getName().equalsIgnoreCase("brandon harmon")){
+
             view = inflater.inflate(R.layout.menu_fragment,
                     container, false);
         }else{

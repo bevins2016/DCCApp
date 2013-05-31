@@ -7,7 +7,7 @@ import java.io.Serializable;
  * Created by harmonbc on 5/29/13.
  */
 public class EDaily implements Serializable{
-    private String body, color, date, submitted, firstname, lastname;
+    private String body, color, date, submitted, firstname, lastname, proj;
     private int usr_id, iss, dep, rel, hours, grade;
 
     public EDaily(){
@@ -107,5 +107,13 @@ public class EDaily implements Serializable{
 
     public void setFirstname(String firstname) {
         this.firstname = firstname;
+    }
+
+    public String getProj() {
+        return proj;
+    }
+
+    public void setProj(String proj) {
+        this.proj = proj;
     }
 }
