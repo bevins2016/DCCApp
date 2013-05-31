@@ -8,10 +8,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
+import android.net.Uri;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,10 +28,13 @@ import android.widget.ToggleButton;
 
 import com.example.dcc.CustomizedListViewFrag;
 import com.example.dcc.EReportLauncherFrag;
+import com.example.dcc.EasterEggs;
 import com.example.dcc.LaunchActivityFrag;
 import com.example.dcc.R;
+import com.example.dcc.Zork;
 import com.example.dcc.helpers.ObjectStorage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,12 +54,19 @@ public class MenuFragment extends Fragment implements OnClickListener{
     public Button voiceButton;
     View view;
     boolean director;
-String login;
+
+    SoundPool soundPool;
+    int sound;
+
+    String login;
     // TTS object
     public TextToSpeech myTTS;
     // status check code
     public int MY_DATA_CHECK_CODE = 0;
-    MediaPlayer mp;
+
+
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,7 +85,16 @@ String login;
             director = true;
         }
 
-        mp = MediaPlayer.create(activity, R.raw.sweet);
+//        mp = MediaPlayer.create(activity, R.raw.sweet);
+//        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//
+//            @Override
+//            public void onCompletion(MediaPlayer mp) {
+//                // TODO Auto-generated method stub
+//                mp.release();
+//            }
+//
+//        });
 
         activity = getActivity();
         assert view != null;
@@ -126,6 +149,8 @@ String login;
         switch (v.getId()) {
             case R.id.news:
                 news();
+//                mp.start();
+//                EasterEggs.glandular.start();
                 break;
             case R.id.photo:
                 photo();
@@ -334,17 +359,56 @@ String login;
             else if (matches.contains("search") && director) {
                 searchReport();
             }
-            else if (matches.contains("free") && director) {
-                mp.start();
+            else if (matches.contains("free")) {
+                EasterEggs.sweeet.start();
             }
-            else if (matches.contains("tacos") && director) {
-                mp.start();
+            else if (matches.contains("tacos")) {
+                EasterEggs.sweeet.start();
             }
-            else if (matches.contains("give me a taco") && director) {
-                mp.start();
+            else if (matches.contains("give me a taco")) {
+                EasterEggs.sweeet.start();
             }
-            else if (matches.contains("I wish I could talk to ghosts") && director) {
-                mp.start();
+            else if (matches.contains("I wish I could talk to ghosts")) {
+                EasterEggs.sweeet.start();
+            }
+            else if (matches.contains("I have a mustache too")) {
+                EasterEggs.speakItalian.start();
+            }
+            else if (matches.contains("spaghetti")) {
+                EasterEggs.speakItalian.start();
+            }
+            else if (matches.contains("I have a glandular problem")) {
+                EasterEggs.glandular.start();
+            }
+            else if (matches.contains("tuba")) {
+                EasterEggs.glandular.start();
+            }
+            else if (matches.contains("oh crap")) {
+                EasterEggs.doh.start();
+            }
+            else if (matches.contains("whoops")) {
+                EasterEggs.doh.start();
+            }
+
+            else if (matches.contains("zork")) {
+                Fragment newer = new Zork();
+                launchFragment(newer);
+            }
+            else if (matches.contains("dark")) {
+                Fragment newer = new Zork();
+                launchFragment(newer);
+            }
+            else if (matches.contains("dork")) {
+                Fragment newer = new Zork();
+                launchFragment(newer);
+            }
+            else if (matches.contains("york")) {
+                Fragment newer = new Zork();
+                launchFragment(newer);
+            }
+            else if (matches.contains("let's play a game")) {
+                Fragment newer = new Zork();
+                launchFragment(newer);
             }
         }
 
@@ -384,5 +448,34 @@ String login;
 //        //myTTS.shutdown();
 //    }
     }
+    public void playSound(int resources){
+        try{
+            boolean mStartPlaying = true;
+            MediaPlayer  mPlayer=null;
+            if (mStartPlaying==true){
+                mPlayer = new MediaPlayer();
 
+                Uri uri = Uri.parse("android.resource://YOUR_PACKAGENAME/" + resources);
+                try {
+                    mPlayer.setDataSource(activity,uri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                mPlayer.prepare();
+                mPlayer.start();
+            }
+            else{
+                mPlayer.release();
+                mPlayer = null;
+            }
+            mStartPlaying = !mStartPlaying;
+        }
+        catch (IOException e){
+//            Log.e(LOG_TAG, "prepare() failed");
+        }
+
+//       MediaPlayer mp = MediaPlayer.create(SpyMainActivity.this, resources);
+//       mp.start();
+
+    }
 }

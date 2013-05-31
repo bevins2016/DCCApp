@@ -305,7 +305,7 @@ public class LoginActivity extends Activity {
 
             if (success)
             {
-                startActivity(new Intent(context, MainActivityFrag.class));
+                startActivity(new Intent(context, EasterEggs.class));
                 finish();
             } else {
                 mPasswordView
