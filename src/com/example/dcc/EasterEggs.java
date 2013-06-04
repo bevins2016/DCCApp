@@ -1,9 +1,15 @@
 package com.example.dcc;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 /**
  * Created by Sam on 5/31/13.
@@ -21,11 +27,14 @@ public class EasterEggs extends Activity {
     public static MediaPlayer glandular;
     public static MediaPlayer doh;
     public static MediaPlayer fourPeters;
+    private View mLoginStatusView;
+    private View mLoginFormView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.splash_screen);
 
         sweeet = MediaPlayer.create(getApplicationContext(), R.raw.sweet_edit);
         speakItalian = MediaPlayer.create(getApplicationContext(), R.raw.italian);
@@ -33,7 +42,53 @@ public class EasterEggs extends Activity {
         doh = MediaPlayer.create(getApplicationContext(), R.raw.doh);
         fourPeters = MediaPlayer.create(getApplicationContext(), R.raw.four_peters);
 
+        mLoginStatusView = findViewById(R.id.login_status);
+
+        showProgress(true);
+
         startActivity(new Intent(this, MainActivityFrag.class));
         finish();
-}
+    }
+
+    /**
+     * Shows the progress UI and hides the login form.
+     */
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    public void showProgress(final boolean show) {
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // for very easy animations. If available, use these APIs to fade-in
+        // the progress spinner.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(
+                    android.R.integer.config_shortAnimTime);
+
+            mLoginStatusView.setVisibility(View.VISIBLE);
+            mLoginStatusView.animate().setDuration(shortAnimTime)
+                    .alpha(show ? 1 : 0)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            mLoginStatusView.setVisibility(show ? View.VISIBLE
+                                    : View.GONE);
+                        }
+                    });
+
+            mLoginFormView.setVisibility(View.VISIBLE);
+            mLoginFormView.animate().setDuration(shortAnimTime)
+                    .alpha(show ? 0 : 1)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            mLoginFormView.setVisibility(show ? View.GONE
+                                    : View.VISIBLE);
+                        }
+                    });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            mLoginStatusView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+        }
+    }
+
 }

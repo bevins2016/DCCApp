@@ -45,15 +45,18 @@ public class Zork extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.enterbutton:
-                if(responseText.getText().toString().equalsIgnoreCase("attack terrible troll with nasty knife"));{
+                if(responseText.getText().toString().equalsIgnoreCase("")){
+                return;
+            }
+                if(responseText.getText().toString().equalsIgnoreCase("attack terrible troll with nasty knife")){
                 troll.setText("The terrible troll dies a horrible death. Would you like to loot the body?");
             }
-            if(troll.getText().toString().equalsIgnoreCase("The terrible troll dies a horrible death. Would you like to loot the body?"));{
+            if(troll.getText().toString().equalsIgnoreCase("The terrible troll dies a horrible death. Would you like to loot the body?")){
                 if(responseText.getText().toString().equalsIgnoreCase("yes")){
                     troll.setText("Congratulations you found 1,000 gold!");
                 }
             }
-                break;
+            break;
             case R.id.clear:
                 responseText.setText("");
                 break;

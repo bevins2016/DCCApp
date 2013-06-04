@@ -412,7 +412,6 @@ public class MenuFragment extends Fragment implements OnClickListener{
             }
         }
 
-
 //        if (requestCode == MY_DATA_CHECK_CODE) {
 //            if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
 //                // the user has the necessary data - create the TTS
@@ -447,35 +446,5 @@ public class MenuFragment extends Fragment implements OnClickListener{
 //        super.onDestroy();
 //        //myTTS.shutdown();
 //    }
-    }
-    public void playSound(int resources){
-        try{
-            boolean mStartPlaying = true;
-            MediaPlayer  mPlayer=null;
-            if (mStartPlaying==true){
-                mPlayer = new MediaPlayer();
-
-                Uri uri = Uri.parse("android.resource://YOUR_PACKAGENAME/" + resources);
-                try {
-                    mPlayer.setDataSource(activity,uri);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                mPlayer.prepare();
-                mPlayer.start();
-            }
-            else{
-                mPlayer.release();
-                mPlayer = null;
-            }
-            mStartPlaying = !mStartPlaying;
-        }
-        catch (IOException e){
-//            Log.e(LOG_TAG, "prepare() failed");
-        }
-
-//       MediaPlayer mp = MediaPlayer.create(SpyMainActivity.this, resources);
-//       mp.start();
-
     }
 }

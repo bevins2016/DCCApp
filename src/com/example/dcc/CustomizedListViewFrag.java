@@ -185,8 +185,7 @@ public class CustomizedListViewFrag extends Fragment {
             // DOM
             // element
 
-            nl = documentO.getElementsByTagName("item");
-
+            nl = documentO.getElementsByTagName("src");
 
             Elements body = doc.select("body");
             ArrayList<String> htmlPlainText = new ArrayList<String>();
@@ -213,7 +212,6 @@ public class CustomizedListViewFrag extends Fragment {
 
                 }
             }
-
 
             ArrayList<String> imageList = new ArrayList<String>();
             ArrayList<String> descriptionList = new ArrayList<String>();
@@ -246,7 +244,7 @@ public class CustomizedListViewFrag extends Fragment {
                 } catch (Exception e3) {
                 }
                 try {
-                    map.put(KEY_TITLE, htmlPlainText.get(i+1));
+                    map.put(KEY_TITLE, htmlPlainText.get(i+3));
                 } catch (Exception e2) {
 
                 }
@@ -262,8 +260,6 @@ public class CustomizedListViewFrag extends Fragment {
                 songsList.add(map);
                 adapter.notifyDataSetChanged();
             }
-
         }
     }
-
 }
