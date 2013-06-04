@@ -53,7 +53,7 @@ public class MySQLQuery {
                 if(ObjectStorage.hasUser(authorID)){
                     u = ObjectStorage.getUser(authorID);
                 }else{
-                    u = convertUser ((JSONObject)getArray("/DCC/getUserById.php?id="+authorID));
+                    u = convertUser (((JSONArray)getArray("/DCC/getUserById.php?id="+authorID)).getJSONObject(0));
                     ObjectStorage.setUser(authorID, u);
                 }
                 n.setPublisher(u);
