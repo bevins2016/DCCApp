@@ -59,11 +59,11 @@ public class MembersListFragment extends Fragment{
                 Collections.sort(members);
                 ObjectStorage.setMemberList(members);
             } catch (InterruptedException e) {
-                Log.e(LOG, e.getMessage());
+                Log.e(LOG, "InterruptedException");
             } catch (ExecutionException e) {
-                Log.e(LOG, e.getMessage());
+                Log.e(LOG, "ExecutionException");
             } catch (TimeoutException e) {
-                Log.e(LOG, e.getMessage());
+                Log.e(LOG, "TimeoutException");
             }
         }
 

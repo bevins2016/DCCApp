@@ -61,6 +61,7 @@ public class LoginActivity extends Activity {
 
     private Context context;
     boolean helper = false;
+    boolean autoLogin = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -114,12 +115,16 @@ public class LoginActivity extends Activity {
         try{
             SharedPreferences sp1=this.getSharedPreferences("CurrentUser", MODE_PRIVATE);
 
-//            mUser =sp1.getString("UserName", null);
-//            mPassword = sp1.getString("PassWord", null);
-            if(sp1.getString("UserName", null) != "") attemptLogin();
+            mUser =sp1.getString("UserName", null);
+            mPassword = sp1.getString("PassWord", null);
 
+            if(sp1.getString("UserName", null) != "")
+            {
+                autoLogin = true;
+                attemptLogin();
+            }
         }catch(Exception e){
-
+            e.printStackTrace();
         }
     }
 
@@ -147,9 +152,11 @@ public class LoginActivity extends Activity {
         mUserView.setError(null);
         mPasswordView.setError(null);
 
-        // Store values at the time of the login attempt.
-        mUser = mUserView.getText().toString();
-        mPassword = mPasswordView.getText().toString();
+        if(!autoLogin){
+            // Store values at the time of the login attempt.
+            mUser = mUserView.getText().toString();
+            mPassword = mPasswordView.getText().toString();
+        }
 
         SharedPreferences sp1=this.getSharedPreferences("CurrentUser", MODE_PRIVATE);
 
@@ -163,38 +170,34 @@ public class LoginActivity extends Activity {
             mPassword = sp1.getString("PassWord", null);
         }
 
-        SharedPreferences mPreferences;
-        mPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
-        SharedPreferences.Editor editor=mPreferences.edit();
-        editor.putString("UserName", mUser);
-        editor.putString("PassWord", mPassword);
-        editor.commit();
 
         boolean cancel = false;
         View focusView = null;
 
 
-        // Check for a valid password.
-        if (TextUtils.isEmpty(mPassword))
-        {
-            mPasswordView.setError(getString(R.string.error_field_required));
-            focusView = mPasswordView;
-            cancel = true;
-        } else if (mPassword.length() < 4)
-        {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
-            cancel = true;
-        }
+        //if(!autoLogin){
+            // Check for a valid password.
+            if (TextUtils.isEmpty(mPassword))
+            {
+                mPasswordView.setError(getString(R.string.error_field_required));
+                focusView = mPasswordView;
+                cancel = true;
+            } else if (mPassword.length() < 4)
+            {
+                mPasswordView.setError(getString(R.string.error_invalid_password));
+                focusView = mPasswordView;
+                cancel = true;
+            }
 
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(mUser))
-        {
-            mUserView.setError(getString(R.string.error_field_required));
-            focusView = mUserView;
-            cancel = true;
-        }
-
+            // Check for a valid email address.
+            if (TextUtils.isEmpty(mUser))
+            {
+                mUserView.setError(getString(R.string.error_field_required));
+                focusView = mUserView;
+                cancel = true;
+            }
+       // }
+        autoLogin = false;
         if (cancel) {
 
             // There was an error; don't attempt login and focus the first
@@ -286,6 +289,7 @@ public class LoginActivity extends Activity {
                 if (!HttpConnection.login(mUser, mPassword))
 
                 {
+
                     cancel(true);
                     return false;
                 }
@@ -306,6 +310,12 @@ public class LoginActivity extends Activity {
 
             if (success)
             {
+                SharedPreferences mPreferences;
+                mPreferences = getSharedPreferences("CurrentUser", MODE_PRIVATE);
+                SharedPreferences.Editor editor=mPreferences.edit();
+                editor.putString("UserName", mUser);
+                editor.putString("PassWord", mPassword);
+                editor.commit();
                 startActivity(new Intent(context, EasterEggs.class));
                 finish();
             } else {
@@ -318,6 +328,7 @@ public class LoginActivity extends Activity {
         @Override
         protected void onCancelled()
         {
+            autoLogin = false;
             mAuthTask = null;
             showProgress(false);
         }
