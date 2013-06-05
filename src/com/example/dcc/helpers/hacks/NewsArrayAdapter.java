@@ -1,8 +1,12 @@
 package com.example.dcc.helpers.hacks;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +16,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.dcc.R;
+import com.example.dcc.helpers.BitmapCache;
 import com.example.dcc.helpers.EDaily;
 import com.example.dcc.helpers.News;
+import com.example.dcc.helpers.User;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  *
@@ -24,6 +33,7 @@ import java.util.List;
 public class NewsArrayAdapter extends ArrayAdapter<News> {
     private final Context context;
     private final List<News> newsList;
+    private ImageView icon;
 
 
     public NewsArrayAdapter(Context context, List<News> news) {
@@ -41,7 +51,7 @@ public class NewsArrayAdapter extends ArrayAdapter<News> {
         TextView date = (TextView)rowView.findViewById(R.id.newsdate);
         TextView name = (TextView)rowView.findViewById(R.id.newsname);
         TextView body = (TextView)rowView.findViewById(R.id.newsbodyprev);
-        ImageView icon = (ImageView)rowView.findViewById(R.id.newsimageView);
+        icon = (ImageView)rowView.findViewById(R.id.newsimageView);
 
         News news = newsList.get(position);
 
@@ -52,8 +62,45 @@ public class NewsArrayAdapter extends ArrayAdapter<News> {
         if(text.length() > 100) text = text.substring(0,100);
         body.setText(text);
 
-        icon.setImageBitmap(news.getPublisher().getImage());
+        String uri = "/DCC/getUserGravitar.php?email=" + news.getPublisher().getEmail();
+        if(BitmapCache.getBitmap(uri)!=null) icon.setImageBitmap( BitmapCache.getBitmap(uri));
+        else {
+            new GetImageTask().execute(news.getPublisher());
+        }
 
         return rowView;
+    }
+
+    public class GetImageTask extends AsyncTask<User, Void, Bitmap> {
+        @Override
+        protected Bitmap doInBackground(User... user) {
+            Bitmap image;
+            try{
+                String uri = "/DCC/getUserGravitar.php?email=" + user[0].getEmail();
+
+                URL url = new URL(user[0].getImageURL());
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setDoInput(true);
+                conn.connect();
+                image = BitmapFactory.decodeStream(conn.getInputStream());
+                conn.disconnect();
+
+                BitmapCache.addBitmap(uri, image);
+                return image;
+            }catch(Exception e){
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap result){
+            if((result!=null)&&!isCancelled()){
+                icon.setImageBitmap(result);
+                notifyDataSetChanged();
+
+            }else{
+                return;
+            }
+        }
     }
 }

@@ -7,11 +7,14 @@ import android.util.Log;
 import com.example.dcc.helpers.mysql.GetInputStreamTask;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Used to store data that represents users of VDC
@@ -55,12 +58,9 @@ public class User implements Serializable, Comparable{
         this.name = name;
     }
 
-    public Bitmap getImage() {
-
+    public String getImageURL(){
         try{
             String uri = "/DCC/getUserGravitar.php?email=" + email;
-            if(BitmapCache.getBitmap(uri) != null) return BitmapCache.getBitmap(uri);
-            Log.e("Fetching Image ",name+"---"+uri);
             StringBuilder sb = new StringBuilder();
             InputStream in = new GetInputStreamTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, uri).get();
             BufferedReader reader = new BufferedReader(new InputStreamReader(in,"iso-8859-1"),8);
@@ -71,17 +71,21 @@ public class User implements Serializable, Comparable{
             }
             setImageURL(sb.toString());
             in.close();
-
-
-            Bitmap image =  new GetImageTask().execute().get();
-
-            BitmapCache.addBitmap(uri, image);
-
-            return image;
-
-        }catch(Exception e){
-            Log.e("EH", e.getLocalizedMessage());
+            return sb.toString();
+        } catch (InterruptedException e1) {
+            e1.printStackTrace();
+        } catch (ExecutionException e1) {
+            e1.printStackTrace();
+        } catch (UnsupportedEncodingException e1) {
+            e1.printStackTrace();
+        } catch (IOException e1) {
+            e1.printStackTrace();
         }
+
+        return null;
+    }
+
+    public Bitmap getImage() {
         return null;
     }
 
@@ -127,32 +131,16 @@ public class User implements Serializable, Comparable{
     }
 
 
-    public class GetImageTask extends AsyncTask<String, Void, Bitmap>{
-        @Override
-        protected Bitmap doInBackground(String... strings) {
-            Bitmap image;
-            try{
-                URL url = new URL(imageURL);
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setDoInput(true);
-                conn.connect();
-                image = BitmapFactory.decodeStream(conn.getInputStream());
-                conn.disconnect();
-            }catch(Exception e){
-                return null;
-            }
-            return image;
-        }
-    }
+
 
     public int compareTo(Object anotherUser) throws ClassCastException{
         try{
-        if(!(anotherUser instanceof User))throw new ClassCastException("Incorrect Object");
-        String lastNameOther = ((User) anotherUser).getName().split(" ")[1];
-        String lastNameThis = getName().split(" ")[1];
+            if(!(anotherUser instanceof User))throw new ClassCastException("Incorrect Object");
+            String lastNameOther = ((User) anotherUser).getName().split(" ")[1];
+            String lastNameThis = getName().split(" ")[1];
 
-        //Multiply by -1 to reverse the order. Orders list from min to max.
-        return lastNameOther.compareTo(lastNameThis)*-1;
+            //Multiply by -1 to reverse the order. Orders list from min to max.
+            return lastNameOther.compareTo(lastNameThis)*-1;
         }catch(ArrayIndexOutOfBoundsException e){
             return 0;
         }

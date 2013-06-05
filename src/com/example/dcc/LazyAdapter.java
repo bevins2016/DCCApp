@@ -55,7 +55,7 @@ public class LazyAdapter extends BaseAdapter {
 //        title.setText(song.get(CustomizedListViewFrag.KEY_TITLE));
 //        artist.setText(song.get(CustomizedListViewFrag.KEY_ARTIST));
 //        duration.setText(song.get(CustomizedListViewFrag.KEY_DURATION));
-        imageLoader.DisplayImage(song.get(CustomizedListViewFrag.KEY_THUMB_URL), thumb_image);
+        //imageLoader.DisplayImage(song.get(CustomizedListViewFrag.KEY_THUMB_URL), thumb_image);
         return vi;
     }
 }

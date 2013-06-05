@@ -38,6 +38,8 @@ public class ObjectStorage {
     appearance based on clickss*/
     private static View menuFrame;
 
+    private static List<String> imageList;
+
     /*sets the action items*/
     public static void setActionItems(List<ActionItem> ais){
         actionItems = ais;
@@ -116,5 +118,13 @@ public class ObjectStorage {
     /*Sets a fragment inside of the hashmap by the key*/
     public static void setFragment(int key, Fragment frag){
         fragment.put(key,frag);
+    }
+
+    public static void setImageList(List<String> imageList2) {
+        imageList = imageList2;
+    }
+
+    public static List<String> getImageList(){
+        return imageList;
     }
 }

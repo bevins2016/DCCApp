@@ -44,7 +44,7 @@ public class EasterEggs extends Activity {
 
         mLoginStatusView = findViewById(R.id.login_status);
 
-        showProgress(true);
+//        showProgress(true);
 
         startActivity(new Intent(this, MainActivityFrag.class));
         finish();
@@ -62,7 +62,7 @@ public class EasterEggs extends Activity {
             int shortAnimTime = getResources().getInteger(
                     android.R.integer.config_shortAnimTime);
 
-            mLoginStatusView.setVisibility(View.VISIBLE);
+//            mLoginStatusView.setVisibility(View.VISIBLE);
             mLoginStatusView.animate().setDuration(shortAnimTime)
                     .alpha(show ? 1 : 0)
                     .setListener(new AnimatorListenerAdapter() {

@@ -156,26 +156,26 @@ public class LoginActivity extends Activity {
             // Store values at the time of the login attempt.
             mUser = mUserView.getText().toString();
             mPassword = mPasswordView.getText().toString();
+        } else {
+
+            SharedPreferences sp1=this.getSharedPreferences("CurrentUser", MODE_PRIVATE);
+
+            if(sp1.getString("UserName", null) == "" && mUser == "" && mPassword == ""){
+                Log.e("Fail", "Failed attempt");
+                return;
+            }
+
+            if(sp1.getString("UserName", null) != ""){
+                mUser =sp1.getString("UserName", null);
+                mPassword = sp1.getString("PassWord", null);
+            }
         }
-
-        SharedPreferences sp1=this.getSharedPreferences("CurrentUser", MODE_PRIVATE);
-
-        if(sp1.getString("UserName", null) == "" && mUser == "" && mPassword == ""){
-            Log.e("Fail", "Failed attempt");
-            return;
-        }
-
-        if(sp1.getString("UserName", null) != ""){
-            mUser =sp1.getString("UserName", null);
-            mPassword = sp1.getString("PassWord", null);
-        }
-
 
         boolean cancel = false;
         View focusView = null;
 
 
-        //if(!autoLogin){
+        if(!autoLogin){
             // Check for a valid password.
             if (TextUtils.isEmpty(mPassword))
             {
@@ -196,7 +196,8 @@ public class LoginActivity extends Activity {
                 focusView = mUserView;
                 cancel = true;
             }
-       // }
+        }
+
         autoLogin = false;
         if (cancel) {
 
