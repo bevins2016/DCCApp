@@ -50,10 +50,12 @@ public class Zork extends Fragment implements View.OnClickListener {
             }
                 if(responseText.getText().toString().equalsIgnoreCase("attack terrible troll with nasty knife")){
                 troll.setText("The terrible troll dies a horrible death. Would you like to loot the body?");
+                    responseText.setText("");
             }
             if(troll.getText().toString().equalsIgnoreCase("The terrible troll dies a horrible death. Would you like to loot the body?")){
                 if(responseText.getText().toString().equalsIgnoreCase("yes")){
                     troll.setText("Congratulations you found 1,000 gold!");
+                    responseText.setText("");
                 }
             }
             break;
@@ -64,9 +66,6 @@ public class Zork extends Fragment implements View.OnClickListener {
                 troll.setText("The terrible troll raises his sword.");
                 responseText.setText("");
                 break;
-
         }
-
-
     }
 }
