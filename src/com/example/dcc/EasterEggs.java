@@ -14,13 +14,17 @@ import android.os.Bundle;
 
 public class EasterEggs extends Activity {
 
-
     public static MediaPlayer sweeet;
     public static MediaPlayer giveYouUp;
     public static MediaPlayer speakItalian;
     public static MediaPlayer glandular;
     public static MediaPlayer doh;
     public static MediaPlayer fourPeters;
+    public static MediaPlayer hacking;
+    public static MediaPlayer makeBelieve;
+    public static MediaPlayer grief;
+    public static MediaPlayer woohoo;
+    public static MediaPlayer yet;
 
 
     @Override
@@ -34,14 +38,17 @@ public class EasterEggs extends Activity {
         glandular = MediaPlayer.create(getApplicationContext(), R.raw.glandular_first);
         doh = MediaPlayer.create(getApplicationContext(), R.raw.doh);
         fourPeters = MediaPlayer.create(getApplicationContext(), R.raw.four_peters);
-
+        hacking = MediaPlayer.create(getApplicationContext(), R.raw.hacking);
+        makeBelieve = MediaPlayer.create(getApplicationContext(), R.raw.makebelieve);
+        grief = MediaPlayer.create(getApplicationContext(), R.raw.stagesofgrief);
+        woohoo = MediaPlayer.create(getApplicationContext(), R.raw.woohoo);
+        yet = MediaPlayer.create(getApplicationContext(), R.raw.yet);
 
 //        showProgress(true);
 
         startActivity(new Intent(this, MainActivityFrag.class));
         finish();
     }
-
 
     /**
      * Shows the progress UI and hides the login form.

@@ -56,6 +56,7 @@ public class Zork extends Fragment implements View.OnClickListener {
                 if(responseText.getText().toString().equalsIgnoreCase("yes")){
                     troll.setText("Congratulations you found 1,000 gold!");
                     responseText.setText("");
+                    EasterEggs.woohoo.start();
                 }
             }
             break;
