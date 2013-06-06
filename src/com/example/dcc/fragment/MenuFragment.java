@@ -410,6 +410,48 @@ public class MenuFragment extends Fragment implements OnClickListener{
                 Fragment newer = new Zork();
                 launchFragment(newer);
             }
+            else if (matches.contains("button to take down the discovery lab server")) {
+               EasterEggs.yet.start();
+            }
+            else if (matches.contains("break server")) {
+                EasterEggs.yet.start();
+            }
+            else if (matches.contains("server off line")) {
+                EasterEggs.yet.start();
+            }
+            else if (matches.contains("I'm tired")) {
+                EasterEggs.hacking.start();
+            }
+            else if (matches.contains("I have been programming all day")) {
+                EasterEggs.hacking.start();
+            }
+            else if (matches.contains("any key")) {
+                EasterEggs.hacking.start();
+            }
+            else if (matches.contains("where's the any key")) {
+                EasterEggs.hacking.start();
+            }
+            else if (matches.contains("denial")) {
+                EasterEggs.grief.start();
+            }
+            else if (matches.contains("five stages of grief")) {
+                EasterEggs.grief.start();
+            }
+            else if (matches.contains("the fastest recovery")) {
+                EasterEggs.grief.start();
+            }
+            else if (matches.contains("I won the lottery")) {
+                EasterEggs.makeBelieve.start();
+            }
+            else if (matches.contains("will I win the lottery")) {
+                EasterEggs.makeBelieve.start();
+            }
+            else if (matches.contains("I won the lottery")) {
+                EasterEggs.makeBelieve.start();
+            }
+            else if (matches.contains("Can I get free food")) {
+                EasterEggs.makeBelieve.start();
+            }
         }
 
 //        if (requestCode == MY_DATA_CHECK_CODE) {
