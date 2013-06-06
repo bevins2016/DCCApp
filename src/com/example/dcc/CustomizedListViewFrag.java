@@ -17,6 +17,7 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.example.dcc.fragment.NewsDetailFragment;
+import com.example.dcc.helpers.ImageWithBool;
 import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.hacks.AlbumArrayAdapter;
 
@@ -31,7 +32,7 @@ import java.util.concurrent.ExecutionException;
 
 public class CustomizedListViewFrag extends Fragment {
 
-    List<String> urls ;
+    List<ImageWithBool> urls ;
     AlbumArrayAdapter adapter;
 
     @Override
@@ -39,7 +40,7 @@ public class CustomizedListViewFrag extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.albumview,
                 container, false);
-        //setRetainInstance(true);
+        setRetainInstance(true);
         getURLS();
         GridView gridview = (GridView)view.findViewById(R.id.gridview);
         adapter = new AlbumArrayAdapter(getActivity(),  urls);
@@ -49,7 +50,7 @@ public class CustomizedListViewFrag extends Fragment {
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(), urls.get(i), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), urls.get(i).url, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -77,11 +78,11 @@ public class CustomizedListViewFrag extends Fragment {
     /**
      * This class is responsible for fetching the list of url's using JSOUP.
      */
-    private class GetImageUrlTask extends AsyncTask<Void, Void, List<String>>{
+    private class GetImageUrlTask extends AsyncTask<Void, Void, List<ImageWithBool>>{
 
         @Override
-        protected List<String> doInBackground(Void... voids) {
-            List<String> imageList = new ArrayList<String>();
+        protected List<ImageWithBool> doInBackground(Void... voids) {
+            List<ImageWithBool> imageList = new ArrayList<ImageWithBool>();
             //No need for cookies here (Ye Pictures are public)... nom nom nom
             try {
                 if(ObjectStorage.getImageList()!=null) return ObjectStorage.getImageList();
@@ -93,10 +94,12 @@ public class CustomizedListViewFrag extends Fragment {
                     String url = imgs.get(i).attr("href");
                     //Images from this url are utility icons
                     if(url.startsWith("http://www.virtualdiscoverycenter.net/wp-content/uploads/2013")){
-                        imageList.add(url);
-                        Log.e("Images", "Added: "+url);
+                        ImageWithBool temp = new ImageWithBool();
+                        temp.url = url;
+                        imageList.add(temp);
                     }
                 }
+                ObjectStorage.setImageList(imageList);
             } catch (IOException e) {
                 e.printStackTrace();
             }

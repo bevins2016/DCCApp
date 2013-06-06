@@ -191,7 +191,7 @@ public class AdminSearchFragment extends Fragment implements View.OnClickListene
     }
 
     /**
-     * Checks the value of each field and populates the necessary string.
+     * Checks the value of each field and ipopulates the necessary string.
      * @return HTML encoded string.
      */
     private String buildQuery() {
@@ -199,9 +199,11 @@ public class AdminSearchFragment extends Fragment implements View.OnClickListene
         StringBuilder sb = new StringBuilder();
 
         if(spinner.getSelectedItemPosition() > 0)
-            sb.append("ID=").append(members.get(spinner.getSelectedItemPosition()-1).getID()).append(" AND ");
-        sb.append("submitted BETWEEN '").append(startDate.getText()).append("' AND '").append(endDate.getText())
-                .append("' AND ");
+            sb.append("ID=").append(members.get(spinner.getSelectedItemPosition()-1)
+                    .getID()).append(" AND ");
+            sb.append("submitted BETWEEN STR_TO_DATE('").append(startDate.getText()).
+                append("','%Y-%m-%d') AND STR_TO_DATE('").append(endDate.getText())
+                .append("','%Y-%m-%d') AND ");
         RadioButton temp = (RadioButton)getView().findViewById(depRG.getCheckedRadioButtonId());
         if(temp!=null){
             sb.append("dependable ").append(temp.getText());

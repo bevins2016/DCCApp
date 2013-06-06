@@ -11,6 +11,7 @@ import android.util.Log;
 import com.example.dcc.fragment.MenuFragment;
 import com.example.dcc.fragment.NewsListFragment;
 import com.example.dcc.fragment.TopFragment;
+import com.example.dcc.helpers.ImageWithBool;
 import com.example.dcc.helpers.ObjectStorage;
 
 import org.jsoup.Jsoup;
@@ -19,6 +20,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -36,9 +38,12 @@ public class MainActivityFrag extends FragmentActivity {
         setContentView(R.layout.main_activity_frag);
         FragmentManager manager = getFragmentManager();
 
+        //For convienence get the list of images early on... Slow connection propogation
         new GetImageUrlTask().execute();
+
         //Start transaction
         FragmentTransaction transaction = manager.beginTransaction();
+
         //Create fragments
         Fragment menu = new MenuFragment();
         Fragment news = (ObjectStorage.getHashMap().containsKey(RIGHT_FRAG)) ?
@@ -62,11 +67,13 @@ public class MainActivityFrag extends FragmentActivity {
         transaction.commit();
     }
 
-    private class GetImageUrlTask extends AsyncTask<Void, Void, List<String>> {
+    private class GetImageUrlTask extends AsyncTask<Void, Void, List<ImageWithBool>> {
 
         @Override
-        protected List<String> doInBackground(Void... voids) {
-            List<String> imageList = new ArrayList<String>();
+        protected List<ImageWithBool> doInBackground(Void... voids) {
+            HashMap<String, Boolean> hashMap = new HashMap<String, Boolean>();
+
+            List<ImageWithBool> imageList = new ArrayList<ImageWithBool>();
             //No need for cookies here (Ye Pictures are public)... nom nom nom
             try {
                 Document doc = Jsoup.connect(
@@ -75,9 +82,20 @@ public class MainActivityFrag extends FragmentActivity {
                 for(int i = 0; i < imgs.size(); i++){
                     String url = imgs.get(i).attr("src");
                     //Images from this url are utility icons
-                    if(url.startsWith("http://www.virtualdiscoverycenter.net/wp-content/uploads/"))
-                        imageList.add(url);
-                    Log.e("Images", "Added: " + url);
+                    if(url.startsWith("http://www.virtualdiscoverycenter.net/wp-content/uploads/")){
+                        String url2;
+                        try{
+                        url2 = url.substring(url.lastIndexOf("/"));
+                        String url3 = url2.substring(0, url2.indexOf("-"));
+                            if(hashMap.containsKey(url3)) break;
+                            else hashMap.put(url3, true);
+                        }catch(Exception e){
+                            Log.e("ARGH2", "These are not the droid you're looking for");
+                        }
+                        ImageWithBool temp = new ImageWithBool();
+                        temp.url = url;
+                        imageList.add(temp);
+                    }
                 }
 
                 ObjectStorage.setImageList(imageList);

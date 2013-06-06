@@ -224,7 +224,8 @@ public class MySQLQuery {
 
                 edailys.add(edaily);
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.e("getEdailys", "Failed to parse EDailys");
+                return null;
             }
         }
         return edailys;

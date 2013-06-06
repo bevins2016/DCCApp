@@ -38,7 +38,7 @@ public class ObjectStorage {
     appearance based on clickss*/
     private static View menuFrame;
 
-    private static List<String> imageList;
+    private static List<ImageWithBool> imageList;
 
     /*sets the action items*/
     public static void setActionItems(List<ActionItem> ais){
@@ -120,11 +120,11 @@ public class ObjectStorage {
         fragment.put(key,frag);
     }
 
-    public static void setImageList(List<String> imageList2) {
+    public static void setImageList(List<ImageWithBool> imageList2) {
         imageList = imageList2;
     }
 
-    public static List<String> getImageList(){
+    public static List<ImageWithBool> getImageList(){
         return imageList;
     }
 }
