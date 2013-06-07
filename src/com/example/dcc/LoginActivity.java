@@ -71,7 +71,6 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.activity_login);
         context = this;
         User user = new User();
-        ObjectStorage.setHashMap(new HashMap<Integer, Fragment>());
         ObjectStorage.setUser(user);
 
 
