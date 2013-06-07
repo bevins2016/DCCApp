@@ -60,7 +60,6 @@ public class LoginActivity extends Activity {
     private TextView mLoginStatusMessageView;
 
     private Context context;
-    boolean helper = false;
     boolean autoLogin = false;
 
     @Override
@@ -72,8 +71,6 @@ public class LoginActivity extends Activity {
         context = this;
         User user = new User();
         ObjectStorage.setUser(user);
-
-
 
         /* Set up the login form. */
         mUser = "";
@@ -117,7 +114,7 @@ public class LoginActivity extends Activity {
             mUser =sp1.getString("UserName", null);
             mPassword = sp1.getString("PassWord", null);
 
-            if(sp1.getString("UserName", null) != "")
+            if(sp1.getString("UserName", null).equals(""))
             {
                 autoLogin = true;
                 attemptLogin();
@@ -153,18 +150,22 @@ public class LoginActivity extends Activity {
 
         if(!autoLogin){
             // Store values at the time of the login attempt.
-            mUser = mUserView.getText().toString();
-            mPassword = mPasswordView.getText().toString();
+            try{
+                mUser = mUserView.getText().toString();
+                mPassword = mPasswordView.getText().toString();
+            }catch(NullPointerException e){
+                mUser = mPassword = "";
+            }
         } else {
 
             SharedPreferences sp1=this.getSharedPreferences("CurrentUser", MODE_PRIVATE);
 
-            if(sp1.getString("UserName", null) == "" && mUser == "" && mPassword == ""){
+            if(sp1.getString("UserName", null).equals("") && mUser.equals("") && mPassword.equals("")){
                 Log.e("Fail", "Failed attempt");
                 return;
             }
 
-            if(sp1.getString("UserName", null) != ""){
+            if(!sp1.getString("UserName", null).equals("")){
                 mUser =sp1.getString("UserName", null);
                 mPassword = sp1.getString("PassWord", null);
             }
@@ -187,7 +188,6 @@ public class LoginActivity extends Activity {
                 focusView = mPasswordView;
                 cancel = true;
             }
-
             // Check for a valid email address.
             if (TextUtils.isEmpty(mUser))
             {
@@ -196,10 +196,8 @@ public class LoginActivity extends Activity {
                 cancel = true;
             }
         }
-
         autoLogin = false;
         if (cancel) {
-
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
@@ -285,11 +283,9 @@ public class LoginActivity extends Activity {
         @Override
         protected Boolean doInBackground(Void... params)
         {
+            showProgress(true);
             try{
-                if (!HttpConnection.login(mUser, mPassword))
-
-                {
-
+                if (!HttpConnection.login(mUser, mPassword)){
                     cancel(true);
                     return false;
                 }

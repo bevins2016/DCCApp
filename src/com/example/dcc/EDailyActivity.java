@@ -115,7 +115,7 @@ public class EDailyActivity extends Activity implements OnClickListener {
 	/**
 	 * Gets student ID, calls Async task to send the file to the server
 	 */
-	public void onClick(View v) {	
+	public void onClick(View v) {
 		File f = new File(Environment.getExternalStorageDirectory() + "/enotebook/InternalStorage.txt");
 		if(f.exists()) {
 			String studentID = "";
@@ -148,10 +148,6 @@ public class EDailyActivity extends Activity implements OnClickListener {
 			try {
 				ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
-//				nameValuePairs.add(new BasicNameValuePair("id", params[1]));
-//				nameValuePairs.add(new BasicNameValuePair("type", "edaily"));
-//				nameValuePairs.add(new BasicNameValuePair("edaily",
-//						getEditText(todayTF)));
 
                 nameValuePairs.add(new BasicNameValuePair("ID", "" + ObjectStorage.getUser().getID()));
                 nameValuePairs.add(new BasicNameValuePair("First", first));
@@ -207,35 +203,6 @@ public class EDailyActivity extends Activity implements OnClickListener {
 
 	}
 
-//    /* Populate spinners, if teams are in the file, set spinners to those values */
-//    private void setupSpinners() {
-//
-//        String add = "";
-//        BufferedReader bufferedreader = null;
-//        adapter = new ArrayAdapter<String>(getApplicationContext(),
-//                R.layout.spinner_item);
-//
-//        adapter.setDropDownViewResource(R.layout.spinner_item);
-//
-//           for(int i = 1; i < 10; i++){
-//               adapter.add("" + i);
-//           }
-//
-//
-//
-//        issues.setAdapter(adapter);
-//        dependability.setAdapter(adapter);
-//        reliability.setAdapter(adapter);
-//
-////        for (int i = 0; i < adapter.getCount(); i++) {
-////            if (adapter.getItem(i).toString().matches(project1)) {
-////                FirstProject.setSelection(i);
-////            }
-////            if (adapter.getItem(i).toString().matches(project2)) {
-////                SecondProject.setSelection(i);
-////            }
-////        }
-//    }
 
 	public void onBackPressed() {
 		finish();

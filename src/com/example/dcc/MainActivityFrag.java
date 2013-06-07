@@ -10,6 +10,9 @@ import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.example.dcc.fragment.ActionItemFrag;
@@ -41,29 +44,35 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
     public static final int LEFT_FRAG = R.id.fragmentcontainerleft;
     public static final int RIGHT_FRAG = R.id.fragmentcontainerright;
     public static final int BOTTOM_FRAG = R.id.fragmentcontainerbottom;
+    Fragment menu, main, top;
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_frag);
-        FragmentManager manager = getFragmentManager();
 
+
+        if(savedInstanceState == null){
+            FragmentManager manager = getFragmentManager();
+
+
+
+            //Start transaction
+            FragmentTransaction transaction = manager.beginTransaction();
+
+            //Create fragments
+            menu = new MenuFragment();
+            main = new NewsListFragment();
+            top = new TopFragment();
+
+            //Add fragments
+            transaction.add(RIGHT_FRAG,main);
+            transaction.add(LEFT_FRAG,menu );
+            transaction.add(BOTTOM_FRAG,top);
+
+            transaction.commit();
+        }
         //For convienence get the list of images early on... Slow connection propogation
         new GetImageUrlTask().execute();
-
-        //Start transaction
-        FragmentTransaction transaction = manager.beginTransaction();
-
-        //Create fragments
-        Fragment menu = new MenuFragment();
-        Fragment news = new NewsListFragment();
-        Fragment bottom = new TopFragment();
-
-        //Add fragments
-        transaction.add(RIGHT_FRAG,news);
-        transaction.add(LEFT_FRAG,menu );
-        transaction.add(BOTTOM_FRAG,bottom);
-
-        transaction.commit();
     }
 
     @Override
@@ -95,6 +104,23 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
                 launchFragment(new CreateActionItemFrag()); break;
             case R.id.button:
                 startVoiceRecognitionActivity(); break;
+            case R.id.menu_button:
+                displaySide(); break;
+        }
+    }
+
+    private void displaySide() {
+        //If menu is hidden, display the image
+        if(ObjectStorage.menuHidden){
+            ObjectStorage.menuHidden = false;
+            FrameLayout menuFrame = (FrameLayout)findViewById(R.id.fragmentcontainerleft);
+            menuFrame.setVisibility(View.VISIBLE);
+        }else{
+            //If the menu is visible, hide it
+            ObjectStorage.menuHidden = true;
+            //menuVisibility.setBackgroundResource(R.drawable.navigationnextitem);
+            FrameLayout menuFrame = (FrameLayout)findViewById(R.id.fragmentcontainerleft);
+            menuFrame.setVisibility(View.GONE);
         }
     }
 
@@ -174,8 +200,8 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
                     if(url.startsWith("http://www.virtualdiscoverycenter.net/wp-content/uploads/")){
                         String url2;
                         try{
-                        url2 = url.substring(url.lastIndexOf("/"));
-                        String url3 = url2.substring(0, url2.indexOf("-"));
+                            url2 = url.substring(url.lastIndexOf("/"));
+                            String url3 = url2.substring(0, url2.indexOf("-"));
                             if(hashMap.containsKey(url3)) break;
                             else hashMap.put(url3, true);
                         }catch(Exception e){

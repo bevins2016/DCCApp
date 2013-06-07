@@ -27,6 +27,7 @@ public class NewsDetailFragment extends Fragment {
 
         View view = inflater.inflate(com.example.dcc.R.layout.news_detailed,
                 container, false);
+        setRetainInstance(true);
         news = (News)this.getArguments().getSerializable("news");
 
         //Get all text views

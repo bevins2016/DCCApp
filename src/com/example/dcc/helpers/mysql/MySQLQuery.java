@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+//TODO:Move json parsing to the json object by passing in the JSONObject.
 /**
  * This class manages the communication between the application and sql queries.
  * Primarily parses database information from JSon objects into Lists of items.
@@ -64,8 +65,6 @@ public class MySQLQuery {
             } catch (JSONException e) {
                 Log.e("dcc.MySQLQuery", e.getMessage());
             }
-
-
         }
 
         //Need to reverse the list for correct view
@@ -83,7 +82,6 @@ public class MySQLQuery {
             user.setHandle(jUser.getString("user_login"));
             user.setProject(jUser.getString("project"));
             user.setProject2(jUser.getString("project2"));
-            Log.e("USER", user.getID()+"");
             return user;
         } catch (JSONException e) {
             Log.e("dcc.MySQLQuery", e.getMessage());

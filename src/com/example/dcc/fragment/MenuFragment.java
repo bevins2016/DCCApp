@@ -15,12 +15,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-<<<<<<< HEAD
-import com.example.dcc.CustomizedListViewFrag;
-import com.example.dcc.EDailyActivityFrag;
-import com.example.dcc.EReportLauncherFrag;
-=======
->>>>>>> f25c1866cfc00a70f2793e0884940f6899861350
 import com.example.dcc.EasterEggs;
 import com.example.dcc.R;
 import com.example.dcc.Zork;
@@ -62,10 +56,6 @@ public class MenuFragment extends Fragment implements OnClickListener {
                     container, false);
             director = true;
         }
-<<<<<<< HEAD
-
-=======
->>>>>>> f25c1866cfc00a70f2793e0884940f6899861350
         activity = getActivity();
         assert view != null;
 
@@ -105,65 +95,9 @@ public class MenuFragment extends Fragment implements OnClickListener {
         return view;
     }
 
-<<<<<<< HEAD
-    /**
-     * Method that launches the fragment into the right container;
-     * @param newer
-     */
-    private void launchFragment(Fragment newer){
-        FragmentManager manager = activity.getFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-
-        ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-
-        transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-        transaction.commit();
-    }
-
-    public void news(){
-        launchFragment(new NewsListFragment());
-    }
-
-    public void photo(){
-        Fragment newer = new CustomizedListViewFrag();
-        launchFragment(newer);
-    }
-    public void report(){
-        Fragment newer = new EDailyActivityFrag();
-        launchFragment(newer);
-    }
-    public void search(){
-        Fragment newer = new LaunchActivityFrag();
-        launchFragment(newer);
-    }
-    public void action(){
-        Fragment newer = new ActionItemFrag();
-        launchFragment(newer);
-    }
-    public void directory(){
-        Fragment newer = new MembersListFragment();
-        launchFragment(newer);
-    }
-    public void searchReport(){
-        Fragment newer = new AdminSearchFragment();
-        launchFragment(newer);
-    }
-    public void toggle(){
-//        if(toggleSound.isChecked()){
-//            speakWords("Access Granted. Welcome ");
-//        }else{
-//            speakWords("Voice Prompts Off");
-//        }
-    }
-    public void createActionItems(){
-
-        Fragment newer = new CreateActionItemFrag();
-        launchFragment(newer);
-=======
     @Override
     public void onClick(View view) {
         listener.onMenuButtonSelected(view.getId());
->>>>>>> f25c1866cfc00a70f2793e0884940f6899861350
     }
 
     @Override

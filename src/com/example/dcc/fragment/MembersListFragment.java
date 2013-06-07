@@ -1,5 +1,6 @@
 package com.example.dcc.fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -103,6 +104,17 @@ public class MembersListFragment extends Fragment{
         }
 
         return view;
+    }
+
+    @Override
+    public void onAttach(Activity activity){
+        super.onAttach(activity);
+        if(activity instanceof OnButtonSelectedListener){
+            listener = (OnButtonSelectedListener) activity;
+        } else {
+            throw new ClassCastException(activity.toString() +
+                    "must implement MyListFragment.OnButtonSelectedListener");
+        }
     }
 
     /**

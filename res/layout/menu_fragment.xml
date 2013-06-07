@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@android:color/holo_blue_light">
+              android:background="#33b5e5">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -38,7 +38,7 @@
                 android:shadowRadius="0"
                 android:background="@drawable/background"
                 android:drawableRight="@drawable/contentedit"
-                android:text="@string/report" />
+                android:text="E-Daily" />
 
         <Button
                 android:id="@+id/action"
@@ -67,8 +67,8 @@
                 android:shadowColor="#000000"
                 android:shadowRadius="0"
                 android:background="@drawable/background"
-                android:drawableRight="@drawable/socialgroup"
-                android:text="Speech Action"
+                android:drawableRight="@drawable/deviceaccessmic"
+                android:text="Voice"
                 android:id="@+id/button" android:layout_gravity="left|center_vertical"/>
         <Button
                 android:layout_width="match_parent"
@@ -76,8 +76,8 @@
                 android:shadowColor="#000000"
                 android:shadowRadius="0"
                 android:background="@drawable/background"
-                android:drawableRight="@drawable/socialgroup"
-                android:text="Delete Auto Login Info"
+                android:drawableRight="@drawable/deviceaccessaccounts"
+                android:text="Log Out"
                 android:id="@+id/logout" android:layout_gravity="left|center_vertical"/>
          <ListView
                 android:layout_width="0dp"

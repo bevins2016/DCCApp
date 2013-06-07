@@ -149,7 +149,4 @@ public class EDailyActivityFrag extends Fragment implements OnClickListener {
 
     }
 
-//    public void onBackPressed() {
-//        activity.finish();
-//    }
 }
