@@ -56,7 +56,7 @@ public class EDailyList extends Fragment {
         });
 
 
-        for(Object e : edailies){
+      for(Object e : edailies){
             adapter.add(((EDaily)e));
         }
         return view;

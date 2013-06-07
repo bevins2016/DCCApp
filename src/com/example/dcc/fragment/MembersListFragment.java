@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import com.example.dcc.R;
 import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.User;
@@ -95,9 +97,13 @@ public class MembersListFragment extends Fragment{
             }
         });
 
+        try{
         //Add all members to the adapter
         for(User m : members){
             adapter.add(Html.fromHtml(m.toString()));
+        }
+        }catch(NullPointerException e){
+            Toast.makeText(getActivity(), "Failed to load friends.", Toast.LENGTH_LONG);
         }
 
         return view;

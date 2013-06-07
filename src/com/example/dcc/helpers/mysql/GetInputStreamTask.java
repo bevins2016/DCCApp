@@ -25,7 +25,6 @@ public class GetInputStreamTask extends AsyncTask<String, Void, InputStream>{
 
     @Override
     public InputStream doInBackground(String... url) {
-
         try{
             User user = ObjectStorage.getUser();
 

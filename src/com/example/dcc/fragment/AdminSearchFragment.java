@@ -72,18 +72,6 @@ public class AdminSearchFragment extends Fragment implements View.OnClickListene
         startDate.setText(sdf.format(new Date()));
         endDate.setText(sdf.format(new Date()));
 
-        depNo = (EditText)view.findViewById(R.id.edailydepno);
-        relNo = (EditText)view.findViewById(R.id.edailyrelno);
-        issNo = (EditText)view.findViewById(R.id.edailyissno);
-
-        issRG = (RadioGroup)view.findViewById(R.id.issrg);
-        relRG = (RadioGroup)view.findViewById(R.id.relrg);
-        depRG = (RadioGroup)view.findViewById(R.id.rgdep);
-
-        issCB = (CheckBox)view.findViewById(R.id.edailyisseq);
-        relCB = (CheckBox)view.findViewById(R.id.edailyreleq);
-        depCB = (CheckBox)view.findViewById(R.id.edailydepeq);
-
         colorbox = (LinearLayout)view.findViewById(R.id.colorvalue);
         numvalue = (TextView)view.findViewById(R.id.numvalue);
 
@@ -202,29 +190,10 @@ public class AdminSearchFragment extends Fragment implements View.OnClickListene
             sb.append("ID=").append(members.get(spinner.getSelectedItemPosition()-1)
                     .getID()).append(" AND ");
             sb.append("submitted BETWEEN STR_TO_DATE('").append(startDate.getText()).
-                append("','%Y-%m-%d') AND STR_TO_DATE('").append(endDate.getText())
-                .append("','%Y-%m-%d') AND ");
-        RadioButton temp = (RadioButton)getView().findViewById(depRG.getCheckedRadioButtonId());
-        if(temp!=null){
-            sb.append("dependable ").append(temp.getText());
-            if(depCB.isChecked()) sb.append("= ");
-            sb.append(" ").append(depNo.getText()).append(" AND ");
-        }
-        temp = (RadioButton)getView().findViewById(issRG.getCheckedRadioButtonId());
-        if(temp!=null){
-            sb.append("issues ").append(temp.getText());
-            if(issCB.isChecked()) sb.append("= ");
-            sb.append(" ").append(issNo.getText()).append(" AND ");
-        }
-        temp = (RadioButton)getView().findViewById(relRG.getCheckedRadioButtonId());
-        if(temp!=null){
-            sb.append("reliable ").append(temp.getText());
-            if(relCB.isChecked()) sb.append("= ");
-            sb.append(" ").append(relNo.getText()).append(" AND ");
-        }
-        if(seekBar.getProgress()>0) sb.append(" grade >= ").append(seekBar.getProgress()).append(" AND ");
+                append("','%Y-%m-%d') AND STR_TO_DATE('").append(endDate.getText()+" 23:59:59")
+                .append("','%Y-%m-%d %H:%i:%s')");
 
-        String str = sb.append(" 1=1 ").toString();
+        String str = sb.toString();
         try {
             Log.e("QUERY", str);
             return URLEncoder.encode(str, "UTF-8");

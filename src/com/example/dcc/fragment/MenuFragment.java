@@ -27,6 +27,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.dcc.CustomizedListViewFrag;
+import com.example.dcc.EDailyActivityFrag;
 import com.example.dcc.EReportLauncherFrag;
 import com.example.dcc.EasterEggs;
 import com.example.dcc.LaunchActivityFrag;
@@ -92,17 +93,6 @@ public class MenuFragment extends Fragment implements OnClickListener{
 
             director = true;
         }
-
-//        mp = MediaPlayer.create(activity, R.raw.sweet);
-//        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-//
-//            @Override
-//            public void onCompletion(MediaPlayer mp) {
-//                // TODO Auto-generated method stub
-//                mp.release();
-//            }
-//
-//        });
 
         activity = getActivity();
         assert view != null;
@@ -228,7 +218,7 @@ public class MenuFragment extends Fragment implements OnClickListener{
         launchFragment(newer);
     }
     public void report(){
-        Fragment newer = new EReportLauncherFrag();
+        Fragment newer = new EDailyActivityFrag();
         launchFragment(newer);
     }
     public void search(){

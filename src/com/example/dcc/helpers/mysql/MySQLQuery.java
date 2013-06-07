@@ -83,6 +83,7 @@ public class MySQLQuery {
             user.setHandle(jUser.getString("user_login"));
             user.setProject(jUser.getString("project"));
             user.setProject2(jUser.getString("project2"));
+            Log.e("USER", user.getID()+"");
             return user;
         } catch (JSONException e) {
             Log.e("dcc.MySQLQuery", e.getMessage());
@@ -99,6 +100,7 @@ public class MySQLQuery {
 
         try{
             Log.e("test", jUser.getString("display_name"));
+            user.setID(Integer.parseInt(jUser.getString("ID")));
             user.setName(jUser.getString("display_name"));
             user.setEmail(jUser.getString("user_email"));
             user.setHandle(jUser.getString("user_login"));
@@ -208,24 +210,27 @@ public class MySQLQuery {
                 JSONObject jEdaily = jEDailys.getJSONObject(i);
                 EDaily edaily = new EDaily();
 
-                edaily.setIss(jEdaily.getInt("issues"));
-                edaily.setRel(jEdaily.getInt("reliable"));
-                edaily.setDep(jEdaily.getInt("dependable"));
-                edaily.setUsr_id(jEdaily.getInt("ID"));
-                edaily.setBody(jEdaily.getString("body"));
-                edaily.setHours(jEdaily.getInt("hours"));
-                edaily.setDate(jEdaily.getString("date"));
-                edaily.setSubmitted(jEdaily.getString("submitted"));
-                edaily.setColor(jEdaily.getString("color"));
-                edaily.setGrade(jEdaily.getInt("grade"));
                 edaily.setFirstname(jEdaily.getString("first"));
                 edaily.setLastname(jEdaily.getString("last"));
                 edaily.setProj(jEdaily.getString("project"));
 
+                edaily.setHours(jEdaily.getInt("hours"));
+                edaily.setBody(jEdaily.getString("body"));
+
+                edaily.setUsr_id(jEdaily.getInt("ID"));
+
+
+                edaily.setDate(jEdaily.getString("date"));
+                edaily.setSubmitted(jEdaily.getString("submitted"));
+                edaily.setColor(jEdaily.getString("color"));
+                edaily.setGrade(jEdaily.getInt("grade"));
+
+                Log.e("getEdailys", jEDailys.toString());
+
                 edailys.add(edaily);
+
             } catch (JSONException e) {
-                Log.e("getEdailys", "Failed to parse EDailys");
-                return null;
+                Log.e("getEdailys---", e.getMessage());
             }
         }
         return edailys;
