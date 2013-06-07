@@ -1,5 +1,6 @@
 package com.example.dcc.fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -14,6 +15,7 @@ import android.widget.*;
 import com.example.dcc.R;
 import com.example.dcc.helpers.EDaily;
 import com.example.dcc.helpers.ObjectStorage;
+import com.example.dcc.helpers.OnButtonSelectedListener;
 import com.example.dcc.helpers.User;
 import com.example.dcc.helpers.hacks.DCCArrayList;
 import com.example.dcc.helpers.mysql.MySQLQuery;
@@ -44,10 +46,8 @@ public class AdminSearchFragment extends Fragment implements View.OnClickListene
     EditText startDate, endDate, depNo, relNo, issNo;
     LinearLayout colorbox;
     TextView numvalue;
-    RadioGroup depRG, relRG, issRG;
-    CheckBox issCB, relCB, depCB;
     SeekBar seekBar;
-
+    private OnButtonSelectedListener listener;
     /*Executes on create view*/
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,6 +58,17 @@ public class AdminSearchFragment extends Fragment implements View.OnClickListene
         getFields(view);
         populateSpinner(view);
         return view;
+    }
+
+    @Override
+    public void onAttach(Activity activity){
+        super.onAttach(activity);
+        if(activity instanceof OnButtonSelectedListener){
+            listener = (OnButtonSelectedListener) activity;
+        } else {
+            throw new ClassCastException(activity.toString() +
+                    "must implement MyListFragment.OnButtonSelectedListener");
+        }
     }
 
     /**
@@ -160,14 +171,8 @@ public class AdminSearchFragment extends Fragment implements View.OnClickListene
             bundle.putSerializable("edailies", edailies);
             detailFrag.setArguments(bundle);
 
-            //Launch the fragment activity
-            FragmentManager manager = getActivity().getFragmentManager();
-            FragmentTransaction transaction = manager.beginTransaction();
 
-            ObjectStorage.setFragment(R.id.fragmentcontainerright, detailFrag);
-            transaction.replace(R.id.fragmentcontainerright, detailFrag);
-
-            transaction.commit();
+            listener.launchFragment(detailFrag);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -183,19 +188,18 @@ public class AdminSearchFragment extends Fragment implements View.OnClickListene
      * @return HTML encoded string.
      */
     private String buildQuery() {
-
         StringBuilder sb = new StringBuilder();
 
         if(spinner.getSelectedItemPosition() > 0)
             sb.append("ID=").append(members.get(spinner.getSelectedItemPosition()-1)
                     .getID()).append(" AND ");
             sb.append("submitted BETWEEN STR_TO_DATE('").append(startDate.getText()).
-                append("','%Y-%m-%d') AND STR_TO_DATE('").append(endDate.getText()+" 23:59:59")
-                .append("','%Y-%m-%d %H:%i:%s')");
+                append("','%Y-%m-%d') AND STR_TO_DATE('").append(endDate.getText())
+                .append("','%Y-%m-%d') AND ");
 
-        String str = sb.toString();
+        if(seekBar.getProgress()>0) sb.append(" grade >= ").append(seekBar.getProgress()).append(" AND ");
+        String str = sb.append(" 1=1" ).toString();
         try {
-            Log.e("QUERY", str);
             return URLEncoder.encode(str, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             return null;

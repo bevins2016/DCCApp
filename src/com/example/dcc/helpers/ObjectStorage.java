@@ -16,9 +16,6 @@ public class ObjectStorage {
 
     /*The User object, stores bio and credential information*/
 	private static User user = null;
-    /*Used to store user objects by their uid number, which is uniquely assigned
-    to each user during registration*/
-    private static HashMap<Integer, Fragment> fragment;
     /*This is a static list of the users that is stored after the initial user list
     is downloaded*/
     private static List<User> memberList;
@@ -98,26 +95,6 @@ public class ObjectStorage {
     /*Returns the main user object*/
 	public static User getUser(){
 		return user;
-	}
-
-    /*Set the hashmap for fragments*/
-    public static void setHashMap(HashMap<Integer, Fragment> hm){
-        if(fragment == null) fragment = hm;
-    }
-
-    /*Returns the hashmap of fragments*/
-    public static HashMap<Integer, Fragment> getHashMap(){
-        return fragment;
-    }
-
-    /*Returns the fragment inside of the hashmap identified by the key*/
-    public static Fragment getFragment(int key){
-        return fragment.get(key);
-    }
-
-    /*Sets a fragment inside of the hashmap by the key*/
-    public static void setFragment(int key, Fragment frag){
-        fragment.put(key,frag);
     }
 
     public static void setImageList(List<ImageWithBool> imageList2) {

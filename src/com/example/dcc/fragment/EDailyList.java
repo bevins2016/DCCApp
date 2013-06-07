@@ -51,7 +51,6 @@ public class EDailyList extends Fragment {
                 Intent intent = new Intent(getActivity(), EDailyDetailedActivity.class);
                 intent.putExtra("edaily", edaily);
                 getActivity().startActivity(intent);
-
             }
         });
 

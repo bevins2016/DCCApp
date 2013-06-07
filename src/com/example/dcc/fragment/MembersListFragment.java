@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.dcc.R;
 import com.example.dcc.helpers.ObjectStorage;
+import com.example.dcc.helpers.OnButtonSelectedListener;
 import com.example.dcc.helpers.User;
 import com.example.dcc.helpers.mysql.MySQLQuery;
 
@@ -44,6 +45,8 @@ public class MembersListFragment extends Fragment{
     private List<User> members;
     //Name of this class in the logs
     private static final String LOG = "dcc.MemberListFragment";
+
+    private OnButtonSelectedListener listener;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
@@ -86,14 +89,7 @@ public class MembersListFragment extends Fragment{
                 bundle.putSerializable("member", member);
                 detailFrag.setArguments(bundle);
 
-                //Launch the fragment activity
-                FragmentManager manager = getActivity().getFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-
-                ObjectStorage.setFragment(R.id.fragmentcontainerright, detailFrag);
-                transaction.replace(R.id.fragmentcontainerright, detailFrag);
-
-                transaction.commit();
+                listener.launchFragment(detailFrag);
             }
         });
 

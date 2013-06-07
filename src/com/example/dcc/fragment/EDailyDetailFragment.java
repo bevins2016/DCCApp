@@ -30,7 +30,6 @@ public class EDailyDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.edaily_detailed, container, false);
         super.onCreate(savedInstanceState);
 
-
         edaily = (EDaily) getArguments().getSerializable("edaily");
 
         author = (TextView)view.findViewById(R.id.edailydetname);

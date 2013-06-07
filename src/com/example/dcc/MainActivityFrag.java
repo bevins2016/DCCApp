@@ -3,16 +3,25 @@ package com.example.dcc;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.example.dcc.fragment.ActionItemFrag;
+import com.example.dcc.fragment.AdminSearchFragment;
+import com.example.dcc.fragment.CreateActionItemFrag;
+import com.example.dcc.fragment.MembersListFragment;
 import com.example.dcc.fragment.MenuFragment;
 import com.example.dcc.fragment.NewsListFragment;
 import com.example.dcc.fragment.TopFragment;
 import com.example.dcc.helpers.ImageWithBool;
 import com.example.dcc.helpers.ObjectStorage;
+import com.example.dcc.helpers.OnButtonSelectedListener;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -27,7 +36,7 @@ import java.util.List;
  * This activity manages all fragments attached to it for the durration of the life of the
  * application.
  */
-public class MainActivityFrag extends FragmentActivity {
+public class MainActivityFrag extends FragmentActivity implements OnButtonSelectedListener {
 
     public static final int LEFT_FRAG = R.id.fragmentcontainerleft;
     public static final int RIGHT_FRAG = R.id.fragmentcontainerright;
@@ -46,18 +55,8 @@ public class MainActivityFrag extends FragmentActivity {
 
         //Create fragments
         Fragment menu = new MenuFragment();
-        Fragment news = (ObjectStorage.getHashMap().containsKey(RIGHT_FRAG)) ?
-                 ObjectStorage.getFragment(RIGHT_FRAG):new NewsListFragment();
+        Fragment news = new NewsListFragment();
         Fragment bottom = new TopFragment();
-
-        //Set fragments
-        ObjectStorage.setFragment(LEFT_FRAG, menu);
-        ObjectStorage.setFragment(RIGHT_FRAG, news);
-        ObjectStorage.setFragment(BOTTOM_FRAG, bottom);
-
-        //Hack to allow for the management of the left frame. Need to access object form this view in
-        //other views.
-        ObjectStorage.setMenuFrame(findViewById(R.id.fragmentcontainerleft));
 
         //Add fragments
         transaction.add(RIGHT_FRAG,news);
@@ -66,6 +65,96 @@ public class MainActivityFrag extends FragmentActivity {
 
         transaction.commit();
     }
+
+    @Override
+    public void onMenuButtonSelected(int buttonId) {
+        switch (buttonId) {
+            case R.id.news:
+                news();break;
+            case R.id.photo:
+                photo(); break;
+            case R.id.report:
+                report(); break;
+            case R.id.search:
+                search();break;
+            case R.id.action:
+                action(); break;
+            case R.id.directory:
+                directory();break;
+            case R.id.logout:
+                SharedPreferences mPreferences;
+                mPreferences = this.getSharedPreferences("CurrentUser", 0);
+                SharedPreferences.Editor editor=mPreferences.edit();
+                editor.putString("UserName", "");
+                editor.putString("PassWord", "");
+                editor.commit();
+                Toast.makeText(this, "Login data cleared",
+                        Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.createaction:
+                launchFragment(new CreateActionItemFrag()); break;
+            case R.id.button:
+                startVoiceRecognitionActivity(); break;
+        }
+    }
+
+    @Override
+    public void launchFragment(Fragment newer){
+        FragmentManager manager = getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(RIGHT_FRAG, newer);
+        transaction.commit();
+    }
+
+    public void news(){
+        launchFragment(new NewsListFragment());
+    }
+
+    public void photo(){
+        Fragment newer = new CustomizedListViewFrag();
+        launchFragment(newer);
+    }
+    public void report(){
+        Fragment newer = new EReportLauncherFrag();
+        launchFragment(newer);
+    }
+    public void search(){
+        Fragment newer = new LaunchActivityFrag();
+        launchFragment(newer);
+    }
+    public void action(){
+        Fragment newer = new ActionItemFrag();
+        launchFragment(newer);
+    }
+    public void directory(){
+        Fragment newer = new MembersListFragment();
+        launchFragment(newer);
+    }
+    public void searchReport(){
+        Fragment newer = new AdminSearchFragment();
+        launchFragment(newer);
+    }
+    public void toggle(){
+    }
+
+    public void createActionItems(){
+
+        Fragment newer = new CreateActionItemFrag();
+        launchFragment(newer);
+    }
+
+    /**
+     * Fire an intent to start the speech recognition activity.
+     */
+    public void startVoiceRecognitionActivity() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
+                "Speech recognition demo");
+        startActivityForResult(intent, 1234);
+    }
+
 
     private class GetImageUrlTask extends AsyncTask<Void, Void, List<ImageWithBool>> {
 

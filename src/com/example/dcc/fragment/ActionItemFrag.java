@@ -19,6 +19,7 @@ import android.widget.ListView;
 import com.example.dcc.R;
 import com.example.dcc.helpers.ActionItem;
 import com.example.dcc.helpers.ObjectStorage;
+import com.example.dcc.helpers.OnButtonSelectedListener;
 import com.example.dcc.helpers.hacks.ActionArrayAdapter;
 import com.example.dcc.helpers.mysql.MySQLQuery;
 
@@ -36,6 +37,7 @@ public class ActionItemFrag extends Fragment implements OnClickListener{
     ActionArrayAdapter adapter;
     List<ActionItem> actionItems;
     Activity activity;
+    private OnButtonSelectedListener listener;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
@@ -71,13 +73,7 @@ public class ActionItemFrag extends Fragment implements OnClickListener{
                 bundle.putSerializable("actionitem", actionItems.get(i));
                 detailFrag.setArguments(bundle);
 
-                FragmentManager manager = activity.getFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-
-                ObjectStorage.setFragment(R.id.fragmentcontainerright, detailFrag);
-                transaction.replace(R.id.fragmentcontainerright, detailFrag);
-
-                transaction.commit();
+                listener.launchFragment(detailFrag);
             }
         });
 
@@ -86,6 +82,17 @@ public class ActionItemFrag extends Fragment implements OnClickListener{
         }
 
         return view;
+    }
+
+    @Override
+    public void onAttach(Activity activity){
+        super.onAttach(activity);
+        if(activity instanceof OnButtonSelectedListener){
+            listener = (OnButtonSelectedListener) activity;
+        } else {
+            throw new ClassCastException(activity.toString() +
+                    "must implement MyListFragment.OnButtonSelectedListener");
+        }
     }
 
     @Override
