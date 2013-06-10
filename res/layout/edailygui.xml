@@ -7,50 +7,31 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:background="#FFFFFF">
 
         <!--
              This View used to set button at bottom of ScrollView 
         	 in a layout that is no full
         -->
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date For:"
+                android:textColor="#000000"
+                android:id="@+id/textView4" android:layout_gravity="left|center_vertical"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:ems="10"
+                android:id="@+id/datefor" android:layout_gravity="left|center_vertical"/>
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Issues"
-                android:id="@+id/textView" android:layout_gravity="left|center_vertical"/>
-        <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:ems="10"
-                android:id="@+id/issues" android:layout_gravity="left|center_vertical"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dependability"
-                android:id="@+id/textView2" android:layout_gravity="left|center_vertical"/>
-        <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:ems="10"
-                android:id="@+id/dependability" android:layout_gravity="left|center_vertical"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Reliability"
-                android:id="@+id/textView3" android:layout_gravity="left|center_vertical"/>
-        <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:ems="10"
-                android:id="@+id/reliability" android:layout_gravity="left|center_vertical"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hours"
+                android:text="Hours:"
+                android:textColor="#000000"
                 android:id="@+id/textView4" android:layout_gravity="left|center_vertical"/>
         <EditText
                 android:layout_width="wrap_content"
@@ -58,6 +39,13 @@
                 android:inputType="number"
                 android:ems="10"
                 android:id="@+id/hours" android:layout_gravity="left|center_vertical"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Report:"
+                android:textColor="#000000"
+                android:id="@+id/textView4" android:layout_gravity="left|center_vertical"/>
 
         <EditText
             android:id="@+id/todayTF"

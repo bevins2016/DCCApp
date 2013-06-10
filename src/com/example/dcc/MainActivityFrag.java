@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -39,22 +41,21 @@ import java.util.List;
  * This activity manages all fragments attached to it for the durration of the life of the
  * application.
  */
-public class MainActivityFrag extends FragmentActivity implements OnButtonSelectedListener {
+public class MainActivityFrag extends FragmentActivity implements OnButtonSelectedListener{
 
     public static final int LEFT_FRAG = R.id.fragmentcontainerleft;
     public static final int RIGHT_FRAG = R.id.fragmentcontainerright;
     public static final int BOTTOM_FRAG = R.id.fragmentcontainerbottom;
     Fragment menu, main, top;
+    private GestureDetector gesture;
+
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_frag);
 
-
         if(savedInstanceState == null){
             FragmentManager manager = getFragmentManager();
-
-
 
             //Start transaction
             FragmentTransaction transaction = manager.beginTransaction();
@@ -132,41 +133,56 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
         transaction.commit();
     }
 
+    public void stackFragment(Fragment newer){
+        FragmentManager manager = getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.add(RIGHT_FRAG, newer);
+        transaction.commit();
+    }
+
     public void news(){
         launchFragment(new NewsListFragment());
     }
 
     public void photo(){
-        Fragment newer = new CustomizedListViewFrag();
-        launchFragment(newer);
+        launchFragment(new CustomizedListViewFrag());
     }
     public void report(){
-        Fragment newer = new EReportLauncherFrag();
-        launchFragment(newer);
+        launchFragment(new EDailyActivityFrag());
     }
     public void search(){
-        Fragment newer = new LaunchActivityFrag();
-        launchFragment(newer);
+        launchFragment(new LaunchActivityFrag());
     }
     public void action(){
-        Fragment newer = new ActionItemFrag();
-        launchFragment(newer);
+        launchFragment(new ActionItemFrag());
     }
     public void directory(){
-        Fragment newer = new MembersListFragment();
-        launchFragment(newer);
+        launchFragment(new MembersListFragment());
     }
     public void searchReport(){
-        Fragment newer = new AdminSearchFragment();
-        launchFragment(newer);
+        launchFragment(new AdminSearchFragment());
     }
     public void toggle(){
+
     }
 
     public void createActionItems(){
 
         Fragment newer = new CreateActionItemFrag();
         launchFragment(newer);
+    }
+
+    @Override
+    public void onBackPressed(){
+        if(!ObjectStorage.menuHidden) displaySide();
+        else
+        {
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(RIGHT_FRAG, new NewsListFragment());
+            transaction.commit();
+        }
+
     }
 
     /**
@@ -180,7 +196,6 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
                 "Speech recognition demo");
         startActivityForResult(intent, 1234);
     }
-
 
     private class GetImageUrlTask extends AsyncTask<Void, Void, List<ImageWithBool>> {
 

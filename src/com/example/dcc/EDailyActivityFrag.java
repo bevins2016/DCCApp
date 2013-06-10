@@ -39,15 +39,9 @@ import android.view.View.OnClickListener;
  */
 public class EDailyActivityFrag extends Fragment implements OnClickListener {
 
-    private EditText todayTF; // Today's Accomplishments Text Field
+    private EditText todayTF, datefor; // Today's Accomplishments Text Field
     private Button sendButton; // Send Button
-    private String url = "http://www.virtualdiscoverycenter.net/wp-content/plugins/buddypress/bp-themes/bp-default/eDaily.php";
-    String first = "";
-    String last = "";
-    String name = "";
-    private EditText issues;
-    private EditText dependability;
-    private EditText reliability;
+    private String url = "/wp-content/plugins/buddypress/bp-themes/bp-default/eDaily.php";
     private EditText hours;
     Activity activity;
 
@@ -65,29 +59,12 @@ public class EDailyActivityFrag extends Fragment implements OnClickListener {
         activity = getActivity();
 
         todayTF = (EditText) view.findViewById(R.id.todayTF);
+        datefor = (EditText) view.findViewById(R.id.datefor);
+
         sendButton = (Button) view.findViewById(R.id.sendButton);
-        issues = (EditText) view.findViewById(R.id.issues);
-        dependability = (EditText) view.findViewById(R.id.dependability);
-        reliability = (EditText) view.findViewById(R.id.reliability);
         hours = (EditText) view.findViewById(R.id.hours);
         sendButton.setOnClickListener(this);
 
-        name = ObjectStorage.getUser().getName();
-
-        boolean helper = false;
-
-        for(int i = 0; i < name.length(); i++){
-
-            if(name.charAt(i) == ' '){
-                helper = true;
-                continue;
-            }
-            if (helper){
-                last += name.charAt(i);
-            } else{
-                first += name.charAt(i);
-            }
-        }
         return view;
     }
 
@@ -114,17 +91,12 @@ public class EDailyActivityFrag extends Fragment implements OnClickListener {
                 ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
                 nameValuePairs.add(new BasicNameValuePair("ID", "" + ObjectStorage.getUser().getID()));
-                nameValuePairs.add(new BasicNameValuePair("First", first));
-                nameValuePairs.add(new BasicNameValuePair("Last", last));
                 nameValuePairs.add(new BasicNameValuePair("Project", ObjectStorage.getUser().getProject()));
                 nameValuePairs.add(new BasicNameValuePair("edaily-content",
                         getEditText(todayTF)));
                 nameValuePairs.add(new BasicNameValuePair("Hours", getEditText(hours)));
-                nameValuePairs.add(new BasicNameValuePair("Issues", getEditText(issues)));
-                nameValuePairs.add(new BasicNameValuePair("Dependability", getEditText(dependability)));
-                nameValuePairs.add(new BasicNameValuePair("Reliability", getEditText(reliability)));
                 SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-                nameValuePairs.add(new BasicNameValuePair("reportdate", sdf.format(new Date())));
+                nameValuePairs.add(new BasicNameValuePair("reportdate",getEditText(datefor)));
 
                 HttpClient httpclient = new DefaultHttpClient();
                 HttpPost httppost = new HttpPost(params[0]);
@@ -133,6 +105,7 @@ public class EDailyActivityFrag extends Fragment implements OnClickListener {
                 Log.e("log_tag", "finished sending" + response.getStatusLine());
             } catch (Exception e) {
                 Log.e("log_tag", "Error in http connection " + e.toString());
+                //TODO: SAVE EREPORT!!!
             }
 
             return null;

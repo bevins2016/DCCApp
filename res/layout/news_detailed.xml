@@ -16,11 +16,13 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#000000"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/newsdate" android:layout_below="@+id/newstitle" android:layout_alignParentLeft="true"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#000000"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/newspublisher" android:layout_below="@+id/newstitle" android:layout_alignParentRight="true"/>
     <TextView
@@ -28,6 +30,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:background="#FFFFFF"
+            android:textColor="#000000"
             android:id="@+id/newsbody" android:layout_below="@+id/newsdate" android:layout_alignParentLeft="true"
             android:layout_alignRight="@+id/newspublisher"
             android:scrollbars="vertical"

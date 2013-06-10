@@ -4,12 +4,13 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:color="#FFFFFF">
+              android:background="#FFFFFF">
 
     <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:id="@+id/memicon"
+            android:background="@drawable/social_group_light"
             android:contentDescription="@string/usericon"
             android:layout_below="@+id/textView"
             android:layout_alignParentRight="true"/>
@@ -44,6 +45,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/namecol"
+            android:textColor="#000000"
             android:textSize="24sp"
             android:id="@+id/textView3"
             android:layout_below="@+id/textView2" android:layout_alignParentLeft="true"/>
@@ -51,6 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/usrname"
+            android:textColor="#000000"
             android:textSize="20sp"
             android:id="@+id/memname"
             android:layout_alignBottom="@+id/textView3" android:layout_toRightOf="@+id/textView3"/>
@@ -59,6 +62,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/handlecol"
+            android:textColor="#000000"
             android:textSize="24sp"
             android:id="@+id/textView4" android:layout_below="@+id/textView3" android:layout_alignParentLeft="true"/>
     <TextView
@@ -67,6 +71,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/project12"
             android:textSize="24sp"
+            android:textColor="#000000"
             android:id="@+id/lmemproj1" android:layout_below="@+id/textView4" android:layout_alignParentLeft="true"/>
     <TextView
             android:layout_width="wrap_content"
@@ -74,6 +79,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/project21"
             android:textSize="24sp"
+            android:textColor="#000000"
             android:id="@+id/textView5" android:layout_below="@+id/lmemproj1" android:layout_alignParentLeft="true"/>
     <TextView
             android:layout_width="wrap_content"
@@ -93,12 +99,14 @@
             android:layout_height="wrap_content"
             android:text="@string/handle"
             android:textSize="20sp"
+            android:textColor="#000000"
             android:id="@+id/memhandle" android:layout_above="@+id/lmemproj1"
             android:layout_toRightOf="@+id/lmemproj1"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/memproj1"
+            android:textColor="#000000"
             android:textSize="20sp"
             android:layout_above="@+id/textView5" android:layout_toRightOf="@+id/lmemproj1"/>
     <TextView
@@ -111,6 +119,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/background"
+            android:textColor="#000000"
             android:id="@+id/mememail" android:layout_below="@+id/textView6" android:layout_alignParentRight="true"
             android:layout_alignParentLeft="true"/>
 </RelativeLayout>

@@ -5,5 +5,6 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
         android:id="@+id/memberText"
+        android:textColor="#000000"
         android:layout_gravity="center_horizontal|top"
         android:background="@drawable/text_selector"/>
