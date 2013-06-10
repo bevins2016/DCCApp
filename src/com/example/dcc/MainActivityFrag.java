@@ -204,7 +204,6 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
             transaction.replace(RIGHT_FRAG, new NewsListFragment());
             transaction.commit();
         }
-
     }
 
     /**

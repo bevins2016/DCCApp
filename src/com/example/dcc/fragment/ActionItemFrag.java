@@ -16,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import com.example.dcc.R;
 import com.example.dcc.helpers.ActionItem;
 import com.example.dcc.helpers.ObjectStorage;
@@ -77,10 +79,15 @@ public class ActionItemFrag extends Fragment implements OnClickListener{
             }
         });
 
-        for(ActionItem n : actionItems){
-            adapter.add(n);
-        }
 
+        if(actionItems.isEmpty()){
+            Toast.makeText(activity, "You have no action items.",
+                    Toast.LENGTH_LONG).show();
+        }else{
+            for(ActionItem n : actionItems){
+                adapter.add(n);
+            }
+        }
         return view;
     }
 
