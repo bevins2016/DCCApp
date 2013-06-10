@@ -44,8 +44,6 @@ public class EasterEggs extends Activity {
         woohoo = MediaPlayer.create(getApplicationContext(), R.raw.woohoo);
         yet = MediaPlayer.create(getApplicationContext(), R.raw.yet);
 
-//        showProgress(true);
-
         startActivity(new Intent(this, MainActivityFrag.class));
         finish();
     }
@@ -90,4 +88,5 @@ public class EasterEggs extends Activity {
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }*/
+
 }

@@ -121,7 +121,6 @@ public class ActionItemActionFrag extends Fragment implements View.OnClickListen
         }
     }
 
-
     /* Send eDaily to the server */
     public class Uploader extends AsyncTask<String, Void, String> {
 

@@ -162,7 +162,6 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
         transaction.add(RIGHT_FRAG, newer);
         transaction.commit();
     }
-
     public void news(){
         launchFragment(new NewsListFragment());
     }

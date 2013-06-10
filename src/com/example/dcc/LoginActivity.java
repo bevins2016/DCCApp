@@ -58,7 +58,6 @@ public class LoginActivity extends Activity {
     private View mLoginFormView;
     private View mLoginStatusView;
     private TextView mLoginStatusMessageView;
-
     private Context context;
     boolean autoLogin = false;
 
@@ -76,7 +75,6 @@ public class LoginActivity extends Activity {
         mUser = "";
         mUserView = (EditText) findViewById(R.id.email);
         mUserView.setText(mUser);
-
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView
                 .setOnEditorActionListener(new TextView.OnEditorActionListener()
@@ -174,7 +172,6 @@ public class LoginActivity extends Activity {
         boolean cancel = false;
         View focusView = null;
 
-
         if(!autoLogin){
             // Check for a valid password.
             if (TextUtils.isEmpty(mPassword))
@@ -201,9 +198,7 @@ public class LoginActivity extends Activity {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
-
         } else {
-
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
@@ -294,7 +289,6 @@ public class LoginActivity extends Activity {
                 cancel(true);
                 return false;
             }
-
             return true;
         }
 
