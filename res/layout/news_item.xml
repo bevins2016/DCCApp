@@ -11,7 +11,6 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:background="@drawable/text_selector">
-
         <ImageView
                 android:layout_width="75dp"
                 android:layout_height="75dp"
@@ -35,7 +34,8 @@
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="Dynamic Title"
                         android:id="@+id/newsItemTitle"
-                        android:maxLines="1"/>
+                        android:maxLines="1"
+                        android:textColor="#000000"/>
 
                 <LinearLayout
                         android:layout_width="wrap_content"
@@ -48,7 +48,8 @@
                             android:text="Dynamic Date"
                             android:id="@+id/newsdate"
                             android:textSize="18sp"
-                            android:maxLines="1"/>
+                            android:maxLines="1"
+                            android:textColor="#000000"/>
 
                     <TextView
                             android:layout_width="wrap_content"
@@ -57,7 +58,8 @@
                             android:text="--By:"
                             android:id="@+id/edailyby"
                             android:textSize="20sp"
-                            android:maxLines="1"/>
+                            android:maxLines="1"
+                            android:textColor="#000000"/>
 
                     <TextView
                             android:layout_width="wrap_content"
@@ -65,7 +67,8 @@
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:text="dynamicname"
                             android:id="@+id/newsname"
-                            android:textSize="18sp"/>
+                            android:textSize="18sp"
+                            android:textColor="#000000"/>
                 </LinearLayout>
 
                 <TextView
@@ -75,10 +78,9 @@
                         android:text="bodypreview"
                         android:id="@+id/newsbodyprev"
                         android:layout_gravity="left|center_vertical"
-                        android:maxLines="1"/>
-
+                        android:maxLines="1"
+                        android:textColor="#000000"/>
             </LinearLayout>
         </LinearLayout>
-
     </LinearLayout>
 </RelativeLayout>

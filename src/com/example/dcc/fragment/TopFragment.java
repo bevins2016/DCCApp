@@ -2,10 +2,13 @@ package com.example.dcc.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.gesture.GestureOverlayView;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.widget.*;
 import com.example.dcc.R;
 import com.example.dcc.helpers.BitmapCache;
@@ -31,6 +34,8 @@ public class TopFragment extends Fragment implements View.OnClickListener{
     private Button menuVisibility;
     //Menu Width
     private OnButtonSelectedListener listener;
+
+    private GestureOverlayView.OnGestureListener gesture;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,28 +69,6 @@ public class TopFragment extends Fragment implements View.OnClickListener{
         } else {
             throw new ClassCastException(activity.toString() +
                     "must implement MyListFragment.OnButtonSelectedListener");
-        }
-    }
-
-    public class GetImageTask extends AsyncTask<User, Void, Bitmap> {
-        @Override
-        protected Bitmap doInBackground(User... user) {
-            Bitmap image;
-            try{
-                String uri = "/DCC/getUserGravitar.php?email=" + user[0].getEmail();
-
-                URL url = new URL(user[0].getImageURL());
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setDoInput(true);
-                conn.connect();
-                image = BitmapFactory.decodeStream(conn.getInputStream());
-                conn.disconnect();
-
-                BitmapCache.addBitmap(uri, image);
-                return image;
-            }catch(Exception e){
-                return null;
-            }
         }
     }
 }

@@ -66,9 +66,6 @@ public class EDailyActivity extends Activity implements OnClickListener {
 
 		todayTF = (EditText) findViewById(R.id.todayTF);
 		sendButton = (Button) findViewById(R.id.sendButton);
-        issues = (EditText) findViewById(R.id.issues);
-        dependability = (EditText) findViewById(R.id.dependability);
-        reliability = (EditText) findViewById(R.id.reliability);
         hours = (EditText) findViewById(R.id.hours);
 		sendButton.setOnClickListener(this);
 

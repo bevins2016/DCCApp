@@ -8,5 +8,5 @@ import android.app.Fragment;
 public interface OnButtonSelectedListener {
         public void onMenuButtonSelected(int buttonId);
         public void launchFragment(Fragment fragment);
-
+        public void stackFragment(Fragment fragment);
 }

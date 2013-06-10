@@ -37,16 +37,10 @@ public class EdailyArrayAdapter extends ArrayAdapter<EDaily> {
         LinearLayout colorbox = (LinearLayout)rowView.findViewById(R.id.edailylinearLayout);
         TextView name = (TextView)rowView.findViewById(R.id.edailynamev);
         TextView date = (TextView)rowView.findViewById(R.id.edailydatev);
-        TextView dep = (TextView)rowView.findViewById(R.id.edailydepv);
-        TextView rel = (TextView)rowView.findViewById(R.id.edailyrelv);
-        TextView iss = (TextView)rowView.findViewById(R.id.edailyissv);
 
         EDaily edaily = eDailyList.get(position);
         name.setText(edaily.getLastname()+","+edaily.getFirstname());
         date.setText(edaily.getDate());
-        dep.setText(""+edaily.getDep());
-        rel.setText(""+edaily.getRel());
-        iss.setText(""+edaily.getIss());
 
         int i = edaily.getGrade();
 

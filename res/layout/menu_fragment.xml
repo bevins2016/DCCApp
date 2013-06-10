@@ -8,8 +8,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_marginTop="30dp"
-            android:background="#FFFFFF">
+            android:layout_marginTop="50dp"
+            android:background="#767676">
         <Button
                 android:id="@+id/news"
                 android:layout_width="match_parent"
