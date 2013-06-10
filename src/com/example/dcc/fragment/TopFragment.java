@@ -30,7 +30,6 @@ public class TopFragment extends Fragment implements View.OnClickListener{
     //Toggles the menu visibility
     private Button menuVisibility;
     //Menu Width
-    private ImageView userIcon;
     private OnButtonSelectedListener listener;
 
     @Override
@@ -39,9 +38,7 @@ public class TopFragment extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.bottom_fragment,
                 container, false);
 
-        //Get needed fields
-        userIcon = (ImageView) view.findViewById(R.id.usericon);
-        TextView textView = (TextView) view.findViewById(R.id.userdata);
+        //Get needed fields        TextView textView = (TextView) view.findViewById(R.id.userdata);
         menuVisibility = (Button)view.findViewById(R.id.menu_button);
 
         //Set listener
@@ -49,12 +46,6 @@ public class TopFragment extends Fragment implements View.OnClickListener{
 
         //Set unique data
         //userIcon.setImageBitmap(ObjectStorage.getUser().getImage());
-
-        String uri = "/DCC/getUserGravitar.php?email=" + ObjectStorage.getUser().getEmail();
-        if(BitmapCache.getBitmap(uri)!=null) userIcon.setImageBitmap( BitmapCache.getBitmap(uri));
-        else new GetImageTask().execute(ObjectStorage.getUser());
-
-        textView.setText(ObjectStorage.getUser().getName());
 
         return view;
     }
@@ -94,14 +85,6 @@ public class TopFragment extends Fragment implements View.OnClickListener{
                 return image;
             }catch(Exception e){
                 return null;
-            }
-        }
-
-
-        @Override
-        protected void onPostExecute(Bitmap result){
-            if((result!=null)&&!isCancelled()){
-                userIcon.setImageBitmap(result);
             }
         }
     }

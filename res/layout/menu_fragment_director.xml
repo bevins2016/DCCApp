@@ -2,13 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="#33b5e5">
+              android:background="#767676">
 
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_marginTop="75dp"
+            android:layout_marginTop="30dp"
             android:background="#FFFFFF">
         <Button
                 android:id="@+id/news"
@@ -17,7 +17,7 @@
                 android:background="@drawable/background"
                 android:shadowColor="#000000"
                 android:shadowRadius="0"
-                android:drawableRight="@drawable/collectionsviewaslist"
+                android:drawableRight="@drawable/collections_view_as_list_ligh"
                 android:text="@string/news" />
 
         <Button
@@ -27,7 +27,7 @@
                 android:background="@drawable/background"
                 android:shadowColor="#000000"
                 android:shadowRadius="0"
-                android:drawableRight="@drawable/deviceaccesscamera"
+                android:drawableRight="@drawable/camera_light"
                 android:text="@string/photo" />
 
         <Button
@@ -37,7 +37,7 @@
                 android:shadowColor="#000000"
                 android:shadowRadius="0"
                 android:background="@drawable/background"
-                android:drawableRight="@drawable/contentedit"
+                android:drawableRight="@drawable/edit_light"
                 android:text="@string/report" />
 
         <Button
@@ -48,7 +48,7 @@
                 android:shadowColor="#000000"
                 android:shadowRadius="0"
                 android:paddingBottom="4dp"
-                android:drawableRight="@drawable/actionabout"
+                android:drawableRight="@drawable/action_about"
                 android:text="@string/action" />
 
         <Button
@@ -58,7 +58,7 @@
                 android:shadowColor="#000000"
                 android:shadowRadius="0"
                 android:background="@drawable/background"
-                android:drawableRight="@drawable/socialgroup"
+                android:drawableRight="@drawable/social_group_light"
                 android:text="@string/directory" />
 
         <Button
@@ -66,7 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background"
-                android:drawableRight="@drawable/actionsearch"
+                android:drawableRight="@drawable/search_light"
                 android:text="Director" />
         <Button
                 android:layout_width="match_parent"
@@ -74,7 +74,7 @@
                 android:shadowColor="#000000"
                 android:shadowRadius="0"
                 android:background="@drawable/background"
-                android:drawableRight="@drawable/socialgroup"
+                android:drawableRight="@drawable/mic_light"
                 android:text="Speech Action"
                 android:id="@+id/button" android:layout_gravity="left|center_vertical"/>
         <Button
@@ -83,7 +83,7 @@
                 android:shadowColor="#000000"
                 android:shadowRadius="0"
                 android:background="@drawable/background"
-                android:drawableRight="@drawable/socialgroup"
+                android:drawableRight="@drawable/access_light"
                 android:text="Delete Auto Login Info"
                 android:id="@+id/logout" android:layout_gravity="left|center_vertical"/>
 

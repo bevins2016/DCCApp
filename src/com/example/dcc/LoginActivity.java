@@ -114,7 +114,7 @@ public class LoginActivity extends Activity {
             mUser =sp1.getString("UserName", null);
             mPassword = sp1.getString("PassWord", null);
 
-            if(sp1.getString("UserName", null).equals(""))
+            if(!sp1.getString("UserName", null).equals(""))
             {
                 autoLogin = true;
                 attemptLogin();
