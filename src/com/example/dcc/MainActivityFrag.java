@@ -1,8 +1,10 @@
 package com.example.dcc;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -92,14 +94,35 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
             case R.id.directory:
                 directory();break;
             case R.id.logout:
-                SharedPreferences mPreferences;
-                mPreferences = this.getSharedPreferences("CurrentUser", 0);
-                SharedPreferences.Editor editor=mPreferences.edit();
-                editor.putString("UserName", "");
-                editor.putString("PassWord", "");
-                editor.commit();
-                Toast.makeText(this, "Login data cleared",
-                        Toast.LENGTH_SHORT).show();
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                //Yes button clicked
+                                SharedPreferences mPreferences;
+                                mPreferences = getApplicationContext().getSharedPreferences("CurrentUser", 0);
+                                SharedPreferences.Editor editor=mPreferences.edit();
+                                editor.putString("UserName", "");
+                                editor.putString("PassWord", "");
+                                editor.commit();
+                                Toast.makeText(getApplicationContext(), "Login data cleared",
+                                        Toast.LENGTH_SHORT).show();
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                Toast.makeText(getApplicationContext(), "Login data not cleared",
+                                        Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+
                 break;
             case R.id.createaction:
                 launchFragment(new CreateActionItemFrag()); break;
