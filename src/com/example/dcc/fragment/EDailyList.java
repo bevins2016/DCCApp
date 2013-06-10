@@ -51,12 +51,11 @@ public class EDailyList extends Fragment {
                 Intent intent = new Intent(getActivity(), EDailyDetailedActivity.class);
                 intent.putExtra("edaily", edaily);
                 getActivity().startActivity(intent);
-
             }
         });
 
 
-        for(Object e : edailies){
+      for(Object e : edailies){
             adapter.add(((EDaily)e));
         }
         return view;

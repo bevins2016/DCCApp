@@ -1,5 +1,6 @@
 package com.example.dcc.fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -13,9 +14,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dcc.MainListFragmentFragment;
 import com.example.dcc.R;
 import com.example.dcc.helpers.ActionItem;
 import com.example.dcc.helpers.ObjectStorage;
+import com.example.dcc.helpers.OnButtonSelectedListener;
 import com.example.dcc.helpers.mysql.MySQLQuery;
 
 import java.util.concurrent.ExecutionException;
@@ -30,6 +33,7 @@ public class ActionItemDetailFrag extends Fragment implements View.OnClickListen
 
     private ActionItem actionitem;
     private static final String ACTIONITEM = "actionitem";
+    private OnButtonSelectedListener listener;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
@@ -56,6 +60,17 @@ public class ActionItemDetailFrag extends Fragment implements View.OnClickListen
         return view;
     }
 
+    @Override
+    public void onAttach(Activity activity){
+        super.onAttach(activity);
+        if(activity instanceof OnButtonSelectedListener){
+            listener = (OnButtonSelectedListener) activity;
+        } else {
+            throw new ClassCastException(activity.toString() +
+                    "must implement MyListFragment.OnButtonSelectedListener");
+        }
+    }
+
     /**
      * On click listener which will forward the fragment to allow the user to respond.
      * @param view
@@ -70,20 +85,9 @@ public class ActionItemDetailFrag extends Fragment implements View.OnClickListen
             bundle.putSerializable(ACTIONITEM, actionitem);
             detailFrag.setArguments(bundle);
 
-            FragmentManager manager = getActivity().getFragmentManager();
-            FragmentTransaction transaction = manager.beginTransaction();
-
-            ObjectStorage.setFragment(R.id.fragmentcontainerright, detailFrag);
-            transaction.replace(R.id.fragmentcontainerright, detailFrag);
-
-            transaction.commit();
+            listener.launchFragment(detailFrag);
         }else{
-            Log.e("Clicked", "Click detected...now work?");
             ActionItemFrag aifrag = new ActionItemFrag();
-
-            FragmentManager manager = getActivity().getFragmentManager();
-            FragmentTransaction transaction = manager.beginTransaction();
-
             try {
                 new RemoveAiTask().execute().get();
                 Toast.makeText(getActivity(), "Action Removed", Toast.LENGTH_LONG).show();
@@ -93,10 +97,7 @@ public class ActionItemDetailFrag extends Fragment implements View.OnClickListen
                 e.printStackTrace();
             }
 
-            ObjectStorage.setFragment(R.id.fragmentcontainerright, aifrag);
-            transaction.replace(R.id.fragmentcontainerright, aifrag);
-
-            transaction.commit();
+            listener.launchFragment(aifrag);
         }
     }
     /**
@@ -106,7 +107,7 @@ public class ActionItemDetailFrag extends Fragment implements View.OnClickListen
         @Override
         protected Void doInBackground(Void... params) {
             Log.e("dasd", "a;sdlkfaj;sdlf");
-             MySQLQuery.removeActionItem("/DCC/removeActionItems.php?aid=", actionitem);
+            MySQLQuery.removeActionItem("/DCC/removeActionItems.php?aid=", actionitem);
             return null;
         }
     }

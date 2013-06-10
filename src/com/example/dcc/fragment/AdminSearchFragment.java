@@ -1,5 +1,6 @@
 package com.example.dcc.fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -14,6 +15,7 @@ import android.widget.*;
 import com.example.dcc.R;
 import com.example.dcc.helpers.EDaily;
 import com.example.dcc.helpers.ObjectStorage;
+import com.example.dcc.helpers.OnButtonSelectedListener;
 import com.example.dcc.helpers.User;
 import com.example.dcc.helpers.hacks.DCCArrayList;
 import com.example.dcc.helpers.mysql.MySQLQuery;
@@ -44,10 +46,8 @@ public class AdminSearchFragment extends Fragment implements View.OnClickListene
     EditText startDate, endDate, depNo, relNo, issNo;
     LinearLayout colorbox;
     TextView numvalue;
-    RadioGroup depRG, relRG, issRG;
-    CheckBox issCB, relCB, depCB;
     SeekBar seekBar;
-
+    private OnButtonSelectedListener listener;
     /*Executes on create view*/
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,6 +58,17 @@ public class AdminSearchFragment extends Fragment implements View.OnClickListene
         getFields(view);
         populateSpinner(view);
         return view;
+    }
+
+    @Override
+    public void onAttach(Activity activity){
+        super.onAttach(activity);
+        if(activity instanceof OnButtonSelectedListener){
+            listener = (OnButtonSelectedListener) activity;
+        } else {
+            throw new ClassCastException(activity.toString() +
+                    "must implement MyListFragment.OnButtonSelectedListener");
+        }
     }
 
     /**
@@ -71,18 +82,6 @@ public class AdminSearchFragment extends Fragment implements View.OnClickListene
 
         startDate.setText(sdf.format(new Date()));
         endDate.setText(sdf.format(new Date()));
-
-        depNo = (EditText)view.findViewById(R.id.edailydepno);
-        relNo = (EditText)view.findViewById(R.id.edailyrelno);
-        issNo = (EditText)view.findViewById(R.id.edailyissno);
-
-        issRG = (RadioGroup)view.findViewById(R.id.issrg);
-        relRG = (RadioGroup)view.findViewById(R.id.relrg);
-        depRG = (RadioGroup)view.findViewById(R.id.rgdep);
-
-        issCB = (CheckBox)view.findViewById(R.id.edailyisseq);
-        relCB = (CheckBox)view.findViewById(R.id.edailyreleq);
-        depCB = (CheckBox)view.findViewById(R.id.edailydepeq);
 
         colorbox = (LinearLayout)view.findViewById(R.id.colorvalue);
         numvalue = (TextView)view.findViewById(R.id.numvalue);
@@ -172,14 +171,8 @@ public class AdminSearchFragment extends Fragment implements View.OnClickListene
             bundle.putSerializable("edailies", edailies);
             detailFrag.setArguments(bundle);
 
-            //Launch the fragment activity
-            FragmentManager manager = getActivity().getFragmentManager();
-            FragmentTransaction transaction = manager.beginTransaction();
 
-            ObjectStorage.setFragment(R.id.fragmentcontainerright, detailFrag);
-            transaction.replace(R.id.fragmentcontainerright, detailFrag);
-
-            transaction.commit();
+            listener.launchFragment(detailFrag);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -195,7 +188,6 @@ public class AdminSearchFragment extends Fragment implements View.OnClickListene
      * @return HTML encoded string.
      */
     private String buildQuery() {
-
         StringBuilder sb = new StringBuilder();
 
         if(spinner.getSelectedItemPosition() > 0)
@@ -204,29 +196,10 @@ public class AdminSearchFragment extends Fragment implements View.OnClickListene
             sb.append("submitted BETWEEN STR_TO_DATE('").append(startDate.getText()).
                 append("','%Y-%m-%d') AND STR_TO_DATE('").append(endDate.getText())
                 .append("','%Y-%m-%d') AND ");
-        RadioButton temp = (RadioButton)getView().findViewById(depRG.getCheckedRadioButtonId());
-        if(temp!=null){
-            sb.append("dependable ").append(temp.getText());
-            if(depCB.isChecked()) sb.append("= ");
-            sb.append(" ").append(depNo.getText()).append(" AND ");
-        }
-        temp = (RadioButton)getView().findViewById(issRG.getCheckedRadioButtonId());
-        if(temp!=null){
-            sb.append("issues ").append(temp.getText());
-            if(issCB.isChecked()) sb.append("= ");
-            sb.append(" ").append(issNo.getText()).append(" AND ");
-        }
-        temp = (RadioButton)getView().findViewById(relRG.getCheckedRadioButtonId());
-        if(temp!=null){
-            sb.append("reliable ").append(temp.getText());
-            if(relCB.isChecked()) sb.append("= ");
-            sb.append(" ").append(relNo.getText()).append(" AND ");
-        }
-        if(seekBar.getProgress()>0) sb.append(" grade >= ").append(seekBar.getProgress()).append(" AND ");
 
-        String str = sb.append(" 1=1 ").toString();
+        if(seekBar.getProgress()>0) sb.append(" grade >= ").append(seekBar.getProgress()).append(" AND ");
+        String str = sb.append(" 1=1" ).toString();
         try {
-            Log.e("QUERY", str);
             return URLEncoder.encode(str, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             return null;

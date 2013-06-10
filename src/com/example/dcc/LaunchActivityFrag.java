@@ -31,6 +31,7 @@ import com.example.dcc.fragment.AdminSearchFragment;
 import com.example.dcc.fragment.CreateActionItemFrag;
 import com.example.dcc.fragment.MembersListFragment;
 import com.example.dcc.helpers.ObjectStorage;
+import com.example.dcc.helpers.OnButtonSelectedListener;
 import com.example.dcc.search.MetaSearchFrag;
 import utilities.StartDateDownloader;
 import android.content.DialogInterface;
@@ -59,6 +60,8 @@ public class LaunchActivityFrag extends Fragment implements OnClickListener {
 
     public static String startdate = "";
     public static String today;
+
+    private OnButtonSelectedListener listener;
 
     Activity activity;
 
@@ -203,32 +206,12 @@ public class LaunchActivityFrag extends Fragment implements OnClickListener {
         Intent intent = new Intent();
         FragmentManager manager = activity.getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-
-        Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
         Fragment newer;
 
         switch (v.getId()) {
             case R.id.meta_button:
-//                intent.setClass(activity, MetaSearch.class);
-//                startActivity(intent);
-//                manager = activity.getFragmentManager();
-//                transaction = manager.beginTransaction();
-//
-//                old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
-//                newer = new MetaSearchFrag();
-//                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-//
-//                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-//                transaction.commit();
-
-                manager = activity.getFragmentManager();
-                transaction = manager.beginTransaction();
-
                 newer = new AdminSearchFragment();
-                ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-
-                transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-                transaction.commit();
+                listener.launchFragment(newer);
                 break;
             case R.id.admin_button:
                 passwordPopup();
@@ -248,18 +231,20 @@ public class LaunchActivityFrag extends Fragment implements OnClickListener {
         }
     }
 
+    @Override
+    public void onAttach(Activity activity){
+        super.onAttach(activity);
+        if(activity instanceof OnButtonSelectedListener){
+            listener = (OnButtonSelectedListener) activity;
+        } else {
+            throw new ClassCastException(activity.toString() +
+                    "must implement MyListFragment.OnButtonSelectedListener");
+        }
+    }
+
     public void createActionItems(){
-
-        Intent intent = new Intent();
-        FragmentManager manager = activity.getFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-
-        Fragment old = ObjectStorage.getFragment(R.id.fragmentcontainerright);
         Fragment newer = new CreateActionItemFrag();
-        ObjectStorage.setFragment(R.id.fragmentcontainerright, newer);
-
-        transaction.replace(R.id.fragmentcontainerright, ObjectStorage.getFragment(R.id.fragmentcontainerright));
-        transaction.commit();
+        listener.launchFragment(newer);
     }
     public void onBackPressed() {
         activity.finish();

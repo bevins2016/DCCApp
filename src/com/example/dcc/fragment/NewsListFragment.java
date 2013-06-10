@@ -1,5 +1,6 @@
 package com.example.dcc.fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.example.dcc.R;
 import com.example.dcc.helpers.News;
 import com.example.dcc.helpers.ObjectStorage;
+import com.example.dcc.helpers.OnButtonSelectedListener;
 import com.example.dcc.helpers.hacks.NewsArrayAdapter;
 import com.example.dcc.helpers.mysql.MySQLQuery;
 
@@ -37,6 +39,7 @@ public class NewsListFragment extends Fragment{
     private ListView listview;
     /*A List<E> of the news items that are pushed into the adapter*/
     private List<News> news;
+    private OnButtonSelectedListener listener;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
@@ -74,13 +77,7 @@ public class NewsListFragment extends Fragment{
                 bundle.putSerializable("news", news.get(i));
                 detailFrag.setArguments(bundle);
 
-                FragmentManager manager = getActivity().getFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-
-                ObjectStorage.setFragment(R.id.fragmentcontainerright, detailFrag);
-                transaction.replace(R.id.fragmentcontainerright, detailFrag);
-
-                transaction.commit();
+                listener.launchFragment(detailFrag);
             }
         });
 
@@ -94,6 +91,16 @@ public class NewsListFragment extends Fragment{
         return view;
     }
 
+    @Override
+    public void onAttach(Activity activity){
+        super.onAttach(activity);
+        if(activity instanceof OnButtonSelectedListener){
+            listener = (OnButtonSelectedListener) activity;
+        } else {
+            throw new ClassCastException(activity.toString() +
+                    "must implement MyListFragment.OnButtonSelectedListener");
+        }
+    }
 
     /*
      *Retrives the newslist from the mysql database

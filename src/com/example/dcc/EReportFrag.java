@@ -90,12 +90,6 @@ public class EReportFrag extends Fragment implements OnClickListener {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.settings:
-                Intent intent = new Intent(activity, SetDefaults.class);
-                startActivity(intent);
-                return true;
-        }
         return false;
     }
 
@@ -131,36 +125,11 @@ public class EReportFrag extends Fragment implements OnClickListener {
 
     /*
      * Creates a popup dialog using alertbuilder to ask the user to fill out
-     * their information in SetDefaults.txt if InternalStorage.txt does not exit
+     * their information in .txt if InternalStorage.txt does not exit
      */
     private void setDefaultsPopup() {
         LayoutInflater factory = LayoutInflater.from(activity);
         final View popup = factory.inflate(R.layout.default_popup, null);
-        TextView textview = (TextView) popup
-                .findViewById(R.id.defaultPopupText);
-        textview.setText(popupText);
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(activity);
-        alertBuilder
-                .setCancelable(true)
-                .setTitle("Student Info")
-                .setView(popup)
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                })
-                .setPositiveButton("Yes",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,
-                                                int which) {
-                                Intent intent = new Intent(activity,
-                                        SetDefaults.class);
-                                startActivity(intent);
-                            }
-                        });
-
-        AlertDialog alertdialog = alertBuilder.create();
-        alertdialog.show();
     }
 
     public class Uploader extends AsyncTask<String, Void, String> {

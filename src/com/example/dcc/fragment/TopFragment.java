@@ -1,5 +1,6 @@
 package com.example.dcc.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,6 +10,7 @@ import android.widget.*;
 import com.example.dcc.R;
 import com.example.dcc.helpers.BitmapCache;
 import com.example.dcc.helpers.ObjectStorage;
+import com.example.dcc.helpers.OnButtonSelectedListener;
 import com.example.dcc.helpers.User;
 
 import android.app.Fragment;
@@ -25,12 +27,10 @@ import java.net.URL;
  */
 public class TopFragment extends Fragment implements View.OnClickListener{
 
-    private Context context;
     //Toggles the menu visibility
     private Button menuVisibility;
     //Menu Width
-    private static final int WIDTH = 200;
-    private ImageView userIcon;
+    private OnButtonSelectedListener listener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,9 +38,7 @@ public class TopFragment extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.bottom_fragment,
                 container, false);
 
-        //Get needed fields
-        userIcon = (ImageView) view.findViewById(R.id.usericon);
-        TextView textView = (TextView) view.findViewById(R.id.userdata);
+        //Get needed fields        TextView textView = (TextView) view.findViewById(R.id.userdata);
         menuVisibility = (Button)view.findViewById(R.id.menu_button);
 
         //Set listener
@@ -49,38 +47,24 @@ public class TopFragment extends Fragment implements View.OnClickListener{
         //Set unique data
         //userIcon.setImageBitmap(ObjectStorage.getUser().getImage());
 
-        String uri = "/DCC/getUserGravitar.php?email=" + ObjectStorage.getUser().getEmail();
-        if(BitmapCache.getBitmap(uri)!=null) userIcon.setImageBitmap( BitmapCache.getBitmap(uri));
-        else new GetImageTask().execute(ObjectStorage.getUser());
-
-        textView.setText(ObjectStorage.getUser().getName());
-
         return view;
     }
 
     /**Take action on the button press*/
     @Override
     public void onClick(View view) {
+            listener.onMenuButtonSelected(view.getId());
+    }
 
-        //If menu is hidden, display the image
-        if(ObjectStorage.menuHidden){
-            ObjectStorage.menuHidden = false;
-            menuVisibility.setBackgroundResource(R.drawable.navigationpreviousitem);
-            View menuV = ObjectStorage.getMenuFrame();
-            ViewGroup.LayoutParams menuP = menuV.getLayoutParams();
-            menuP.width = WIDTH;
-            menuV.setLayoutParams(menuP);
-
-        }else{
-            //If the menu is visible, hide it
-            ObjectStorage.menuHidden = true;
-            menuVisibility.setBackgroundResource(R.drawable.navigationnextitem);
-            View menuV = ObjectStorage.getMenuFrame();
-            ViewGroup.LayoutParams menuP = menuV.getLayoutParams();
-            menuP.width = 1;
-            menuV.setLayoutParams(menuP);
+    @Override
+    public void onAttach(Activity activity){
+        super.onAttach(activity);
+        if(activity instanceof OnButtonSelectedListener){
+            listener = (OnButtonSelectedListener) activity;
+        } else {
+            throw new ClassCastException(activity.toString() +
+                    "must implement MyListFragment.OnButtonSelectedListener");
         }
-
     }
 
     public class GetImageTask extends AsyncTask<User, Void, Bitmap> {
@@ -101,13 +85,6 @@ public class TopFragment extends Fragment implements View.OnClickListener{
                 return image;
             }catch(Exception e){
                 return null;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap result){
-            if((result!=null)&&!isCancelled()){
-                userIcon.setImageBitmap(result);
             }
         }
     }

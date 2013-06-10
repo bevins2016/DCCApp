@@ -10,9 +10,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.dcc.MainListFragmentFragment;
 import com.example.dcc.R;
 import com.example.dcc.helpers.ActionItem;
+import com.example.dcc.helpers.OnButtonSelectedListener;
 import com.example.dcc.helpers.mysql.HttpConnection;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
@@ -46,6 +50,7 @@ public class ActionItemActionFrag extends Fragment implements View.OnClickListen
     //Stores the values set inside of the action item frag
     List<NameValuePair> nameValuePairs;
 
+    public OnButtonSelectedListener listener;
     /**
      * Used to create the view for this fragment
      * @param inflater
@@ -68,13 +73,23 @@ public class ActionItemActionFrag extends Fragment implements View.OnClickListen
 
         actionitem = (ActionItem)getArguments().getSerializable("actionitem");
         aitext = (TextView)view.findViewById(R.id.aitext);
-
         aitext.setText(actionitem.getBody());
 
         //Set Listeners
         aisubmit.setOnClickListener(this);
 
         return view;
+    }
+
+    @Override
+    public void onAttach(Activity activity){
+        super.onAttach(activity);
+        if(activity instanceof OnButtonSelectedListener){
+            listener = (OnButtonSelectedListener) activity;
+        } else {
+            throw new ClassCastException(activity.toString() +
+                    "must implement MyListFragment.OnButtonSelectedListener");
+        }
     }
 
     /**
@@ -85,7 +100,6 @@ public class ActionItemActionFrag extends Fragment implements View.OnClickListen
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.aisubmut:
-
                 nameValuePairs = new ArrayList<NameValuePair>();
 
                 nameValuePairs.add(new BasicNameValuePair("subject", actionitem.getSubject()));
@@ -93,6 +107,7 @@ public class ActionItemActionFrag extends Fragment implements View.OnClickListen
                 nameValuePairs.add(new BasicNameValuePair("aiid", ""+actionitem.getAid()));
                 nameValuePairs.add(new BasicNameValuePair("aitag", actionitem.getTag()));
 
+                listener.launchFragment(new ActionItemFrag());
                 try {
                     new Uploader().execute().get(10, TimeUnit.SECONDS);
                 } catch (InterruptedException e) {
@@ -104,8 +119,6 @@ public class ActionItemActionFrag extends Fragment implements View.OnClickListen
                 }
                 //TODO: RETURN TO ACTIVITY LIST FRAGMENT
         }
-
-
     }
 
 

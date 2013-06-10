@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.example.dcc.R;
 import com.example.dcc.helpers.ObjectStorage;
+import com.example.dcc.helpers.OnButtonSelectedListener;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -51,6 +53,7 @@ public class CreateActionItemFrag extends Fragment implements View.OnClickListen
     CheckBox fifteenCheck;
     CheckBox tenCheck;
     CheckBox learningCheck;
+    private OnButtonSelectedListener listener;
 
 
     private String url = "http://www.virtualdiscoverycenter.net/wp-content/plugins/buddypress/bp-themes/bp-default/ai-post.php";
@@ -97,6 +100,17 @@ public class CreateActionItemFrag extends Fragment implements View.OnClickListen
             }
         }
         return view;
+    }
+
+    @Override
+    public void onAttach(Activity activity){
+        super.onAttach(activity);
+        if(activity instanceof OnButtonSelectedListener){
+            listener = (OnButtonSelectedListener) activity;
+        } else {
+            throw new ClassCastException(activity.toString() +
+                    "must implement MyListFragment.OnButtonSelectedListener");
+        }
     }
 
     @Override
@@ -155,14 +169,6 @@ public class CreateActionItemFrag extends Fragment implements View.OnClickListen
                     nameValuePairs.add(new BasicNameValuePair("lr", "lr"));
                 }
 
-//                nameValuePairs.add(new BasicNameValuePair("tag", "" + "Justice League"));
-//                nameValuePairs.add(new BasicNameValuePair("ai-date", "05/24"));
-//                nameValuePairs.add(new BasicNameValuePair("time", "2:14pm"));
-//                nameValuePairs.add(new BasicNameValuePair("title", "Superman will LaserEyes everyone"));
-//                nameValuePairs.add(new BasicNameValuePair("content", "Superman flies a mile into the air, shoots his lasers and kill his enemies. End of movie."));
-//                nameValuePairs.add(new BasicNameValuePair("15", "15"));
-
-//                HttpConnection.postResponse(url, nameValuePairs, false);
                 HttpClient httpclient = new DefaultHttpClient();
                 HttpPost httppost = new HttpPost(params[0]);
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -184,7 +190,7 @@ public class CreateActionItemFrag extends Fragment implements View.OnClickListen
                 String filename = "/enotebook/edailys/" + studentID + "_" + sdf.format(new Date()) + "_edaily.txt";
                 FileWriter internal = new FileWriter(Environment.getExternalStorageDirectory()
                         + filename);
-                internal.append("");//getEditText(todayTF)
+                internal.append("");
                 internal.flush();
                 internal.close();
             } catch (IOException e) {
@@ -197,6 +203,7 @@ public class CreateActionItemFrag extends Fragment implements View.OnClickListen
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
+            listener.launchFragment(new NewsListFragment());
 			/* Update complete toast */
             Toast.makeText(activity, "Report Sent!",
                     Toast.LENGTH_SHORT).show();

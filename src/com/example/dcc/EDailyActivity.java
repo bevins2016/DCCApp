@@ -45,7 +45,6 @@ public class EDailyActivity extends Activity implements OnClickListener {
 	private Button sendButton; // Send Button
 	//http://storage.virtualdiscoverycenter.net/projectmorpheus/dcc/save.php
 	private String url = "http://www.virtualdiscoverycenter.net/wp-content/plugins/buddypress/bp-themes/bp-default/eDaily.php";//http://www.facebook.com/l.php?u=http%3A%2F%2Fwww.virtualdiscoverycenter.net%2Fwp-content%2Fplugins%2Fbuddypress%2Fbp-themes%2Fbp-default%2FeDaily.php&h=3AQH7TTNw
-	private String popupText = "Reports can not be submitted until sudent info is set!\n\nFill this out now?";
     String first = "";
     String last = "";
     String name = "";
@@ -94,9 +93,6 @@ public class EDailyActivity extends Activity implements OnClickListener {
 
 		File f = new File(Environment.getExternalStorageDirectory()
 				+ "/enotebook/InternalStorage.txt");
-		if (!f.exists()) {
-			setDefaultsPopup();
-		}
 	}
 
 	@Override
@@ -109,8 +105,8 @@ public class EDailyActivity extends Activity implements OnClickListener {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.settings:
-			Intent intent = new Intent(this, SetDefaults.class);
-			startActivity(intent);
+			//Intent intent = new Intent(this, SetDefaults.class);
+			//startActivity(intent);
 			return true;
 		}
 		return false;
@@ -119,7 +115,7 @@ public class EDailyActivity extends Activity implements OnClickListener {
 	/**
 	 * Gets student ID, calls Async task to send the file to the server
 	 */
-	public void onClick(View v) {	
+	public void onClick(View v) {
 		File f = new File(Environment.getExternalStorageDirectory() + "/enotebook/InternalStorage.txt");
 		if(f.exists()) {
 			String studentID = "";
@@ -136,46 +132,10 @@ public class EDailyActivity extends Activity implements OnClickListener {
 			uploader.execute(url, studentID);
 			finish();
 		}
-		else {
-			setDefaultsPopup();
-		}
 	}
 
 	private String getEditText(EditText edittext) {
 		return edittext.getText().toString();
-	}
-
-	/*
-	 * Creates a popup dialog using alertbuilder to ask the user to fill out
-	 * their information in SetDefaults.txt if InternalStorage.txt does not exit
-	 */
-	private void setDefaultsPopup() {
-//		LayoutInflater factory = LayoutInflater.from(this);
-//		final View popup = factory.inflate(R.layout.default_popup, null);
-//		TextView textview = (TextView) popup.findViewById(R.id.defaultPopupText);
-//		textview.setText(popupText);
-//		AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
-//		alertBuilder
-//				.setCancelable(true)
-//				.setTitle("Student Info")
-//				.setView(popup)
-//				.setNegativeButton("No", new DialogInterface.OnClickListener() {
-//					public void onClick(DialogInterface dialog, int id) {
-//						dialog.cancel();
-//					}
-//				})
-//				.setPositiveButton("Yes",
-//						new DialogInterface.OnClickListener() {
-//							public void onClick(DialogInterface dialog,
-//									int which) {
-//								Intent intent = new Intent(EDailyActivity.this,
-//										SetDefaults.class);
-//								startActivity(intent);
-//							}
-//						});
-//
-//		AlertDialog alertdialog = alertBuilder.create();
-//		alertdialog.show();
 	}
 
 	/* Send eDaily to the server */
@@ -188,10 +148,6 @@ public class EDailyActivity extends Activity implements OnClickListener {
 			try {
 				ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
-//				nameValuePairs.add(new BasicNameValuePair("id", params[1]));
-//				nameValuePairs.add(new BasicNameValuePair("type", "edaily"));
-//				nameValuePairs.add(new BasicNameValuePair("edaily",
-//						getEditText(todayTF)));
 
                 nameValuePairs.add(new BasicNameValuePair("ID", "" + ObjectStorage.getUser().getID()));
                 nameValuePairs.add(new BasicNameValuePair("First", first));
@@ -247,35 +203,6 @@ public class EDailyActivity extends Activity implements OnClickListener {
 
 	}
 
-//    /* Populate spinners, if teams are in the file, set spinners to those values */
-//    private void setupSpinners() {
-//
-//        String add = "";
-//        BufferedReader bufferedreader = null;
-//        adapter = new ArrayAdapter<String>(getApplicationContext(),
-//                R.layout.spinner_item);
-//
-//        adapter.setDropDownViewResource(R.layout.spinner_item);
-//
-//           for(int i = 1; i < 10; i++){
-//               adapter.add("" + i);
-//           }
-//
-//
-//
-//        issues.setAdapter(adapter);
-//        dependability.setAdapter(adapter);
-//        reliability.setAdapter(adapter);
-//
-////        for (int i = 0; i < adapter.getCount(); i++) {
-////            if (adapter.getItem(i).toString().matches(project1)) {
-////                FirstProject.setSelection(i);
-////            }
-////            if (adapter.getItem(i).toString().matches(project2)) {
-////                SecondProject.setSelection(i);
-////            }
-////        }
-//    }
 
 	public void onBackPressed() {
 		finish();

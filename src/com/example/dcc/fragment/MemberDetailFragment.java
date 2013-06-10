@@ -1,5 +1,6 @@
 package com.example.dcc.fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.dcc.R;
+import com.example.dcc.helpers.OnButtonSelectedListener;
 import com.example.dcc.helpers.User;
 
 /**
@@ -27,6 +29,8 @@ public class MemberDetailFragment extends Fragment implements View.OnClickListen
     Button mememail;
     //Image of the user's gravitar
     ImageView userIcon;
+
+    private OnButtonSelectedListener listener;
 
     /**
      * Override method used to create the view of this fragment
@@ -66,6 +70,17 @@ public class MemberDetailFragment extends Fragment implements View.OnClickListen
         if(member.getImage()!=null)
             userIcon.setImageBitmap(member.getImage());
         return view;
+    }
+
+    @Override
+    public void onAttach(Activity activity){
+        super.onAttach(activity);
+        if(activity instanceof OnButtonSelectedListener){
+            listener = (OnButtonSelectedListener) activity;
+        } else {
+            throw new ClassCastException(activity.toString() +
+                    "must implement MyListFragment.OnButtonSelectedListener");
+        }
     }
 
     /**
