@@ -248,6 +248,9 @@ public class MenuFragment extends Fragment implements OnClickListener {
             else if (matches.contains("server off line")) {
                 EasterEggs.yet.start();
             }
+            else if (matches.contains("do you need a button to take the server off line")) {
+                EasterEggs.yet.start();
+            }
             else if (matches.contains("I'm tired")) {
                 EasterEggs.hacking.start();
             }
@@ -263,7 +266,7 @@ public class MenuFragment extends Fragment implements OnClickListener {
             else if (matches.contains("denial")) {
                 EasterEggs.grief.start();
             }
-            else if (matches.contains("five stages of grief")) {
+            else if (matches.contains("what are the five stages of grief")) {
                 EasterEggs.grief.start();
             }
             else if (matches.contains("the fastest recovery")) {
