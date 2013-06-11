@@ -145,7 +145,7 @@ public class MySQLQuery {
             is.close();
 
             result=sb.toString();
-            Log.e("getarray", result);
+            //Log.e("getarray", result);
             return new JSONObject(result);
         } catch (UnsupportedEncodingException e) {
             Log.e("dcc.MySQLQuery", e.getMessage());

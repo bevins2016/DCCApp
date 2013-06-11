@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import android.widget.Toast;
+
 import com.example.dcc.R;
 import com.example.dcc.helpers.ActionItem;
 import com.example.dcc.helpers.OnButtonSelectedListener;
@@ -20,9 +22,7 @@ import com.example.dcc.helpers.hacks.ActionArrayAdapter;
 import com.example.dcc.helpers.mysql.MySQLQuery;
 
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
+
 
 
 @SuppressLint("NewApi")
@@ -64,12 +64,18 @@ public class ActionItemFrag extends Fragment implements OnClickListener{
                 listener.launchFragment(detailFrag);
             }
         });
+
         return view;
     }
 
+
     private void addToAdapter(List<ActionItem> list){
         if(adapter.getCount()>0) adapter.clear();
-        if(list == null || list.size()==0) return;
+        if(list == null || actionItems.isEmpty()) {
+            Toast.makeText(activity, "You have no action items.",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
         for(ActionItem n : list){
             adapter.add(n);
         }

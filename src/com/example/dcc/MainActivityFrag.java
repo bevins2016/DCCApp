@@ -1,8 +1,10 @@
 package com.example.dcc;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -12,6 +14,7 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.example.dcc.fragment.ActionItemDetailFrag;
@@ -101,15 +104,34 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
                 isNews = false;
                 directory();break;
             case R.id.logout:
-                isNews = false;
-                SharedPreferences mPreferences;
-                mPreferences = this.getSharedPreferences("CurrentUser", 0);
-                SharedPreferences.Editor editor=mPreferences.edit();
-                editor.putString("UserName", "");
-                editor.putString("PassWord", "");
-                editor.commit();
-                Toast.makeText(this, "Login data cleared",
-                        Toast.LENGTH_SHORT).show();
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                //Yes button clicked
+                                SharedPreferences mPreferences;
+                                mPreferences = getApplicationContext().getSharedPreferences("CurrentUser", 0);
+                                SharedPreferences.Editor editor=mPreferences.edit();
+                                editor.putString("UserName", "");
+                                editor.putString("PassWord", "");
+                                editor.commit();
+                                Toast.makeText(getApplicationContext(), "Login data cleared",
+                                        Toast.LENGTH_SHORT).show();
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                Toast.makeText(getApplicationContext(), "Login data not cleared",
+                                        Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
                 break;
             case R.id.createaction:
                 isNews = false;
@@ -125,12 +147,16 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
         //If menu is hidden, display the image
         if(ObjectStorage.menuHidden){
             ObjectStorage.menuHidden = false;
+            ScrollView scrollview = (ScrollView)findViewById(R.id.fragleft);
+            scrollview.setVisibility(View.VISIBLE);
             FrameLayout menuFrame = (FrameLayout)findViewById(R.id.fragmentcontainerleft);
             menuFrame.setVisibility(View.VISIBLE);
         }else{
             //If the menu is visible, hide it
             ObjectStorage.menuHidden = true;
             //menuVisibility.setBackgroundResource(R.drawable.navigationnextitem);
+            ScrollView scrollview = (ScrollView)findViewById(R.id.fragleft);
+            scrollview.setVisibility(View.GONE);
             FrameLayout menuFrame = (FrameLayout)findViewById(R.id.fragmentcontainerleft);
             menuFrame.setVisibility(View.GONE);
         }
@@ -150,7 +176,6 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
         transaction.add(RIGHT_FRAG, newer);
         transaction.commit();
     }
-
     public void news(){
         launchFragment(new NewsListFragment());
     }
@@ -197,7 +222,6 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
                 launchFragment(new NewsListFragment());
             }
         }
-
     }
 
     /**

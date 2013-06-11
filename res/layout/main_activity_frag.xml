@@ -4,11 +4,19 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-    <FrameLayout
-            android:id="@+id/fragmentcontainerleft"
+
+    <ScrollView
+            android:layout_height="match_parent"
             android:layout_width="200dp"
-            android:layout_height="fill_parent"
-            android:visibility="gone"/>
+            android:id="@+id/fragleft"
+            android:visibility="gone">
+        <FrameLayout
+                android:id="@+id/fragmentcontainerleft"
+                android:layout_width="200dp"
+                android:layout_height="fill_parent"
+                android:visibility="gone"
+                />
+    </ScrollView>
 
     <LinearLayout
             android:layout_width="wrap_content"
@@ -16,7 +24,7 @@
             android:layout_alignParentTop="true"
             android:orientation="vertical"
             android:layout_alignParentRight="true"
-            android:layout_toRightOf="@+id/fragmentcontainerleft">
+            android:layout_toRightOf="@+id/fragleft">
         <FrameLayout
                 android:id="@+id/fragmentcontainerbottom"
                 android:name="com.example.dcc.BottomFragment"
