@@ -137,7 +137,7 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
                 isNews = false;
                 launchFragment(new CreateActionItemFrag()); break;
             case R.id.button:
-                startVoiceRecognitionActivity(); break;
+                 break;
             case R.id.menu_button:
                 displaySide(); break;
         }
@@ -197,9 +197,7 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
     public void searchReport(){
         launchFragment(new AdminSearchFragment());
     }
-    public void toggle(){
 
-    }
 
     public void createActionItems(){
         Fragment newer = new CreateActionItemFrag();
@@ -224,17 +222,7 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
         }
     }
 
-    /**
-     * Fire an intent to start the speech recognition activity.
-     */
-    public void startVoiceRecognitionActivity() {
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
-                "Speech recognition demo");
-        startActivityForResult(intent, 1234);
-    }
+
 
     private class GetImageUrlTask extends AsyncTask<Void, Void, List<ImageWithBool>> {
 

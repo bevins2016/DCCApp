@@ -98,9 +98,24 @@ public class MenuFragment extends Fragment implements OnClickListener {
 
     @Override
     public void onClick(View view) {
+        if (view.getId() == R.id.button){
+            startVoiceRecognitionActivity();
+        }else{
         listener.onMenuButtonSelected(view.getId());
+        }
     }
 
+    /**
+     * Fire an intent to start the speech recognition activity.
+     */
+    public void startVoiceRecognitionActivity() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
+                "Speech recognition demo");
+        startActivityForResult(intent, 1234);
+    }
     @Override
     public void onAttach(Activity activity){
         super.onAttach(activity);
