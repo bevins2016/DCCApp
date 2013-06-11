@@ -2,8 +2,6 @@ package com.example.dcc.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
@@ -23,7 +21,6 @@ import com.example.dcc.helpers.OnButtonSelectedListener;
 import com.example.dcc.helpers.User;
 import com.example.dcc.helpers.mysql.MySQLQuery;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -59,18 +56,7 @@ public class MembersListFragment extends Fragment{
         //If the members object is null in the list, refresh the list
         if((members = ObjectStorage.getMemberList())==null){
             GetMembersTask t =  new GetMembersTask();
-            t.execute((Void) null);
-            try {
-                members = t.get(20, TimeUnit.SECONDS);
-                Collections.sort(members);
-                ObjectStorage.setMemberList(members);
-            } catch (InterruptedException e) {
-                Log.e(LOG, "InterruptedException");
-            } catch (ExecutionException e) {
-                Log.e(LOG, "ExecutionException");
-            } catch (TimeoutException e) {
-                Log.e(LOG, "TimeoutException");
-            }
+            t.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         }
 
         //Make an adapter
@@ -94,15 +80,6 @@ public class MembersListFragment extends Fragment{
             }
         });
 
-        try{
-        //Add all members to the adapter
-        for(User m : members){
-            adapter.add(Html.fromHtml(m.toString()));
-        }
-        }catch(NullPointerException e){
-            Toast.makeText(getActivity(), "Failed to load friends.", Toast.LENGTH_LONG);
-        }
-
         return view;
     }
 
@@ -120,10 +97,31 @@ public class MembersListFragment extends Fragment{
     /**
      * Retrieves the list of members to from the database
      */
-    public class GetMembersTask extends AsyncTask<Void, Void, List<User>> {
+    public class GetMembersTask extends AsyncTask<Void, Void, Void> {
         @Override
-        protected List<User> doInBackground(Void... params) {
-            return MySQLQuery.getAllMembers("/DCC/getAllUsers.php");
+        protected Void doInBackground(Void... params) {
+            members =  MySQLQuery.getAllMembers("/DCC/getAllUsers.php");
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(null);
+            Collections.sort(members);
+            ObjectStorage.setMemberList(members);
+
+            try{
+                //Add all members to the adapter
+                for(User m : members){
+                    adapter.setNotifyOnChange(true);
+                    adapter.add(Html.fromHtml(m.toString()));
+                    //adapter.refresh();
+                }
+            }catch(NullPointerException e){
+                Toast.makeText(getActivity(), "Failed to load friends.", Toast.LENGTH_LONG);
+            }
+
+
         }
     }
 

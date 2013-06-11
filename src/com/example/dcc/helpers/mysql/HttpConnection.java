@@ -4,15 +4,15 @@ package com.example.dcc.helpers.mysql;
  * This class is used to manage all HTTP connections. It will do this through static methods in order to increase
  * Portability between classes within this app. This class should only be called by a ASYNCTASK
  */
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
 
-import com.example.dcc.helpers.*;
+import android.util.Log;
+
+import com.example.dcc.helpers.ObjectStorage;
+import com.example.dcc.helpers.User;
+import com.example.dcc.helpers.hacks.DCCCookieSpecFactory;
+import com.example.dcc.helpers.hacks.DCCCookieStore;
+import com.example.dcc.helpers.hacks.DCCRedirectHandler;
+
 import org.apache.http.Header;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -28,11 +28,13 @@ import org.apache.http.message.BasicNameValuePair;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-import android.util.Log;
-
-import com.example.dcc.helpers.hacks.DCCCookieSpecFactory;
-import com.example.dcc.helpers.hacks.DCCCookieStore;
-import com.example.dcc.helpers.hacks.DCCRedirectHandler;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HttpConnection {
 

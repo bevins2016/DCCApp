@@ -10,18 +10,18 @@ import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.example.dcc.fragment.ActionItemDetailFrag;
 import com.example.dcc.fragment.ActionItemFrag;
 import com.example.dcc.fragment.AdminSearchFragment;
 import com.example.dcc.fragment.CreateActionItemFrag;
+import com.example.dcc.fragment.MemberDetailFragment;
 import com.example.dcc.fragment.MembersListFragment;
 import com.example.dcc.fragment.MenuFragment;
+import com.example.dcc.fragment.NewsDetailFragment;
 import com.example.dcc.fragment.NewsListFragment;
 import com.example.dcc.fragment.TopFragment;
 import com.example.dcc.helpers.ImageWithBool;
@@ -47,12 +47,15 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
     public static final int RIGHT_FRAG = R.id.fragmentcontainerright;
     public static final int BOTTOM_FRAG = R.id.fragmentcontainerbottom;
     Fragment menu, main, top;
-    private GestureDetector gesture;
+
+    private boolean isNews;
 
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_frag);
+
+        isNews = true;
 
         if(savedInstanceState == null){
             FragmentManager manager = getFragmentManager();
@@ -80,18 +83,25 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
     public void onMenuButtonSelected(int buttonId) {
         switch (buttonId) {
             case R.id.news:
+                isNews = true;
                 news();break;
             case R.id.photo:
+                isNews = false;
                 photo(); break;
             case R.id.report:
+                isNews = false;
                 report(); break;
             case R.id.search:
+                isNews = false;
                 search();break;
             case R.id.action:
+                isNews = false;
                 action(); break;
             case R.id.directory:
+                isNews = false;
                 directory();break;
             case R.id.logout:
+                isNews = false;
                 SharedPreferences mPreferences;
                 mPreferences = this.getSharedPreferences("CurrentUser", 0);
                 SharedPreferences.Editor editor=mPreferences.edit();
@@ -102,6 +112,7 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
                         Toast.LENGTH_SHORT).show();
                 break;
             case R.id.createaction:
+                isNews = false;
                 launchFragment(new CreateActionItemFrag()); break;
             case R.id.button:
                 startVoiceRecognitionActivity(); break;
@@ -143,7 +154,6 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
     public void news(){
         launchFragment(new NewsListFragment());
     }
-
     public void photo(){
         launchFragment(new CustomizedListViewFrag());
     }
@@ -167,7 +177,6 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
     }
 
     public void createActionItems(){
-
         Fragment newer = new CreateActionItemFrag();
         launchFragment(newer);
     }
@@ -178,9 +187,15 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
         else
         {
             FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.replace(RIGHT_FRAG, new NewsListFragment());
-            transaction.commit();
+            Fragment frag = fragmentManager.findFragmentById(RIGHT_FRAG);
+
+            if(frag instanceof MemberDetailFragment){
+                launchFragment(new MembersListFragment());
+            }else if (frag instanceof ActionItemDetailFrag){
+                launchFragment(new ActionItemFrag());
+            }else if (frag instanceof NewsDetailFragment){
+                launchFragment(new NewsListFragment());
+            }
         }
 
     }
@@ -201,8 +216,6 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
 
         @Override
         protected List<ImageWithBool> doInBackground(Void... voids) {
-            HashMap<String, Boolean> hashMap = new HashMap<String, Boolean>();
-
             List<ImageWithBool> imageList = new ArrayList<ImageWithBool>();
             //No need for cookies here (Ye Pictures are public)... nom nom nom
             try {
@@ -212,16 +225,7 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
                 for(int i = 0; i < imgs.size(); i++){
                     String url = imgs.get(i).attr("src");
                     //Images from this url are utility icons
-                    if(url.startsWith("http://www.virtualdiscoverycenter.net/wp-content/uploads/")){
-                        String url2;
-                        try{
-                            url2 = url.substring(url.lastIndexOf("/"));
-                            String url3 = url2.substring(0, url2.indexOf("-"));
-                            if(hashMap.containsKey(url3)) break;
-                            else hashMap.put(url3, true);
-                        }catch(Exception e){
-                            Log.e("ARGH2", "These are not the droid you're looking for");
-                        }
+                    if(url.startsWith("http://www.virtualdiscoverycenter.net/wp-content/gallery")){
                         ImageWithBool temp = new ImageWithBool();
                         temp.url = url;
                         imageList.add(temp);

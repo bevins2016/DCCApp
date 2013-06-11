@@ -5,7 +5,7 @@
           android:versionName="1.0" >
 
     <uses-sdk
-            android:minSdkVersion="11"
+            android:minSdkVersion="12"
             android:targetSdkVersion="16" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -64,7 +64,7 @@
                 android:name=".EDailyActivity"
                 android:label="@string/app_name" />
         <activity
-                android:name="com.example.dcc.AddStudent"
+                android:name="com.example.dcc.EDailyDetailedActivity"
                 android:label="@string/app_name" >
         </activity>
         <activity

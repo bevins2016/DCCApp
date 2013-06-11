@@ -1,10 +1,5 @@
 package com.example.dcc;
 
-import android.app.Fragment;
-import com.example.dcc.helpers.ObjectStorage;
-import com.example.dcc.helpers.User;
-import com.example.dcc.helpers.mysql.HttpConnection;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -15,7 +10,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -26,13 +20,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.HashMap;
+import com.example.dcc.helpers.ObjectStorage;
+import com.example.dcc.helpers.User;
+import com.example.dcc.helpers.mysql.HttpConnection;
+
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;

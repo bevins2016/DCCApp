@@ -1,29 +1,16 @@
 package com.example.dcc.fragment;
 
 import android.app.Activity;
-import android.content.Context;
-import android.gesture.GestureOverlayView;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
-import android.util.Log;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
-import android.widget.*;
-import com.example.dcc.R;
-import com.example.dcc.helpers.BitmapCache;
-import com.example.dcc.helpers.ObjectStorage;
-import com.example.dcc.helpers.OnButtonSelectedListener;
-import com.example.dcc.helpers.User;
-
 import android.app.Fragment;
+import android.gesture.GestureOverlayView;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
+import com.example.dcc.R;
+import com.example.dcc.helpers.OnButtonSelectedListener;
 
 /**
  * Just Kidding, this is actually the top fragment

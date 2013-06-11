@@ -10,15 +10,15 @@
 package com.example.dcc.surveys;
 
 
-import com.example.dcc.R;
-
-import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import com.example.dcc.R;
 
 public class CreateSurvey extends Activity {
 

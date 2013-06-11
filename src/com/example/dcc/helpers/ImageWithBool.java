@@ -1,7 +1,6 @@
 package com.example.dcc.helpers;
 
 import android.graphics.Bitmap;
-import android.widget.ImageView;
 
 /**
  * Created by harmonbc on 6/5/13.

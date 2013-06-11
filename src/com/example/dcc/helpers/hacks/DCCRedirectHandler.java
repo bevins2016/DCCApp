@@ -1,11 +1,11 @@
 package com.example.dcc.helpers.hacks;
 
-import java.net.URI;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.ProtocolException;
 import org.apache.http.client.RedirectHandler;
 import org.apache.http.protocol.HttpContext;
+
+import java.net.URI;
 
 /**
  * Class that disallows the forwarding of redirects.

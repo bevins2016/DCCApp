@@ -15,7 +15,7 @@ package utilities;
  * Gets the start date of the program from the server
  *********************************************************************/
 
-import java.io.IOException;
+import android.os.AsyncTask;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -25,7 +25,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
-import android.os.AsyncTask;
+import java.io.IOException;
 
 public class StartDateDownloader extends AsyncTask<String, Void, String> {
 

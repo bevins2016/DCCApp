@@ -1,23 +1,17 @@
 package com.example.dcc.fragment;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.dcc.EDailyDetailedActivity;
 import com.example.dcc.R;
 import com.example.dcc.helpers.EDaily;
-import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.hacks.DCCArrayList;
 import com.example.dcc.helpers.hacks.EdailyArrayAdapter;
 

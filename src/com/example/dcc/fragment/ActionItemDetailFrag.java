@@ -2,8 +2,6 @@ package com.example.dcc.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,10 +12,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.dcc.MainListFragmentFragment;
 import com.example.dcc.R;
 import com.example.dcc.helpers.ActionItem;
-import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.OnButtonSelectedListener;
 import com.example.dcc.helpers.mysql.MySQLQuery;
 

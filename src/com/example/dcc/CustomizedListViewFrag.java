@@ -4,11 +4,8 @@
 package com.example.dcc;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +13,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import com.example.dcc.fragment.NewsDetailFragment;
+import com.example.dcc.helpers.BitmapCache;
 import com.example.dcc.helpers.ImageWithBool;
 import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.hacks.AlbumArrayAdapter;
@@ -89,11 +86,11 @@ public class CustomizedListViewFrag extends Fragment {
                 Document doc = Jsoup.connect(
                         "http://www.virtualdiscoverycenter.net/media/photos/").get();
 
-                Elements imgs = doc.getElementsByClass("rgg_imagegrid ").first().getElementsByTag("a");
+                Elements imgs = doc.getElementsByClass("ngg-galleryoverview").first().getElementsByTag("a");
                 for(int i = 0; i < imgs.size(); i++){
                     String url = imgs.get(i).attr("href");
                     //Images from this url are utility icons
-                    if(url.startsWith("http://www.virtualdiscoverycenter.net/wp-content/uploads/2013")){
+                    if(url.startsWith("http://www.virtualdiscoverycenter.net/wp-content/gallery")){
                         ImageWithBool temp = new ImageWithBool();
                         temp.url = url;
                         imageList.add(temp);

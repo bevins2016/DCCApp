@@ -20,6 +20,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import java.util.concurrent.RejectedExecutionException;
 
 import static android.graphics.Bitmap.createScaledBitmap;
 
@@ -30,6 +31,7 @@ import static android.graphics.Bitmap.createScaledBitmap;
 public class AlbumArrayAdapter  extends BaseAdapter {
     private Activity activity;
     private List<ImageWithBool> mBitmapList;
+    LayoutInflater inflater;
 
     /**
      *
@@ -40,6 +42,7 @@ public class AlbumArrayAdapter  extends BaseAdapter {
         super();
         this.activity = activity;
         mBitmapList = bitmapList;
+        inflater = (LayoutInflater) activity.getLayoutInflater();
     }
 
     /**
@@ -58,7 +61,7 @@ public class AlbumArrayAdapter  extends BaseAdapter {
      */
     @Override
     public Object getItem(int i) {
-        return mBitmapList.get(i);
+       return mBitmapList.get(i);
     }
 
     /**
@@ -82,14 +85,12 @@ public class AlbumArrayAdapter  extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) activity.getLayoutInflater();
-        ViewHolder view;
 
+        ViewHolder view;
         if(convertView == null)
         {
             view = new ViewHolder();
             convertView = inflater.inflate(R.layout.album_square, null);
-
             view.imgViewFlag = (ImageView)convertView.findViewById(R.id.gridImageView);
             convertView.setTag(view);
         }
@@ -100,10 +101,21 @@ public class AlbumArrayAdapter  extends BaseAdapter {
 
         Bitmap addThis;
         if(mBitmapList.get(position).bool)
-             view.imgViewFlag.setImageBitmap(mBitmapList.get(position).image);
+            view.imgViewFlag.setImageBitmap(mBitmapList.get(position).image);
         else {
             view.imgViewFlag.setImageResource(R.drawable.deviceaccesscamera);
-            new GetMediaImageTask().execute(mBitmapList.get(position));
+            int errorCount = 0;
+            boolean success = false;
+            do{
+                try{
+                    new GetMediaImageTask().executeOnExecutor(
+                            AsyncTask.SERIAL_EXECUTOR, mBitmapList.get(position));
+                    success =true;
+                }catch(RejectedExecutionException e){
+                    errorCount ++;
+                }
+            }while(!success && errorCount<5);
+
         }
 
         return convertView;

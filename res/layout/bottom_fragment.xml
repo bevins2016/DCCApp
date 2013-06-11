@@ -9,8 +9,8 @@
                   android:gravity="center"
                   android:background="#FFFFFF"
                   android:id="@+id/linearLayout">
-        <LinearLayout android:layout_width="50dp"
-                      android:layout_height="50dp"
+        <LinearLayout android:layout_width="48dp"
+                      android:layout_height="48dp"
                       android:gravity="center"
                       android:background="#33b5e5">
             <Button
@@ -18,6 +18,7 @@
                     android:layout_height="48dp"
                     android:layout_width="48dp"
                     android:background="@drawable/collections_view_as_list_ligh"
+                    android:onClick="#FFFFFF"
                     android:layout_alignParentLeft="true"
                     />
         </LinearLayout>

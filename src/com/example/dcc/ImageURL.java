@@ -1,9 +1,9 @@
 package com.example.dcc;
 
+import com.example.dcc.helpers.mysql.HttpConnection;
+
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-
-import com.example.dcc.helpers.mysql.HttpConnection;
 
 public class ImageURL {
 	

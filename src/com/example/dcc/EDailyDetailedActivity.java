@@ -1,6 +1,5 @@
 package com.example.dcc;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -8,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
 import com.example.dcc.fragment.EDailyDetailFragment;
-import com.example.dcc.fragment.MenuFragment;
 import com.example.dcc.helpers.EDaily;
 
 /**

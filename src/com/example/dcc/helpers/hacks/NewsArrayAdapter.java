@@ -3,28 +3,23 @@ package com.example.dcc.helpers.hacks;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.dcc.R;
 import com.example.dcc.helpers.BitmapCache;
-import com.example.dcc.helpers.EDaily;
 import com.example.dcc.helpers.News;
 import com.example.dcc.helpers.User;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
-import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  *
@@ -65,7 +60,7 @@ public class NewsArrayAdapter extends ArrayAdapter<News> {
         String uri = "/DCC/getUserGravitar.php?email=" + news.getPublisher().getEmail();
         if(BitmapCache.getBitmap(uri)!=null) icon.setImageBitmap( BitmapCache.getBitmap(uri));
         else {
-            new GetImageTask().execute(news.getPublisher());
+            new GetImageTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, news.getPublisher());
         }
 
         return rowView;

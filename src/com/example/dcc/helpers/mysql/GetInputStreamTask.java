@@ -1,10 +1,12 @@
 package com.example.dcc.helpers.mysql;
 
 import android.os.AsyncTask;
+
 import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.User;
 import com.example.dcc.helpers.hacks.DCCCookieSpecFactory;
 import com.example.dcc.helpers.hacks.DCCCookieStore;
+
 import org.apache.http.HttpHost;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.params.ClientPNames;

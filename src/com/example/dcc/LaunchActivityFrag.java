@@ -16,6 +16,30 @@ package com.example.dcc;
  * and has password protection for AdminActivity
  *********************************************************************/
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Environment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.dcc.admin.AdminActivity;
+import com.example.dcc.fragment.AdminSearchFragment;
+import com.example.dcc.fragment.CreateActionItemFrag;
+import com.example.dcc.helpers.OnButtonSelectedListener;
+import com.example.dcc.surveys.CreateSurvey;
+import com.example.dcc.surveys.ManageSurvey;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -24,30 +48,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
-import android.app.*;
-import android.view.ViewGroup;
-import com.example.dcc.fragment.ActionItemFrag;
-import com.example.dcc.fragment.AdminSearchFragment;
-import com.example.dcc.fragment.CreateActionItemFrag;
-import com.example.dcc.fragment.MembersListFragment;
-import com.example.dcc.helpers.ObjectStorage;
-import com.example.dcc.helpers.OnButtonSelectedListener;
-import com.example.dcc.search.MetaSearchFrag;
 import utilities.StartDateDownloader;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Environment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
-
-import com.example.dcc.admin.AdminActivity;
-import com.example.dcc.surveys.CreateSurvey;
-import com.example.dcc.surveys.ManageSurvey;
 
 public class LaunchActivityFrag extends Fragment implements OnClickListener {
 

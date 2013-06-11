@@ -1,17 +1,20 @@
 package com.example.dcc;
 
-import java.io.*;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-
+import android.app.Activity;
 import android.app.Fragment;
-import android.view.*;
-import android.widget.*;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
-import com.example.dcc.helpers.ActionItemData;
 import com.example.dcc.helpers.ObjectStorage;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -20,15 +23,9 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Environment;
-import android.util.Log;
-import android.view.View.OnClickListener;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * eDaily Activity Allows user to create eDailys and send them to the specified
@@ -61,6 +58,8 @@ public class EDailyActivityFrag extends Fragment implements OnClickListener {
         todayTF = (EditText) view.findViewById(R.id.todayTF);
         datefor = (EditText) view.findViewById(R.id.datefor);
 
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        datefor.setText(sdf.format(new Date()));
         sendButton = (Button) view.findViewById(R.id.sendButton);
         hours = (EditText) view.findViewById(R.id.hours);
         sendButton.setOnClickListener(this);

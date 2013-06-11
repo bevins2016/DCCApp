@@ -3,22 +3,18 @@ package com.example.dcc.fragment;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Html;
-import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
 import com.example.dcc.R;
 import com.example.dcc.helpers.ActionItem;
-import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.OnButtonSelectedListener;
 import com.example.dcc.helpers.hacks.ActionArrayAdapter;
 import com.example.dcc.helpers.mysql.MySQLQuery;
@@ -32,33 +28,25 @@ import java.util.concurrent.TimeoutException;
 @SuppressLint("NewApi")
 public class ActionItemFrag extends Fragment implements OnClickListener{
 
-    ListView listview;
+    private ListView listview;
 
-    ActionArrayAdapter adapter;
-    List<ActionItem> actionItems;
-    Activity activity;
+    private ActionArrayAdapter adapter;
+    private List<ActionItem> actionItems;
+    private Activity activity;
+    private Context context;
     private OnButtonSelectedListener listener;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        //setRetainInstance(true);
+        setRetainInstance(true);
 
         View view = inflater.inflate(R.layout.action_item_fragment, container, false);
         activity = getActivity();
 
         GetNewsTask g = new GetNewsTask();
-        try {
-            g.execute((Void) null).get(20, TimeUnit.SECONDS);
-            ObjectStorage.setActionItems(actionItems);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (TimeoutException e) {
-            e.printStackTrace();
-        }
 
+        g.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
         listview = (ListView)view.findViewById(R.id.ailistView);
         adapter = new ActionArrayAdapter(getActivity(), actionItems);
@@ -76,14 +64,16 @@ public class ActionItemFrag extends Fragment implements OnClickListener{
                 listener.launchFragment(detailFrag);
             }
         });
-
-        for(ActionItem n : actionItems){
-            adapter.add(n);
-        }
-
         return view;
     }
 
+    private void addToAdapter(List<ActionItem> list){
+        if(adapter.getCount()>0) adapter.clear();
+        if(list == null || list.size()==0) return;
+        for(ActionItem n : list){
+            adapter.add(n);
+        }
+    }
     @Override
     public void onAttach(Activity activity){
         super.onAttach(activity);
@@ -110,7 +100,7 @@ public class ActionItemFrag extends Fragment implements OnClickListener{
 
         @Override
         protected void onPostExecute(final Boolean success) {
-
+            addToAdapter(actionItems);
         }
 
         @Override
