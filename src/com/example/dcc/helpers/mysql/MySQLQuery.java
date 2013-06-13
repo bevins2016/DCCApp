@@ -161,7 +161,6 @@ public class MySQLQuery {
         return null;
     }
 
-
     public synchronized static List<User> getAllMembers(String url){
         List<User> lMembers = new ArrayList<User>();
         JSONArray jMembers = (JSONArray)getArray(url);

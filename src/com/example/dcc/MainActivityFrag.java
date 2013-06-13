@@ -222,8 +222,6 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
         }
     }
 
-
-
     private class GetImageUrlTask extends AsyncTask<Void, Void, List<ImageWithBool>> {
 
         @Override

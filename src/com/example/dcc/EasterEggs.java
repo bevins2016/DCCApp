@@ -9,9 +9,6 @@ import android.os.Bundle;
  * Created by Sam on 5/31/13.
  */
 
-
-
-
 public class EasterEggs extends Activity {
 
     public static MediaPlayer sweeet;
@@ -25,7 +22,6 @@ public class EasterEggs extends Activity {
     public static MediaPlayer grief;
     public static MediaPlayer woohoo;
     public static MediaPlayer yet;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

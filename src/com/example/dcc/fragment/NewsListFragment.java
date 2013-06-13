@@ -71,7 +71,6 @@ public class NewsListFragment extends Fragment{
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("news", news.get(i));
                 detailFrag.setArguments(bundle);
-
                 listener.launchFragment(detailFrag);
             }
         });
@@ -107,5 +106,4 @@ public class NewsListFragment extends Fragment{
             return true;
         }
     }
-
 }

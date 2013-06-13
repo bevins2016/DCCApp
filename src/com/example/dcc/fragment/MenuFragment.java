@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -39,7 +40,6 @@ public class MenuFragment extends Fragment implements OnClickListener {
     View view;
     boolean director;
     private OnButtonSelectedListener listener;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -153,6 +153,9 @@ public class MenuFragment extends Fragment implements OnClickListener {
             if (matches.contains("keyword here") { startActivity(new
             == Intent("name.of.manifest.ACTIVITY")
             */
+            Log.e("", matches.toString());
+            char izard[] = new char[matches.toString().length()];
+            izard = matches.toString().toCharArray();
 
             if (matches.contains("news")) {
                 listener.onMenuButtonSelected(R.id.news);
@@ -229,7 +232,7 @@ public class MenuFragment extends Fragment implements OnClickListener {
             else if (matches.contains("tuba")) {
                 EasterEggs.glandular.start();
             }
-            else if (matches.contains("oh crap")) {
+            else if (matches.contains("crap")) {
                 EasterEggs.doh.start();
             }
             else if (matches.contains("whoops")) {
@@ -261,6 +264,9 @@ public class MenuFragment extends Fragment implements OnClickListener {
             else if (matches.contains("break server")) {
                 EasterEggs.yet.start();
             }
+//            else if (izard.) {
+//                EasterEggs.yet.start();
+//            }
             else if (matches.contains("server off line")) {
                 EasterEggs.yet.start();
             }
