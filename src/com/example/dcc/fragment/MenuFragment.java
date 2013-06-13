@@ -79,7 +79,6 @@ public class MenuFragment extends Fragment implements OnClickListener {
         directoryB.setOnClickListener(this);
         delete.setOnClickListener(this);
 
-
         // Check to see if a recognition activity is present
         // if running on AVD virtual device it will give this message. The mic
         // required only works on an actual android device//
@@ -116,6 +115,7 @@ public class MenuFragment extends Fragment implements OnClickListener {
                 "Speech recognition demo");
         startActivityForResult(intent, 1234);
     }
+
     @Override
     public void onAttach(Activity activity){
         super.onAttach(activity);
