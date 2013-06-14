@@ -20,7 +20,7 @@
                 android:drawableRight="@drawable/collections_view_as_list_ligh"
                 android:text="@string/news" />
 
-        <Button
+       <!-- <Button
                 android:id="@+id/photo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
                 android:shadowColor="#000000"
                 android:shadowRadius="0"
                 android:drawableRight="@drawable/camera_light"
-                android:text="@string/photo" />
+                android:text="@string/photo" />-->
 
         <Button
                 android:id="@+id/report"

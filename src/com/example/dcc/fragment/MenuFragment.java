@@ -62,7 +62,7 @@ public class MenuFragment extends Fragment implements OnClickListener {
 
         //Get all buttons from the view
         Button newsB = (Button) view.findViewById(R.id.news);
-        Button photoB = (Button) view.findViewById(R.id.photo);
+//        Button photoB = (Button) view.findViewById(R.id.photo);
         Button reportB = (Button) view.findViewById(R.id.report);
         Button actionB = (Button) view.findViewById(R.id.action);
         Button directoryB = (Button) view.findViewById(R.id.directory);
@@ -73,7 +73,7 @@ public class MenuFragment extends Fragment implements OnClickListener {
 
         //Set on click listeners
         newsB.setOnClickListener(this);
-        photoB.setOnClickListener(this);
+//        photoB.setOnClickListener(this);
         reportB.setOnClickListener(this);
         actionB.setOnClickListener(this);
         directoryB.setOnClickListener(this);
@@ -160,12 +160,12 @@ public class MenuFragment extends Fragment implements OnClickListener {
             if (matches.contains("news")) {
                 listener.onMenuButtonSelected(R.id.news);
             }
-            else if (matches.contains("gallery")) {
-                listener.onMenuButtonSelected(R.id.photo);
-            }
-            else if (matches.contains("photo")) {
-                listener.onMenuButtonSelected(R.id.photo);
-            }
+//            else if (matches.contains("gallery")) {
+//                listener.onMenuButtonSelected(R.id.photo);
+//            }
+//            else if (matches.contains("photo")) {
+//                listener.onMenuButtonSelected(R.id.photo);
+//            }
             else if (matches.contains("report")) {
                 listener.onMenuButtonSelected(R.id.report);
             }

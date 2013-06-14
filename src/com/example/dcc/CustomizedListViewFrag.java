@@ -1,5 +1,7 @@
 /**
  * This class manages the fragment responsible for displaying the media items (Pictures)
+ *
+ * Deactivated for now due to the instability of the site (Constant Changes).
  */
 package com.example.dcc;
 
@@ -13,7 +15,6 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import com.example.dcc.helpers.BitmapCache;
 import com.example.dcc.helpers.ImageWithBool;
 import com.example.dcc.helpers.ObjectStorage;
 import com.example.dcc.helpers.hacks.AlbumArrayAdapter;

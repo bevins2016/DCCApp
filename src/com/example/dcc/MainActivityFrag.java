@@ -43,6 +43,9 @@ import java.util.List;
 /**
  * This activity manages all fragments attached to it for the durration of the life of the
  * application.
+ *
+ * When this activity creates a frag it passes the frag an instance of itself which is leveraged
+ * with the onbuttonselectedlistener in order to pass back on click actions.
  */
 public class MainActivityFrag extends FragmentActivity implements OnButtonSelectedListener{
 
@@ -51,14 +54,10 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
     public static final int BOTTOM_FRAG = R.id.fragmentcontainerbottom;
     Fragment menu, main, top;
 
-    private boolean isNews;
-
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_frag);
-
-        isNews = true;
 
         if(savedInstanceState == null){
             FragmentManager manager = getFragmentManager();
@@ -79,29 +78,21 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
             transaction.commit();
         }
         //For convienence get the list of images early on... Slow connection propogation
-        new GetImageUrlTask().execute();
+        //new GetImageUrlTask().execute();
     }
 
     @Override
     public void onMenuButtonSelected(int buttonId) {
         switch (buttonId) {
             case R.id.news:
-                isNews = true;
                 news();break;
-            case R.id.photo:
-                isNews = false;
-                photo(); break;
             case R.id.report:
-                isNews = false;
                 report(); break;
             case R.id.search:
-                isNews = false;
                 search();break;
             case R.id.action:
-                isNews = false;
                 action(); break;
             case R.id.directory:
-                isNews = false;
                 directory();break;
             case R.id.logout:
                 DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
@@ -134,7 +125,6 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
                         .setNegativeButton("No", dialogClickListener).show();
                 break;
             case R.id.createaction:
-                isNews = false;
                 launchFragment(new CreateActionItemFrag()); break;
             case R.id.button:
                  break;
@@ -204,6 +194,11 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
         launchFragment(newer);
     }
 
+    /*
+     *This class manages the logic behind the back button presses.
+     * This will first disable the menu button, then will exit any
+     * detailed views, and then it will exit the app completely.
+     */
     @Override
     public void onBackPressed(){
         if(!ObjectStorage.menuHidden) displaySide();
@@ -222,6 +217,11 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
         }
     }
 
+    /**
+     * This class fetches all image urls from the site.
+     * Currently disabled during the beta stage till the site layout becomes stable.
+     *
+     */
     private class GetImageUrlTask extends AsyncTask<Void, Void, List<ImageWithBool>> {
 
         @Override

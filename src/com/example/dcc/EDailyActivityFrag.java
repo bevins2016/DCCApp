@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * eDaily Activity Allows user to create eDailys and send them to the specified
+ * eDaily frag Allows user to create eDailys and send them to the specified
  * email addresses in "InternalStorage" file
  *
  * @author Ashutosh Gupta
