@@ -52,7 +52,6 @@ public class EReportFrag extends Fragment implements OnClickListener {
     private EditText Thursday;
     private EditText Friday;
     private EditText Saturday;
-
     private Button SendButton;
     Activity activity;
 
