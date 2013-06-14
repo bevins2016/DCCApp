@@ -91,7 +91,7 @@ public class HttpConnection {
      * @param page
      * @param nvp
      * @param holdFirst
-     * @return
+     * @return HTTPResponse
      */
     public static synchronized HttpResponse postResponse(String page,
                                                           List<NameValuePair> nvp,
