@@ -1,5 +1,6 @@
 /**********************************************************************
- * Director's Command Center
+ * Director's Command Center - This displays a list of options specifically
+ * for director/management use
  *
  * @author Chris Crowell <crowelch@mail.uc.edu>
  * @version 1.0
@@ -9,13 +10,6 @@
 
 package com.example.dcc;
 
-/**********************************************************************
- * LaunchActivity.java
- *
- * Gets start and end dates for the program, creates directory,
- * and has password protection for AdminActivity
- *********************************************************************/
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -24,7 +18,6 @@ import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -40,9 +33,6 @@ import com.example.dcc.helpers.OnButtonSelectedListener;
 import com.example.dcc.surveys.CreateSurvey;
 import com.example.dcc.surveys.ManageSurvey;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -51,13 +41,6 @@ import java.util.concurrent.ExecutionException;
 import utilities.StartDateDownloader;
 
 public class LaunchActivityFrag extends Fragment implements OnClickListener {
-
-    // Create buttons Globally so they are available to all methods
-    private Button MetaSearchButton;
-    private Button CreateSurveyButton;
-    private Button ManageSurveyButton;
-    private Button AdminButton;
-    private Button createAI;
 
     public static String startdate = "";
     public static String today;
@@ -77,18 +60,18 @@ public class LaunchActivityFrag extends Fragment implements OnClickListener {
 
 		/* Check if directory exists, if not create it */
 		/* Call functions to get start and end dates */
-        setDefaults();
+        //setDefaults();
 
 		/* Set up buttons */
-        MetaSearchButton = (Button) view.findViewById(R.id.meta_button);
-        MetaSearchButton.setOnClickListener(this);
-        CreateSurveyButton = (Button) view.findViewById(R.id.survey_button);
-        CreateSurveyButton.setOnClickListener(this);
-        ManageSurveyButton = (Button) view.findViewById(R.id.manage_survey_button);
-        ManageSurveyButton.setOnClickListener(this);
-        AdminButton = (Button) view.findViewById(R.id.admin_button);
-        AdminButton.setOnClickListener(this);
-        createAI = (Button) view.findViewById(R.id.createaction);
+        Button metaSearchButton = (Button) view.findViewById(R.id.meta_button);
+        metaSearchButton.setOnClickListener(this);
+        Button createSurveyButton = (Button) view.findViewById(R.id.survey_button);
+        createSurveyButton.setOnClickListener(this);
+        Button manageSurveyButton = (Button) view.findViewById(R.id.manage_survey_button);
+        manageSurveyButton.setOnClickListener(this);
+        Button adminButton = (Button) view.findViewById(R.id.admin_button);
+        adminButton.setOnClickListener(this);
+        Button createAI = (Button) view.findViewById(R.id.createaction);
         createAI.setOnClickListener(this);
         Button search = (Button) view.findViewById(R.id.meta_button);
         search.setOnClickListener(this);
@@ -101,34 +84,34 @@ public class LaunchActivityFrag extends Fragment implements OnClickListener {
      * parameters.
      */
     private void setDefaults() {
-        today = getToday();
-        startdate = setStartDate();
-        FileWriter filewriter = null;
-        String path = Environment.getExternalStorageDirectory().getPath();
-        File f = new File(path + "/dcc");
-        File checkKeyword = new File(f + "/keywords.txt");
-        if (!f.exists()) {
-            f.mkdir();
-        }
-        if (!checkKeyword.exists()) {
-            try {
-                checkKeyword.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        try {
-            filewriter = new FileWriter(f + "/startdate.txt");
-            filewriter.append(startdate);
-            filewriter.flush();
-            filewriter.close();
-            filewriter = new FileWriter(f + "/enddate.txt");
-            filewriter.append(today);
-            filewriter.flush();
-            filewriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        today = getToday();
+//        startdate = setStartDate();
+//        FileWriter filewriter = null;
+//        String path = Environment.getExternalStorageDirectory().getPath();
+//        File f = new File(path + "/dcc");
+//        File checkKeyword = new File(f + "/keywords.txt");
+//        if (!f.exists()) {
+//            f.mkdir();
+//        }
+//        if (!checkKeyword.exists()) {
+//            try {
+//                checkKeyword.createNewFile();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        try {
+//            filewriter = new FileWriter(f + "/startdate.txt");
+//            filewriter.append(startdate);
+//            filewriter.flush();
+//            filewriter.close();
+//            filewriter = new FileWriter(f + "/enddate.txt");
+//            filewriter.append(today);
+//            filewriter.flush();
+//            filewriter.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     /* Get today's date and format it to YYYY-MM-DD */

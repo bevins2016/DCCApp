@@ -10,6 +10,7 @@ import com.example.dcc.fragment.EDailyDetailFragment;
 import com.example.dcc.helpers.EDaily;
 
 /**
+ * This class displays a user's edaily report and the results of their grade
  * Created by harmonbc on 5/30/13.
  */
 public class EDailyDetailedActivity extends FragmentActivity {

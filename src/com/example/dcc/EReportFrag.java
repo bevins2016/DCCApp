@@ -43,7 +43,6 @@ import java.util.Locale;
 public class EReportFrag extends Fragment implements OnClickListener {
 
     private String url = "http://storage.virtualdiscoverycenter.net/projectmorpheus/dcc/save.php";
-    private String popupText = "Reports can not be submitted until sudent info is set!\n\nFill this out now?";
 
     private EditText Sunday;
     private EditText Monday;
