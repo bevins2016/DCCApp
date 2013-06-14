@@ -58,6 +58,7 @@ public class EDailyActivityFrag extends Fragment implements OnClickListener {
         todayTF = (EditText) view.findViewById(R.id.todayTF);
         datefor = (EditText) view.findViewById(R.id.datefor);
 
+        //set the date to the standard format that is used on the website.
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         datefor.setText(sdf.format(new Date()));
         sendButton = (Button) view.findViewById(R.id.sendButton);
@@ -72,6 +73,7 @@ public class EDailyActivityFrag extends Fragment implements OnClickListener {
      */
     public void onClick(View v) {
             Uploader uploader = new Uploader();
+        //start async task
             uploader.execute(url);
 
     }
@@ -96,7 +98,7 @@ public class EDailyActivityFrag extends Fragment implements OnClickListener {
                 nameValuePairs.add(new BasicNameValuePair("Hours", getEditText(hours)));
                 SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
                 nameValuePairs.add(new BasicNameValuePair("reportdate",getEditText(datefor)));
-
+                //start http client and send the namevaluepairs
                 HttpClient httpclient = new DefaultHttpClient();
                 HttpPost httppost = new HttpPost(params[0]);
                 httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));

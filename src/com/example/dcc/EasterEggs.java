@@ -11,6 +11,7 @@ import android.os.Bundle;
 
 public class EasterEggs extends Activity {
 
+    //declare MediaPlayer objects
     public static MediaPlayer sweeet;
     public static MediaPlayer giveYouUp;
     public static MediaPlayer speakItalian;
@@ -29,6 +30,7 @@ public class EasterEggs extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
 
+        //initialize MediaPlayer objects
         sweeet = MediaPlayer.create(getApplicationContext(), R.raw.sweet_edit);
         speakItalian = MediaPlayer.create(getApplicationContext(), R.raw.italian);
         glandular = MediaPlayer.create(getApplicationContext(), R.raw.glandular_first);
@@ -40,6 +42,7 @@ public class EasterEggs extends Activity {
         woohoo = MediaPlayer.create(getApplicationContext(), R.raw.woohoo);
         yet = MediaPlayer.create(getApplicationContext(), R.raw.yet);
 
+        //this class is autoloaded and then is automatically switched to the main.
         startActivity(new Intent(this, MainActivityFrag.class));
         finish();
     }

@@ -43,6 +43,8 @@ public class Zork extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.enterbutton:
+
+                //this will check if the user has written the correct answer and update accordingly
                 if(responseText.getText().toString().equalsIgnoreCase("")){
                 return;
             }
@@ -54,14 +56,17 @@ public class Zork extends Fragment implements View.OnClickListener {
                 if(responseText.getText().toString().equalsIgnoreCase("yes")){
                     troll.setText("Congratulations you found 1,000 gold!");
                     responseText.setText("");
+                    //start sound on win scenario
                     EasterEggs.woohoo.start();
                 }
             }
             break;
             case R.id.clear:
+                //set the editText to blank
                 responseText.setText("");
                 break;
             case R.id.restart:
+                //set the original text
                 troll.setText("The terrible troll raises his sword.");
                 responseText.setText("");
                 break;

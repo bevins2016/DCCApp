@@ -40,6 +40,7 @@ import java.util.Locale;
  * @author Chris Crowell <crowelch@mail.uc.edu>
  */
 
+//This class is no longer used but it is an original copy of the form of the implementation for other classes
 public class EReportFrag extends Fragment implements OnClickListener {
 
     private String url = "http://storage.virtualdiscoverycenter.net/projectmorpheus/dcc/save.php";

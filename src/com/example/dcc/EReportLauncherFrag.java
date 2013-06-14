@@ -25,6 +25,7 @@ public class EReportLauncherFrag extends Fragment implements OnClickListener {
     private Button fiftysevenButton; // 0:57 Button
     Activity activity;
     private OnButtonSelectedListener listener;
+
     /**
      * Attaches buttons to corresponding widgets in the .xml file and sets up a
      * listener (the class itself)
