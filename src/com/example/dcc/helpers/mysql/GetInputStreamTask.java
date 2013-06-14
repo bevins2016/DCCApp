@@ -16,7 +16,11 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import java.io.InputStream;
 
 /**
- * This is used to get a basic input stream for posting to a URI
+ * This is used to get a basic input stream for posting to a URI.
+ *
+ * This class is unique because it passes the wordpress cookie back to the server
+ * to authenticate the user.
+ *
  * Created by Harmon on 5/17/13.
  */
 public class GetInputStreamTask extends AsyncTask<String, Void, InputStream>{
