@@ -77,6 +77,13 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
 
             transaction.commit();
         }
+
+        if(!ObjectStorage.menuHidden){
+            ScrollView scrollview = (ScrollView)findViewById(R.id.fragleft);
+            scrollview.setVisibility(View.VISIBLE);
+            FrameLayout menuFrame = (FrameLayout)findViewById(R.id.fragmentcontainerleft);
+            menuFrame.setVisibility(View.VISIBLE);
+        }
         //For convienence get the list of images early on... Slow connection propogation
         //new GetImageUrlTask().execute();
     }
@@ -104,8 +111,9 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
                                 SharedPreferences mPreferences;
                                 mPreferences = getApplicationContext().getSharedPreferences("CurrentUser", 0);
                                 SharedPreferences.Editor editor=mPreferences.edit();
-                                editor.putString("UserName", "");
-                                editor.putString("PassWord", "");
+                                editor.clear();
+                                /*editor.putString("UserName", null);
+                                editor.putString("PassWord", null);*/
                                 editor.commit();
                                 Toast.makeText(getApplicationContext(), "Login data cleared",
                                         Toast.LENGTH_SHORT).show();
@@ -130,6 +138,8 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
                  break;
             case R.id.menu_button:
                 displaySide(); break;
+            case R.id.menu_search:
+                launchFragment(new AdminSearchFragment()); break;
         }
     }
 
@@ -187,8 +197,6 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
     public void searchReport(){
         launchFragment(new AdminSearchFragment());
     }
-
-
     public void createActionItems(){
         Fragment newer = new CreateActionItemFrag();
         launchFragment(newer);
@@ -213,41 +221,9 @@ public class MainActivityFrag extends FragmentActivity implements OnButtonSelect
                 launchFragment(new ActionItemFrag());
             }else if (frag instanceof NewsDetailFragment){
                 launchFragment(new NewsListFragment());
+            }else{
+                finish();
             }
-        }
-    }
-
-    /**
-     * This class fetches all image urls from the site.
-     * Currently disabled during the beta stage till the site layout becomes stable.
-     *
-     */
-    private class GetImageUrlTask extends AsyncTask<Void, Void, List<ImageWithBool>> {
-
-        @Override
-        protected List<ImageWithBool> doInBackground(Void... voids) {
-            List<ImageWithBool> imageList = new ArrayList<ImageWithBool>();
-            //No need for cookies here (Ye Pictures are public)... nom nom nom
-            try {
-                Document doc = Jsoup.connect(
-                        "http://www.virtualdiscoverycenter.net/media/photos/").get();
-                Elements imgs = doc.getElementsByTag("img");
-                for(int i = 0; i < imgs.size(); i++){
-                    String url = imgs.get(i).attr("src");
-                    //Images from this url are utility icons
-                    if(url.startsWith("http://www.virtualdiscoverycenter.net/wp-content/gallery")){
-                        ImageWithBool temp = new ImageWithBool();
-                        temp.url = url;
-                        imageList.add(temp);
-                    }
-                }
-
-                ObjectStorage.setImageList(imageList);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return imageList;
         }
     }
 }

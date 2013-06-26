@@ -59,8 +59,7 @@ public class LoginActivity extends Activity {
 
         setContentView(R.layout.activity_login);
         context = this;
-        User user = new User();
-        ObjectStorage.setUser(user);
+        ObjectStorage.setUser(new User());
 
         /* Set up the login form. */
         mUser = "";
@@ -106,19 +105,12 @@ public class LoginActivity extends Activity {
             if(!sp1.getString("UserName", null).equals(""))
             {
                 autoLogin = true;
+                showProgress(true);
                 attemptLogin();
             }
         }catch(Exception e){
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.login, menu);
-        return true;
     }
 
     /**
@@ -128,6 +120,10 @@ public class LoginActivity extends Activity {
      */
     public void attemptLogin()
     {
+
+        mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
+        showProgress(true);
+
         if (mAuthTask != null)
         {
             return;
@@ -149,42 +145,42 @@ public class LoginActivity extends Activity {
 
             SharedPreferences sp1=this.getSharedPreferences("CurrentUser", MODE_PRIVATE);
 
-            if(sp1.getString("UserName", null).equals("") && mUser.equals("") && mPassword.equals("")){
-                Log.e("Fail", "Failed attempt");
-                return;
-            }
-
-            if(!sp1.getString("UserName", null).equals("")){
-                mUser =sp1.getString("UserName", null);
-                mPassword = sp1.getString("PassWord", null);
+            try{
+                if(!sp1.getString("UserName", null).equals("")){
+                    mUser =sp1.getString("UserName", null);
+                    mPassword = sp1.getString("PassWord", null);
+                }
+            }catch(Exception e){
+                autoLogin = false;
+                attemptLogin();
             }
         }
 
         boolean cancel = false;
         View focusView = null;
 
-        if(!autoLogin){
-            // Check for a valid password.
-            if (TextUtils.isEmpty(mPassword))
-            {
-                mPasswordView.setError(getString(R.string.error_field_required));
-                focusView = mPasswordView;
-                cancel = true;
-            } else if (mPassword.length() < 4)
-            {
-                mPasswordView.setError(getString(R.string.error_invalid_password));
-                focusView = mPasswordView;
-                cancel = true;
-            }
-            // Check for a valid email address.
-            if (TextUtils.isEmpty(mUser))
-            {
-                mUserView.setError(getString(R.string.error_field_required));
-                focusView = mUserView;
-                cancel = true;
-            }
+        // Check for a valid password.
+        if (TextUtils.isEmpty(mPassword))
+        {
+            mPasswordView.setError(getString(R.string.error_field_required));
+            focusView = mPasswordView;
+            cancel = true;
+        } else if (mPassword.length() < 4)
+        {
+            mPasswordView.setError(getString(R.string.error_invalid_password));
+            focusView = mPasswordView;
+            cancel = true;
         }
+        // Check for a valid email address.
+        if (TextUtils.isEmpty(mUser))
+        {
+            mUserView.setError(getString(R.string.error_field_required));
+            focusView = mUserView;
+            cancel = true;
+        }
+        //Reset auto login
         autoLogin = false;
+
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
@@ -192,26 +188,23 @@ public class LoginActivity extends Activity {
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
-            showProgress(true);
             mAuthTask = new UserLoginTask();
 
             /*Attempt Login, If failure display a toast to alert the user to possible reason*/
             try {
+                mAuthTask.execute();
 
-                boolean status = mAuthTask.execute().get(20, TimeUnit.SECONDS);
-
-                if(!status){
+                /*if(!status){
                     Toast.makeText(context, "Login Failure Please Verify Credentials and Try Again", Toast.LENGTH_LONG).show();
-                }
-
+                }*/
+/*
             } catch (InterruptedException e) {
                 Toast.makeText(context, "Login Failure Please Try Again Later", Toast.LENGTH_LONG).show();
             } catch (ExecutionException e) {
-                Toast.makeText(context, "Login Failure Please Try Again Later", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Login Failure Please Try Again Later.", Toast.LENGTH_LONG).show();
             } catch (TimeoutException e) {
                 /*Caused by a server timeout / slow internet */
-                Toast.makeText(context, "Connection Timout", Toast.LENGTH_LONG).show();
+              //  Toast.makeText(context, "Connection Timout", Toast.LENGTH_LONG).show();
             } catch (CancellationException e){
                 /*Caused if there is no network*/
                 Toast.makeText(context, "Network Failure Exception Please Check Settings And Try Again", Toast.LENGTH_LONG).show();
@@ -219,45 +212,33 @@ public class LoginActivity extends Activity {
         }
     }
 
-    /**
-     * Shows the progress UI and hides the login form.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+
     public void showProgress(final boolean show) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(
-                    android.R.integer.config_shortAnimTime);
+        Log.e("LoginActivity", "SHOW PROGRESS: "+show);
+        int shortAnimTime = getResources().getInteger(
+                android.R.integer.config_shortAnimTime);
 
-            mLoginStatusView.setVisibility(View.VISIBLE);
-            mLoginStatusView.animate().setDuration(shortAnimTime)
-                    .alpha(show ? 1 : 0)
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            mLoginStatusView.setVisibility(show ? View.VISIBLE
-                                    : View.GONE);
-                        }
-                    });
+        mLoginStatusView.setVisibility(View.VISIBLE);
+        mLoginStatusView.animate().setDuration(shortAnimTime)
+                .alpha(show ? 1 : 0)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mLoginStatusView.setVisibility(show ? View.VISIBLE
+                                : View.GONE);
+                    }
+                });
 
-            mLoginFormView.setVisibility(View.VISIBLE);
-            mLoginFormView.animate().setDuration(shortAnimTime)
-                    .alpha(show ? 0 : 1)
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            mLoginFormView.setVisibility(show ? View.GONE
-                                    : View.VISIBLE);
-                        }
-                    });
-        } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
-            mLoginStatusView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
+        mLoginFormView.setVisibility(View.VISIBLE);
+        mLoginFormView.animate().setDuration(shortAnimTime)
+                .alpha(show ? 0 : 1)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mLoginFormView.setVisibility(show ? View.GONE
+                                : View.VISIBLE);
+                    }
+                });
     }
 
     /**
@@ -269,7 +250,6 @@ public class LoginActivity extends Activity {
         @Override
         protected Boolean doInBackground(Void... params)
         {
-            showProgress(true);
             try{
                 if (!HttpConnection.login(mUser, mPassword)){
                     cancel(true);
@@ -287,7 +267,7 @@ public class LoginActivity extends Activity {
         protected void onPostExecute(final Boolean success)
         {
             mAuthTask = null;
-            showProgress(false);
+
 
             if (success)
             {
@@ -297,6 +277,7 @@ public class LoginActivity extends Activity {
                 editor.putString("UserName", mUser);
                 editor.putString("PassWord", mPassword);
                 editor.commit();
+                showProgress(false);
                 startActivity(new Intent(context, EasterEggs.class));
                 finish();
             } else {

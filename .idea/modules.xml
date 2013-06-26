@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DCCApp.iml" filepath="$PROJECT_DIR$/DCCApp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libs/volley/tests/tests.iml" filepath="$PROJECT_DIR$/libs/volley/tests/tests.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libs/volley/volley.iml" filepath="$PROJECT_DIR$/libs/volley/volley.iml" />
     </modules>
   </component>
 </project>

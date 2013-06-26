@@ -53,14 +53,17 @@ public class MembersListFragment extends Fragment{
         setRetainInstance(true);
         View view = inflater.inflate(R.layout.members_list, container, false);
 
+        boolean waitToLoad = false;
         //If the members object is null in the list, refresh the list
         if((members = ObjectStorage.getMemberList())==null){
+            waitToLoad = true;
             GetMembersTask t =  new GetMembersTask();
             t.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         }
 
         //Make an adapter
         adapter = new ArrayAdapter<Spanned>(getActivity(), R.layout.member_item);
+
         //Get the listview, set the listview and the adapter
         listview = (ListView)view.findViewById(R.id.membersList);
         listview.setAdapter(adapter);
@@ -80,6 +83,12 @@ public class MembersListFragment extends Fragment{
             }
         });
 
+        if(!waitToLoad){
+            for(User m : members){
+                adapter.setNotifyOnChange(true);
+                adapter.add(Html.fromHtml(m.toString()));
+            }
+        }
         return view;
     }
 
@@ -115,13 +124,10 @@ public class MembersListFragment extends Fragment{
                 for(User m : members){
                     adapter.setNotifyOnChange(true);
                     adapter.add(Html.fromHtml(m.toString()));
-                    //adapter.refresh();
                 }
             }catch(NullPointerException e){
                 Toast.makeText(getActivity(), "Failed to load friends.", Toast.LENGTH_LONG);
             }
-
-
         }
     }
 

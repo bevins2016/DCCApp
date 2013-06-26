@@ -45,7 +45,7 @@ public class MenuFragment extends Fragment implements OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        if(ObjectStorage.getUser().getName().equalsIgnoreCase("brandon harmon") || ObjectStorage.getUser().getName().equalsIgnoreCase("sam bevins")
+        if(ObjectStorage.getUser().getName().equalsIgnoreCase("sam bevins")
                 || ObjectStorage.getUser().getName().equalsIgnoreCase("robert williams")){
 
             view = inflater.inflate(R.layout.menu_fragment_director,
@@ -53,8 +53,11 @@ public class MenuFragment extends Fragment implements OnClickListener {
             Button searchB = (Button) view.findViewById(R.id.search);
             searchB.setOnClickListener(this);
         }else{
+
             view = inflater.inflate(R.layout.menu_fragment,
                     container, false);
+            Button searchN = (Button)view.findViewById(R.id.menu_search);
+            searchN.setOnClickListener(this);
             director = true;
         }
         activity = getActivity();

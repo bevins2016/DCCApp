@@ -1,6 +1,8 @@
 package com.example.dcc.fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,6 +25,8 @@ public class EDailyList extends Fragment {
     EdailyArrayAdapter adapter;
     ListView listview;
     DCCArrayList edailies;
+
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.edaily_list,
@@ -54,4 +58,5 @@ public class EDailyList extends Fragment {
         }
         return view;
     }
+
 }
