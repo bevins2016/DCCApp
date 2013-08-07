@@ -48,7 +48,10 @@ public class EasterEggs extends Activity {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of f31c4cc... upgrades
     /**
      * Shows the progress UI and hides the login form.
      */
@@ -90,5 +93,8 @@ public class EasterEggs extends Activity {
         }
     }*/
 
+<<<<<<< HEAD
+>>>>>>> parent of f31c4cc... upgrades
+=======
 >>>>>>> parent of f31c4cc... upgrades
 }

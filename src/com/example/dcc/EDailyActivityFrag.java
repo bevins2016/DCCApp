@@ -118,8 +118,13 @@ public class EDailyActivityFrag extends Fragment implements OnClickListener {
             e.printStackTrace();
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
     }
 
+=======
+
+    }
+>>>>>>> parent of f31c4cc... upgrades
 =======
 
     }
