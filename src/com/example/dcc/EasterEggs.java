@@ -88,6 +88,10 @@ public class EasterEggs extends Activity {
         }
     }*/
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> parent of f31c4cc... upgrades
 =======
 
 >>>>>>> parent of f31c4cc... upgrades
