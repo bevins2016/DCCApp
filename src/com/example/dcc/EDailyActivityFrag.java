@@ -117,8 +117,8 @@ public class EDailyActivityFrag extends Fragment implements OnClickListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
+
     private void checkForCache(){
         file = new File(context.getFilesDir(), "EDAILY_CACHE");
         hasCache = file.exists();
