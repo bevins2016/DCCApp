@@ -87,4 +87,8 @@ public class EasterEggs extends Activity {
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }*/
+<<<<<<< HEAD
+=======
+
+>>>>>>> parent of f31c4cc... upgrades
 }
