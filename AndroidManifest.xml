@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.dcc"
+          package="com.S2013.dcc"
           android:versionCode="1"
           android:versionName="1.0" >
 
@@ -25,7 +25,7 @@
             android:label="@string/app_name"
             android:theme="@android:style/Theme.NoTitleBar" >
         <activity
-                android:name="com.example.dcc.LoginActivity"
+                android:name="com.S2013.dcc.LoginActivity"
                 android:label="@string/app_name"
                 android:windowSoftInputMode="adjustResize|stateVisible" >
             <intent-filter>
@@ -34,45 +34,15 @@
             </intent-filter>
         </activity>
         <activity
-                android:name="com.example.dcc.surveys.CreateSurvey"
+                android:name="com.S2013.dcc.EDailyDetailedActivity"
                 android:label="@string/app_name" >
         </activity>
         <activity
-                android:name="com.example.dcc.surveys.ManageSurvey"
+                android:name="com.S2013.dcc.MainActivityFrag"
                 android:label="@string/app_name" >
         </activity>
         <activity
-                android:name="com.example.dcc.search.SearchResults"
-                android:label="@string/app_name" >
-        </activity>
-        <activity
-                android:name="com.example.dcc.search.MetaSearch"
-                android:label="@string/app_name"
-                android:screenOrientation="landscape" >
-        </activity>
-        <activity
-                android:name="com.example.dcc.admin.AdminActivity"
-                android:label="@string/app_name"
-                android:screenOrientation="landscape" >
-        </activity>
-
-        <activity
-                android:name="com.example.dcc.admin.EditStudents"
-                android:label="@string/app_name" >
-        </activity>
-        <activity
-                android:name=".EDailyActivity"
-                android:label="@string/app_name" />
-        <activity
-                android:name="com.example.dcc.EDailyDetailedActivity"
-                android:label="@string/app_name" >
-        </activity>
-        <activity
-                android:name="com.example.dcc.MainActivityFrag"
-                android:label="@string/app_name" >
-        </activity>
-        <activity
-                android:name="com.example.dcc.EasterEggs"
+                android:name="com.S2013.dcc.EasterEggs"
                 android:label="@string/app_name" >
         </activity>
     </application>
