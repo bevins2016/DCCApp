@@ -27,7 +27,7 @@
             android:layout_toRightOf="@+id/fragleft">
         <FrameLayout
                 android:id="@+id/fragmentcontainerbottom"
-                android:name="com.S2013.dcc.BottomFragment"
+                android:name="com.example.dcc.BottomFragment"
                 android:layout_width="fill_parent"
                 android:layout_height="50dp"
                 android:layout_alignParentTop="true"
