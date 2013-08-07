@@ -47,11 +47,6 @@ public class EasterEggs extends Activity {
         finish();
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of f31c4cc... upgrades
     /**
      * Shows the progress UI and hides the login form.
      */
@@ -92,9 +87,4 @@ public class EasterEggs extends Activity {
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }*/
-
-<<<<<<< HEAD
->>>>>>> parent of f31c4cc... upgrades
-=======
->>>>>>> parent of f31c4cc... upgrades
 }
